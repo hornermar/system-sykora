@@ -41,7 +41,6 @@ export const StepperButtons = ({
       ) : (
         <>
           <Button
-            color="inherit"
             disabled={activeStep === -1}
             onClick={handleBack}
             sx={{ mr: 1 }}
@@ -49,11 +48,19 @@ export const StepperButtons = ({
             Zpět
           </Button>
 
-          {activeStep !== steps.length - 1 ? (
-            <Button onClick={handleNext}>
-              {activeStep === steps.length - 2 ? "Vygenerovat" : "Další"}
+          {activeStep !== steps.length && activeStep !== steps.length - 1 && (
+            <Button variant="contained" onClick={handleNext}>
+              Další
             </Button>
-          ) : (
+          )}
+
+          {activeStep === steps.length - 1 && (
+            <Button variant="contained" onClick={handleNext}>
+              Vygenerovat
+            </Button>
+          )}
+
+          {activeStep === steps.length && (
             <Button onClick={handleReset}>Začít znovu</Button>
           )}
         </>

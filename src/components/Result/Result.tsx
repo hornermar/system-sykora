@@ -36,13 +36,7 @@ export const Result = ({ defaultGrid, form, setForm }: ResultProps) => {
   }, [form.coefficient, form.rule, isRandom, defaultGrid]);
 
   return (
-    <Stack
-      sx={{
-        padding: "15px",
-        height: "100%",
-        justifyContent: "center",
-      }}
-    >
+    <Stack>
       <Structure
         grid={grid}
         cellType={displayText ? "text" : "image"}

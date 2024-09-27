@@ -8,7 +8,7 @@ import { getEmptyGrid } from "../utils/getEmptyGrid";
 export const clickableColor = "#04c2df";
 export const primaryColor = "#c0c4c4";
 
-const steps = ["Mřížka", "Prvky", "Koeficient", "Pravidlo", "Výsledek"];
+const steps = ["Mřížka", "Prvky", "Koeficient", "Pravidlo"];
 
 const defaultFormValues = {
   coefficient: 2,
@@ -35,18 +35,18 @@ export const Dashboard = () => {
       {activeStep === -1 ? (
         <Typography
           variant="h1"
+          color="primary"
           sx={{
             fontSize: "48px",
             fontWeight: 600,
-            color: clickableColor,
             margin: "30px 20px 0px 35px",
           }}
         >
           Simulátor Sýkora
         </Typography>
-      ) : (
+      ) : activeStep !== steps.length - 1 ? (
         <Stepper activeStep={activeStep} steps={steps} />
-      )}
+      ) : null}
 
       <Content
         activeStep={activeStep}
