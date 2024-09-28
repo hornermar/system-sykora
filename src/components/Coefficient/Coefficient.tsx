@@ -1,5 +1,6 @@
 import { FormValues } from "../../types/FormValues";
-import { Slider } from "../common-old/Slider";
+import { Slider } from "@mui/material";
+import { Typography } from "@mui/material";
 
 type CoefficientProps = {
   form: FormValues;
@@ -9,10 +10,11 @@ type CoefficientProps = {
 export const Coefficient = ({ form, setForm }: CoefficientProps) => {
   return (
     <>
-      <p>
-        Zvol <strong>koeficient</strong>. Ten má číselnou hodnotuv rozmezí od 0
-        do 4.
-      </p>
+      <Typography variant="body1">
+        Dále zvol koeficient. Ten má mít hodnotu v rozmezí od <b>0</b> do{" "}
+        <b>5</b>.
+      </Typography>
+
       <Slider
         value={form.coefficient}
         step={0.01}
@@ -24,16 +26,19 @@ export const Coefficient = ({ form, setForm }: CoefficientProps) => {
             coefficient: newValue as number,
           }))
         }
+        valueLabelDisplay="on"
+        sx={{ margin: "40px 0 35px" }}
       />
-      <p>
+      <Typography variant="body1">
         Jeho funkce je urychlit nebo zpomalit přechody od světlých elementů k
         tmavým nebo naopak. Vyšší koeficient znamená kontrastnější přechody,
         nižší pozvolnější.
-      </p>
-      <p style={{ marginBottom: "50px" }}>
-        Připočítá se nebo odečítá v místech, kde se v mřížce nachází <b>+</b> a{" "}
-        <b>-</b>.
-      </p>
+      </Typography>
+
+      <Typography variant="body1">
+        Koeficient se připočítává nebo odečítá v místech, kde se nachází{" "}
+        <b>+</b> nebo <b>-</b>.
+      </Typography>
     </>
   );
 };

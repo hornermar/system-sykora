@@ -1,5 +1,4 @@
 import { Box, Button } from "@mui/material";
-import { primaryColor } from "../../../pages/Dashboard";
 
 type StepperButtonsProps = {
   activeStep: number;
@@ -30,14 +29,27 @@ export const StepperButtons = ({
         display: "flex",
         flexDirection: "row",
         position: "fixed",
-        bottom: 0,
+        bottom: 15,
         width: "100%",
         justifyContent: activeStep === -1 ? "center" : "space-between",
-        backgroundColor: primaryColor,
       }}
     >
       {activeStep === -1 ? (
-        <Button onClick={handleNext}>Začít</Button>
+        <Button
+          onClick={handleNext}
+          variant="contained"
+          size="large"
+          endIcon={
+            <img
+              src="/arrow-right-solid.svg"
+              alt="Arrow Right"
+              style={{ height: "16px" }}
+            />
+          }
+          sx={{ padding: "30px 40px" }}
+        >
+          Začít
+        </Button>
       ) : (
         <>
           <Button

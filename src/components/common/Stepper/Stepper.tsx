@@ -8,13 +8,18 @@ type StepperProps = {
 
 export const Stepper = ({ activeStep, steps }: StepperProps) => {
   return (
-    <MuiStepper activeStep={activeStep} sx={{ margin: "30px 20px 0px 27px" }}>
-      {map(steps, (label, index) => {
+    <MuiStepper
+      activeStep={activeStep}
+      sx={{ margin: "30px 20px 0px 27px" }}
+      color="secondary"
+    >
+      {map(steps, (label) => {
         const stepProps: { completed?: boolean } = {};
 
         return (
           <Step key={label} {...stepProps}>
-            <StepLabel>{activeStep === index && label}</StepLabel>
+            <StepLabel />
+            {/* <StepLabel>{activeStep === index && label}</StepLabel> */}
           </Step>
         );
       })}

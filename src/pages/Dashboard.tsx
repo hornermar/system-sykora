@@ -32,21 +32,30 @@ export const Dashboard = () => {
 
   return (
     <Stack>
-      {activeStep === -1 ? (
+      {activeStep === -1 && (
         <Typography
           variant="h1"
-          color="primary"
           sx={{
-            fontSize: "48px",
-            fontWeight: 600,
             margin: "30px 20px 0px 35px",
           }}
         >
-          Simulátor Sýkora
+          SYSTÉM SÝKORA
         </Typography>
-      ) : activeStep !== steps.length - 1 ? (
-        <Stepper activeStep={activeStep} steps={steps} />
-      ) : null}
+      )}
+
+      {activeStep > -1 && activeStep < steps.length && (
+        <>
+          <Stepper activeStep={activeStep} steps={steps} />
+          <Typography
+            variant="h2"
+            sx={{
+              margin: "20px 20px 0px 35px",
+            }}
+          >
+            {steps[activeStep]}
+          </Typography>
+        </>
+      )}
 
       <Content
         activeStep={activeStep}

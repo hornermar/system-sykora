@@ -1,31 +1,27 @@
+import { Typography } from "@mui/material";
+
 export const Introduction = () => {
   return (
     <>
-      <p>Algoritmus Zdeňka Sýkory pro tvorbu černobílých struktur.</p>
+      <Typography variant="body1">
+        Zdeněk Sýkora pro tvorbu černoílých struktur používal algoritmus, který
+        navrhl v průběhu 60. let. V roce 1961 začal vytvářet geometrické
+        abstraktní obrazy. Skládaly se ze čtverců nebo obdélníků, uvnitř kterých
+        byly umístěny geometrické vzory.
+      </Typography>
 
-      <p>
-        Zdeněk Sýkora začal v roce 1961 vytvářet geometrické abstraktní obrazy.
-        Jejich kompozice byla výsledkem opakovaného použití jednoho nebo více
-        základních elementů. Tyto elementy se vyznačovaly tvarem (čtvercovým
-        nebo obdélným) a geometrickými vzory uvnitř.
-      </p>
+      <Typography variant="body1">
+        Pro výpočet jednotlivých prvků se jevilo jako ideální řešení využít
+        počítač. Společně s matematikem Jaroslavem Blažkem, který měl toho času
+        počítač k dispozici na svém pracovišti, Matematicko-fyzikální fakultě
+        Univerzity Karlovy. V roce 1964 spolu začali vytvářet program, který
+        tento algoritmus uvedl do provozu.
+      </Typography>
 
-      <p>
-        Při zvažování pravidel pro tvorbu kompozic si ale uvědomil, že naráží na
-        kombinatorické složitosti, které lze snadněji vyřešit pomocí počítače.
-        Obrátil se proto na matematika Jaroslava Blažka, který měl toho času k
-        dispozici počítač LGP-30 na svém pracovišti, Matematicko-fyzikální
-        fakultě Univerzity Karlovy. Spolu tak v roce 1964 začali vytvářet
-        program, který dopočítával elementy v obraze podle předem zadaných
-        pravidel.
-      </p>
-      <p>
-        V následujících najdete popis algoritmu. Nejprve jsou vysvětleny
-        jednotlivé vstupy, které umělec do programu zadával. Poté vás provede
-        samotným postupem, vysvětleným na interaktivním příkladu. V poslední
-        části si pak můžete sami vyzkoušet, jak se výpočet chová s různými
-        parametry.
-      </p>
+      <Typography variant="body1">
+        A jak tento algoritmus přesně funguje? Jaké parametry zadává umělec a co
+        už je práce počítače?
+      </Typography>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Structure } from "../Structure/Structure";
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { FormValues } from "../../types/FormValues";
 import { getEmptyGrid } from "../../utils/getEmptyGrid";
 import { Input } from "../Input/Input";
@@ -34,7 +34,10 @@ export const Diagram = ({ form, setForm }: DiagramProps) => {
 
   return (
     <>
-      <p>Nejprve zvolte počet sloupců a řádků mřížky.</p>
+      <Typography variant="body1">
+        Urči počet sloupců a řádků mřížky:
+      </Typography>
+
       <Stack
         width={"100%"}
         flexDirection="row"
