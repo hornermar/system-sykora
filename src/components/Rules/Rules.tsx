@@ -47,11 +47,7 @@ export const Rules = ({ form, setForm }: RulesProps) => {
           ))}
         </RadioGroup>
       </FormControl>
-      <Structure
-        grid={rulesItems[form.rule].example}
-        cellType="image"
-        key={form.rule}
-      />
+      <Structure grid={rulesItems[form.rule].example} key={form.rule} />
     </>
   );
 };

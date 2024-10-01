@@ -20,7 +20,7 @@ export const Coefficient = ({ form, setForm }: CoefficientProps) => {
         step={0.01}
         min={0.01}
         max={3.99}
-        onChange={(e: Event, newValue: number | number[]) =>
+        onChange={(_, newValue: number | number[]) =>
           setForm((prev) => ({
             ...prev,
             coefficient: newValue as number,

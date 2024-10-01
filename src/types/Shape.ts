@@ -1,14 +1,14 @@
-import { ElementType } from "@/app/types/ElementType";
-import { Neighbour } from "@/app/types/Neighbout";
+import { ElementType } from "./ElementType";
+import { Neighbour } from "./Neighbout";
 
 export type ShapeDescription = {
-    neighbours: Neighbour;
-    options: ElementType[];
-    reason: string | undefined;
-    finalOptions: ElementType[] | undefined;
+  neighbours: Neighbour;
+  options: ElementType[];
+  reason: string | undefined;
+  finalOptions: ElementType[] | undefined;
 };
 
 export type Shape = {
-    result: string | undefined;
-    description: ShapeDescription;
+  result: string | undefined;
+  description: ShapeDescription;
 };

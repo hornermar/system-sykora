@@ -16,7 +16,7 @@ export const ElementSelect = ({
   onClose,
   onCellChange,
 }: ElementsSelectProps) => {
-  const onCellClick = (x: number, y: number, element: string) => {
+  const onCellClick = (_x: number, _y: number, element: string) => {
     onCellChange(element === "x" ? "0" : element);
     onClose();
   };
