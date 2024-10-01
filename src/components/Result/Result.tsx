@@ -26,7 +26,6 @@ type ResultProps = {
 export const Result = ({ defaultGrid, form, setForm }: ResultProps) => {
   const [grid, setGrid] = useState(defaultGrid);
   const [displayDefaultGrid, setDisplayDefaultGrid] = useState(false);
-  const [displayText, setDisplayText] = useState(false);
   const [isRandom, setIsRandom] = useState(false);
 
   useEffect(() => {
@@ -39,12 +38,11 @@ export const Result = ({ defaultGrid, form, setForm }: ResultProps) => {
     <Stack>
       <Structure
         grid={grid}
-        cellType={displayText ? "text" : "image"}
         defaultGrid={defaultGrid}
         displayDefaultGrid={displayDefaultGrid}
       />
 
-      <Box sx={{ position: "absolute", top: "30vh" }}>
+      {/* <Box sx={{ position: "absolute", top: "30vh" }}>
         <Collapse defaultExpanded={false} sx={collapseSx}>
           <Stack
             flexDirection="row"
@@ -99,7 +97,7 @@ export const Result = ({ defaultGrid, form, setForm }: ResultProps) => {
                 paddingTop: "3px",
               }}
             >
-              {/* {rulesItems[form.rule].text.replaceAll(" ", "\u00A0")} */}
+              {rulesItems[form.rule].text.replaceAll(" ", "\u00A0")}
               {rulesItems[form.rule].text.replace(/ /g, "\u00A0")}
             </span>
           </Stack>
@@ -170,7 +168,7 @@ export const Result = ({ defaultGrid, form, setForm }: ResultProps) => {
             </Stack>
           </Stack>
         </Collapse>
-      </Box>
+      </Box> */}
     </Stack>
   );
 };

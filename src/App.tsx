@@ -1,5 +1,6 @@
 import { Dashboard } from "./pages/Dashboard";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 const customTheme = createTheme({
@@ -11,14 +12,13 @@ const customTheme = createTheme({
       contrastText: "#ffffff",
     },
     secondary: {
-      light: "#1edffc",
-      main: "#04c2df",
-      dark: "#02899e",
-      contrastText: "#ffffff",
+      light: "#f3f3f3",
+      main: "#e0e0e0",
+      dark: "#c2c2c2",
+      contrastText: "#000000",
     },
   },
   typography: {
-    // fontSize: 10 Montserrat", sans-serif;
     fontFamily: "Roboto mono, monospace",
     h1: {
       fontFamily: "Pathway Gothic One, sans-serif",
@@ -27,7 +27,7 @@ const customTheme = createTheme({
     },
     h2: {
       fontFamily: "Pathway Gothic One, sans-serif",
-      fontSize: "48px",
+      fontSize: "40px",
       fontWeight: 500,
     },
 
@@ -41,11 +41,39 @@ const customTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: "20px",
-          padding: "30px 40px",
+          borderRadius: "10px",
+          padding: "12px 20px",
+          boxShadow: "none",
+
+          "&:hover": {
+            boxShadow: "none",
+          },
+          "&:active": {
+            boxShadow: "none",
+          },
+        },
+        outlined: {
+          border: "2px solid",
+          backgroundColor: "#ffffff",
         },
         endIcon: {
-          marginLeft: "16px", // Add margin-left for padding
+          marginLeft: "16px",
+        },
+      },
+    },
+    MuiFormControlLabel: {
+      styleOverrides: {
+        label: {
+          fontSize: "13px",
+        },
+      },
+    },
+    MuiDialogTitle: {
+      styleOverrides: {
+        root: {
+          fontFamily: "Pathway Gothic One, sans-serif",
+          fontSize: "28px",
+          fontWeight: 500,
         },
       },
     },
@@ -55,7 +83,12 @@ const customTheme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={customTheme}>
-      <Dashboard />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          {/* Add more routes here as needed */}
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

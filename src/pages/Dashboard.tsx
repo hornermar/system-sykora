@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Stack, Typography } from "@mui/material";
 import { Content } from "../components/Content/Content";
 import { Stepper } from "../components/common/Stepper/Stepper";
 import { StepperButtons } from "../components/common/Stepper/Buttons";
-import { getEmptyGrid } from "../utils/getEmptyGrid";
+import { useStep } from "../hooks/useStep";
+import { useGrid } from "../hooks/useGrid";
 
 export const clickableColor = "#04c2df";
 export const primaryColor = "#c0c4c4";
@@ -12,7 +13,7 @@ const steps = ["Mřížka", "Prvky", "Koeficient", "Pravidlo"];
 
 const defaultFormValues = {
   coefficient: 2,
-  rule: 3,
+  rule: 0,
   structure: {
     rows: 10,
     columns: 10,
@@ -20,19 +21,27 @@ const defaultFormValues = {
 };
 
 export const Dashboard = () => {
-  const [activeStep, setActiveStep] = useState(-1);
   const [form, setForm] = useState(defaultFormValues);
-  const [grid, setGrid] = useState<string[][]>(
-    getEmptyGrid(form.structure.rows, form.structure.columns)
+  const { grid, setGrid, setEmptyGrid } = useGrid(
+    form.structure.rows,
+    form.structure.columns
   );
 
+  const { activeStep, handleStepChange } = useStep();
+
   useEffect(() => {
-    setGrid(getEmptyGrid(form.structure.rows, form.structure.columns));
-  }, [form.structure.rows, form.structure.columns]);
+    handleStepChange(0);
+  }, []);
+
+  const reset = () => {
+    setForm(defaultFormValues);
+    setEmptyGrid();
+    handleStepChange(1);
+  };
 
   return (
     <Stack>
-      {activeStep === -1 && (
+      {activeStep === 0 && (
         <Typography
           variant="h1"
           sx={{
@@ -43,16 +52,16 @@ export const Dashboard = () => {
         </Typography>
       )}
 
-      {activeStep > -1 && activeStep < steps.length && (
+      {activeStep > 0 && activeStep < steps.length + 1 && (
         <>
-          <Stepper activeStep={activeStep} steps={steps} />
+          <Stepper activeStep={activeStep - 1} steps={steps} />
           <Typography
             variant="h2"
             sx={{
               margin: "20px 20px 0px 35px",
             }}
           >
-            {steps[activeStep]}
+            {steps[activeStep - 1].toUpperCase()}
           </Typography>
         </>
       )}
@@ -62,12 +71,15 @@ export const Dashboard = () => {
         form={form}
         setForm={setForm}
         grid={grid}
+        setGrid={setGrid}
+        setEmptyGrid={setEmptyGrid}
       />
 
       <StepperButtons
         activeStep={activeStep}
-        setActiveStep={setActiveStep}
+        onStepChange={handleStepChange}
         steps={steps}
+        reset={reset}
       />
     </Stack>
   );

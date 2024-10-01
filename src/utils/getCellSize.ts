@@ -1,9 +1,12 @@
 export const getCellSize = (
-    ref: React.RefObject<HTMLDivElement>,
-    columnsCount: number
+  ref: React.RefObject<HTMLDivElement>,
+  columns: number,
+  rows: number
 ) => {
-    if (!ref.current) return 0;
+  if (!ref.current) return 0;
 
-    const gridWidth = columnsCount;
-    return ref.current.clientWidth / gridWidth;
+  const sizeBasedOnWidth = ref.current.clientWidth / columns;
+  const sizeBasedOnHeight = (window.innerHeight - 100) / rows;
+
+  return Math.min(sizeBasedOnWidth, sizeBasedOnHeight);
 };

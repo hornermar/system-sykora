@@ -8,6 +8,7 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
+  Typography,
 } from "@mui/material";
 
 type RulesProps = {
@@ -25,12 +26,12 @@ export const Rules = ({ form, setForm }: RulesProps) => {
 
   return (
     <>
-      <p>
-        Nakonec vyberte jedno ze čtyř <b>pravidel</b>. To rozhoduje, jaké vztahy
+      <Typography variant="body1">
+        Nakonec vyberte jedno ze čtyř pravidel. To rozhoduje, jaké vztahy
         elementy navazují, zda se vzájemně napojují, nebo se od sebe izolují
         (barvou, tvarem, nebo obojím).
-      </p>
-      <FormControl sx={{ marginBottom: "30px" }}>
+      </Typography>
+      <FormControl sx={{ margin: "10px 0 20px" }}>
         <RadioGroup value={form.rule} onChange={handleChange}>
           {map(rulesItems, (rule: Rule) => (
             <FormControlLabel
@@ -38,7 +39,10 @@ export const Rules = ({ form, setForm }: RulesProps) => {
               control={<Radio />}
               label={`${rule.code}: ${rule.text}`}
               key={rule.code}
-              sx={{ marginBottom: "10px" }}
+              sx={{
+                marginBottom: "5px",
+                fontStyle: form.rule === rule.code ? "italic" : "normal",
+              }}
             />
           ))}
         </RadioGroup>

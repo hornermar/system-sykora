@@ -15,41 +15,39 @@ import { StructureGrid } from "./Grid";
 export type StructureProps = {
   grid: string[][];
   defaultGrid?: string[][];
-  cellType?: "image" | "text";
   sx?: CSSProperties;
-  onCellClick?: (x: number, y: number) => void;
+  onCellClick?: (x: number, y: number, name: string) => void;
   activeCell?: Cell;
   activeNeighbours?: Cell[];
-  color?: string;
   displayDefaultGrid?: boolean;
+  exampleMode?: boolean;
+  displayName?: boolean;
 };
 
 export const Structure = memo(function Structure({
   grid,
   defaultGrid,
-  cellType,
   sx,
   onCellClick,
   activeCell,
   activeNeighbours,
-  color,
   displayDefaultGrid,
 }: StructureProps) {
   const [cellSize, setCellSize] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
 
-  // const rowsCount = size(grid);
+  const rowsCount = size(grid);
   const columnsCount = Math.max(...map(grid, (row) => size(row)));
 
   useEffect(() => {
-    const newCellSize = getCellSize(ref, columnsCount);
+    const newCellSize = getCellSize(ref, columnsCount, rowsCount);
     setCellSize(Math.floor(newCellSize));
-  }, [columnsCount]);
+  }, [columnsCount, rowsCount]);
 
   const handleCellClick = useCallback(
-    (x: number, y: number) => {
+    (x: number, y: number, name: string) => {
       if (onCellClick) {
-        onCellClick(x, y);
+        onCellClick(x, y, name);
       }
     },
     [onCellClick]
@@ -67,13 +65,11 @@ export const Structure = memo(function Structure({
         <StructureGrid
           grid={grid}
           cellSize={cellSize}
-          cellType={cellType}
           defaultGrid={defaultGrid}
           displayDefaultGrid={displayDefaultGrid}
           activeNeighbours={activeNeighbours}
           activeCell={activeCell}
-          handleCellClick={handleCellClick}
-          color={color}
+          handleCellClick={onCellClick && handleCellClick}
         />
       ) : (
         <Box

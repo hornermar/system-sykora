@@ -1,14 +1,28 @@
-import { Stack, SxProps } from "@mui/material";
+import { Stack, SxProps, Typography } from "@mui/material";
 import { map } from "lodash";
-import { getElementImage } from "../../utils/getElementImages";
-import { primaryColor } from "../../pages/Dashboard";
+import { getImgPath } from "../../utils/getImgPath";
+import { useCallback } from "react";
+import { useTheme } from "@mui/material/styles";
 
 type GridProps = {
   grid: string[][];
   size: number;
   displayName?: boolean;
   sx?: SxProps;
-  activeCell?: { x: number; y: number };
+  onCellClick?: (x: number, y: number, name: string) => void;
+};
+
+const pathMap = (cell: string) => {
+  switch (cell) {
+    case "x":
+      return "/x.svg";
+    case "+":
+      return "/plus.svg";
+    case "-":
+      return "/minus.svg";
+    default:
+      return `/elements/${cell}.svg`;
+  }
 };
 
 export const Grid = ({
@@ -16,8 +30,19 @@ export const Grid = ({
   size,
   displayName,
   sx,
-  activeCell,
+  onCellClick,
 }: GridProps) => {
+  const theme = useTheme();
+
+  const handleCellClick = useCallback(
+    (x: number, y: number, name: string) => {
+      if (onCellClick && name !== "") {
+        onCellClick(x, y, name);
+      }
+    },
+    [onCellClick]
+  );
+
   return (
     <>
       {map(grid, (row, y) => (
@@ -28,7 +53,6 @@ export const Grid = ({
           sx={sx}
         >
           {map(row, (cell: string, x) => {
-            const isCellActive = activeCell?.x === x && activeCell?.y === y;
             return (
               <div
                 key={`${x}${y}`}
@@ -41,24 +65,47 @@ export const Grid = ({
                 <div
                   style={{
                     height: `${size}px`,
+                    width: `${size}px`,
                     marginBottom: !displayName ? "20px" : 0,
-                    outline: isCellActive
-                      ? `4px solid ${primaryColor}`
-                      : "initial",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor:
+                      cell === "+" || cell === "-" || cell === "x"
+                        ? theme.palette.secondary.dark
+                        : "transparent",
                   }}
+                  onClick={() => handleCellClick?.(x, y, cell)}
                 >
-                  <img
-                    src={getElementImage(cell)}
-                    width={size}
-                    height={size}
-                    alt={`element ${cell}`}
-                  />
+                  {cell !== "+" &&
+                  cell !== "-" &&
+                  cell !== "x" &&
+                  cell !== "" ? (
+                    <img
+                      src={getImgPath(cell)}
+                      width={size}
+                      height={size}
+                      alt={`element ${cell}`}
+                      style={{ cursor: "pointer" }}
+                    />
+                  ) : cell === "" ? (
+                    <span>
+                      <b>{cell}</b>
+                    </span>
+                  ) : (
+                    <img
+                      src={pathMap(cell)}
+                      width={size / 2}
+                      height={size / 2}
+                      alt={`${cell} icon`}
+                    />
+                  )}
                 </div>
 
                 {displayName && (
-                  <span style={{ marginBottom: "15px" }}>
+                  <Typography component="span" style={{ marginBottom: "8px" }}>
                     {cell !== "0" ? cell : " "}
-                  </span>
+                  </Typography>
                 )}
               </div>
             );

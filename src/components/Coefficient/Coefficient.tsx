@@ -29,15 +29,16 @@ export const Coefficient = ({ form, setForm }: CoefficientProps) => {
         valueLabelDisplay="on"
         sx={{ margin: "40px 0 35px" }}
       />
+
       <Typography variant="body1">
-        Jeho funkce je urychlit nebo zpomalit přechody od světlých elementů k
-        tmavým nebo naopak. Vyšší koeficient znamená kontrastnější přechody,
-        nižší pozvolnější.
+        Jeho funkcí je zpomalit nebo urychlit přechody od světlých prvků k
+        tmavým a naopak. Nižší koeficient znamená pozvolnějí přechody, vyšší
+        kontrastnější.
       </Typography>
 
       <Typography variant="body1">
-        Koeficient se připočítává nebo odečítá v místech, kde se nachází{" "}
-        <b>+</b> nebo <b>-</b>.
+        Připočítává se nebo odečítá v místech, kde se v mřížce nachází <b>+</b>{" "}
+        nebo <b>-</b>.
       </Typography>
     </>
   );
