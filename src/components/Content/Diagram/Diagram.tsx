@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
-import { Structure } from "../Structure/Structure";
+import { Structure } from "../../Structure/Structure";
 import { Stack, Typography, Chip, Box } from "@mui/material";
-import { FormValues } from "../../types/FormValues";
-import { getEmptyGrid } from "../../utils/getEmptyGrid";
-import { Select } from "../Select/Select";
+import { FormValues } from "../../../types/FormValues";
+import { Select } from "../../common/Select/Select";
 import { map } from "lodash";
 import { SelectChangeEvent } from "@mui/material/Select";
+import { useDefaultGrid } from "../../../hooks/useDefaultGrid";
 
 type DiagramProps = {
   form: FormValues;
   setForm: React.Dispatch<React.SetStateAction<FormValues>>;
-  grid: string[][];
+  defaultGrid: string[][];
 };
 
 const chips = [
@@ -19,13 +18,10 @@ const chips = [
 ];
 
 export const Diagram = ({ form, setForm }: DiagramProps) => {
-  const [grid, setGrid] = useState<string[][]>(
-    getEmptyGrid(form.structure.rows, form.structure.columns)
+  const { getEmptyGrid } = useDefaultGrid(
+    form.structure.rows,
+    form.structure.columns
   );
-
-  useEffect(() => {
-    setGrid(getEmptyGrid(form.structure.rows, form.structure.columns));
-  }, [form.structure.rows, form.structure.columns]);
 
   const handleChange = (e: SelectChangeEvent<number>) => {
     const { name, value } = e.target;
@@ -38,6 +34,8 @@ export const Diagram = ({ form, setForm }: DiagramProps) => {
       },
     }));
   };
+
+  const grid = getEmptyGrid();
 
   return (
     <>

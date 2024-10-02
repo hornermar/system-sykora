@@ -1,6 +1,6 @@
-import { Dialog } from "../common/Dialog/Dialog";
-import { allElementsByGroupGrid } from "../../lib/grids";
-import { Grid } from "../Grid/Grid";
+import { Dialog } from "../../common/Dialog/Dialog";
+import { allElementsByGroupGrid } from "../../../lib/grids";
+import { Grid } from "../../Grid/Grid";
 
 type ElementsSelectProps = {
   open: boolean;

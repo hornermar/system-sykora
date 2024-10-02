@@ -1,5 +1,53 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
+const steps = [
+  {
+    label: "Zdroje",
+    isDisplayed: false,
+    order: 0,
+  },
+  {
+    label: "Mřížka",
+    isDisplayed: true,
+    order: 1,
+  },
+  {
+    label: "Prvky",
+    isDisplayed: true,
+    order: 2,
+  },
+  {
+    label: "Koeficient",
+    isDisplayed: true,
+    order: 3,
+  },
+  {
+    label: "Pravidlo",
+    isDisplayed: true,
+    order: 4,
+  },
+  {
+    label: "Výsledek",
+    isDisplayed: false,
+    order: 5,
+  },
+  {
+    label: "Průchod mřížkou",
+    isDisplayed: true,
+    order: 6,
+  },
+  {
+    label: "Výpočet skupiny",
+    isDisplayed: true,
+    order: 7,
+  },
+  {
+    label: "Volba prvku",
+    isDisplayed: true,
+    order: 8,
+  },
+];
+
 export const useStep = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -10,13 +58,14 @@ export const useStep = () => {
     return step !== null ? parseInt(step, 10) : 0;
   };
 
-  const handleStepChange = (step: number) => {
+  const onStepChange = (step: number) => {
     const params = new URLSearchParams(location.search);
     params.set("step", step.toString());
     navigate({ search: params.toString() });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const activeStep = getActiveStep();
 
-  return { activeStep, handleStepChange };
+  return { activeStep, onStepChange, steps };
 };

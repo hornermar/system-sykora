@@ -1,25 +1,34 @@
 import { useState } from "react";
-import { Structure } from "../Structure/Structure";
+import { Structure } from "../../Structure/Structure";
 import { ElementsDialog } from "./Dialog";
 import { Box, Typography, Chip } from "@mui/material";
-import { useSwitch } from "../../hooks/useSwitch";
+import { useSwitch } from "../../../hooks/useSwitch";
 import { ElementSelect } from "./Select";
 import { set } from "lodash";
-import { exampleGrid } from "../../lib/grids";
-import { FormValues } from "../../types/FormValues";
+import { exampleGrid } from "../../../lib/grids";
+import { FormValues } from "../../../types/FormValues";
+
+function getSubGrid(
+  grid: string[][],
+  rows: number,
+  columns: number
+): string[][] {
+  return grid.slice(0, rows).map((row) => row.slice(0, columns));
+}
 
 type ElementsProps = {
-  grid: string[][];
-  setGrid: React.Dispatch<React.SetStateAction<string[][]>>;
-  setEmptyGrid  : () => void;
+  defaultGrid: string[][];
+  setDefaultGrid: React.Dispatch<React.SetStateAction<string[][]>>;
+  setEmptyGrid: () => void;
   form: FormValues;
 };
 
-function getSubGrid(grid: string[][], rows: number, columns: number): string[][] {
-  return grid.slice(0, rows).map(row => row.slice(0, columns));
-}
-
-export const Elements = ({ grid, setGrid, setEmptyGrid, form }: ElementsProps) => {
+export const Elements = ({
+  defaultGrid,
+  setDefaultGrid,
+  setEmptyGrid,
+  form,
+}: ElementsProps) => {
   const [activeCell, setActiveCell] = useState<{ x: number; y: number } | null>(
     null
   );
@@ -32,7 +41,7 @@ export const Elements = ({ grid, setGrid, setEmptyGrid, form }: ElementsProps) =
   };
 
   const onCellChange = (element: string) => {
-    setGrid((prevGrid) => {
+    setDefaultGrid((prevGrid) => {
       const newGrid = [...prevGrid];
       set(newGrid, [activeCell!.y, activeCell!.x], element);
       return newGrid;
@@ -40,9 +49,10 @@ export const Elements = ({ grid, setGrid, setEmptyGrid, form }: ElementsProps) =
   };
 
   const setTemplate = () => {
-
-    setGrid(getSubGrid(exampleGrid, form.structure.rows, form.structure.columns));
-  }
+    setDefaultGrid(
+      getSubGrid(exampleGrid, form.structure.rows, form.structure.columns)
+    );
+  };
 
   return (
     <>
@@ -63,26 +73,30 @@ export const Elements = ({ grid, setGrid, setEmptyGrid, form }: ElementsProps) =
         znaménka <b>+</b> nebo <b>-</b>.
       </Typography>
 
-      <Box sx={{ marginBottom: "10px", display: "flex", flexDirection: "row", justifyContent: "right" }} >
-      <Chip
-           
-           label={"Použít šablonu"}
+      <Box
+        sx={{
+          marginBottom: "10px",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "right",
+        }}
+      >
+        <Chip
+          label={"Použít šablonu"}
           onClick={setTemplate}
-           size="small"
-           sx={{ marginRight: "10px" }}
-         />
-     
-      <Chip
-           
-            label={"Smazat vše"}
-           onClick={setEmptyGrid}
-            size="small"
-            sx={{ marginRight: "10px" }}
-          />
-      
+          size="small"
+          sx={{ marginRight: "10px" }}
+        />
+
+        <Chip
+          label={"Smazat vše"}
+          onClick={setEmptyGrid}
+          size="small"
+          sx={{ marginRight: "10px" }}
+        />
       </Box>
 
-      <Structure grid={grid} onCellClick={onCellClick} />
+      <Structure grid={defaultGrid} onCellClick={onCellClick} />
 
       <ElementSelect
         open={openSelect}

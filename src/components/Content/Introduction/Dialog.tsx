@@ -1,6 +1,6 @@
-import { Dialog } from "../common/Dialog/Dialog";
-import { originalGrid } from "../../lib/originalGrid";
-import { Structure } from "../Structure/Structure";
+import { Dialog } from "../../common/Dialog/Dialog";
+import { originalGrid } from "../../../lib/originalGrid";
+import { Structure } from "../../Structure/Structure";
 import { Typography, Link } from "@mui/material";
 
 type IntroductionDialogProps = {

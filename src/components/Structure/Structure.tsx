@@ -22,6 +22,7 @@ export type StructureProps = {
   displayDefaultGrid?: boolean;
   exampleMode?: boolean;
   displayName?: boolean;
+  variant?: "image" | "text";
 };
 
 export const Structure = memo(function Structure({
@@ -32,6 +33,7 @@ export const Structure = memo(function Structure({
   activeCell,
   activeNeighbours,
   displayDefaultGrid,
+  variant = "image",
 }: StructureProps) {
   const [cellSize, setCellSize] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
@@ -39,10 +41,23 @@ export const Structure = memo(function Structure({
   const rowsCount = size(grid);
   const columnsCount = Math.max(...map(grid, (row) => size(row)));
 
-  useEffect(() => {
+  const updateCellSize = useCallback(() => {
     const newCellSize = getCellSize(ref, columnsCount, rowsCount);
     setCellSize(Math.floor(newCellSize));
   }, [columnsCount, rowsCount]);
+
+  useEffect(() => {
+    updateCellSize();
+  }, [columnsCount, rowsCount, updateCellSize]);
+
+  useEffect(() => {
+    window.addEventListener("resize", updateCellSize);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", updateCellSize);
+    };
+  }, [columnsCount, rowsCount, updateCellSize]);
 
   const handleCellClick = useCallback(
     (x: number, y: number, name: string) => {
@@ -70,6 +85,7 @@ export const Structure = memo(function Structure({
           activeNeighbours={activeNeighbours}
           activeCell={activeCell}
           handleCellClick={onCellClick && handleCellClick}
+          variant={variant}
         />
       ) : (
         <Box

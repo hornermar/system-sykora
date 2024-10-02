@@ -1,8 +1,8 @@
-import { FormValues } from "../../types/FormValues";
+import { FormValues } from "../../../types/FormValues";
 import { map } from "lodash";
-import { Rule } from "../../types/Rule";
-import { rulesItems } from "../../lib/formItems";
-import { Structure } from "../Structure/Structure";
+import { Rule } from "../../../types/Rule";
+import { rulesItems } from "../../../lib/formItems";
+import { Structure } from "../../Structure/Structure";
 import {
   FormControl,
   RadioGroup,

@@ -1,4 +1,4 @@
-import { FormValues } from "../../types/FormValues";
+import { FormValues } from "../../../types/FormValues";
 import { Slider } from "@mui/material";
 import { Typography } from "@mui/material";
 

@@ -1,8 +1,8 @@
-import { Grid } from "../Grid/Grid";
-import { Dialog } from "../common/Dialog/Dialog";
+import { Grid } from "../../Grid/Grid";
+import { Dialog } from "../../common/Dialog/Dialog";
 import { Typography, Stack } from "@mui/material";
 import { map } from "lodash";
-import { allElementsGrid } from "../../lib/grids";
+import { allElementsGrid } from "../../../lib/grids";
 
 type ElementsDialogProps = {
   open: boolean;

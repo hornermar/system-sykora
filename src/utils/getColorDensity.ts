@@ -10,39 +10,39 @@ import { getRounded } from "./getRounded";
   emloying the known color densities (assigned or calculated) of all elements 
   whose sides or corners touch.
 */
-export const getColourDensity = (
-    grid: string[][],
-    x: number,
-    y: number,
-    coefficient: number
+export const getColorDensity = (
+  grid: string[][],
+  x: number,
+  y: number,
+  coefficient: number
 ): Density => {
-    let step: number = 1;
-    let repeat: boolean = true;
-    let unRoundedResult: number = 0;
-    let description: DensityDescription[] = [];
+  let step: number = 1;
+  let repeat: boolean = true;
+  let unRoundedResult: number = 0;
+  const description: DensityDescription[] = [];
 
-    while (repeat && step < 5) {
-        const neighbours = getNeighbours(step, grid, x, y);
-        const neighboursNames = map(neighbours, (neighbour) => neighbour.name);
-        const neighboursAverage: number = getDensityAverage(neighboursNames);
-        unRoundedResult = applyCoefficient(
-            grid[y][x],
-            coefficient,
-            neighboursAverage
-        );
+  while (repeat && step < 5) {
+    const neighbours = getNeighbours(step, grid, x, y);
+    const neighboursNames = map(neighbours, (neighbour) => neighbour.name);
+    const neighboursAverage: number = getDensityAverage(neighboursNames);
+    unRoundedResult = applyCoefficient(
+      grid[y][x],
+      coefficient,
+      neighboursAverage
+    );
 
-        repeat = unRoundedResult - Math.floor(unRoundedResult) === 0.5;
-        description.push({
-            step,
-            neighbours,
-            neighboursAverage:
-                Math.round((neighboursAverage + Number.EPSILON) * 100) / 100,
-            unRoundedResult:
-                Math.round((unRoundedResult + Number.EPSILON) * 100) / 100,
-        });
-        step++;
-    }
+    repeat = unRoundedResult - Math.floor(unRoundedResult) === 0.5;
+    description.push({
+      step,
+      neighbours,
+      neighboursAverage:
+        Math.round((neighboursAverage + Number.EPSILON) * 100) / 100,
+      unRoundedResult:
+        Math.round((unRoundedResult + Number.EPSILON) * 100) / 100,
+    });
+    step++;
+  }
 
-    const rounded: number = getRounded(unRoundedResult);
-    return { result: rounded, description };
+  const rounded: number = getRounded(unRoundedResult);
+  return { result: rounded, description };
 };

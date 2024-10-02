@@ -22,7 +22,7 @@ const customTheme = createTheme({
     fontFamily: "Roboto mono, monospace",
     h1: {
       fontFamily: "Pathway Gothic One, sans-serif",
-      fontSize: "48px",
+      fontSize: "50px",
       fontWeight: 500,
     },
     h2: {
@@ -36,13 +36,16 @@ const customTheme = createTheme({
       marginBottom: "10px",
       lineHeight: "1.6",
     },
+    body2: {
+      fontSize: "12px",
+    },
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: "10px",
-          padding: "12px 20px",
+          borderRadius: "0px",
+          padding: "12px 15px",
           boxShadow: "none",
 
           "&:hover": {

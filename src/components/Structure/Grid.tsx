@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { map } from "lodash";
 import { memo } from "react";
 import { Cell } from "../../types/General";
@@ -13,6 +13,7 @@ type StructureGridProps = {
   activeCell?: Cell;
   handleCellClick?: (x: number, y: number, name: string) => void;
   displayDefaultGrid?: boolean;
+  variant: "image" | "text";
 };
 
 export const StructureGrid = memo(function StructureGrid({
@@ -23,6 +24,7 @@ export const StructureGrid = memo(function StructureGrid({
   handleCellClick,
   grid,
   displayDefaultGrid,
+  variant,
 }: StructureGridProps) {
   const theme = useTheme();
 
@@ -40,6 +42,13 @@ export const StructureGrid = memo(function StructureGrid({
           {map(row, (cell: string, x) => {
             const isCellActive = activeCell?.x === x && activeCell?.y === y;
             const isCellEmpty = cell === "0" || cell === "+" || cell === "-";
+
+            const isCellOriginal =
+              !displayDefaultGrid &&
+              defaultGrid &&
+              defaultGrid[y][x] !== "+" &&
+              defaultGrid[y][x] !== "-" &&
+              defaultGrid[y][x] === cell;
 
             const isCellActiveNeighbour =
               activeNeighbours &&
@@ -59,41 +68,55 @@ export const StructureGrid = memo(function StructureGrid({
                   width: `${cellSize}px`,
                   height: `${cellSize}px`,
                   border: isCellActive
-                    ? `2px solid ${theme.palette.secondary.main}`
+                    ? `1px solid ${theme.palette.secondary.dark}`
                     : isCellActiveNeighbour
-                    ? `2px solid ${theme.palette.secondary.main}`
-                    : isCellEmpty
-                    ? "1px solid #c0c4c4"
+                    ? `1px solid ${theme.palette.secondary.dark}`
+                    : variant === "text" || isCellEmpty
+                    ? `1px solid ${theme.palette.secondary.main}`
                     : "initial",
                   backgroundColor: isCellActive
-                    ? theme.palette.secondary.main
+                    ? theme.palette.secondary.dark
                     : isCellActiveNeighbour
-                    ? "#f5f2f0"
+                    ? theme.palette.secondary.main
                     : theme.palette.secondary.light,
                   cursor: handleCellClick ? "pointer" : "unset",
                   zIndex: isCellActive ? 100 : isCellActiveNeighbour ? 50 : 0,
                 }}
               >
-                {cell !== "+" && cell !== "-" ? (
-                  <img
-                    src={getImgPath(cell)}
-                    width={cellSize}
-                    height={cellSize}
-                    alt={`element ${cell}`}
-                    style={{
-                      objectFit: "fill",
-                      opacity: isCellActive || isCellActiveNeighbour ? 0.6 : 1,
-                      border:
-                        isCellActive || isCellActiveNeighbour
-                          ? `2px solid ${theme.palette.secondary.main}`
-                          : "none",
+                {variant === "text" && (
+                  <Typography
+                    sx={{
+                      margin: 0,
+                      textDecoration:
+                        defaultGrid && isCellOriginal ? "underline" : "none",
                     }}
-                  />
-                ) : (
-                  <span>
-                    <b>{cell}</b>
-                  </span>
+                  >
+                    {cell !== "0" && cell}
+                  </Typography>
                 )}
+
+                {variant === "image" &&
+                  (cell !== "+" && cell !== "-" ? (
+                    <img
+                      src={getImgPath(cell)}
+                      width={cellSize}
+                      height={cellSize}
+                      alt={`element ${cell}`}
+                      style={{
+                        objectFit: "fill",
+                        opacity:
+                          isCellActive || isCellActiveNeighbour ? 0.6 : 1,
+                        // border:
+                        //   isCellActive || isCellActiveNeighbour
+                        //     ? `2px solid ${theme.palette.secondary.main}`
+                        //     : "none",
+                      }}
+                    />
+                  ) : (
+                    <Typography component="span" sx={{ margin: 0 }}>
+                      {cell}
+                    </Typography>
+                  ))}
               </Box>
             );
           })}
