@@ -6,7 +6,7 @@ type GoingThroughProps = {
   grid: string[][];
 };
 
-export const GoingThrough = ({ defaultGrid, grid }: GoingThroughProps) => {
+export const GoingThrough = ({ defaultGrid }: GoingThroughProps) => {
   return (
     <>
       <Typography variant="body1">
