@@ -4,14 +4,6 @@ import { getImgPath } from "../../utils/getImgPath";
 import { useCallback } from "react";
 import { useTheme } from "@mui/material/styles";
 
-type GridProps = {
-  grid: string[][];
-  size: number;
-  displayName?: boolean;
-  sx?: SxProps;
-  onCellClick?: (x: number, y: number, name: string) => void;
-};
-
 const pathMap = (cell: string) => {
   switch (cell) {
     case "x":
@@ -25,12 +17,22 @@ const pathMap = (cell: string) => {
   }
 };
 
+type GridProps = {
+  grid: string[][];
+  size: number;
+  displayName?: boolean;
+  sx?: SxProps;
+  onCellClick?: (x: number, y: number, name: string) => void;
+  activeNames?: string[];
+};
+
 export const Grid = ({
   grid,
   size,
   displayName,
   sx,
   onCellClick,
+  activeNames,
 }: GridProps) => {
   const theme = useTheme();
 
@@ -43,6 +45,11 @@ export const Grid = ({
     [onCellClick]
   );
 
+  // const activeCellNames = map(activeCells, ({ name }) => {
+  //   if (name === "0") return;
+  //   else return name;
+  // }).filter(Boolean);
+
   return (
     <>
       {map(grid, (row, y) => (
@@ -53,6 +60,8 @@ export const Grid = ({
           sx={sx}
         >
           {map(row, (cell: string, x) => {
+            const isCellActive = activeNames?.includes(cell);
+
             return (
               <div
                 key={`${x}${y}`}
@@ -74,6 +83,9 @@ export const Grid = ({
                       cell === "+" || cell === "-" || cell === "x"
                         ? theme.palette.secondary.dark
                         : "transparent",
+                    outline: isCellActive
+                      ? `3px solid ${theme.palette.primary.dark}`
+                      : "unset",
                   }}
                   onClick={() => handleCellClick?.(x, y, cell)}
                 >

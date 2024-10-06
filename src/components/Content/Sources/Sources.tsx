@@ -3,15 +3,19 @@ import { Typography, Box } from "@mui/material";
 export const Sources = () => {
   return (
     <>
-      <Typography variant="body1">
-        Zdeněk Sýkora popsal algoritmus v textu Můj systém z roku 1967. O pár
-        let později, v roce 1970, jej pak spolu s Jaroslavem Blažkem popisují v
-        textu Computer-aided multielement geometrical abstract paintings.
+      <Typography variant="body1" sx={{ marginBottom: "20px" }}>
+        Zdeněk Sýkora popsal algoritmus v textu Můj systém z roku 1967.
+        <sup>1</sup> O pár let později, v roce 1970, jej pak spolu s Jaroslavem
+        Blažkem popisují v textu Computer-aided multielement geometrical
+        abstract paintings.<sup>2</sup>
       </Typography>
 
       <Box
         component="ol"
-        sx={{ fontFamily: "Roboto mono, monospace", fontSize: "12px" }}
+        sx={{
+          fontFamily: "Roboto mono, monospace",
+          fontSize: "12px",
+        }}
       >
         <Box component="li" sx={{ paddingBottom: "10px" }}>
           <Typography variant="body2">

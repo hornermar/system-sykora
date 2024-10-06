@@ -29,14 +29,16 @@ export const Elements = ({
   setEmptyGrid,
   form,
 }: ElementsProps) => {
-  const [activeCell, setActiveCell] = useState<{ x: number; y: number } | null>(
-    null
-  );
+  const [activeCell, setActiveCell] = useState<{
+    x: number;
+    y: number;
+    name: string;
+  } | null>(null);
   const [openDialog, onOpenDialog, onCloseDialog] = useSwitch(false);
   const [openSelect, onOpenSelect, onCloseSelect] = useSwitch(false);
 
-  const onCellClick = (x: number, y: number) => {
-    setActiveCell({ x, y });
+  const onCellClick = (x: number, y: number, name: string) => {
+    setActiveCell({ x, y, name });
     onOpenSelect();
   };
 
@@ -58,21 +60,17 @@ export const Elements = ({
     <>
       <Typography variant="body1">
         Aby bylo možné strukturu dopočítat algoritmem, je potřeba v mřížce
-        vyplnit některá pole. Kliknutím do jednotlivých polí se vám otevře
-        nabídka s možnými{" "}
-        <span onClick={onOpenDialog} style={{ textDecoration: "underline" }}>
-          prvky
-        </span>
-        .
+        vyplnit některá pole. Na výběr máte z 20 prvků, které určí základ vaší
+        struktury.
       </Typography>
-
-      <ElementsDialog open={openDialog} onClose={onCloseDialog} />
-
-      <Typography variant="body1" sx={{ marginBottom: "20px" }}>
+      <Typography variant="body1">
         Do míst, kde si přejete urychlit nebo zpomalit přechody barev, přidejte
         znaménka <b>+</b> nebo <b>-</b>.
       </Typography>
 
+      <Typography variant="body1" sx={{ marginBottom: "20px" }}>
+        Kliknutím do vybraného pole se vám otevře nabídka.
+      </Typography>
       <Box
         sx={{
           marginBottom: "10px",
@@ -96,14 +94,30 @@ export const Elements = ({
         />
       </Box>
 
-      <Structure grid={defaultGrid} onCellClick={onCellClick} />
-
-      <ElementSelect
-        open={openSelect}
-        onClose={onCloseSelect}
-        activeCell={activeCell}
-        onCellChange={onCellChange}
+      <Structure
+        grid={defaultGrid}
+        onCellClick={onCellClick}
+        sx={{ marginBottom: "20px" }}
       />
+
+      {activeCell && (
+        <ElementSelect
+          open={openSelect}
+          onClose={onCloseSelect}
+          activeCell={activeCell}
+          onCellChange={onCellChange}
+        />
+      )}
+
+      <Typography variant="body1">
+        Jak jednotlivé prvky vznikly můžete zjistit{" "}
+        <span onClick={onOpenDialog} style={{ textDecoration: "underline" }}>
+          tady
+        </span>
+        .
+      </Typography>
+
+      <ElementsDialog open={openDialog} onClose={onCloseDialog} />
     </>
   );
 };

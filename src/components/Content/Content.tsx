@@ -11,6 +11,7 @@ import { useTheme } from "@mui/material/styles";
 import { useStep } from "../../hooks/useStep";
 import { GoingThrough } from "./GoingThrought/GoingThrough";
 import { Group } from "./Group/Group";
+import { useSwitch } from "../../hooks/useSwitch";
 
 type ContentProps = {
   activeStep: number;
@@ -20,7 +21,6 @@ type ContentProps = {
   setDefaultGrid: React.Dispatch<React.SetStateAction<string[][]>>;
   grid: string[][];
   setEmptyGrid: () => void;
-  reset?: () => void;
 };
 
 export const Content = ({
@@ -31,9 +31,9 @@ export const Content = ({
   setDefaultGrid,
   grid,
   setEmptyGrid,
-  reset,
 }: ContentProps) => {
   const { steps } = useStep();
+  const [editOpen, onEditOpen, onEditClose] = useSwitch(false);
   const theme = useTheme();
   return (
     <>
@@ -110,10 +110,18 @@ export const Content = ({
       {/* Result */}
       {activeStep === 5 && (
         <ContentContainer
-          children={<Result grid={grid} />}
+          children={
+            <Result
+              grid={grid}
+              editOpen={editOpen}
+              onEditClose={onEditClose}
+              form={form}
+              setForm={setForm}
+            />
+          }
           backButton="Zpět"
-          middleButton="Začít znovu"
-          onMiddleButtonClick={reset}
+          middleButton="Upravit"
+          onMiddleButtonClick={onEditOpen}
           nextButton="Prozkoumat"
           fulllHeight
         />

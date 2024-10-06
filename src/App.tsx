@@ -6,7 +6,7 @@ import "./App.css";
 const customTheme = createTheme({
   palette: {
     primary: {
-      light: "#04c2df",
+      light: "#c0e9f0",
       main: "#000000",
       dark: "#04c2df",
       contrastText: "#ffffff",
@@ -55,12 +55,15 @@ const customTheme = createTheme({
             boxShadow: "none",
           },
         },
-        outlined: {
+        outlinedPrimary: {
           border: "2px solid",
           backgroundColor: "#ffffff",
         },
         endIcon: {
           marginLeft: "16px",
+        },
+        containedSecondary: {
+          backgroundColor: "#c2c2c2",
         },
       },
     },
@@ -68,6 +71,7 @@ const customTheme = createTheme({
       styleOverrides: {
         label: {
           fontSize: "13px",
+          marginBottom: 0,
         },
       },
     },
