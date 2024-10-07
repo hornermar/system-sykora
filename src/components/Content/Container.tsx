@@ -47,7 +47,7 @@ export const ContentContainer = ({
       >
         <Box sx={{ maxWidth: maxWidth, width: "100%", margin: "0 auto" }}>
           {activeStep > 0 && activeStep !== 5 && (
-            <Stepper activeStep={activeStep - 1} steps={steps} />
+            <Stepper activeStep={activeStep} steps={steps} />
           )}
           <Box
             sx={{

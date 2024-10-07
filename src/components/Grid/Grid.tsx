@@ -6,12 +6,10 @@ import { useTheme } from "@mui/material/styles";
 
 const pathMap = (cell: string) => {
   switch (cell) {
-    case "x":
-      return "/x.svg";
     case "+":
-      return "/plus.svg";
+      return "icons/plus.svg";
     case "-":
-      return "/minus.svg";
+      return "icons/minus.svg";
     default:
       return `/elements/${cell}.svg`;
   }

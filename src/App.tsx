@@ -39,6 +39,9 @@ const customTheme = createTheme({
     body2: {
       fontSize: "12px",
     },
+    caption: {
+      fontSize: "10px",
+    },
   },
   components: {
     MuiButton: {
@@ -81,6 +84,36 @@ const customTheme = createTheme({
           fontFamily: "Pathway Gothic One, sans-serif",
           fontSize: "28px",
           fontWeight: 500,
+        },
+      },
+    },
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          fontFamily: "Pathway Gothic One, sans-serif",
+          fontWeight: 500,
+          fontSize: "20px",
+          boxShadow: "none",
+        },
+      },
+    },
+    MuiAccordionSummary: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+          minHeight: "unset !important",
+          textTransform: "uppercase",
+        },
+        content: {
+          marginTop: "10px !important",
+          marginBottom: "5px !important",
+        },
+      },
+    },
+    MuiAccordionDetails: {
+      styleOverrides: {
+        root: {
+          padding: 0,
         },
       },
     },

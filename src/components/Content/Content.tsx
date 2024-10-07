@@ -114,14 +114,13 @@ export const Content = ({
             <Result
               grid={grid}
               editOpen={editOpen}
-              onEditClose={onEditClose}
               form={form}
               setForm={setForm}
             />
           }
           backButton="Zpět"
-          middleButton="Upravit"
-          onMiddleButtonClick={onEditOpen}
+          middleButton={editOpen ? "Hotovo" : "Upravit"}
+          onMiddleButtonClick={editOpen ? onEditClose : onEditOpen}
           nextButton="Prozkoumat"
           fulllHeight
         />

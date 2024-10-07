@@ -34,7 +34,9 @@ export const ElementSelect = ({
         onClick={() => onClick(undefined, undefined, "0")}
         endIcon={
           <img
-            src={activeCell.name === "0" ? "/xDisabled.svg" : "/x.svg"}
+            src={
+              activeCell.name === "0" ? "/icons/xDisabled.svg" : "/icons/x.svg"
+            }
             width={20}
             height={20}
             alt={"x icon"}

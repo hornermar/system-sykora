@@ -11,6 +11,7 @@ const defaultFormValues = {
     rows: 10,
     columns: 10,
   },
+  isRandom: false,
 };
 
 export const Dashboard = () => {
@@ -28,14 +29,22 @@ export const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    setGrid(getElements(form.rule, form.coefficient, defaultGrid));
-  }, [form.coefficient, form.rule, defaultGrid]);
+    setGrid(
+      getElements(
+        form.rule,
+        form.coefficient,
+        defaultGrid,
+        undefined,
+        form.isRandom
+      )
+    );
+  }, [form.coefficient, form.rule, defaultGrid, form.isRandom]);
 
-  const reset = () => {
-    setForm(defaultFormValues);
-    setEmptyGrid();
-    onStepChange(1);
-  };
+  // const reset = () => {
+  //   setForm(defaultFormValues);
+  //   setEmptyGrid();
+  //   onStepChange(1);
+  // };
 
   return (
     <Content
@@ -46,7 +55,6 @@ export const Dashboard = () => {
       setDefaultGrid={setDefaultGrid}
       grid={grid}
       setEmptyGrid={setEmptyGrid}
-      reset={reset}
     />
   );
 };

@@ -4,7 +4,7 @@ import { Density } from "../../../types/Density";
 import { size, map } from "lodash";
 import { FormValues } from "../../../types/FormValues";
 import { GroupAverage } from "./Average";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Accordion } from "../../common/Accordion/Accordion";
 
 type GroupCalculationProps = {
@@ -42,6 +42,7 @@ export const GroupCalculation = ({
               <Accordion
                 summary={`${description.step}. okruh`}
                 key={description.step}
+                defaultExpanded={description.step === steps}
               >
                 <GroupAverage
                   cellContent={cellContent}
@@ -49,17 +50,11 @@ export const GroupCalculation = ({
                   description={description}
                 />
                 {steps > 0 && description.step !== steps && (
-                  <div
-                    style={{
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      paddingTop: "10px",
-                    }}
-                  >
+                  <Typography variant="body1">
                     Protože výsledek není jednoznačný (končí{" "}
                     {(0.5).toLocaleString("cs-CZ")}
                     ), je potřeba prohledat širší okolí.
-                  </div>
+                  </Typography>
                 )}
               </Accordion>
             );

@@ -46,7 +46,12 @@ export const Dialog = ({
           top: 8,
         }}
       >
-        <img src={"/xmark.svg"} width={20} height={20} alt={"close icon"} />
+        <img
+          src={"/icons/xmark.svg"}
+          width={20}
+          height={20}
+          alt={"close icon"}
+        />
       </IconButton>
 
       <DialogContent sx={{ paddingTop: "0", fontSize: "14px" }}>

@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { Structure } from "../../Structure/Structure";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Cell } from "../../../types/General";
 import { getColorDensity } from "../../../utils/getColorDensity";
 import { size, map } from "lodash";
@@ -8,6 +8,7 @@ import { FormValues } from "../../../types/FormValues";
 import { getSlicedGrid } from "../../../utils/getSlicedGrid";
 import { GroupCalculation } from "./Calculation";
 import { Label } from "../../common/Label/Label";
+import { mapGrid } from "../../../utils/mapGrid";
 
 type GroupProps = {
   grid: string[][];
@@ -18,7 +19,20 @@ type GroupProps = {
 const cellsToProcess = ["0", "+", "-"];
 
 export const Group = ({ grid, defaultGrid, form }: GroupProps) => {
-  const [activeCell, setActiveCell] = useState<Cell>({ x: 4, y: 0 });
+  const [activeCell, setActiveCell] = useState<Cell>({ x: 0, y: 0 });
+
+  useEffect(() => {
+    mapGrid(
+      defaultGrid,
+      (x, y) => {
+        if (defaultGrid[y][x] === "0") {
+          setActiveCell({ x, y });
+        }
+      },
+      undefined,
+      (x, y) => defaultGrid[y][x] === "0"
+    );
+  }, []);
 
   const onCellClick = (x: number, y: number) => {
     if (!defaultGrid || !cellsToProcess) return;
@@ -51,16 +65,11 @@ export const Group = ({ grid, defaultGrid, form }: GroupProps) => {
     [group, averageSteps]
   );
 
-  // const options = filter(
-  //   elementList,
-  //   ({ colorDensity }) => colorDensity === group.result
-  // );
-
   return (
     <>
       <Typography variant="body1">
         Při zjišťování skupiny algoritmus prochází sousedící prvky, které se s
-        prvkem dotýkají stranou i rohy.
+        prvkem dotýkají stranou i rohy. Místo obrázků těd vidíte názvy prvků.
       </Typography>
 
       <Structure
@@ -87,18 +96,6 @@ export const Group = ({ grid, defaultGrid, form }: GroupProps) => {
       <Typography variant="body1">Vybere nejbližší skupinu prvků:</Typography>
 
       <Label value={group.result.toLocaleString("cs-CZ")} />
-      {/* <Typography variant="body1">Do ní patří tyto elementy</Typography>
-
-      <Grid
-        grid={[map(options, (option) => option.name)]}
-        displayName
-        size={30}
-        sx={{
-          justifyContent: "flex-start",
-          gap: "10px",
-          marginTop: "10px",
-        }}
-      /> */}
     </>
   );
 };

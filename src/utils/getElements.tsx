@@ -3,6 +3,7 @@ import { elementList } from "../lib/elementList";
 import { Cell } from "../types/General";
 import { getColorDensity } from "./getColorDensity";
 import { getShape } from "./getShape";
+import { mapGrid } from "./mapGrid";
 
 export const cellsToProcess = ["0", "+", "-"];
 
@@ -45,24 +46,12 @@ export const getElements = (
   // Create a copy of the grid
   const newGrid = map(grid, (row: string[]) => [...row]);
 
-  // Iterate over the rows
-  for (let y = 0; y < grid.length; y++) {
-    // If the row is even, iterate from left to right
-    if (y % 2 === 0) {
-      for (let x = 0; x < grid[y].length; x++) {
-        if (endCell && endCell.x === x && endCell.y === y) return newGrid;
-        else {
-          processCell(newGrid, x, y, coefficient, rule, isRandom);
-        }
-      }
-    } else {
-      // If the row is odd, iterate from right to left
-      for (let x = grid[y].length - 1; x >= 0; x--) {
-        if (endCell && endCell.x === x && endCell.y === y) return newGrid;
-        else processCell(newGrid, x, y, coefficient, rule, isRandom);
-      }
+  mapGrid(newGrid, (x, y) => {
+    if (endCell && endCell.x === x && endCell.y === y) return newGrid;
+    else {
+      processCell(newGrid, x, y, coefficient, rule, isRandom);
     }
-  }
+  });
 
   return newGrid;
 };

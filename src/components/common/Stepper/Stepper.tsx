@@ -1,4 +1,9 @@
-import { Stepper as MuiStepper, Step, StepLabel } from "@mui/material";
+import {
+  Stepper as MuiStepper,
+  Step,
+  StepLabel,
+  StepIcon,
+} from "@mui/material";
 import { map } from "lodash";
 
 type Step = {
@@ -15,23 +20,39 @@ type StepperProps = {
 export const Stepper = ({ activeStep, steps }: StepperProps) => {
   return (
     <MuiStepper
-      activeStep={activeStep}
+      activeStep={activeStep - 1}
       sx={{ margin: "30px 20px 0 27px" }}
       color="secondary"
     >
-      {map(steps, (step) => {
-        const stepProps: { completed?: boolean } = {};
+      {activeStep < 5 &&
+        map(steps.slice(1, 5), (step) => {
+          return (
+            <Step key={step.order} completed={activeStep > step.order}>
+              <StepLabel
+                StepIconComponent={(props) => (
+                  <StepIcon {...props} icon={step.order} />
+                )}
+              />
+            </Step>
+          );
+        })}
 
-        if (!step.isDisplayed || step.order > 5) {
-          return null;
-        }
-
-        return (
-          <Step key={step.label} {...stepProps}>
-            <StepLabel />
-          </Step>
-        );
-      })}
+      {activeStep > 5 &&
+        map(steps.slice(6), (step) => {
+          return (
+            <Step
+              key={step.order}
+              completed={activeStep > step.order}
+              active={activeStep === step.order}
+            >
+              <StepLabel
+                StepIconComponent={(props) => (
+                  <StepIcon {...props} icon={step.order} />
+                )}
+              />
+            </Step>
+          );
+        })}
     </MuiStepper>
   );
 };
