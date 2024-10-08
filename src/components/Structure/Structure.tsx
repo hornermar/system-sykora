@@ -76,7 +76,7 @@ export const Structure = memo(function Structure({
       sx={{ margin: "0 auto", ...sx }}
       ref={ref}
     >
-      {cellSize > 0 ? (
+      {cellSize > 0 && (
         <StructureGrid
           grid={grid}
           cellSize={cellSize}
@@ -87,7 +87,9 @@ export const Structure = memo(function Structure({
           handleCellClick={onCellClick && handleCellClick}
           variant={variant}
         />
-      ) : (
+      )}
+
+      {cellSize === 0 && rowsCount !== 0 && columnsCount !== 0 && (
         <Box
           sx={{
             width: "100%",

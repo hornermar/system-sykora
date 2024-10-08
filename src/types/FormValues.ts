@@ -4,6 +4,5 @@ export type FormValues = {
     columns: number;
   };
   coefficient: number;
-  rule: number;
-  isRandom: boolean;
+  rule: number | null;
 };

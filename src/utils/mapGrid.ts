@@ -11,17 +11,24 @@ export const mapGrid = (
   const processCell = (x: number, y: number) => {
     if (stop) return;
 
-    setTimeout(() => {
-      if (stop) return;
-
+    if (timeout === 0) {
       processCellCallback(x, y);
-
       if (stopCondition && stopCondition(x, y)) {
         stop = true;
       }
-    }, currentTimeout);
+    } else {
+      setTimeout(() => {
+        if (stop) return;
 
-    currentTimeout += timeout;
+        processCellCallback(x, y);
+
+        if (stopCondition && stopCondition(x, y)) {
+          stop = true;
+        }
+      }, currentTimeout);
+
+      currentTimeout += timeout;
+    }
   };
 
   // Iterate over the rows

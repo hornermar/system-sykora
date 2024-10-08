@@ -47,7 +47,9 @@ export const Rules = ({ form, setForm }: RulesProps) => {
           ))}
         </RadioGroup>
       </FormControl>
-      <Structure grid={rulesItems[form.rule].example} key={form.rule} />
+      {form.rule !== null && (
+        <Structure grid={rulesItems[form.rule].example} key={form.rule} />
+      )}
     </>
   );
 };

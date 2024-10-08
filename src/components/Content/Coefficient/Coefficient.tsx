@@ -11,14 +11,13 @@ export const Coefficient = ({ form, setForm }: CoefficientProps) => {
   return (
     <>
       <Typography variant="body1">
-        Dále zvol koeficient. Ten má mít hodnotu v rozmezí od <b>0</b> do{" "}
-        <b>5</b>.
+        Dále zvol koeficient. Ten má mít hodnotu v rozmezí <b>0</b> do <b>5</b>.
       </Typography>
 
       <Slider
         value={form.coefficient}
         step={0.01}
-        min={0.01}
+        min={form.coefficient === 0 ? 0 : 0.01}
         max={3.99}
         onChange={(_, newValue: number | number[]) =>
           setForm((prev) => ({

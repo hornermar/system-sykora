@@ -3,19 +3,20 @@ import { Content } from "../components/Content/Content";
 import { useStep } from "../hooks/useStep";
 import { useDefaultGrid } from "../hooks/useDefaultGrid";
 import { getElements } from "../utils/getElements";
+import { FormValues } from "../types/FormValues";
 
 const defaultFormValues = {
-  coefficient: 2,
-  rule: 0,
+  coefficient: 0,
+  rule: null,
   structure: {
-    rows: 10,
-    columns: 10,
+    rows: 0,
+    columns: 0,
   },
   isRandom: false,
 };
 
 export const Dashboard = () => {
-  const [form, setForm] = useState(defaultFormValues);
+  const [form, setForm] = useState<FormValues>(defaultFormValues);
   const { defaultGrid, setDefaultGrid, setEmptyGrid } = useDefaultGrid(
     form.structure.rows,
     form.structure.columns
@@ -29,22 +30,15 @@ export const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    setGrid(
-      getElements(
-        form.rule,
-        form.coefficient,
-        defaultGrid,
-        undefined,
-        form.isRandom
-      )
-    );
-  }, [form.coefficient, form.rule, defaultGrid, form.isRandom]);
+    if (form.rule !== null && form.coefficient) {
+      setGrid(getElements(form.rule, form.coefficient, defaultGrid, undefined));
+    }
+  }, [form.coefficient, form.rule, defaultGrid]);
 
-  // const reset = () => {
-  //   setForm(defaultFormValues);
-  //   setEmptyGrid();
-  //   onStepChange(1);
-  // };
+  const resetForm = () => {
+    setForm(defaultFormValues);
+    setEmptyGrid();
+  };
 
   return (
     <Content
@@ -55,6 +49,7 @@ export const Dashboard = () => {
       setDefaultGrid={setDefaultGrid}
       grid={grid}
       setEmptyGrid={setEmptyGrid}
+      resetForm={resetForm}
     />
   );
 };

@@ -3,9 +3,18 @@ import { IntroductionDialog } from "./Dialog";
 import { useSwitch } from "../../../hooks/useSwitch";
 import { useStep } from "../../../hooks/useStep";
 
+// type IntroductionProps = {
+//   resetForm: () => void;
+// };
+
 export const Introduction = () => {
   const [openDialog, onOpenDialog, onCloseDialog] = useSwitch(false);
   const { onStepChange } = useStep();
+
+  const onStart = () => {
+    // resetForm();
+    onStepChange(1);
+  };
 
   return (
     <>
@@ -36,7 +45,7 @@ export const Introduction = () => {
         <Button
           sx={{ padding: "12px 60px" }}
           variant="contained"
-          onClick={() => onStepChange(1)}
+          onClick={() => onStart()}
         >
           Začít
         </Button>

@@ -43,11 +43,6 @@ export const Grid = ({
     [onCellClick]
   );
 
-  // const activeCellNames = map(activeCells, ({ name }) => {
-  //   if (name === "0") return;
-  //   else return name;
-  // }).filter(Boolean);
-
   return (
     <>
       {map(grid, (row, y) => (

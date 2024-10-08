@@ -12,6 +12,7 @@ import { useStep } from "../../hooks/useStep";
 import { GoingThrough } from "./GoingThrought/GoingThrough";
 import { Group } from "./Group/Group";
 import { useSwitch } from "../../hooks/useSwitch";
+import { useEffect } from "react";
 
 type ContentProps = {
   activeStep: number;
@@ -21,6 +22,7 @@ type ContentProps = {
   setDefaultGrid: React.Dispatch<React.SetStateAction<string[][]>>;
   grid: string[][];
   setEmptyGrid: () => void;
+  resetForm: () => void;
 };
 
 export const Content = ({
@@ -35,6 +37,13 @@ export const Content = ({
   const { steps } = useStep();
   const [editOpen, onEditOpen, onEditClose] = useSwitch(false);
   const theme = useTheme();
+
+  useEffect(() => {
+    if (activeStep !== 5 && editOpen) {
+      onEditClose();
+    }
+  }, [activeStep, onEditClose, editOpen, setForm]);
+
   return (
     <>
       {/* Introduction */}
@@ -63,6 +72,7 @@ export const Content = ({
           }
           backButton="Zpět na úvod"
           nextButton="Další"
+          disableNext={!form.structure.columns || !form.structure.rows}
           fulllHeight
         />
       )}
@@ -93,6 +103,7 @@ export const Content = ({
           backButton="Zpět"
           nextButton="Další"
           fulllHeight
+          disableNext={!form.coefficient}
         />
       )}
 
@@ -104,6 +115,7 @@ export const Content = ({
           backButton="Zpět"
           nextButton="Vygenerovat"
           fulllHeight
+          disableNext={form.rule === null}
         />
       )}
 
@@ -116,6 +128,7 @@ export const Content = ({
               editOpen={editOpen}
               form={form}
               setForm={setForm}
+              defaultGrid={defaultGrid}
             />
           }
           backButton="Zpět"

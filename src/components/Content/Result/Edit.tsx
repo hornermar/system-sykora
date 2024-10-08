@@ -20,9 +20,17 @@ type ResultEditProps = {
   form: FormValues;
   setForm: React.Dispatch<React.SetStateAction<FormValues>>;
   open: boolean;
+  isRandom: boolean;
+  setIsRandom: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const ResultEdit = ({ form, setForm, open }: ResultEditProps) => {
+export const ResultEdit = ({
+  form,
+  setForm,
+  open,
+  isRandom,
+  setIsRandom,
+}: ResultEditProps) => {
   const theme = useTheme();
 
   const handleGroupChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,26 +47,26 @@ export const ResultEdit = ({ form, setForm, open }: ResultEditProps) => {
     }));
   };
 
-  const toggleIsRandom = () => {
-    setForm((prev) => ({
-      ...prev,
-      isRandom: !prev.isRandom,
-    }));
+  const toggleIsRandom = (
+    _: React.ChangeEvent<HTMLInputElement>,
+    selected: boolean
+  ) => {
+    setIsRandom(!selected);
   };
 
   return (
-    <Box sx={{ position: "absolute", top: "50vh" }}>
-      <Collapse in={open} orientation="horizontal" sx={{ marginLeft: "-35px" }}>
+    <Box sx={{ position: "absolute", top: "50vh", width: "100vw", left: 0 }}>
+      <Collapse in={open} orientation="horizontal">
         <Stack
           sx={{
             backgroundColor: theme.palette.secondary.main,
-            padding: "20px",
+            padding: "10px",
           }}
         >
           <Stack flexDirection="row" alignItems="center">
             <Typography
               variant="body1"
-              sx={{ paddingRight: "20px", margin: 0 }}
+              sx={{ paddingRight: "10px", margin: 0 }}
             >
               Koeficient
             </Typography>
@@ -68,25 +76,21 @@ export const ResultEdit = ({ form, setForm, open }: ResultEditProps) => {
               min={0.01}
               max={3.99}
               onChange={handleCoeffChange}
-              valueLabelDisplay="on"
-              sx={{ margin: "15px 0" }}
-              disabled={form.isRandom}
+              valueLabelDisplay={isRandom ? "off" : "on"}
+              sx={{ margin: "5px 0" }}
+              disabled={isRandom}
             />
           </Stack>
 
-          <Stack
-            flexDirection="row"
-            alignItems="center"
-            sx={{ marginBottom: "20px" }}
-          >
+          <Stack flexDirection="row" alignItems="center">
             <Typography
               variant="body1"
-              sx={{ paddingRight: "20px", margin: 0 }}
+              sx={{ paddingRight: "10px", margin: 0 }}
             >
               Pravidlo
             </Typography>
 
-            <FormControl disabled={form.isRandom}>
+            <FormControl disabled={isRandom}>
               <RadioGroup
                 row
                 value={form.rule}
@@ -116,13 +120,13 @@ export const ResultEdit = ({ form, setForm, open }: ResultEditProps) => {
             <Stack>
               <Typography variant="body1" sx={{ margin: 0 }}>
                 Algoritmus
-              </Typography>
-              <Typography variant="caption">
-                Vypnutím se prvky vybírají náhodně
+                <Typography variant="caption" component="span">
+                  (Vypnutím se prvky vyberou náhodně)
+                </Typography>
               </Typography>
             </Stack>
 
-            <Switch checked={!form.isRandom} onChange={toggleIsRandom} />
+            <Switch checked={!isRandom} onChange={toggleIsRandom} />
           </Stack>
         </Stack>
       </Collapse>

@@ -13,6 +13,7 @@ type ContentContainerProps = {
   middleButton?: string;
   onMiddleButtonClick?: () => void;
   fulllHeight?: boolean;
+  disableNext?: boolean;
 };
 
 export const ContentContainer = ({
@@ -24,6 +25,7 @@ export const ContentContainer = ({
   middleButton,
   onMiddleButtonClick,
   fulllHeight,
+  disableNext,
 }: ContentContainerProps) => {
   const { activeStep, onStepChange, steps } = useStep();
 
@@ -42,7 +44,7 @@ export const ContentContainer = ({
           backgroundColor: color?.main ?? "unset",
           color: color?.contrastText ?? "unset",
           paddingBottom: activeStep > 0 ? "77px" : "0px",
-          minHeight: fulllHeight ? "98vh" : "unset",
+          minHeight: fulllHeight ? "95vh" : "unset",
         }}
       >
         <Box sx={{ maxWidth: maxWidth, width: "100%", margin: "0 auto" }}>
@@ -99,7 +101,12 @@ export const ContentContainer = ({
             )}
 
             {nextButton && (
-              <Button variant="contained" onClick={handleNext} fullWidth>
+              <Button
+                variant="contained"
+                onClick={handleNext}
+                fullWidth
+                disabled={disableNext}
+              >
                 {nextButton}
               </Button>
             )}

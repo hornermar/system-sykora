@@ -16,7 +16,7 @@ type InputProps = {
 };
 
 export const Select = ({ label, name, value, onChange, max }: InputProps) => {
-  const options = Array.from({ length: max }, (_, i) => i + 1);
+  const options = Array.from({ length: max + 1 }, (_, i) => i);
 
   return (
     <Stack gap={1} flexDirection="row" alignItems="center">
