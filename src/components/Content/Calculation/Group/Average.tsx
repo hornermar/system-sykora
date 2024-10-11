@@ -1,6 +1,6 @@
-import { DensityDescription } from "../../../types/Density";
+import { DensityDescription } from "../../../../types/Density";
 import { first, map, size } from "lodash";
-import { Label } from "../../common/Label/Label";
+import { Label } from "../../../common/Label/Label";
 import { Typography } from "@mui/material";
 
 type GroupAverageProps = {
@@ -35,11 +35,11 @@ export const GroupAverage = ({
       {(cellContent === "+" || cellContent === "-") && (
         <>
           <Typography variant="body1">
-            {`V buňce je znaménko ${cellContent}, ${
+            {`V buňce je ${cellContent}, ${
               cellContent === "+" ? "k" : "od"
             } průměru proto  ${
               cellContent === "+" ? "přičte" : "odečte"
-            } koeficient ${coefficient.toLocaleString("cs-CZ")}:`}
+            } vybraný koeficient ${coefficient.toLocaleString("cs-CZ")}:`}
           </Typography>
 
           <Label

@@ -31,6 +31,8 @@ export const Dialog = ({
           backgroundColor: theme.palette.secondary.main,
           width: "100vw",
           maxWidth: "600px",
+          border: `2px solid ${theme.palette.primary.main}`,
+          borderRadius: "0",
         },
       }}
     >

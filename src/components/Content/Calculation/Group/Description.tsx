@@ -1,31 +1,23 @@
 import { useMemo } from "react";
-import { Cell } from "../../../types/General";
-import { Density } from "../../../types/Density";
+import { Density } from "../../../../types/Density";
 import { size, map } from "lodash";
-import { FormValues } from "../../../types/FormValues";
+import { FormValues } from "../../../../types/FormValues";
 import { GroupAverage } from "./Average";
 import { Box, Typography } from "@mui/material";
-import { Accordion } from "../../common/Accordion/Accordion";
+import { Accordion } from "../../../common/Accordion/Accordion";
 
-type GroupCalculationProps = {
-  defaultGrid: string[][];
-  cell: Cell;
+type CalculationGroupDescriptionProps = {
+  cellContent: string;
   group: Density;
   form: FormValues;
 };
 
-export const GroupCalculation = ({
-  defaultGrid,
-  cell,
+export const CalculationGroupDescription = ({
+  cellContent,
   group,
   form,
-}: GroupCalculationProps) => {
+}: CalculationGroupDescriptionProps) => {
   const steps = useMemo(() => size(group.description), [group]);
-
-  const cellContent = useMemo(
-    () => defaultGrid[cell.y][cell.x],
-    [cell, defaultGrid]
-  );
 
   return (
     <>

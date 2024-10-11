@@ -71,15 +71,15 @@ export const ResultEdit = ({
         bottom: "52.5px",
         width: "100vw",
         left: 0,
-        borderTop: open ? "2px solid black" : "none",
-        borderLeft: "2px solid black",
-        borderRight: "2px solid black",
+        borderTop: open ? `2px solid ${theme.palette.primary.main}` : "none",
+        borderLeft: `2px solid ${theme.palette.primary.main}`,
+        borderRight: `2px solid ${theme.palette.primary.main}`,
       }}
     >
       <Collapse in={open} orientation="vertical">
         <Stack
           sx={{
-            backgroundColor: theme.palette.secondary.light,
+            backgroundColor: theme.palette.secondary.main,
             padding: "10px 35px 15px",
           }}
         >
@@ -153,9 +153,9 @@ export const ResultEdit = ({
             <Stack>
               <Typography variant="body1" sx={{ margin: 0 }}>
                 Algoritmus:
-                <Typography variant="caption" component="div">
-                  Vypnutím se prvky vyberou náhodně
-                </Typography>
+              </Typography>
+              <Typography variant="caption">
+                Vypnutím se prvky vyberou náhodně
               </Typography>
             </Stack>
 

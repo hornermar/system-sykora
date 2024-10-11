@@ -42,7 +42,7 @@ const steps = [
     order: 7,
   },
   {
-    label: "Volba prvku",
+    label: "volba prvku",
     isDisplayed: true,
     order: 8,
   },

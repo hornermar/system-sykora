@@ -10,9 +10,9 @@ import { Sources } from "./Sources/Sources";
 import { useTheme } from "@mui/material/styles";
 import { useStep } from "../../hooks/useStep";
 import { GoingThrough } from "./GoingThrought/GoingThrough";
-import { Group } from "./Group/Group";
 import { useSwitch } from "../../hooks/useSwitch";
 import { useEffect } from "react";
+import { Calculation } from "./Calculation/Calculation";
 
 type ContentProps = {
   activeStep: number;
@@ -43,6 +43,12 @@ export const Content = ({
       onEditClose();
     }
   }, [activeStep, onEditClose, editOpen, setForm]);
+
+  const isFormFilled =
+    form.structure.columns &&
+    form.structure.rows &&
+    form.coefficient !== 0 &&
+    form.rule !== null;
 
   return (
     <>
@@ -120,7 +126,7 @@ export const Content = ({
       )}
 
       {/* Result */}
-      {activeStep === 5 && (
+      {activeStep === 5 && isFormFilled && (
         <ContentContainer
           children={
             <Result
@@ -140,7 +146,7 @@ export const Content = ({
       )}
 
       {/* Going Through Diagram */}
-      {activeStep === 6 && (
+      {activeStep === 6 && isFormFilled && (
         <ContentContainer
           title={steps[6].label}
           children={<GoingThrough grid={grid} defaultGrid={defaultGrid} />}
@@ -151,12 +157,37 @@ export const Content = ({
       )}
 
       {/* Group */}
-      {activeStep === 7 && (
+      {activeStep === 7 && isFormFilled && (
         <ContentContainer
           title={steps[7].label}
-          children={<Group grid={grid} defaultGrid={defaultGrid} form={form} />}
+          children={
+            <Calculation
+              grid={grid}
+              defaultGrid={defaultGrid}
+              form={form}
+              part="group"
+            />
+          }
           backButton="Zpět"
           nextButton="Další"
+          fulllHeight
+        />
+      )}
+
+      {/* Shape */}
+      {activeStep === 8 && isFormFilled && (
+        <ContentContainer
+          title={steps[8].label}
+          children={
+            <Calculation
+              grid={grid}
+              defaultGrid={defaultGrid}
+              form={form}
+              part="shape"
+            />
+          }
+          backButton="Zpět"
+          nextButton="Závěr"
           fulllHeight
         />
       )}

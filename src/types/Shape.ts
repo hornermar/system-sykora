@@ -1,5 +1,5 @@
 import { ElementType } from "./ElementType";
-import { Neighbour } from "./Neighbout";
+import { Neighbour } from "./Neighbour";
 
 export type ShapeDescription = {
   neighbours: Neighbour;

@@ -4,7 +4,7 @@ import { FormValues } from "../../../types/FormValues";
 import { Select } from "../../common/Select/Select";
 import { map } from "lodash";
 import { SelectChangeEvent } from "@mui/material/Select";
-import { useDefaultGrid } from "../../../hooks/useDefaultGrid";
+import { createEmptyGrid } from "../../../utils/createEmptyGrid";
 
 type DiagramProps = {
   form: FormValues;
@@ -18,11 +18,6 @@ const chips = [
 ];
 
 export const Diagram = ({ form, setForm }: DiagramProps) => {
-  const { getEmptyGrid } = useDefaultGrid(
-    form.structure.rows,
-    form.structure.columns
-  );
-
   const handleChange = (e: SelectChangeEvent<number>) => {
     const { name, value } = e.target;
 
@@ -35,7 +30,7 @@ export const Diagram = ({ form, setForm }: DiagramProps) => {
     }));
   };
 
-  const grid = getEmptyGrid();
+  const grid = createEmptyGrid(form.structure.rows, form.structure.columns);
 
   return (
     <>

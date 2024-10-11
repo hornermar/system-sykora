@@ -46,6 +46,7 @@ export const StructureGrid = memo(function StructureGrid({
             const isCellOriginal =
               !displayDefaultGrid &&
               defaultGrid &&
+              defaultGrid[y][x] !== "0" &&
               defaultGrid[y][x] !== "+" &&
               defaultGrid[y][x] !== "-" &&
               defaultGrid[y][x] === cell;
@@ -60,7 +61,7 @@ export const StructureGrid = memo(function StructureGrid({
               <Box
                 key={`${x}${y}`}
                 className={`element-${x}${y}`}
-                onClick={() => handleCellClick?.(x, y, cell)}
+                onClick={() => !isCellOriginal && handleCellClick?.(x, y, cell)}
                 sx={{
                   display: "flex",
                   justifyContent: "center",
@@ -79,7 +80,8 @@ export const StructureGrid = memo(function StructureGrid({
                     : isCellActiveNeighbour
                     ? theme.palette.secondary.main
                     : theme.palette.secondary.light,
-                  cursor: handleCellClick ? "pointer" : "unset",
+                  cursor:
+                    handleCellClick && !isCellOriginal ? "pointer" : "unset",
                   zIndex: isCellActive ? 100 : isCellActiveNeighbour ? 50 : 0,
                 }}
               >
@@ -87,8 +89,11 @@ export const StructureGrid = memo(function StructureGrid({
                   <Typography
                     sx={{
                       margin: 0,
-                      textDecoration:
-                        defaultGrid && isCellOriginal ? "underline" : "none",
+                      fontWeight: 500,
+                      color:
+                        defaultGrid && isCellOriginal
+                          ? theme.palette.text.disabled
+                          : theme.palette.text.primary,
                     }}
                   >
                     {cell !== "0" && cell}

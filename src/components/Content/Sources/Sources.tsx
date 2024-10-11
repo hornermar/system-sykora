@@ -1,4 +1,5 @@
 import { Typography, Box } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export const Sources = () => {
   return (
@@ -26,7 +27,16 @@ export const Sources = () => {
         <Box component="li">
           <Typography variant="body2">
             SÝKORA, Zdeněk, BLAŽEK Jaroslav. Computer aided Multi element
-            Geometrical Abstract Paintings. Leonardo. 1970, roč. 3, s. 409-413
+            Geometrical Abstract Paintings. Leonardo. 1970, roč. 3, s. 409-413{" "}
+            <Link to="https://www.jstor.org/stable/1572257">
+              <img
+                src={"/icons/arrow-up-right-from-square.svg"}
+                width={12}
+                height={12}
+                alt={"open icon"}
+                style={{ verticalAlign: "text-center" }}
+              />
+            </Link>
           </Typography>
         </Box>
       </Box>
