@@ -9,7 +9,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { Cell } from "../../types/General";
+import { Cell, ViewMode } from "../../types/General";
 import { StructureGrid } from "./Grid";
 
 export type StructureProps = {
@@ -22,7 +22,7 @@ export type StructureProps = {
   displayDefaultGrid?: boolean;
   exampleMode?: boolean;
   displayName?: boolean;
-  variant?: "image" | "text";
+  viewMode?: ViewMode;
 };
 
 export const Structure = memo(function Structure({
@@ -33,7 +33,7 @@ export const Structure = memo(function Structure({
   activeCell,
   activeNeighbours,
   displayDefaultGrid,
-  variant = "image",
+  viewMode = "image",
 }: StructureProps) {
   const [cellSize, setCellSize] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
@@ -85,7 +85,7 @@ export const Structure = memo(function Structure({
           activeNeighbours={activeNeighbours}
           activeCell={activeCell}
           handleCellClick={onCellClick && handleCellClick}
-          variant={variant}
+          viewMode={viewMode}
         />
       )}
 

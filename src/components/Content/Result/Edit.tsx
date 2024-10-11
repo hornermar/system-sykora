@@ -1,6 +1,5 @@
 import {
   Stack,
-  Collapse,
   Typography,
   Slider,
   FormControl,
@@ -9,12 +8,17 @@ import {
   Radio,
   Switch,
   Box,
+  Collapse,
+  // Select,
+  // MenuItem,
+  // SelectChangeEvent,
 } from "@mui/material";
 import { FormValues } from "../../../types/FormValues";
 import { rulesItems } from "../../../lib/formItems";
 import { Rule } from "../../../types/Rule";
 import { map } from "lodash";
 import { useTheme } from "@mui/material/styles";
+import { ViewMode } from "../../../types/General";
 
 type ResultEditProps = {
   form: FormValues;
@@ -22,6 +26,8 @@ type ResultEditProps = {
   open: boolean;
   isRandom: boolean;
   setIsRandom: React.Dispatch<React.SetStateAction<boolean>>;
+  viewMode: ViewMode;
+  setViewMode: React.Dispatch<React.SetStateAction<ViewMode>>;
 };
 
 export const ResultEdit = ({
@@ -54,21 +60,41 @@ export const ResultEdit = ({
     setIsRandom(!selected);
   };
 
+  // const handleViewModeChange = (event: SelectChangeEvent<ViewMode>) => {
+  //   setViewMode(event.target.value as ViewMode);
+  // };
+
   return (
-    <Box sx={{ position: "absolute", top: "50vh", width: "100vw", left: 0 }}>
-      <Collapse in={open} orientation="horizontal">
+    <Box
+      sx={{
+        position: "fixed",
+        bottom: "52.5px",
+        width: "100vw",
+        left: 0,
+        borderTop: open ? "2px solid black" : "none",
+        borderLeft: "2px solid black",
+        borderRight: "2px solid black",
+      }}
+    >
+      <Collapse in={open} orientation="vertical">
         <Stack
           sx={{
-            backgroundColor: theme.palette.secondary.main,
-            padding: "10px",
+            backgroundColor: theme.palette.secondary.light,
+            padding: "10px 35px 15px",
           }}
         >
           <Stack flexDirection="row" alignItems="center">
             <Typography
               variant="body1"
-              sx={{ paddingRight: "10px", margin: 0 }}
+              sx={{
+                paddingRight: "10px",
+                margin: 0,
+                color: isRandom
+                  ? theme.palette.text.disabled
+                  : theme.palette.text.primary,
+              }}
             >
-              Koeficient
+              Koeficient:
             </Typography>
             <Slider
               value={form.coefficient}
@@ -77,17 +103,24 @@ export const ResultEdit = ({
               max={3.99}
               onChange={handleCoeffChange}
               valueLabelDisplay={isRandom ? "off" : "on"}
-              sx={{ margin: "5px 0" }}
+              sx={{ margin: "5px 10px 0 0" }}
               disabled={isRandom}
+              size="small"
             />
           </Stack>
 
           <Stack flexDirection="row" alignItems="center">
             <Typography
               variant="body1"
-              sx={{ paddingRight: "10px", margin: 0 }}
+              sx={{
+                paddingRight: "10px",
+                margin: 0,
+                color: isRandom
+                  ? theme.palette.text.disabled
+                  : theme.palette.text.primary,
+              }}
             >
-              Pravidlo
+              Pravidlo:
             </Typography>
 
             <FormControl disabled={isRandom}>
@@ -119,15 +152,37 @@ export const ResultEdit = ({
           >
             <Stack>
               <Typography variant="body1" sx={{ margin: 0 }}>
-                Algoritmus
-                <Typography variant="caption" component="span">
-                  (Vypnutím se prvky vyberou náhodně)
+                Algoritmus:
+                <Typography variant="caption" component="div">
+                  Vypnutím se prvky vyberou náhodně
                 </Typography>
               </Typography>
             </Stack>
 
-            <Switch checked={!isRandom} onChange={toggleIsRandom} />
+            <Switch
+              checked={!isRandom}
+              onChange={toggleIsRandom}
+              size="small"
+            />
           </Stack>
+
+          {/* <Stack flexDirection="row" alignItems="center">
+            <Typography
+              variant="body1"
+              sx={{ paddingRight: "10px", margin: 0 }}
+            >
+              Zobrazení prvků:
+            </Typography>
+            <Select
+              value={viewMode}
+              onChange={(event) => handleViewModeChange(event)}
+              size="small"
+              sx={{ minWidth: 120 }}
+            >
+              <MenuItem value="image">Obrázek</MenuItem>
+              <MenuItem value="text">Názvy</MenuItem>
+            </Select>
+          </Stack> */}
         </Stack>
       </Collapse>
     </Box>

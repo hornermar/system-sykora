@@ -117,6 +117,16 @@ const customTheme = createTheme({
         },
       },
     },
+    MuiSlider: {
+      styleOverrides: {
+        valueLabel: {
+          top: -6,
+          backgroundColor: "unset",
+          color: "#000000",
+          fontSize: "13px",
+        },
+      },
+    },
   },
 });
 
@@ -126,7 +136,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          {/* Add more routes here as needed */}
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

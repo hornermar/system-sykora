@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { map } from "lodash";
 import { memo } from "react";
-import { Cell } from "../../types/General";
+import { Cell, ViewMode } from "../../types/General";
 import { getImgPath } from "../../utils/getImgPath";
 import { useTheme } from "@mui/material/styles";
 
@@ -13,7 +13,7 @@ type StructureGridProps = {
   activeCell?: Cell;
   handleCellClick?: (x: number, y: number, name: string) => void;
   displayDefaultGrid?: boolean;
-  variant: "image" | "text";
+  viewMode: ViewMode;
 };
 
 export const StructureGrid = memo(function StructureGrid({
@@ -24,7 +24,7 @@ export const StructureGrid = memo(function StructureGrid({
   handleCellClick,
   grid,
   displayDefaultGrid,
-  variant,
+  viewMode,
 }: StructureGridProps) {
   const theme = useTheme();
 
@@ -71,7 +71,7 @@ export const StructureGrid = memo(function StructureGrid({
                     ? `1px solid ${theme.palette.secondary.dark}`
                     : isCellActiveNeighbour
                     ? `1px solid ${theme.palette.secondary.dark}`
-                    : variant === "text" || isCellEmpty
+                    : viewMode === "text" || isCellEmpty
                     ? `1px solid ${theme.palette.secondary.main}`
                     : "initial",
                   backgroundColor: isCellActive
@@ -83,7 +83,7 @@ export const StructureGrid = memo(function StructureGrid({
                   zIndex: isCellActive ? 100 : isCellActiveNeighbour ? 50 : 0,
                 }}
               >
-                {variant === "text" && (
+                {viewMode === "text" && (
                   <Typography
                     sx={{
                       margin: 0,
@@ -95,7 +95,7 @@ export const StructureGrid = memo(function StructureGrid({
                   </Typography>
                 )}
 
-                {variant === "image" &&
+                {viewMode === "image" &&
                   (cell !== "+" && cell !== "-" ? (
                     <img
                       src={getImgPath(cell)}

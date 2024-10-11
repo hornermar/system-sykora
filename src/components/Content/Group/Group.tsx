@@ -78,7 +78,7 @@ export const Group = ({ grid, defaultGrid, form }: GroupProps) => {
         onCellClick={onCellClick}
         activeCell={activeCell}
         activeNeighbours={activeNeighbours}
-        variant="text"
+        viewMode="text"
         sx={{ margin: "15px 0" }}
       />
 

@@ -84,7 +84,13 @@ export const ContentContainer = ({
             }}
           >
             {backButton && (
-              <Button variant="outlined" onClick={handleBack} fullWidth>
+              <Button
+                variant="outlined"
+                onClick={handleBack}
+                fullWidth
+                disableTouchRipple
+                disableFocusRipple
+              >
                 {backButton}
               </Button>
             )}
@@ -95,6 +101,8 @@ export const ContentContainer = ({
                 variant="outlined"
                 onClick={onMiddleButtonClick}
                 fullWidth
+                disableTouchRipple
+                disableFocusRipple
               >
                 {middleButton}
               </Button>
@@ -106,6 +114,8 @@ export const ContentContainer = ({
                 onClick={handleNext}
                 fullWidth
                 disabled={disableNext}
+                disableTouchRipple
+                disableFocusRipple
               >
                 {nextButton}
               </Button>

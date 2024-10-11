@@ -27,9 +27,9 @@ export const Rules = ({ form, setForm }: RulesProps) => {
   return (
     <>
       <Typography variant="body1">
-        Nakonec vyberte jedno ze čtyř pravidel. To rozhoduje, jaké vztahy
-        elementy navazují, zda se vzájemně napojují, nebo se od sebe izolují
-        (barvou, tvarem, nebo obojím).
+        Nakonec vyber jedno ze čtyř pravidel. To rozhoduje, jaké vztahy elementy
+        navazují, zda se vzájemně napojují, nebo se od sebe izolují (barvou,
+        tvarem, nebo obojím).
       </Typography>
       <FormControl sx={{ margin: "10px 0 20px" }}>
         <RadioGroup value={form.rule} onChange={handleChange}>

@@ -4,6 +4,7 @@ import { FormValues } from "../../../types/FormValues";
 import { ResultEdit } from "./Edit";
 import { useState } from "react";
 import { getElements } from "../../../utils/getElements";
+import { ViewMode } from "../../../types/General";
 
 type ResultProps = {
   grid: string[][];
@@ -21,6 +22,7 @@ export const Result = ({
   defaultGrid,
 }: ResultProps) => {
   const [isRandom, setIsRandom] = useState<boolean>(false);
+  const [viewMode, setViewMode] = useState<ViewMode>("image");
 
   const randomGrid = getElements(
     form.rule!,
@@ -32,7 +34,7 @@ export const Result = ({
 
   return (
     <Stack>
-      <Structure grid={isRandom ? randomGrid : grid} />
+      <Structure grid={isRandom ? randomGrid : grid} viewMode={viewMode} />
 
       <ResultEdit
         form={form}
@@ -40,6 +42,8 @@ export const Result = ({
         open={editOpen}
         isRandom={isRandom}
         setIsRandom={setIsRandom}
+        viewMode={viewMode}
+        setViewMode={setViewMode}
       />
     </Stack>
   );
