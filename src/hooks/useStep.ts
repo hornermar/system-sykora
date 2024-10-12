@@ -32,7 +32,7 @@ const steps = [
     order: 5,
   },
   {
-    label: "Průchod mřížkou",
+    label: "A jak algoritmus funguje?",
     isDisplayed: true,
     order: 6,
   },

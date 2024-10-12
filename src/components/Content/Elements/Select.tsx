@@ -28,7 +28,12 @@ export const ElementSelect = ({
   };
 
   return (
-    <Dialog open={open} onClose={onClose} title="Zvol prvek nebo znaménko">
+    <Dialog
+      open={open}
+      onClose={onClose}
+      title="Vyber obsah buňky"
+      sx={{ paddingBottom: "4px" }}
+    >
       <Button
         variant="contained"
         onClick={() => onClick(undefined, undefined, "0")}

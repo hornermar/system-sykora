@@ -65,6 +65,7 @@ export const Content = ({
               onStepChange(1);
               resetForm();
             }}
+            fulllHeight
           />
         </>
       )}
@@ -76,7 +77,7 @@ export const Content = ({
           children={
             <Diagram form={form} setForm={setForm} defaultGrid={defaultGrid} />
           }
-          backButton="Zpět na úvod"
+          backButton="Zpět na začátek"
           nextButton="Další"
           disableNext={!form.structure.columns || !form.structure.rows}
           fulllHeight
@@ -183,6 +184,7 @@ export const Content = ({
             backButton="Zpět"
             nextButton="Na začátek"
             onNextButtonClick={() => onStepChange(0)}
+            fulllHeight
           />
           <ContentContainer
             title={steps[0].label}

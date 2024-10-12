@@ -33,7 +33,7 @@ export const GoingThrough = ({ defaultGrid, grid }: GoingThroughProps) => {
   return (
     <>
       <Typography variant="body1">
-        Algoritmus začíná počítat v levém horním rohu. Postupuje zleva doprava v
+        Výpočet začíná v levém horním rohu. Postupuje po buňce zleva doprava v
         lichých řadách a zprava doleva v sudých.
       </Typography>
 

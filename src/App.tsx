@@ -30,7 +30,6 @@ const customTheme = createTheme({
       fontSize: "40px",
       fontWeight: 500,
     },
-
     body1: {
       fontSize: "14px",
       marginBottom: "10px",
@@ -130,6 +129,21 @@ const customTheme = createTheme({
           backgroundColor: "unset",
           color: "#000000",
           fontSize: "13px",
+        },
+      },
+    },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          backgroundColor: "#c2c2c2",
+          color: "#000000",
+          fontSize: "12px",
+          maxWidth: "250px",
+          fontWeight: 400,
+          padding: "15px ",
+        },
+        arrow: {
+          color: "#c2c2c2",
         },
       },
     },

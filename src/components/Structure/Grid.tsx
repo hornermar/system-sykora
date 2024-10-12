@@ -69,15 +69,13 @@ export const StructureGrid = memo(function StructureGrid({
                   width: `${cellSize}px`,
                   height: `${cellSize}px`,
                   border:
-                    isCellActive || isCellActiveNeighbour
-                      ? `1px solid ${theme.palette.secondary.dark}`
-                      : viewMode === "text" || isCellEmpty
+                    viewMode === "text" || isCellEmpty
                       ? `1px solid ${theme.palette.secondary.main}`
                       : "initial",
                   backgroundColor: isCellActive
-                    ? theme.palette.secondary.dark
+                    ? theme.palette.primary.dark
                     : isCellActiveNeighbour
-                    ? theme.palette.secondary.main
+                    ? theme.palette.primary.light
                     : theme.palette.secondary.light,
                   cursor:
                     handleCellClick && !isCellOriginal ? "pointer" : "unset",
@@ -109,11 +107,11 @@ export const StructureGrid = memo(function StructureGrid({
                       style={{
                         objectFit: "fill",
                         opacity:
-                          isCellActive || isCellActiveNeighbour ? 0.5 : 1,
-                        border:
-                          isCellActive || isCellActiveNeighbour
-                            ? `2px solid ${theme.palette.secondary.dark}`
-                            : "none",
+                          isCellOriginal && defaultGrid
+                            ? 0.5
+                            : isCellActiveNeighbour
+                            ? 0.3
+                            : 1,
                       }}
                     />
                   ) : (

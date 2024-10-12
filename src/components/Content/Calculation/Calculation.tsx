@@ -23,6 +23,8 @@ type GroupProps = {
 };
 
 const cellsToProcess = ["0", "+", "-"];
+const tooltip =
+  "Kliknutím do buňky vyber prvek, u kterého chceš zobrazit výpočet. Prvky, které jsou zašedlé, jsou původní, a proto není možné je vybrat.";
 
 export const Calculation = ({ grid, defaultGrid, form, part }: GroupProps) => {
   const [activeCell, setActiveCell] = useState<Cell>({ x: 0, y: 0 });
@@ -124,6 +126,7 @@ export const Calculation = ({ grid, defaultGrid, form, part }: GroupProps) => {
         }
         viewMode={part === "group" ? "text" : "image"}
         sx={{ margin: "15px 0" }}
+        tooltip={tooltip}
       />
 
       {part === "group" && (

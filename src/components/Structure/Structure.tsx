@@ -11,6 +11,7 @@ import {
 } from "react";
 import { Cell, ViewMode } from "../../types/General";
 import { StructureGrid } from "./Grid";
+import { StructureTooltip } from "./Tooltip";
 
 export type StructureProps = {
   grid: string[][];
@@ -23,6 +24,7 @@ export type StructureProps = {
   exampleMode?: boolean;
   displayName?: boolean;
   viewMode?: ViewMode;
+  tooltip?: string;
 };
 
 export const Structure = memo(function Structure({
@@ -34,6 +36,7 @@ export const Structure = memo(function Structure({
   activeNeighbours,
   displayDefaultGrid,
   viewMode = "image",
+  tooltip,
 }: StructureProps) {
   const [cellSize, setCellSize] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
@@ -73,20 +76,23 @@ export const Structure = memo(function Structure({
       flexDirection="column"
       width="100%"
       alignItems="center"
-      sx={{ margin: "0 auto", ...sx }}
+      sx={{ margin: "0 auto", ...sx, position: "relative" }}
       ref={ref}
     >
       {cellSize > 0 && (
-        <StructureGrid
-          grid={grid}
-          cellSize={cellSize}
-          defaultGrid={defaultGrid}
-          displayDefaultGrid={displayDefaultGrid}
-          activeNeighbours={activeNeighbours}
-          activeCell={activeCell}
-          handleCellClick={onCellClick && handleCellClick}
-          viewMode={viewMode}
-        />
+        <>
+          {onCellClick && <StructureTooltip tooltip={tooltip} />}
+          <StructureGrid
+            grid={grid}
+            cellSize={cellSize}
+            defaultGrid={defaultGrid}
+            displayDefaultGrid={displayDefaultGrid}
+            activeNeighbours={activeNeighbours}
+            activeCell={activeCell}
+            handleCellClick={onCellClick && handleCellClick}
+            viewMode={viewMode}
+          />
+        </>
       )}
 
       {cellSize === 0 && rowsCount !== 0 && columnsCount !== 0 && (

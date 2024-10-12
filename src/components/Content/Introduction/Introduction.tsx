@@ -34,23 +34,6 @@ export const Introduction = () => {
         Vyzkoušej si, jak algoritmus funguje a vytvoř si vlastní strukturu!
       </Typography>
 
-      {/* <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          margin: "20px 0",
-        }}
-      >
-        <Button
-          sx={{ padding: "12px 60px" }}
-          variant="contained"
-          onClick={() => onStart()}
-        >
-          Začít
-        </Button>
-      </Box> */}
-
       <Typography variant="body1">
         Jednu ze struktur můžete najít v{" "}
         <span onClick={onOpenDialog} style={{ textDecoration: "underline" }}>

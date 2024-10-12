@@ -24,8 +24,8 @@ export const GroupAverage = ({
     <>
       <Label
         value={`${
-          size(neighboursGroup) === 1
-            ? first(neighboursGroup)?.toLocaleString("cs-CZ")
+          size(neighboursGroup) <= 1
+            ? first(neighboursGroup)?.toLocaleString("cs-CZ") ?? 0
             : `(${neighboursGroup.join(" + ")})`
         } : ${size(
           neighboursGroup

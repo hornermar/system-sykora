@@ -63,14 +63,11 @@ export const Elements = ({
         vyplnit některá pole. Na výběr máš z 20 prvků, které určí základ
         struktury.
       </Typography>
-      <Typography variant="body1">
+      <Typography variant="body1" sx={{ marginBottom: "20px" }}>
         Do míst, kde si přeješ urychlit nebo zpomalit přechody barev, přidej
         znaménka <b>+</b> nebo <b>-</b>.
       </Typography>
 
-      <Typography variant="body1" sx={{ marginBottom: "20px" }}>
-        Kliknutím do vybraného pole se otevře nabídka.
-      </Typography>
       <Box
         sx={{
           marginBottom: "10px",
@@ -98,6 +95,7 @@ export const Elements = ({
         grid={defaultGrid}
         onCellClick={onCellClick}
         sx={{ marginBottom: "20px" }}
+        tooltip="Kliknutím do vybraného pole se otevře nabídka."
       />
 
       {activeCell && (

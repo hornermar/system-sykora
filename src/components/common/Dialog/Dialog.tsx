@@ -2,7 +2,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Dialog as MuiDialog } from "@mui/material";
 import { DialogContent } from "@mui/material";
 import { IconButton } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+import { SxProps, useTheme } from "@mui/material/styles";
 
 type DialogProp = {
   open: boolean;
@@ -10,6 +10,7 @@ type DialogProp = {
   title: string;
   children: React.ReactNode;
   fullScreen?: boolean;
+  sx?: SxProps;
 };
 
 export const Dialog = ({
@@ -18,6 +19,7 @@ export const Dialog = ({
   title,
   children,
   fullScreen,
+  sx,
 }: DialogProp) => {
   const theme = useTheme();
 
@@ -35,7 +37,9 @@ export const Dialog = ({
         },
       }}
     >
-      <DialogTitle>{title.toUpperCase()}</DialogTitle>
+      <DialogTitle sx={{ marginRight: "20px" }}>
+        {title.toUpperCase()}
+      </DialogTitle>
 
       <IconButton
         color="inherit"
@@ -55,7 +59,7 @@ export const Dialog = ({
         />
       </IconButton>
 
-      <DialogContent sx={{ paddingTop: "0", fontSize: "14px" }}>
+      <DialogContent sx={{ paddingTop: "0", fontSize: "14px", ...sx }}>
         {children}
       </DialogContent>
     </MuiDialog>
