@@ -13,7 +13,7 @@ export const IntroductionDialog = ({
   onClose,
 }: IntroductionDialogProps) => {
   return (
-    <Dialog open={open} onClose={onClose} title="Stěna, 1968" fullScreen>
+    <Dialog open={open} onClose={onClose} title="Stěna, 1969" fullScreen>
       <Typography variant="body1">
         Na konci 60. let 20 století pomocí tohoto algoritmu vytvořil Stěnu pro
         pasáž. Původně z jedné strany sousedila s polským kulturním střediskem,

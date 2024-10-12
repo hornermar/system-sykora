@@ -23,7 +23,7 @@ export const CalculationGroupDialog = ({
   );
 
   return (
-    <Dialog title="Skupina 2" open={open} onClose={onClose}>
+    <Dialog title={`Skupina ${group.result}`} open={open} onClose={onClose}>
       <Grid
         grid={[map(options, (option) => option.name)]}
         displayName

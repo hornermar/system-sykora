@@ -37,14 +37,19 @@ const steps = [
     order: 6,
   },
   {
-    label: "Výpočet skupiny",
+    label: "Výběr skupiny",
     isDisplayed: true,
     order: 7,
   },
   {
-    label: "volba prvku",
+    label: "Výběr prvku",
     isDisplayed: true,
     order: 8,
+  },
+  {
+    label: "Závěr",
+    isDisplayed: true,
+    order: 9,
   },
 ];
 

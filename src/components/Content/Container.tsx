@@ -14,6 +14,7 @@ type ContentContainerProps = {
   onMiddleButtonClick?: () => void;
   fulllHeight?: boolean;
   disableNext?: boolean;
+  onNextButtonClick?: () => void;
 };
 
 export const ContentContainer = ({
@@ -26,6 +27,7 @@ export const ContentContainer = ({
   onMiddleButtonClick,
   fulllHeight,
   disableNext,
+  onNextButtonClick,
 }: ContentContainerProps) => {
   const { activeStep, onStepChange, steps } = useStep();
 
@@ -48,7 +50,7 @@ export const ContentContainer = ({
         }}
       >
         <Box sx={{ maxWidth: maxWidth, width: "100%", margin: "0 auto" }}>
-          {activeStep > 0 && activeStep !== 5 && (
+          {activeStep > 0 && activeStep !== 5 && activeStep !== 9 && (
             <Stepper activeStep={activeStep} steps={steps} />
           )}
           <Box
@@ -111,7 +113,7 @@ export const ContentContainer = ({
             {nextButton && (
               <Button
                 variant="contained"
-                onClick={handleNext}
+                onClick={onNextButtonClick ?? handleNext}
                 fullWidth
                 disabled={disableNext}
                 disableTouchRipple

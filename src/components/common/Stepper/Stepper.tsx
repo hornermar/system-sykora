@@ -8,7 +8,6 @@ import { map } from "lodash";
 
 type Step = {
   label: string;
-  isDisplayed: boolean;
   order: number;
 };
 

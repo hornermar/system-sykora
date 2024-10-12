@@ -57,6 +57,12 @@ const customTheme = createTheme({
           "&:active": {
             boxShadow: "none",
           },
+          "&.Mui-disabled": {
+            border: "2px solid rgba(0, 0, 0, 0)",
+          },
+        },
+        containedPrimary: {
+          border: "2px solid black",
         },
         outlinedPrimary: {
           border: "2px solid",

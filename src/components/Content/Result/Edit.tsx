@@ -162,7 +162,7 @@ export const ResultEdit = ({
             <Switch
               checked={!isRandom}
               onChange={toggleIsRandom}
-              size="small"
+              // size="small"
             />
           </Stack>
 

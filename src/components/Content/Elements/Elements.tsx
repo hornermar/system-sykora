@@ -60,16 +60,16 @@ export const Elements = ({
     <>
       <Typography variant="body1">
         Aby bylo možné strukturu dopočítat algoritmem, je potřeba v mřížce
-        vyplnit některá pole. Na výběr máte z 20 prvků, které určí základ vaší
+        vyplnit některá pole. Na výběr máš z 20 prvků, které určí základ
         struktury.
       </Typography>
       <Typography variant="body1">
-        Do míst, kde si přejete urychlit nebo zpomalit přechody barev, přidejte
+        Do míst, kde si přeješ urychlit nebo zpomalit přechody barev, přidej
         znaménka <b>+</b> nebo <b>-</b>.
       </Typography>
 
       <Typography variant="body1" sx={{ marginBottom: "20px" }}>
-        Kliknutím do vybraného pole se vám otevře nabídka.
+        Kliknutím do vybraného pole se otevře nabídka.
       </Typography>
       <Box
         sx={{
@@ -110,10 +110,10 @@ export const Elements = ({
       )}
 
       <Typography variant="body1">
-        Jak jednotlivé prvky vznikly můžete zjistit{" "}
-        <span onClick={onOpenDialog} style={{ textDecoration: "underline" }}>
-          tady
-        </span>
+        Jak jednotlivé prvky vznikly zjisti{" "}
+        <b onClick={onOpenDialog}>
+          <u>zde</u>
+        </b>
         .
       </Typography>
 

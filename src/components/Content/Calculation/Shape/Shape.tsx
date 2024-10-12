@@ -6,13 +6,21 @@ import { Rule } from "../../../../types/Rule";
 import { find, map } from "lodash";
 import { Grid } from "../../../Grid/Grid";
 import { Shape } from "../../../../types/Shape";
+import { Density } from "../../../../types/Density";
 
 type ShapeProps = {
   form: FormValues;
   shape: Shape;
+  onOpenDialog: () => void;
+  group: Density;
 };
 
-export const CalculationShape = ({ form, shape }: ShapeProps) => {
+export const CalculationShape = ({
+  form,
+  shape,
+  onOpenDialog,
+  group,
+}: ShapeProps) => {
   const ruleItem: Rule = useMemo(
     () =>
       find(rulesItems, (ruleItem: Rule) => form.rule === ruleItem.code) ??
@@ -23,17 +31,26 @@ export const CalculationShape = ({ form, shape }: ShapeProps) => {
   return (
     <>
       <Typography variant="body1">
-        Jaké vlastnosti hledá se řídí pravidlem, v tomto případě:
+        Zkoumá, jaké vlastnosti mají strany dotyku - jakou mají barvu a zda je
+        zde otevřený tvar či nikoliv. Zde se řídí pravidlem:
       </Typography>
 
       <Typography variant="body1">
-        <i>
-          {ruleItem?.code} : {ruleItem?.text}
-        </i>
+        <b>
+          {ruleItem?.code}: {ruleItem?.text}
+        </b>
       </Typography>
 
       <Typography variant="body1">
-        Protože {shape.description.reason}. Výsledkem je <b>{shape.result}</b>
+        Snaží se najít prvek ze{" "}
+        <b onClick={() => onOpenDialog()}>
+          <u>skupiny {group.result.toLocaleString("cs-CZ")}</u>
+        </b>
+        , který podmínky splňuje nejlépe.
+      </Typography>
+
+      <Typography variant="body1">
+        {shape.description.reason}: <b>{shape.result}</b>
       </Typography>
 
       <Grid

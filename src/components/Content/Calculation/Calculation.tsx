@@ -12,6 +12,8 @@ import { CalculationShape } from "./Shape/Shape";
 import { getShape } from "../../../utils/getShape";
 import { Shape } from "../../../types/Shape";
 import { Density } from "../../../types/Density";
+import { useSwitch } from "../../../hooks/useSwitch";
+import { CalculationGroupDialog } from "./Group/Dialog";
 
 type GroupProps = {
   grid: string[][];
@@ -24,6 +26,7 @@ const cellsToProcess = ["0", "+", "-"];
 
 export const Calculation = ({ grid, defaultGrid, form, part }: GroupProps) => {
   const [activeCell, setActiveCell] = useState<Cell>({ x: 0, y: 0 });
+  const [openDialog, onOpenDialog, onCloseDialog] = useSwitch(false);
 
   const initializeActiveCell = useCallback(() => {
     mapGrid(
@@ -106,9 +109,8 @@ export const Calculation = ({ grid, defaultGrid, form, part }: GroupProps) => {
 
       {part === "shape" && (
         <Typography variant="body1">
-          Při výběru natočení zkoumá sousední elementy (dotýkající se pouze
-          stranou stranou) a jejich vlastnosti. Těmi jsou barva (černá / bílá) a
-          tvar na sousedící straně (ano / ne).
+          Při konečném výběru ze skupiny zkoumá algoritmus prvky, které s
+          analyzovaným prvkem sousedí stranami.
         </Typography>
       )}
 
@@ -125,10 +127,28 @@ export const Calculation = ({ grid, defaultGrid, form, part }: GroupProps) => {
       />
 
       {part === "group" && (
-        <CalculationGroup form={form} group={group} cellContent={cellContent} />
+        <CalculationGroup
+          form={form}
+          group={group}
+          cellContent={cellContent}
+          onOpenDialog={onOpenDialog}
+        />
       )}
 
-      {part === "shape" && <CalculationShape form={form} shape={shape} />}
+      {part === "shape" && (
+        <CalculationShape
+          form={form}
+          shape={shape}
+          onOpenDialog={onOpenDialog}
+          group={group}
+        />
+      )}
+
+      <CalculationGroupDialog
+        open={openDialog}
+        onClose={onCloseDialog}
+        group={group}
+      />
     </>
   );
 };

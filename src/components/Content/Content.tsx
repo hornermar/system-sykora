@@ -13,6 +13,7 @@ import { GoingThrough } from "./GoingThrought/GoingThrough";
 import { useSwitch } from "../../hooks/useSwitch";
 import { useEffect } from "react";
 import { Calculation } from "./Calculation/Calculation";
+import { End } from "./End/End";
 
 type ContentProps = {
   activeStep: number;
@@ -33,8 +34,9 @@ export const Content = ({
   setDefaultGrid,
   grid,
   setEmptyGrid,
+  resetForm,
 }: ContentProps) => {
-  const { steps } = useStep();
+  const { steps, onStepChange } = useStep();
   const [editOpen, onEditOpen, onEditClose] = useSwitch(false);
   const theme = useTheme();
 
@@ -58,13 +60,11 @@ export const Content = ({
           <ContentContainer
             children={<Introduction />}
             title="Systém Sýkora"
-            fulllHeight
-            // nextButton="Start"
-          />
-          <ContentContainer
-            title={steps[0].label}
-            children={<Sources />}
-            color={theme.palette.primary}
+            nextButton="Začít"
+            onNextButtonClick={() => {
+              onStepChange(1);
+              resetForm();
+            }}
           />
         </>
       )}
@@ -72,7 +72,7 @@ export const Content = ({
       {/* Diagram */}
       {activeStep === 1 && (
         <ContentContainer
-          title={steps[1].label}
+          title={steps[activeStep].label}
           children={
             <Diagram form={form} setForm={setForm} defaultGrid={defaultGrid} />
           }
@@ -86,7 +86,7 @@ export const Content = ({
       {/* Elements */}
       {activeStep === 2 && (
         <ContentContainer
-          title={steps[2].label}
+          title={steps[activeStep].label}
           children={
             <Elements
               defaultGrid={defaultGrid}
@@ -104,7 +104,7 @@ export const Content = ({
       {/* Coefficient */}
       {activeStep === 3 && (
         <ContentContainer
-          title={steps[3].label}
+          title={steps[activeStep].label}
           children={<Coefficient form={form} setForm={setForm} />}
           backButton="Zpět"
           nextButton="Další"
@@ -116,7 +116,7 @@ export const Content = ({
       {/* Rule */}
       {activeStep === 4 && (
         <ContentContainer
-          title={steps[4].label}
+          title={steps[activeStep].label}
           children={<Rules form={form} setForm={setForm} />}
           backButton="Zpět"
           nextButton="Vygenerovat"
@@ -148,7 +148,7 @@ export const Content = ({
       {/* Going Through Diagram */}
       {activeStep === 6 && isFormFilled && (
         <ContentContainer
-          title={steps[6].label}
+          title={steps[activeStep].label}
           children={<GoingThrough grid={grid} defaultGrid={defaultGrid} />}
           backButton="Zpět"
           nextButton="Další"
@@ -156,40 +156,40 @@ export const Content = ({
         />
       )}
 
-      {/* Group */}
-      {activeStep === 7 && isFormFilled && (
+      {/* Group + Shape */}
+      {(activeStep === 7 || activeStep === 8) && isFormFilled && (
         <ContentContainer
-          title={steps[7].label}
+          title={steps[activeStep].label}
           children={
             <Calculation
               grid={grid}
               defaultGrid={defaultGrid}
               form={form}
-              part="group"
+              part={activeStep === 7 ? "group" : "shape"}
             />
           }
           backButton="Zpět"
-          nextButton="Další"
+          nextButton={activeStep === 7 ? "Další" : "Závěr"}
           fulllHeight
         />
       )}
 
-      {/* Shape */}
-      {activeStep === 8 && isFormFilled && (
-        <ContentContainer
-          title={steps[8].label}
-          children={
-            <Calculation
-              grid={grid}
-              defaultGrid={defaultGrid}
-              form={form}
-              part="shape"
-            />
-          }
-          backButton="Zpět"
-          nextButton="Závěr"
-          fulllHeight
-        />
+      {/* End */}
+      {activeStep === 9 && isFormFilled && (
+        <>
+          <ContentContainer
+            title={steps[activeStep].label}
+            children={<End />}
+            backButton="Zpět"
+            nextButton="Na začátek"
+            onNextButtonClick={() => onStepChange(0)}
+          />
+          <ContentContainer
+            title={steps[0].label}
+            children={<Sources />}
+            color={theme.palette.primary}
+          />
+        </>
       )}
     </>
   );

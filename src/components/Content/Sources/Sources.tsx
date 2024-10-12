@@ -31,10 +31,9 @@ export const Sources = () => {
             <Link to="https://www.jstor.org/stable/1572257">
               <img
                 src={"/icons/arrow-up-right-from-square.svg"}
-                width={12}
-                height={12}
+                width={11}
+                height={11}
                 alt={"open icon"}
-                style={{ verticalAlign: "text-center" }}
               />
             </Link>
           </Typography>

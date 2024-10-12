@@ -19,7 +19,7 @@ export const GoingThrough = ({ defaultGrid, grid }: GoingThroughProps) => {
       (x, y) => {
         setSliceFromCell({ x, y });
       },
-      70,
+      90,
       undefined,
       () => setSliceFromCell((prev) => ({ x: prev.x, y: prev.y + 1 }))
     );

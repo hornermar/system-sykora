@@ -68,13 +68,12 @@ export const StructureGrid = memo(function StructureGrid({
                   alignItems: "center",
                   width: `${cellSize}px`,
                   height: `${cellSize}px`,
-                  border: isCellActive
-                    ? `1px solid ${theme.palette.secondary.dark}`
-                    : isCellActiveNeighbour
-                    ? `1px solid ${theme.palette.secondary.dark}`
-                    : viewMode === "text" || isCellEmpty
-                    ? `1px solid ${theme.palette.secondary.main}`
-                    : "initial",
+                  border:
+                    isCellActive || isCellActiveNeighbour
+                      ? `1px solid ${theme.palette.secondary.dark}`
+                      : viewMode === "text" || isCellEmpty
+                      ? `1px solid ${theme.palette.secondary.main}`
+                      : "initial",
                   backgroundColor: isCellActive
                     ? theme.palette.secondary.dark
                     : isCellActiveNeighbour
@@ -110,11 +109,11 @@ export const StructureGrid = memo(function StructureGrid({
                       style={{
                         objectFit: "fill",
                         opacity:
-                          isCellActive || isCellActiveNeighbour ? 0.6 : 1,
-                        // border:
-                        //   isCellActive || isCellActiveNeighbour
-                        //     ? `2px solid ${theme.palette.secondary.main}`
-                        //     : "none",
+                          isCellActive || isCellActiveNeighbour ? 0.5 : 1,
+                        border:
+                          isCellActive || isCellActiveNeighbour
+                            ? `2px solid ${theme.palette.secondary.dark}`
+                            : "none",
                       }}
                     />
                   ) : (

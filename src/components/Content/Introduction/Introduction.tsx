@@ -1,7 +1,7 @@
-import { Typography, Button, Box } from "@mui/material";
+import { Typography } from "@mui/material";
 import { IntroductionDialog } from "./Dialog";
 import { useSwitch } from "../../../hooks/useSwitch";
-import { useStep } from "../../../hooks/useStep";
+// import { useStep } from "../../../hooks/useStep";
 
 // type IntroductionProps = {
 //   resetForm: () => void;
@@ -9,12 +9,12 @@ import { useStep } from "../../../hooks/useStep";
 
 export const Introduction = () => {
   const [openDialog, onOpenDialog, onCloseDialog] = useSwitch(false);
-  const { onStepChange } = useStep();
+  // const { onStepChange } = useStep();
 
-  const onStart = () => {
-    // resetForm();
-    onStepChange(1);
-  };
+  // const onStart = () => {
+  //   // resetForm();
+  //   onStepChange(1);
+  // };
 
   return (
     <>
@@ -34,7 +34,7 @@ export const Introduction = () => {
         Vyzkoušej si, jak algoritmus funguje a vytvoř si vlastní strukturu!
       </Typography>
 
-      <Box
+      {/* <Box
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -49,7 +49,7 @@ export const Introduction = () => {
         >
           Začít
         </Button>
-      </Box>
+      </Box> */}
 
       <Typography variant="body1">
         Jednu ze struktur můžete najít v{" "}
