@@ -37,7 +37,7 @@ export const Stepper = ({ activeStep, steps }: StepperProps) => {
         })}
 
       {activeStep > 5 &&
-        map(steps.slice(6), (step) => {
+        map(steps.slice(6, steps.length - 1), (step) => {
           return (
             <Step
               key={step.order}
