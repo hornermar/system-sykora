@@ -53,8 +53,8 @@ export const Dialog = ({
       >
         <img
           src={"/icons/xmark.svg"}
-          width={20}
-          height={20}
+          width={30}
+          height={30}
           alt={"close icon"}
         />
       </IconButton>

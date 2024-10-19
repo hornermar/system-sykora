@@ -2,18 +2,15 @@ import { FormValues } from "../../types/FormValues";
 import { Coefficient } from "./Coefficient/Coefficient";
 import { Diagram } from "./Diagram/Diagram";
 import { Elements } from "./Elements/Elements";
-import { Introduction } from "./Introduction/Introduction";
 import { Rules } from "./Rules/Rules";
 import { Result } from "./Result/Result";
-import { ContentContainer } from "./Container";
-import { Sources } from "./Sources/Sources";
-import { useTheme } from "@mui/material/styles";
+import { Container } from "../common/Container/Container";
 import { useStep } from "../../hooks/useStep";
-import { GoingThrough } from "./GoingThrought/GoingThrough";
 import { useSwitch } from "../../hooks/useSwitch";
 import { useEffect } from "react";
-import { Calculation } from "./Calculation/Calculation";
+import { GoingThrough } from "./GoingThrought/GoingThrough";
 import { End } from "./End/End";
+import { Calculation } from "./Calculation/Calculation";
 
 type ContentProps = {
   activeStep: number;
@@ -34,11 +31,9 @@ export const Content = ({
   setDefaultGrid,
   grid,
   setEmptyGrid,
-  resetForm,
 }: ContentProps) => {
-  const { steps, onStepChange } = useStep();
+  const { steps } = useStep();
   const [editOpen, onEditOpen, onEditClose] = useSwitch(false);
-  const theme = useTheme();
 
   useEffect(() => {
     if (activeStep !== 5 && editOpen) {
@@ -54,30 +49,13 @@ export const Content = ({
 
   return (
     <>
-      {/* Introduction */}
-      {activeStep === 0 && (
-        <>
-          <ContentContainer
-            children={<Introduction />}
-            title="Systém Sýkora"
-            nextButton="Začít"
-            onNextButtonClick={() => {
-              onStepChange(1);
-              resetForm();
-            }}
-            fulllHeight
-          />
-        </>
-      )}
-
       {/* Diagram */}
       {activeStep === 1 && (
-        <ContentContainer
-          title={steps[activeStep].label}
+        <Container
+          title={steps[activeStep - 1].label}
           children={
             <Diagram form={form} setForm={setForm} defaultGrid={defaultGrid} />
           }
-          backButton="Zpět na začátek"
           nextButton="Další"
           disableNext={!form.structure.columns || !form.structure.rows}
           fulllHeight
@@ -86,8 +64,8 @@ export const Content = ({
 
       {/* Elements */}
       {activeStep === 2 && (
-        <ContentContainer
-          title={steps[activeStep].label}
+        <Container
+          title={steps[activeStep - 1].label}
           children={
             <Elements
               defaultGrid={defaultGrid}
@@ -104,8 +82,8 @@ export const Content = ({
 
       {/* Coefficient */}
       {activeStep === 3 && (
-        <ContentContainer
-          title={steps[activeStep].label}
+        <Container
+          title={steps[activeStep - 1].label}
           children={<Coefficient form={form} setForm={setForm} />}
           backButton="Zpět"
           nextButton="Další"
@@ -116,19 +94,48 @@ export const Content = ({
 
       {/* Rule */}
       {activeStep === 4 && (
-        <ContentContainer
-          title={steps[activeStep].label}
+        <Container
+          title={steps[activeStep - 1].label}
           children={<Rules form={form} setForm={setForm} />}
           backButton="Zpět"
-          nextButton="Vygenerovat"
+          nextButton="Další"
           fulllHeight
           disableNext={form.rule === null}
         />
       )}
 
-      {/* Result */}
+      {/* Going Through Diagram */}
       {activeStep === 5 && isFormFilled && (
-        <ContentContainer
+        <Container
+          title={steps[activeStep - 1].label}
+          children={<GoingThrough grid={grid} defaultGrid={defaultGrid} />}
+          backButton="Zpět"
+          nextButton="Další"
+          fulllHeight
+        />
+      )}
+
+      {/* Group + Shape */}
+      {(activeStep === 6 || activeStep === 7) && isFormFilled && (
+        <Container
+          title={steps[activeStep - 1].label}
+          children={
+            <Calculation
+              grid={grid}
+              defaultGrid={defaultGrid}
+              form={form}
+              part={activeStep === 6 ? "group" : "shape"}
+            />
+          }
+          backButton="Zpět"
+          nextButton={activeStep === 6 ? "Další" : "Vygenerovat"}
+          fulllHeight
+        />
+      )}
+
+      {/* Result */}
+      {activeStep === 8 && isFormFilled && (
+        <Container
           children={
             <Result
               grid={grid}
@@ -146,50 +153,14 @@ export const Content = ({
         />
       )}
 
-      {/* Going Through Diagram */}
-      {activeStep === 6 && isFormFilled && (
-        <ContentContainer
-          title={steps[activeStep].label}
-          children={<GoingThrough grid={grid} defaultGrid={defaultGrid} />}
-          backButton="Zpět"
-          nextButton="Další"
-          fulllHeight
-        />
-      )}
-
-      {/* Group + Shape */}
-      {(activeStep === 7 || activeStep === 8) && isFormFilled && (
-        <ContentContainer
-          title={steps[activeStep].label}
-          children={
-            <Calculation
-              grid={grid}
-              defaultGrid={defaultGrid}
-              form={form}
-              part={activeStep === 7 ? "group" : "shape"}
-            />
-          }
-          backButton="Zpět"
-          nextButton={activeStep === 7 ? "Další" : "Závěr"}
-          fulllHeight
-        />
-      )}
-
       {/* End */}
       {activeStep === 9 && isFormFilled && (
         <>
-          <ContentContainer
-            title={steps[activeStep].label}
+          <Container
+            title={steps[activeStep - 1].label}
             children={<End />}
             backButton="Zpět"
-            nextButton="Na začátek"
-            onNextButtonClick={() => onStepChange(0)}
             fulllHeight
-          />
-          <ContentContainer
-            title={steps[0].label}
-            children={<Sources />}
-            color={theme.palette.primary}
           />
         </>
       )}

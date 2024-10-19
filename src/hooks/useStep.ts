@@ -2,11 +2,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const steps = [
   {
-    label: "Zdroje",
-    isDisplayed: false,
-    order: 0,
-  },
-  {
     label: "Mřížka",
     isDisplayed: true,
     order: 1,
@@ -27,23 +22,23 @@ const steps = [
     order: 4,
   },
   {
-    label: "Výsledek",
-    isDisplayed: false,
-    order: 5,
-  },
-  {
-    label: "A jak algoritmus funguje?",
+    label: "Výpočet",
     isDisplayed: true,
-    order: 6,
+    order: 5,
   },
   {
     label: "Výběr skupiny",
     isDisplayed: true,
-    order: 7,
+    order: 6,
   },
   {
     label: "Výběr prvku",
     isDisplayed: true,
+    order: 7,
+  },
+  {
+    label: "Výsledek",
+    isDisplayed: false,
     order: 8,
   },
   {
@@ -72,5 +67,9 @@ export const useStep = () => {
 
   const activeStep = getActiveStep();
 
-  return { activeStep, onStepChange, steps };
+  return {
+    activeStep,
+    onStepChange,
+    steps,
+  };
 };

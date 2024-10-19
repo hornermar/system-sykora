@@ -1,10 +1,10 @@
 import { Stack, Box, Button, PaletteColor, Typography } from "@mui/material";
-import { useStep } from "../../hooks/useStep";
-import { Stepper } from "../common/Stepper/Stepper";
+import { useStep } from "../../../hooks/useStep";
+// import { Stepper } from "../common/Stepper/Stepper";
 
 const maxWidth = "850px";
 
-type ContentContainerProps = {
+type ContainerProps = {
   children: React.ReactNode;
   title?: string;
   color?: PaletteColor;
@@ -17,7 +17,7 @@ type ContentContainerProps = {
   onNextButtonClick?: () => void;
 };
 
-export const ContentContainer = ({
+export const Container = ({
   children,
   title,
   color,
@@ -28,8 +28,8 @@ export const ContentContainer = ({
   fulllHeight,
   disableNext,
   onNextButtonClick,
-}: ContentContainerProps) => {
-  const { activeStep, onStepChange, steps } = useStep();
+}: ContainerProps) => {
+  const { activeStep, onStepChange } = useStep();
 
   const handleBack = () => {
     onStepChange(activeStep - 1);
@@ -42,17 +42,19 @@ export const ContentContainer = ({
   return (
     <>
       <Stack
+        component="main"
         sx={{
           backgroundColor: color?.main ?? "unset",
           color: color?.contrastText ?? "unset",
+          paddingTop: "50px",
           paddingBottom: activeStep > 0 ? "77px" : "0px",
-          minHeight: fulllHeight ? "95vh" : "unset",
+          minHeight: fulllHeight ? "100vh" : "100%",
         }}
       >
         <Box sx={{ maxWidth: maxWidth, width: "100%", margin: "0 auto" }}>
-          {activeStep > 0 && activeStep !== 5 && activeStep !== 9 && (
+          {/* {activeStep > 0 && activeStep !== 5 && activeStep !== 9 && (
             <Stepper activeStep={activeStep} steps={steps} />
-          )}
+          )} */}
           <Box
             sx={{
               fontSize: "16px",
@@ -64,7 +66,7 @@ export const ContentContainer = ({
               <Typography
                 variant={title === "Systém Sýkora" ? "h1" : "h2"}
                 sx={{
-                  marginTop: activeStep === 0 ? "30px" : "20px",
+                  marginTop: activeStep === 0 ? "0px" : "5px",
                 }}
               >
                 {title.toUpperCase()}

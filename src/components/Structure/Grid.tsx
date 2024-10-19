@@ -110,7 +110,7 @@ export const StructureGrid = memo(function StructureGrid({
                           isCellOriginal && defaultGrid
                             ? 0.5
                             : isCellActiveNeighbour
-                            ? 0.3
+                            ? 0.4
                             : 1,
                       }}
                     />

@@ -1,161 +1,24 @@
-import { Dashboard } from "./pages/Dashboard";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { DashboardWrapper } from "./pages/Dashboard";
+import { ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Header } from "./components/Header/Header";
+import { AboutWrapper } from "./pages/About";
+import { SourcesWrapper } from "./pages/Sources";
+import { customTheme } from "./theme";
+import { GeneratorWrapper } from "./pages/Generator";
 import "./App.css";
-
-const customTheme = createTheme({
-  palette: {
-    primary: {
-      light: "#c0e9f0",
-      main: "#000000",
-      dark: "#04c2df",
-      contrastText: "#ffffff",
-    },
-    secondary: {
-      light: "#f3f3f3",
-      main: "#e0e0e0",
-      dark: "#c2c2c2",
-      contrastText: "#000000",
-    },
-  },
-  typography: {
-    fontFamily: "Roboto mono, monospace",
-    h1: {
-      fontFamily: "Pathway Gothic One, sans-serif",
-      fontSize: "50px",
-      fontWeight: 500,
-    },
-    h2: {
-      fontFamily: "Pathway Gothic One, sans-serif",
-      fontSize: "40px",
-      fontWeight: 500,
-    },
-    body1: {
-      fontSize: "14px",
-      marginBottom: "10px",
-      lineHeight: "1.6",
-    },
-    body2: {
-      fontSize: "12px",
-    },
-    caption: {
-      fontSize: "10px",
-    },
-  },
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          borderRadius: "0px",
-          padding: "12px 15px",
-          boxShadow: "none",
-
-          "&:hover": {
-            boxShadow: "none",
-          },
-          "&:active": {
-            boxShadow: "none",
-          },
-          "&.Mui-disabled": {
-            border: "2px solid rgba(0, 0, 0, 0)",
-          },
-        },
-        containedPrimary: {
-          border: "2px solid black",
-        },
-        outlinedPrimary: {
-          border: "2px solid",
-          backgroundColor: "#ffffff",
-        },
-        endIcon: {
-          marginLeft: "16px",
-        },
-        containedSecondary: {
-          backgroundColor: "#c2c2c2",
-        },
-      },
-    },
-    MuiFormControlLabel: {
-      styleOverrides: {
-        label: {
-          fontSize: "13px",
-          marginBottom: 0,
-        },
-      },
-    },
-    MuiDialogTitle: {
-      styleOverrides: {
-        root: {
-          fontFamily: "Pathway Gothic One, sans-serif",
-          fontSize: "28px",
-          fontWeight: 500,
-        },
-      },
-    },
-    MuiAccordion: {
-      styleOverrides: {
-        root: {
-          fontFamily: "Pathway Gothic One, sans-serif",
-          fontWeight: 500,
-          fontSize: "20px",
-          boxShadow: "none",
-        },
-      },
-    },
-    MuiAccordionSummary: {
-      styleOverrides: {
-        root: {
-          padding: 0,
-          minHeight: "unset !important",
-          textTransform: "uppercase",
-        },
-        content: {
-          marginTop: "10px !important",
-          marginBottom: "5px !important",
-        },
-      },
-    },
-    MuiAccordionDetails: {
-      styleOverrides: {
-        root: {
-          padding: 0,
-        },
-      },
-    },
-    MuiSlider: {
-      styleOverrides: {
-        valueLabel: {
-          top: -6,
-          backgroundColor: "unset",
-          color: "#000000",
-          fontSize: "13px",
-        },
-      },
-    },
-    MuiTooltip: {
-      styleOverrides: {
-        tooltip: {
-          backgroundColor: "#c2c2c2",
-          color: "#000000",
-          fontSize: "12px",
-          maxWidth: "250px",
-          fontWeight: 400,
-          padding: "15px ",
-        },
-        arrow: {
-          color: "#c2c2c2",
-        },
-      },
-    },
-  },
-});
 
 function App() {
   return (
     <ThemeProvider theme={customTheme}>
       <BrowserRouter>
+        <Header />
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<DashboardWrapper />} />
+          <Route path="/struktura" element={<GeneratorWrapper />} />
+
+          <Route path="/zdroje" element={<SourcesWrapper />} />
+          <Route path="/o-projektu" element={<AboutWrapper />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

@@ -18,6 +18,7 @@ export const StructureTooltip = ({ tooltip }: StructureTooltip) => {
       placement="right"
       arrow
       sx={{ width: "100px" }}
+      leaveDelay={5000}
     >
       <img
         style={{
