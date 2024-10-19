@@ -2,7 +2,7 @@ import { LinearProgress } from "@mui/material/";
 import { useStep } from "../../hooks/useStep";
 
 export const HeaderProgressbar = () => {
-  const { steps, activeStep } = useStep("generator");
+  const { steps, activeStep } = useStep();
 
   const value = (100 / steps.length) * activeStep;
 

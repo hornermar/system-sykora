@@ -9,7 +9,7 @@ type GoingThroughProps = {
   grid: string[][];
 };
 
-export const GoingThrough = ({ defaultGrid, grid }: GoingThroughProps) => {
+export const GoingThrough = ({ defaultGrid }: GoingThroughProps) => {
   const [activeCell, setActiveCell] = useState<Cell>({ x: 0, y: 0 });
   // const [sliceFromCell, setSliceFromCell] = useState<Cell>({ x: 0, y: 0 });
 
