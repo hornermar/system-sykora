@@ -8,7 +8,7 @@ import { createEmptyGrid } from "../../../utils/createEmptyGrid";
 
 type DiagramProps = {
   form: FormValues;
-  setForm: React.Dispatch<React.SetStateAction<FormValues>>;
+  onFormChange: (newFormValues: Partial<FormValues>) => void;
   defaultGrid: string[][];
 };
 
@@ -17,20 +17,13 @@ const chips = [
   { columns: 11, rows: 21 },
 ];
 
-export const Diagram = ({ form, setForm }: DiagramProps) => {
+export const Diagram = ({ form, onFormChange }: DiagramProps) => {
   const handleChange = (e: SelectChangeEvent<number>) => {
     const { name, value } = e.target;
-
-    setForm((prev: FormValues) => ({
-      ...prev,
-      structure: {
-        ...prev.structure,
-        [name]: value,
-      },
-    }));
+    onFormChange({ [name]: value });
   };
 
-  const grid = createEmptyGrid(form.structure.rows, form.structure.columns);
+  const grid = createEmptyGrid(form.rows, form.columns);
 
   return (
     <>
@@ -42,7 +35,7 @@ export const Diagram = ({ form, setForm }: DiagramProps) => {
         <Select
           label="Sloupce"
           name="columns"
-          value={form.structure.columns}
+          value={form.columns}
           onChange={handleChange}
           max={11}
         />
@@ -50,7 +43,7 @@ export const Diagram = ({ form, setForm }: DiagramProps) => {
         <Select
           label="Řady"
           name="rows"
-          value={form.structure.rows}
+          value={form.rows}
           onChange={handleChange}
           max={21}
         />
@@ -61,16 +54,9 @@ export const Diagram = ({ form, setForm }: DiagramProps) => {
           <Chip
             key={index}
             label={`${chip.columns}x${chip.rows}`}
-            onClick={() => {
-              setForm((prev: FormValues) => ({
-                ...prev,
-                structure: {
-                  ...prev.structure,
-                  columns: chip.columns,
-                  rows: chip.rows,
-                },
-              }));
-            }}
+            onClick={() =>
+              onFormChange({ columns: chip.columns, rows: chip.rows })
+            }
             size="small"
             sx={{ marginRight: "10px" }}
           />

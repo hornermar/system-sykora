@@ -1,40 +1,21 @@
 import { useState, useEffect, useCallback } from "react";
 import { Content } from "../components/Content/Content";
-import { useStep } from "../hooks/useStep";
 import { getElements } from "../utils/getElements";
-import { FormValues } from "../types/FormValues";
 import { createEmptyGrid } from "../utils/createEmptyGrid";
-
-const defaultFormValues = {
-  coefficient: 0,
-  rule: null,
-  structure: {
-    rows: 0,
-    columns: 0,
-  },
-  isRandom: false,
-};
+import { useFormParams } from "../hooks/useFormParams";
 
 export const GeneratorWrapper = () => {
-  const [form, setForm] = useState<FormValues>(defaultFormValues);
+  const { form, activeStep, onFormChange, defaultFormValues } = useFormParams();
   const [defaultGrid, setDefaultGrid] = useState<string[][]>(
-    createEmptyGrid(form.structure.rows, form.structure.columns)
+    createEmptyGrid(form.rows, form.columns)
   );
-
   const [grid, setGrid] = useState<string[][]>([]);
-  const { activeStep, onStepChange } = useStep();
 
   useEffect(() => {
-    onStepChange(1);
-  }, []);
-
-  useEffect(() => {
-    if (form.structure.rows && form.structure.columns) {
-      setDefaultGrid(
-        createEmptyGrid(form.structure.rows, form.structure.columns)
-      );
+    if (form.rows && form.columns) {
+      setDefaultGrid(createEmptyGrid(form.rows, form.columns));
     }
-  }, [form.structure.rows, form.structure.columns]);
+  }, [form.rows, form.columns]);
 
   useEffect(() => {
     if (form.rule !== null && form.coefficient) {
@@ -43,21 +24,19 @@ export const GeneratorWrapper = () => {
   }, [form.coefficient, form.rule, defaultGrid]);
 
   const resetForm = useCallback(() => {
-    setForm(defaultFormValues);
+    onFormChange(defaultFormValues);
     setDefaultGrid([]);
-  }, [setForm, setDefaultGrid]);
+  }, [onFormChange, setDefaultGrid, defaultFormValues]);
 
   const setEmptyGrid = useCallback(() => {
-    setDefaultGrid(
-      createEmptyGrid(form.structure.rows, form.structure.columns)
-    );
-  }, [form.structure.rows, form.structure.columns, setDefaultGrid]);
+    setDefaultGrid(createEmptyGrid(form.rows, form.columns));
+  }, [form.rows, form.columns, setDefaultGrid]);
 
   return (
     <Content
       activeStep={activeStep}
       form={form}
-      setForm={setForm}
+      onFormChange={onFormChange}
       defaultGrid={defaultGrid}
       setDefaultGrid={setDefaultGrid}
       grid={grid}

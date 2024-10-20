@@ -9,13 +9,12 @@ import { useStep } from "../../hooks/useStep";
 import { useSwitch } from "../../hooks/useSwitch";
 import { useEffect } from "react";
 import { GoingThrough } from "./GoingThrought/GoingThrough";
-import { End } from "./End/End";
 import { Calculation } from "./Calculation/Calculation";
 
 type ContentProps = {
   activeStep: number;
   form: FormValues;
-  setForm: React.Dispatch<React.SetStateAction<FormValues>>;
+  onFormChange: (newFormValues: Partial<FormValues>) => void;
   defaultGrid: string[][];
   setDefaultGrid: React.Dispatch<React.SetStateAction<string[][]>>;
   grid: string[][];
@@ -26,7 +25,7 @@ type ContentProps = {
 export const Content = ({
   activeStep,
   form,
-  setForm,
+  onFormChange,
   defaultGrid,
   setDefaultGrid,
   grid,
@@ -36,16 +35,13 @@ export const Content = ({
   const [editOpen, onEditOpen, onEditClose] = useSwitch(false);
 
   useEffect(() => {
-    if (activeStep !== 5 && editOpen) {
+    if (activeStep !== 8 && editOpen) {
       onEditClose();
     }
-  }, [activeStep, onEditClose, editOpen, setForm]);
+  }, [activeStep, onEditClose, editOpen]);
 
   const isFormFilled =
-    form.structure.columns &&
-    form.structure.rows &&
-    form.coefficient !== 0 &&
-    form.rule !== null;
+    form.columns && form.rows && form.coefficient !== 0 && form.rule !== null;
 
   return (
     <>
@@ -54,10 +50,14 @@ export const Content = ({
         <Container
           title={steps[activeStep - 1].label}
           children={
-            <Diagram form={form} setForm={setForm} defaultGrid={defaultGrid} />
+            <Diagram
+              form={form}
+              onFormChange={onFormChange}
+              defaultGrid={defaultGrid}
+            />
           }
           nextButton="Další"
-          disableNext={!form.structure.columns || !form.structure.rows}
+          disableNext={!form.columns || !form.rows}
           fulllHeight
         />
       )}
@@ -84,7 +84,12 @@ export const Content = ({
       {activeStep === 3 && (
         <Container
           title={steps[activeStep - 1].label}
-          children={<Coefficient form={form} setForm={setForm} />}
+          children={
+            <Coefficient
+              coefficient={form.coefficient}
+              onFormChange={onFormChange}
+            />
+          }
           backButton="Zpět"
           nextButton="Další"
           fulllHeight
@@ -96,7 +101,7 @@ export const Content = ({
       {activeStep === 4 && (
         <Container
           title={steps[activeStep - 1].label}
-          children={<Rules form={form} setForm={setForm} />}
+          children={<Rules rule={form.rule} onFormChange={onFormChange} />}
           backButton="Zpět"
           nextButton="Další"
           fulllHeight
@@ -141,28 +146,15 @@ export const Content = ({
               grid={grid}
               editOpen={editOpen}
               form={form}
-              setForm={setForm}
+              onFormChange={onFormChange}
               defaultGrid={defaultGrid}
             />
           }
           backButton="Zpět"
-          middleButton={editOpen ? "Hotovo" : "Upravit"}
-          onMiddleButtonClick={editOpen ? onEditClose : onEditOpen}
-          nextButton="Prozkoumat"
+          nextButton={editOpen ? "Hotovo" : "Upravit"}
+          onNextButtonClick={editOpen ? onEditClose : onEditOpen}
           fulllHeight
         />
-      )}
-
-      {/* End */}
-      {activeStep === 9 && isFormFilled && (
-        <>
-          <Container
-            title={steps[activeStep - 1].label}
-            children={<End />}
-            backButton="Zpět"
-            fulllHeight
-          />
-        </>
       )}
     </>
   );

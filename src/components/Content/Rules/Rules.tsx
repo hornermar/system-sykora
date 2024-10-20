@@ -12,16 +12,13 @@ import {
 } from "@mui/material";
 
 type RulesProps = {
-  form: FormValues;
-  setForm: React.Dispatch<React.SetStateAction<FormValues>>;
+  rule: FormValues["rule"];
+  onFormChange: (newFormValues: Partial<FormValues>) => void;
 };
 
-export const Rules = ({ form, setForm }: RulesProps) => {
+export const Rules = ({ rule, onFormChange }: RulesProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({
-      ...prev,
-      rule: Number(event.target.value),
-    }));
+    onFormChange({ rule: Number(event.target.value) });
   };
 
   return (
@@ -32,23 +29,23 @@ export const Rules = ({ form, setForm }: RulesProps) => {
         tvarem, nebo obojím).
       </Typography>
       <FormControl sx={{ margin: "10px 0 20px" }}>
-        <RadioGroup value={form.rule} onChange={handleChange}>
-          {map(rulesItems, (rule: Rule) => (
+        <RadioGroup value={rule} onChange={handleChange}>
+          {map(rulesItems, (item: Rule) => (
             <FormControlLabel
-              value={rule.code.toString()}
+              value={item.code.toString()}
               control={<Radio />}
-              label={`${rule.code}: ${rule.text}`}
-              key={rule.code}
+              label={`${item.code}: ${item.text}`}
+              key={item.code}
               sx={{
                 marginBottom: "5px",
-                fontStyle: form.rule === rule.code ? "italic" : "normal",
+                fontStyle: rule === item.code ? "italic" : "normal",
               }}
             />
           ))}
         </RadioGroup>
       </FormControl>
-      {form.rule !== null && (
-        <Structure grid={rulesItems[form.rule].example} key={form.rule} />
+      {rule !== null && (
+        <Structure grid={rulesItems[rule].example} key={rule} />
       )}
     </>
   );

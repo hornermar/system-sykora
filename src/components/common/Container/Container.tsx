@@ -1,6 +1,6 @@
 import { Stack, Box, Button, PaletteColor, Typography } from "@mui/material";
 import { useStep } from "../../../hooks/useStep";
-// import { Stepper } from "../common/Stepper/Stepper";
+import { Progressbar } from "../ProgressBar/ProgressBar";
 
 const maxWidth = "850px";
 
@@ -46,15 +46,12 @@ export const Container = ({
         sx={{
           backgroundColor: color?.main ?? "unset",
           color: color?.contrastText ?? "unset",
-          paddingTop: "50px",
           paddingBottom: activeStep > 0 ? "77px" : "0px",
           minHeight: fulllHeight ? "100vh" : "100%",
         }}
       >
         <Box sx={{ maxWidth: maxWidth, width: "100%", margin: "0 auto" }}>
-          {/* {activeStep > 0 && activeStep !== 5 && activeStep !== 9 && (
-            <Stepper activeStep={activeStep} steps={steps} />
-          )} */}
+          <Progressbar />
           <Box
             sx={{
               fontSize: "16px",
@@ -62,7 +59,7 @@ export const Container = ({
               textAlign: "left",
             }}
           >
-            {title && (
+            {title === "Systém Sýkora" && (
               <Typography
                 variant={title === "Systém Sýkora" ? "h1" : "h2"}
                 sx={{

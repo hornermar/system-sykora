@@ -1,8 +1,6 @@
 export type FormValues = {
-  structure: {
-    rows: number;
-    columns: number;
-  };
+  rows: number;
+  columns: number;
   coefficient: number;
   rule: number | null;
 };

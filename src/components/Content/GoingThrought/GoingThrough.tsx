@@ -9,11 +9,12 @@ type GoingThroughProps = {
   grid: string[][];
 };
 
-export const GoingThrough = ({ defaultGrid }: GoingThroughProps) => {
-  const [activeCell, setActiveCell] = useState<Cell>({ x: 0, y: 0 });
-  // const [sliceFromCell, setSliceFromCell] = useState<Cell>({ x: 0, y: 0 });
+const initializeActiveCell = { x: 0, y: 0 };
 
-  useEffect(() => {
+export const GoingThrough = ({ defaultGrid }: GoingThroughProps) => {
+  const [activeCell, setActiveCell] = useState<Cell>(initializeActiveCell);
+
+  const goThroughGrid = () => {
     mapGrid(
       defaultGrid,
       (x, y) => {
@@ -23,32 +24,25 @@ export const GoingThrough = ({ defaultGrid }: GoingThroughProps) => {
         else return;
       },
       200,
-      undefined
+      undefined,
+      () => goThroughGrid()
     );
+  };
+
+  useEffect(() => {
+    goThroughGrid();
   }, []);
-
-  // useEffect(() => {
-  //   mapGrid(
-  //     defaultGrid,
-  //     (x, y) => {
-  //       setSliceFromCell({ x, y });
-  //     },
-  //     90,
-  //     undefined,
-  //     () => setSliceFromCell((prev) => ({ x: prev.x, y: prev.y + 1 }))
-  //   );
-  // }, []);
-
-  // const slicedGrid = useMemo(
-  //   () => getSlicedGrid(grid, defaultGrid, sliceFromCell),
-  //   [grid, defaultGrid, sliceFromCell]
-  // );
 
   return (
     <>
       <Typography variant="body1">
-        Výpočet algoritmu začíná v levém horním rohu. Postupuje po buňce zleva
-        doprava v lichých řadách a zprava doleva v sudých.
+        A teď už strukturu přebírá algoritmus. Postupně dopočítává pole, která
+        zůstala prázdná.
+      </Typography>
+
+      <Typography variant="body1">
+        Počítat začíná v levém horním rohu a postupuje po buňce zleva doprava v
+        lichých řadách a zprava doleva v sudých.
       </Typography>
 
       <Structure grid={defaultGrid} activeCell={activeCell} />

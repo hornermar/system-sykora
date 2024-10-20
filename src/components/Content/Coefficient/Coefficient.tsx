@@ -3,11 +3,14 @@ import { Slider } from "@mui/material";
 import { Typography } from "@mui/material";
 
 type CoefficientProps = {
-  form: FormValues;
-  setForm: React.Dispatch<React.SetStateAction<FormValues>>;
+  coefficient: FormValues["coefficient"];
+  onFormChange: (newFormValues: Partial<FormValues>) => void;
 };
 
-export const Coefficient = ({ form, setForm }: CoefficientProps) => {
+export const Coefficient = ({
+  coefficient,
+  onFormChange,
+}: CoefficientProps) => {
   return (
     <>
       <Typography variant="body1">
@@ -16,15 +19,12 @@ export const Coefficient = ({ form, setForm }: CoefficientProps) => {
       </Typography>
 
       <Slider
-        value={form.coefficient}
+        value={coefficient}
         step={0.01}
-        min={form.coefficient === 0 ? 0 : 0.01}
+        min={coefficient === 0 ? 0 : 0.01}
         max={3.99}
         onChange={(_, newValue: number | number[]) =>
-          setForm((prev) => ({
-            ...prev,
-            coefficient: newValue as number,
-          }))
+          onFormChange({ coefficient: newValue as number })
         }
         valueLabelDisplay="on"
         sx={{ margin: "40px 0 35px" }}

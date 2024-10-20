@@ -51,9 +51,7 @@ export const Elements = ({
   };
 
   const setTemplate = () => {
-    setDefaultGrid(
-      getSubGrid(exampleGrid, form.structure.rows, form.structure.columns)
-    );
+    setDefaultGrid(getSubGrid(exampleGrid, form.rows, form.columns));
   };
 
   return (

@@ -9,7 +9,7 @@ import { ViewMode } from "../../../types/General";
 type ResultProps = {
   grid: string[][];
   form: FormValues;
-  setForm: React.Dispatch<React.SetStateAction<FormValues>>;
+  onFormChange: (newFormValues: Partial<FormValues>) => void;
   editOpen: boolean;
   defaultGrid: string[][];
 };
@@ -17,7 +17,7 @@ type ResultProps = {
 export const Result = ({
   grid,
   form,
-  setForm,
+  onFormChange,
   editOpen,
   defaultGrid,
 }: ResultProps) => {
@@ -38,7 +38,7 @@ export const Result = ({
 
       <ResultEdit
         form={form}
-        setForm={setForm}
+        onFormChange={onFormChange}
         open={editOpen}
         isRandom={isRandom}
         setIsRandom={setIsRandom}

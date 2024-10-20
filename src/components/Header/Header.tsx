@@ -2,7 +2,6 @@ import * as React from "react";
 import { Button, Toolbar, Box, AppBar, IconButton } from "@mui/material/";
 import { HeaderDrawer } from "./Drawer";
 import { useLocation } from "react-router-dom";
-import { HeaderProgressbar } from "./Progressbar";
 
 interface Props {
   window?: () => Window;
@@ -41,31 +40,43 @@ export const Header = (props: Props) => {
   const colors = navItems.find((item) => item.to === location.pathname)?.colors;
 
   return (
-    <Box>
-      <AppBar component="nav" sx={{ ...colors }}>
-        <HeaderProgressbar />
+    <>
+      <IconButton
+        color="inherit"
+        aria-label="open drawer"
+        edge="start"
+        onClick={handleDrawerToggle}
+        sx={{
+          display: { xs: "block", sm: "none" },
+          position: "absolute",
+          right: 30,
+          top: 22,
+        }}
+      >
+        <img
+          src={
+            colors?.color === "white"
+              ? "/icons/bars-white.svg"
+              : "/icons/bars.svg"
+          }
+          width={30}
+          height={30}
+          alt={"chevron down icon"}
+        />
+      </IconButton>
+
+      <AppBar
+        component="nav"
+        sx={{ ...colors, display: { xs: "none", sm: "block" } }}
+      >
         <Toolbar
-          sx={{ display: "flex", justifyContent: "flex-end", padding: "0 8px" }}
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            padding: "0 8px",
+          }}
         >
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ display: { sm: "none" } }}
-          >
-            <img
-              src={
-                colors?.color === "white"
-                  ? "/icons/bars-white.svg"
-                  : "/icons/bars.svg"
-              }
-              width={30}
-              height={30}
-              alt={"chevron down icon"}
-            />
-          </IconButton>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+          <Box>
             {navItems.map((item) => (
               <Button key={item.label}>{item.label}</Button>
             ))}
@@ -78,6 +89,6 @@ export const Header = (props: Props) => {
         handleDrawerToggle={handleDrawerToggle}
         navItems={navItems}
       />
-    </Box>
+    </>
   );
 };

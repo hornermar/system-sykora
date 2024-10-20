@@ -22,7 +22,7 @@ import { ViewMode } from "../../../types/General";
 
 type ResultEditProps = {
   form: FormValues;
-  setForm: React.Dispatch<React.SetStateAction<FormValues>>;
+  onFormChange: (newFormValues: Partial<FormValues>) => void;
   open: boolean;
   isRandom: boolean;
   setIsRandom: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,7 +32,7 @@ type ResultEditProps = {
 
 export const ResultEdit = ({
   form,
-  setForm,
+  onFormChange,
   open,
   isRandom,
   setIsRandom,
@@ -40,17 +40,11 @@ export const ResultEdit = ({
   const theme = useTheme();
 
   const handleGroupChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({
-      ...prev,
-      rule: Number(event.target.value),
-    }));
+    onFormChange({ rule: Number(event.target.value) });
   };
 
   const handleCoeffChange = (_: Event, newValue: number | number[]) => {
-    setForm((prev) => ({
-      ...prev,
-      coefficient: newValue as number,
-    }));
+    onFormChange({ coefficient: newValue as number });
   };
 
   const toggleIsRandom = (
@@ -103,7 +97,7 @@ export const ResultEdit = ({
               max={3.99}
               onChange={handleCoeffChange}
               valueLabelDisplay={isRandom ? "off" : "on"}
-              sx={{ margin: "5px 10px 0 0" }}
+              sx={{ margin: "5px 10px 0 0", paddingBottom: "15px !important" }}
               disabled={isRandom}
               size="small"
             />
