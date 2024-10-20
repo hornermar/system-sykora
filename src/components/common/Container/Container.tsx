@@ -1,6 +1,6 @@
 import { Stack, Box, Button, PaletteColor, Typography } from "@mui/material";
 import { useStep } from "../../../hooks/useStep";
-import { ProgressBar } from "../ProgressBar/ProgressBar";
+import { Progress } from "../Progress/Progress";
 
 const maxWidth = "850px";
 
@@ -51,7 +51,7 @@ export const Container = ({
         }}
       >
         <Box sx={{ maxWidth: maxWidth, width: "100%", margin: "0 auto" }}>
-          <ProgressBar />
+          <Progress />
           <Box
             sx={{
               fontSize: "16px",

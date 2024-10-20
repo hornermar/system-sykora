@@ -47,7 +47,7 @@ const CircularProgressWithLabel = (
   );
 };
 
-export const ProgressBar = () => {
+export const Progress = () => {
   const { steps, activeStep } = useStep();
 
   if (activeStep === 0 || !activeStep) return null;
