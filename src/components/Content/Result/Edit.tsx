@@ -74,7 +74,7 @@ export const ResultEdit = ({
         <Stack
           sx={{
             backgroundColor: theme.palette.secondary.main,
-            padding: "10px 35px 15px",
+            padding: "20px 35px 15px",
           }}
         >
           <Stack flexDirection="row" alignItems="center">
@@ -97,7 +97,7 @@ export const ResultEdit = ({
               max={3.99}
               onChange={handleCoeffChange}
               valueLabelDisplay={isRandom ? "off" : "on"}
-              sx={{ margin: "5px 10px 0 0", paddingBottom: "15px !important" }}
+              sx={{ margin: "0 10px 0 0", paddingBottom: "10px !important" }}
               disabled={isRandom}
               size="small"
             />

@@ -49,8 +49,8 @@ export const Header = (props: Props) => {
         sx={{
           display: { xs: "block", sm: "none" },
           position: "absolute",
-          right: 30,
-          top: 22,
+          right: 12,
+          top: 14,
         }}
       >
         <img

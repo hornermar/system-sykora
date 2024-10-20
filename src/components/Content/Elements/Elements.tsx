@@ -71,7 +71,7 @@ export const Elements = ({
           marginBottom: "10px",
           display: "flex",
           flexDirection: "row",
-          justifyContent: "right",
+          // justifyContent: "right",
         }}
       >
         <Chip

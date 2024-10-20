@@ -23,11 +23,11 @@ export const StructureTooltip = ({ tooltip }: StructureTooltip) => {
       <img
         style={{
           position: "absolute",
-          top: 5,
-          left: -30,
-          rotate: "90deg",
+          top: -35,
+          right: 6,
+          rotate: "0deg",
         }}
-        src={"/icons/hand-pointer.svg"}
+        src={"/icons/circle-info.svg"}
         width={25}
         height={25}
         alt={"hand icon"}

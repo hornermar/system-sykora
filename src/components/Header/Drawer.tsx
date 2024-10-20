@@ -66,7 +66,10 @@ export const HeaderDrawer = ({
             padding: "10px 12px 10px 20px",
           }}
         >
-          <Typography variant="h6">Systém Sýkora</Typography>
+          <Typography variant="h6" onClick={() => handleItemClick("/")}>
+            Systém Sýkora
+          </Typography>
+
           <IconButton onClick={handleDrawerToggle}>
             <img
               src={"/icons/xmark.svg"}

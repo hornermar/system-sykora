@@ -22,7 +22,21 @@ const CircularProgressWithLabel = (
       sx={{ padding: "20px 20px 0" }}
     >
       <Box sx={{ position: "relative" }}>
-        <CircularProgress variant="determinate" {...circularProgressProps} />
+        <CircularProgress
+          thickness={4}
+          variant="determinate"
+          value={100}
+          sx={(theme) => ({
+            color: theme.palette.grey[200],
+          })}
+          size={circularProgressProps.size}
+        />
+        <CircularProgress
+          thickness={4}
+          variant="determinate"
+          {...circularProgressProps}
+          sx={{ position: "absolute", left: 0 }}
+        />
         <Box
           sx={{
             top: 0,
@@ -38,7 +52,7 @@ const CircularProgressWithLabel = (
           <Typography
             variant="subtitle2"
             component="div"
-            sx={{ color: "text.secondary", marginTop: "-4px" }}
+            sx={{ color: "text.secondary", marginTop: "-6px" }}
           >{`${activeStep}/${size(steps)}`}</Typography>
         </Box>
       </Box>

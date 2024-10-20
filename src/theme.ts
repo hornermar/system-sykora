@@ -50,17 +50,6 @@ export const customTheme = createTheme({
     },
   },
   components: {
-    MuiLinearProgress: {
-      styleOverrides: {
-        root: {
-          height: "3px",
-          backgroundColor: "transparent",
-        },
-        bar: {
-          backgroundColor: "e0e0e0",
-        },
-      },
-    },
     MuiAppBar: {
       styleOverrides: {
         root: {
@@ -164,7 +153,7 @@ export const customTheme = createTheme({
       styleOverrides: {
         tooltip: {
           backgroundColor: "#c2c2c2",
-          color: white,
+          color: black,
           fontSize: "12px",
           maxWidth: "250px",
           fontWeight: 400,

@@ -46,8 +46,8 @@ export const Container = ({
         sx={{
           backgroundColor: color?.main ?? "unset",
           color: color?.contrastText ?? "unset",
-          paddingBottom: activeStep > 0 ? "77px" : "0px",
           minHeight: fulllHeight ? "100vh" : "100%",
+          paddingBottom: "50px",
         }}
       >
         <Box sx={{ maxWidth: maxWidth, width: "100%", margin: "0 auto" }}>
@@ -55,15 +55,15 @@ export const Container = ({
           <Box
             sx={{
               fontSize: "16px",
-              padding: "0px 35px 20px",
+              padding: "0px 20px 20px",
               textAlign: "left",
             }}
           >
-            {title === "Systém Sýkora" && (
+            {title && (
               <Typography
                 variant={title === "Systém Sýkora" ? "h1" : "h2"}
                 sx={{
-                  marginTop: activeStep === 0 ? "0px" : "5px",
+                  marginRight: "20px",
                 }}
               >
                 {title.toUpperCase()}

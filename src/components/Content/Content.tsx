@@ -5,7 +5,6 @@ import { Elements } from "./Elements/Elements";
 import { Rules } from "./Rules/Rules";
 import { Result } from "./Result/Result";
 import { Container } from "../common/Container/Container";
-import { useStep } from "../../hooks/useStep";
 import { useSwitch } from "../../hooks/useSwitch";
 import { useEffect } from "react";
 import { GoingThrough } from "./GoingThrought/GoingThrough";
@@ -31,7 +30,6 @@ export const Content = ({
   grid,
   setEmptyGrid,
 }: ContentProps) => {
-  const { steps } = useStep();
   const [editOpen, onEditOpen, onEditClose] = useSwitch(false);
 
   useEffect(() => {
@@ -48,7 +46,6 @@ export const Content = ({
       {/* Diagram */}
       {activeStep === 1 && (
         <Container
-          title={steps[activeStep - 1].label}
           children={
             <Diagram
               form={form}
@@ -65,7 +62,6 @@ export const Content = ({
       {/* Elements */}
       {activeStep === 2 && (
         <Container
-          title={steps[activeStep - 1].label}
           children={
             <Elements
               defaultGrid={defaultGrid}
@@ -83,7 +79,6 @@ export const Content = ({
       {/* Coefficient */}
       {activeStep === 3 && (
         <Container
-          title={steps[activeStep - 1].label}
           children={
             <Coefficient
               coefficient={form.coefficient}
@@ -100,7 +95,6 @@ export const Content = ({
       {/* Rule */}
       {activeStep === 4 && (
         <Container
-          title={steps[activeStep - 1].label}
           children={<Rules rule={form.rule} onFormChange={onFormChange} />}
           backButton="Zpět"
           nextButton="Další"
@@ -112,7 +106,6 @@ export const Content = ({
       {/* Going Through Diagram */}
       {activeStep === 5 && isFormFilled && (
         <Container
-          title={steps[activeStep - 1].label}
           children={<GoingThrough grid={grid} defaultGrid={defaultGrid} />}
           backButton="Zpět"
           nextButton="Další"
@@ -123,7 +116,6 @@ export const Content = ({
       {/* Group + Shape */}
       {(activeStep === 6 || activeStep === 7) && isFormFilled && (
         <Container
-          title={steps[activeStep - 1].label}
           children={
             <Calculation
               grid={grid}
