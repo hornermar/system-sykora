@@ -16,17 +16,29 @@ const getFormValuesFromParams = (searchParams: URLSearchParams): FormValues => {
   const columns = parseInt(searchParams.get("columns") || "", 10);
 
   return {
+    rows: !isNaN(rows) ? rows : defaultFormValues.rows,
+    columns: !isNaN(columns) ? columns : defaultFormValues.rows,
     coefficient:
       !isNaN(coefficient) && coefficient > 0 && coefficient < 4
         ? coefficient
         : defaultFormValues.coefficient,
     rule: parsedRule !== null && rules.includes(parsedRule) ? parsedRule : null,
-    rows: !isNaN(rows) ? rows : defaultFormValues.rows,
-    columns: !isNaN(columns) ? columns : defaultFormValues.rows,
   };
 };
 
 const getValidParams = (values: FormValues, activeStep: number) => {
+  const { rows, columns, coefficient, rule } = values;
+
+  let step = activeStep;
+
+  if (rows === 0 || (columns === 0 && activeStep > 1)) {
+    step = 1;
+  } else if (!coefficient && activeStep > 3) {
+    step = 3;
+  } else if (rule === null && activeStep > 4) {
+    step = 4;
+  }
+
   const params = Object.fromEntries(
     Object.entries(values).map(([key, value]) => [
       key,
@@ -34,7 +46,7 @@ const getValidParams = (values: FormValues, activeStep: number) => {
     ])
   );
 
-  return { step: !isNaN(activeStep) ? activeStep.toString() : "0", ...params };
+  return { step: !isNaN(step) ? step.toString() : "0", ...params };
 };
 
 const defaultFormValues: FormValues = {

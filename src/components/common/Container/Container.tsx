@@ -15,6 +15,7 @@ type ContainerProps = {
   onMiddleButtonClick?: () => void;
   fulllHeight?: boolean;
   disableNext?: boolean;
+  disableMiddle?: boolean;
   onNextButtonClick?: () => void;
 };
 
@@ -29,6 +30,7 @@ export const Container = ({
   onMiddleButtonClick,
   fulllHeight,
   disableNext,
+  disableMiddle,
   onNextButtonClick,
 }: ContainerProps) => {
   const { activeStep, onStepChange } = useStep();
@@ -102,6 +104,7 @@ export const Container = ({
                 fullWidth
                 disableTouchRipple
                 disableFocusRipple
+                disabled={disableMiddle}
               >
                 {middleButton}
               </Button>

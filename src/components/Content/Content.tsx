@@ -115,6 +115,7 @@ export const Content = ({
           onMiddleButtonClick={() => onStepChange(size(steps))}
           fulllHeight
           disableNext={form.rule === null}
+          disableMiddle={form.rule === null}
         />
       )}
 

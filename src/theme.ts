@@ -66,6 +66,7 @@ export const customTheme = createTheme({
           borderRadius: "0px",
           padding: "12px 15px",
           boxShadow: "none",
+          borderWidth: "2px",
 
           "&:hover": {
             boxShadow: "none",
@@ -73,8 +74,11 @@ export const customTheme = createTheme({
           "&:active": {
             boxShadow: "none",
           },
-          "&.Mui-disabled": {
+          "&.Mui-disabled.MuiButton-contained": {
             border: "2px solid rgba(0, 0, 0, 0)",
+          },
+          "&.Mui-disabled": {
+            borderWidth: "2px",
           },
         },
         containedPrimary: {
