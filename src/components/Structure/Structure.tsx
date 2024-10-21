@@ -11,7 +11,9 @@ import {
 } from "react";
 import { Cell, ViewMode } from "../../types/General";
 import { StructureGrid } from "./Grid";
-import { StructureTooltip } from "./Tooltip";
+// import { StructureTooltip } from "./Tooltip";
+import { StructureToolbox } from "./Toolbox";
+import { Swipe } from "./Swipe";
 
 export type StructureProps = {
   grid: string[][];
@@ -21,10 +23,10 @@ export type StructureProps = {
   activeCell?: Cell;
   activeNeighbours?: Cell[];
   displayDefaultGrid?: boolean;
-  exampleMode?: boolean;
-  displayName?: boolean;
+
   viewMode?: ViewMode;
   tooltip?: string;
+  isViewModeChangeable?: boolean;
 };
 
 export const Structure = memo(function Structure({
@@ -35,9 +37,11 @@ export const Structure = memo(function Structure({
   activeCell,
   activeNeighbours,
   displayDefaultGrid,
-  viewMode = "image",
+  viewMode,
   tooltip,
+  isViewModeChangeable,
 }: StructureProps) {
+  const [mode, setMode] = useState<ViewMode>(viewMode ?? "image");
   const [cellSize, setCellSize] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -48,6 +52,10 @@ export const Structure = memo(function Structure({
     const newCellSize = getCellSize(ref, columnsCount, rowsCount);
     setCellSize(Math.floor(newCellSize));
   }, [columnsCount, rowsCount]);
+
+  useEffect(() => {
+    setMode(viewMode ?? "image");
+  }, [viewMode]);
 
   useEffect(() => {
     updateCellSize();
@@ -81,16 +89,26 @@ export const Structure = memo(function Structure({
     >
       {cellSize > 0 && (
         <>
-          {onCellClick && <StructureTooltip tooltip={tooltip} />}
-          <StructureGrid
-            grid={grid}
-            cellSize={cellSize}
-            defaultGrid={defaultGrid}
-            displayDefaultGrid={displayDefaultGrid}
-            activeNeighbours={activeNeighbours}
-            activeCell={activeCell}
-            handleCellClick={onCellClick && handleCellClick}
-            viewMode={viewMode}
+          {/* {onCellClick && <StructureTooltip tooltip={tooltip} />} */}
+          {!!onCellClick && <Swipe setViewMode={setMode} />}
+          <div id="swipe-container">
+            <StructureGrid
+              grid={grid}
+              cellSize={cellSize}
+              defaultGrid={defaultGrid}
+              displayDefaultGrid={displayDefaultGrid}
+              activeNeighbours={activeNeighbours}
+              activeCell={activeCell}
+              handleCellClick={onCellClick && handleCellClick}
+              viewMode={mode}
+            />
+          </div>
+          <StructureToolbox
+            width={cellSize * columnsCount}
+            isViewModeChangeable={isViewModeChangeable}
+            viewMode={mode}
+            tooltip={tooltip}
+            clickable={!!onCellClick}
           />
         </>
       )}

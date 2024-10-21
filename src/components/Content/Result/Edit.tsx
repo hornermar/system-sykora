@@ -9,16 +9,12 @@ import {
   Switch,
   Box,
   Collapse,
-  // Select,
-  // MenuItem,
-  // SelectChangeEvent,
 } from "@mui/material";
 import { FormValues } from "../../../types/FormValues";
 import { rulesItems } from "../../../lib/formItems";
 import { Rule } from "../../../types/Rule";
 import { map } from "lodash";
 import { useTheme } from "@mui/material/styles";
-import { ViewMode } from "../../../types/General";
 
 type ResultEditProps = {
   form: FormValues;
@@ -26,8 +22,6 @@ type ResultEditProps = {
   open: boolean;
   isRandom: boolean;
   setIsRandom: React.Dispatch<React.SetStateAction<boolean>>;
-  viewMode: ViewMode;
-  setViewMode: React.Dispatch<React.SetStateAction<ViewMode>>;
 };
 
 export const ResultEdit = ({
@@ -53,10 +47,6 @@ export const ResultEdit = ({
   ) => {
     setIsRandom(!selected);
   };
-
-  // const handleViewModeChange = (event: SelectChangeEvent<ViewMode>) => {
-  //   setViewMode(event.target.value as ViewMode);
-  // };
 
   return (
     <Box
@@ -153,30 +143,8 @@ export const ResultEdit = ({
               </Typography>
             </Stack>
 
-            <Switch
-              checked={!isRandom}
-              onChange={toggleIsRandom}
-              // size="small"
-            />
+            <Switch checked={!isRandom} onChange={toggleIsRandom} />
           </Stack>
-
-          {/* <Stack flexDirection="row" alignItems="center">
-            <Typography
-              variant="body1"
-              sx={{ paddingRight: "10px", margin: 0 }}
-            >
-              Zobrazení prvků:
-            </Typography>
-            <Select
-              value={viewMode}
-              onChange={(event) => handleViewModeChange(event)}
-              size="small"
-              sx={{ minWidth: 120 }}
-            >
-              <MenuItem value="image">Obrázek</MenuItem>
-              <MenuItem value="text">Názvy</MenuItem>
-            </Select>
-          </Stack> */}
         </Stack>
       </Collapse>
     </Box>

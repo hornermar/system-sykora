@@ -5,7 +5,7 @@ import { createEmptyGrid } from "../utils/createEmptyGrid";
 import { useFormParams } from "../hooks/useFormParams";
 
 export const GeneratorWrapper = () => {
-  const { form, activeStep, onFormChange, defaultFormValues } = useFormParams();
+  const { form, onFormChange, defaultFormValues } = useFormParams();
   const [defaultGrid, setDefaultGrid] = useState<string[][]>(
     createEmptyGrid(form.rows, form.columns)
   );
@@ -34,7 +34,6 @@ export const GeneratorWrapper = () => {
 
   return (
     <Content
-      activeStep={activeStep}
       form={form}
       onFormChange={onFormChange}
       defaultGrid={defaultGrid}

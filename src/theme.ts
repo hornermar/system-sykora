@@ -22,7 +22,7 @@ export const customTheme = createTheme({
     fontFamily: "Roboto mono, monospace",
     h1: {
       fontFamily: "Pathway Gothic One, sans-serif",
-      fontSize: "65px",
+      fontSize: "54px",
       fontWeight: 500,
       textTransform: "uppercase",
     },

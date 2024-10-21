@@ -6,7 +6,7 @@ export const getCellSize = (
   if (!ref.current) return 0;
 
   const sizeBasedOnWidth = ref.current.clientWidth / columns;
-  const sizeBasedOnHeight = (window.innerHeight - 120) / rows;
+  const sizeBasedOnHeight = (window.innerHeight - 70) / rows;
 
   return Math.min(sizeBasedOnWidth, sizeBasedOnHeight);
 };

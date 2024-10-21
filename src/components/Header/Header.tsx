@@ -9,9 +9,14 @@ interface Props {
 
 const navItems = [
   {
-    label: "Vygeneruj si strukturu",
+    label: "Prozkoumej algoritmus",
     to: "/struktura",
     colors: { backgroundColor: "white", color: "black" },
+  },
+  {
+    label: "Struktura v Jindřišské",
+    to: "/jindrisska",
+    colors: { backgroundColor: "black", color: "white" },
   },
   {
     label: "Zdroje",

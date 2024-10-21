@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
 import { FormValues } from "../types/FormValues";
 import { rulesItems } from "../lib/formItems";
 import { Rule } from "../types/Rule";
 import { map } from "lodash";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const rules = map(rulesItems, (rule: Rule) => rule.code);
 
@@ -34,7 +34,7 @@ const getValidParams = (values: FormValues, activeStep: number) => {
     ])
   );
 
-  return { step: !isNaN(activeStep) ? activeStep.toString() : "1", ...params };
+  return { step: !isNaN(activeStep) ? activeStep.toString() : "0", ...params };
 };
 
 const defaultFormValues: FormValues = {
@@ -45,14 +45,19 @@ const defaultFormValues: FormValues = {
 };
 
 export const useFormParams = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const searchParams = new URLSearchParams(location.search);
   const form = getFormValuesFromParams(searchParams);
 
   const activeStep = parseInt(searchParams.get("step") || "", 10);
 
   useEffect(() => {
     const params = getValidParams(form, activeStep);
-    setSearchParams(params);
+    navigate(
+      { search: `?${new URLSearchParams(params).toString()}` },
+      { replace: true }
+    );
   }, []);
 
   const onFormChange = (newFormValues: Partial<FormValues>) => {
@@ -62,15 +67,19 @@ export const useFormParams = () => {
     };
 
     const params = getValidParams(updatedForm, activeStep);
-
-    setSearchParams(params);
+    navigate(
+      { search: `?${new URLSearchParams(params).toString()}` },
+      {
+        replace: true,
+      }
+    );
   };
 
   const handleStepChange = (step: number) => {
-    setSearchParams((prevParams) => ({
-      ...Object.fromEntries(prevParams),
-      step: step.toString(),
-    }));
+    searchParams.set("step", step.toString());
+    navigate(`${location.pathname}?${searchParams.toString()}`, {
+      replace: true,
+    });
   };
 
   return {

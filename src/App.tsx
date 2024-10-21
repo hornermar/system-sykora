@@ -6,6 +6,7 @@ import { AboutWrapper } from "./pages/About";
 import { SourcesWrapper } from "./pages/Sources";
 import { customTheme } from "./theme";
 import { GeneratorWrapper } from "./pages/Generator";
+import { BlackWhiteStructure } from "./pages/BlackWhiteStructure";
 import "./App.css";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<DashboardWrapper />} />
           <Route path="/struktura" element={<GeneratorWrapper />} />
 
+          <Route path="/jindrisska" element={<BlackWhiteStructure />} />
           <Route path="/zdroje" element={<SourcesWrapper />} />
           <Route path="/o-projektu" element={<AboutWrapper />} />
         </Routes>

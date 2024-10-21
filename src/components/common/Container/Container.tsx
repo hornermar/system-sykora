@@ -1,12 +1,13 @@
-import { Stack, Box, Button, PaletteColor, Typography } from "@mui/material";
+import { Stack, Box, Button, PaletteColor } from "@mui/material";
 import { useStep } from "../../../hooks/useStep";
-import { Progress } from "../Progress/Progress";
+import { Title } from "../Title/Title";
 
 const maxWidth = "850px";
 
 type ContainerProps = {
   children: React.ReactNode;
   title?: string;
+  titleVariant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   color?: PaletteColor;
   backButton?: string;
   nextButton?: string;
@@ -20,6 +21,7 @@ type ContainerProps = {
 export const Container = ({
   children,
   title,
+  titleVariant,
   color,
   backButton,
   nextButton,
@@ -51,24 +53,17 @@ export const Container = ({
         }}
       >
         <Box sx={{ maxWidth: maxWidth, width: "100%", margin: "0 auto" }}>
-          <Progress />
           <Box
             sx={{
               fontSize: "16px",
-              padding: "0px 20px 20px",
+              padding: "10px 20px 20px",
               textAlign: "left",
             }}
           >
-            {title && (
-              <Typography
-                variant={title === "Systém Sýkora" ? "h1" : "h2"}
-                sx={{
-                  marginRight: "20px",
-                }}
-              >
-                {title.toUpperCase()}
-              </Typography>
-            )}
+            {/* Title with Progress */}
+            <Title title={title} variant={titleVariant} />
+
+            {/* Children */}
             <Box sx={{ marginTop: "20px" }}>{children}</Box>
           </Box>
 
@@ -98,7 +93,10 @@ export const Container = ({
 
             {middleButton && (
               <Button
-                sx={{ borderLeft: "none", borderRight: "none" }}
+                sx={{
+                  borderLeft: "none",
+                  borderRight: disableNext ? "revert" : "none",
+                }}
                 variant="outlined"
                 onClick={onMiddleButtonClick}
                 fullWidth

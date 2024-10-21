@@ -9,9 +9,11 @@ import { useSwitch } from "../../hooks/useSwitch";
 import { useEffect } from "react";
 import { GoingThrough } from "./GoingThrought/GoingThrough";
 import { Calculation } from "./Calculation/Calculation";
+import { Instruction } from "./Instruction/Instruction";
+import { useStep } from "../../hooks/useStep";
+import { size } from "lodash";
 
 type ContentProps = {
-  activeStep: number;
   form: FormValues;
   onFormChange: (newFormValues: Partial<FormValues>) => void;
   defaultGrid: string[][];
@@ -22,7 +24,6 @@ type ContentProps = {
 };
 
 export const Content = ({
-  activeStep,
   form,
   onFormChange,
   defaultGrid,
@@ -31,6 +32,7 @@ export const Content = ({
   setEmptyGrid,
 }: ContentProps) => {
   const [editOpen, onEditOpen, onEditClose] = useSwitch(false);
+  const { activeStep, steps, onStepChange } = useStep();
 
   useEffect(() => {
     if (activeStep !== 8 && editOpen) {
@@ -43,6 +45,16 @@ export const Content = ({
 
   return (
     <>
+      {/* Instruction */}
+      {(activeStep === 0 || !activeStep) && (
+        <Container
+          children={<Instruction />}
+          title="Instrukce"
+          nextButton="Začít"
+          fulllHeight
+        />
+      )}
+
       {/* Diagram */}
       {activeStep === 1 && (
         <Container
@@ -53,6 +65,7 @@ export const Content = ({
               defaultGrid={defaultGrid}
             />
           }
+          backButton="Zpět na instrukce"
           nextButton="Další"
           disableNext={!form.columns || !form.rows}
           fulllHeight
@@ -98,6 +111,8 @@ export const Content = ({
           children={<Rules rule={form.rule} onFormChange={onFormChange} />}
           backButton="Zpět"
           nextButton="Další"
+          middleButton="Přeskočit popis"
+          onMiddleButtonClick={() => onStepChange(size(steps))}
           fulllHeight
           disableNext={form.rule === null}
         />

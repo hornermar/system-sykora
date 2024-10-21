@@ -45,7 +45,11 @@ export const GoingThrough = ({ defaultGrid }: GoingThroughProps) => {
         lichých řadách a zprava doleva v sudých.
       </Typography>
 
-      <Structure grid={defaultGrid} activeCell={activeCell} />
+      <Structure
+        grid={defaultGrid}
+        activeCell={activeCell}
+        isViewModeChangeable
+      />
     </>
   );
 };

@@ -23,7 +23,7 @@ const steps: Step[] = [
     order: 4,
   },
   {
-    label: "Výpočet",
+    label: "Průchod mřížkou",
     order: 5,
   },
   {

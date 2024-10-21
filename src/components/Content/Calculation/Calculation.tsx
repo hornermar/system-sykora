@@ -110,7 +110,6 @@ export const Calculation = ({ grid, defaultGrid, form, part }: GroupProps) => {
           <Typography variant="body1">
             Při jejím zjišťování prochází sousedící prvky, které se s prvkem
             dotýkají stranou i rohy.
-            {/* Místo obrázků těd vidíte názvy prvků. */}
           </Typography>
         </>
       )}
@@ -133,6 +132,7 @@ export const Calculation = ({ grid, defaultGrid, form, part }: GroupProps) => {
         viewMode={part === "group" ? "text" : "image"}
         sx={{ margin: "15px 0" }}
         tooltip={tooltip}
+        isViewModeChangeable
       />
 
       {part === "group" && (

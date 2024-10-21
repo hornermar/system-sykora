@@ -61,7 +61,16 @@ export const Elements = ({
         vyplnit některá pole. Na výběr máš z 20 prvků, které určí základ
         struktury.
       </Typography>
-      <Typography variant="body1" sx={{ marginBottom: "20px" }}>
+
+      <Typography variant="body1">
+        Podrobný popis prvků najdeš{" "}
+        <b onClick={onOpenDialog}>
+          <u>tady</u>
+        </b>
+        .
+      </Typography>
+
+      <Typography variant="body1">
         Do míst, kde si přeješ urychlit nebo zpomalit přechody barev, přidej
         znaménka <b>+</b> nebo <b>-</b>.
       </Typography>
@@ -69,9 +78,6 @@ export const Elements = ({
       <Box
         sx={{
           marginBottom: "10px",
-          display: "flex",
-          flexDirection: "row",
-          // justifyContent: "right",
         }}
       >
         <Chip
@@ -92,8 +98,8 @@ export const Elements = ({
       <Structure
         grid={defaultGrid}
         onCellClick={onCellClick}
-        sx={{ marginBottom: "20px" }}
         tooltip="Kliknutím do vybraného pole se otevře nabídka."
+        isViewModeChangeable
       />
 
       {activeCell && (
@@ -104,14 +110,6 @@ export const Elements = ({
           onCellChange={onCellChange}
         />
       )}
-
-      <Typography variant="body1">
-        Jak jednotlivé prvky vznikly zjisti{" "}
-        <b onClick={onOpenDialog}>
-          <u>zde</u>
-        </b>
-        .
-      </Typography>
 
       <ElementsDialog open={openDialog} onClose={onCloseDialog} />
     </>

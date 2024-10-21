@@ -13,6 +13,7 @@ type DiagramProps = {
 };
 
 const chips = [
+  { columns: 6, rows: 6 },
   { columns: 10, rows: 10 },
   { columns: 11, rows: 21 },
 ];
@@ -31,7 +32,7 @@ export const Diagram = ({ form, onFormChange }: DiagramProps) => {
         Urči počet sloupců a řádků mřížky:
       </Typography>
 
-      <Stack width={"100%"} flexDirection="row" gap={2}>
+      <Stack width={"100%"} flexDirection="row" gap={3}>
         <Select
           label="Sloupce"
           name="columns"
@@ -49,7 +50,14 @@ export const Diagram = ({ form, onFormChange }: DiagramProps) => {
         />
       </Stack>
 
-      <Box sx={{ marginBottom: "10px" }}>
+      <Box
+        sx={{
+          marginBottom: "10px",
+          // display: "flex",
+          // flexDirection: "row",
+          // justifyContent: "right",
+        }}
+      >
         {map(chips, (chip, index) => (
           <Chip
             key={index}
