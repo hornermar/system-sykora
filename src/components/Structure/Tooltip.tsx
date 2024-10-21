@@ -25,6 +25,7 @@ export const StructureTooltip = ({ tooltip }: StructureTooltip) => {
           position: "absolute",
           top: -30,
           right: 9,
+          transform: "rotate(180deg)",
         }}
         src={"/icons/hand-pointer.svg"}
         width={20}

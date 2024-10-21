@@ -100,8 +100,8 @@ export const Grid = ({
                   ) : (
                     <img
                       src={pathMap(cell)}
-                      width={size / 2}
-                      height={size / 2}
+                      width={size / 2.5}
+                      height={size / 2.5}
                       alt={`${cell} icon`}
                     />
                   )}

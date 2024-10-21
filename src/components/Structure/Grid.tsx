@@ -8,23 +8,25 @@ import { useTheme } from "@mui/material/styles";
 type StructureGridProps = {
   grid: string[][];
   cellSize: number;
+  viewMode: ViewMode;
   defaultGrid?: string[][];
   activeNeighbours?: Cell[];
   activeCell?: Cell;
   handleCellClick?: (x: number, y: number, name: string) => void;
   displayDefaultGrid?: boolean;
-  viewMode: ViewMode;
+  highlightDefaultGrid?: boolean;
 };
 
 export const StructureGrid = memo(function StructureGrid({
+  grid,
   cellSize,
+  viewMode,
   defaultGrid,
   activeNeighbours,
   activeCell,
   handleCellClick,
-  grid,
   displayDefaultGrid,
-  viewMode,
+  highlightDefaultGrid,
 }: StructureGridProps) {
   const theme = useTheme();
 
@@ -40,8 +42,9 @@ export const StructureGrid = memo(function StructureGrid({
           }}
         >
           {map(row, (cell: string, x) => {
+            const isCellSign = cell === "+" || cell === "-";
             const isCellActive = activeCell?.x === x && activeCell?.y === y;
-            const isCellEmpty = cell === "0" || cell === "+" || cell === "-";
+            const isCellEmpty = cell === "0" || isCellSign;
 
             const isCellOriginal =
               !displayDefaultGrid &&
@@ -82,13 +85,13 @@ export const StructureGrid = memo(function StructureGrid({
                   zIndex: isCellActive ? 100 : isCellActiveNeighbour ? 50 : 0,
                 }}
               >
-                {viewMode === "text" && (
+                {viewMode === "text" && !isCellSign && (
                   <Typography
                     sx={{
                       margin: 0,
                       fontWeight: 500,
                       color:
-                        defaultGrid && isCellOriginal
+                        defaultGrid && highlightDefaultGrid
                           ? theme.palette.text.disabled
                           : theme.palette.text.primary,
                     }}
@@ -97,30 +100,24 @@ export const StructureGrid = memo(function StructureGrid({
                   </Typography>
                 )}
 
-                {viewMode === "image" &&
-                  (cell !== "+" && cell !== "-" && cell !== "0" ? (
-                    <img
-                      src={getImgPath(cell)}
-                      width={cellSize}
-                      height={cellSize}
-                      alt={`element ${cell}`}
-                      style={{
-                        objectFit: "fill",
-                        opacity:
-                          isCellOriginal && defaultGrid
-                            ? 0.5
-                            : isCellActiveNeighbour
-                            ? 0.4
-                            : 1,
-                      }}
-                    />
-                  ) : (
-                    cell !== "0" && (
-                      <Typography component="span" sx={{ margin: 0 }}>
-                        {cell}
-                      </Typography>
-                    )
-                  ))}
+                {((viewMode === "image" && cell !== "0") ||
+                  (viewMode === "text" && isCellSign)) && (
+                  <img
+                    src={getImgPath(cell)}
+                    width={isCellSign ? cellSize / 2.5 : cellSize}
+                    height={isCellSign ? cellSize / 2.5 : cellSize}
+                    alt={`element ${cell}`}
+                    style={{
+                      objectFit: "fill",
+                      opacity:
+                        isCellOriginal && highlightDefaultGrid
+                          ? 0.5
+                          : isCellActiveNeighbour
+                          ? 0.4
+                          : 1,
+                    }}
+                  />
+                )}
               </Box>
             );
           })}

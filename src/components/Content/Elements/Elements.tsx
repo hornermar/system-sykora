@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useCell } from "../../../hooks/useCell";
 import { Structure } from "../../Structure/Structure";
 import { ElementsDialog } from "./Dialog";
 import { Box, Typography, Chip } from "@mui/material";
 import { useSwitch } from "../../../hooks/useSwitch";
 import { ElementSelect } from "./Select";
-import { set } from "lodash";
 import { exampleGrid } from "../../../lib/grids";
 import { FormValues } from "../../../types/FormValues";
 
@@ -29,26 +28,13 @@ export const Elements = ({
   setEmptyGrid,
   form,
 }: ElementsProps) => {
-  const [activeCell, setActiveCell] = useState<{
-    x: number;
-    y: number;
-    name: string;
-  } | null>(null);
   const [openDialog, onOpenDialog, onCloseDialog] = useSwitch(false);
   const [openSelect, onOpenSelect, onCloseSelect] = useSwitch(false);
 
-  const onCellClick = (x: number, y: number, name: string) => {
-    setActiveCell({ x, y, name });
-    onOpenSelect();
-  };
-
-  const onCellChange = (element: string) => {
-    setDefaultGrid((prevGrid) => {
-      const newGrid = [...prevGrid];
-      set(newGrid, [activeCell!.y, activeCell!.x], element);
-      return newGrid;
-    });
-  };
+  const { activeCell, onCellClick, onCellChange } = useCell({
+    onOpenSelect,
+    setDefaultGrid,
+  });
 
   const setTemplate = () => {
     setDefaultGrid(getSubGrid(exampleGrid, form.rows, form.columns));

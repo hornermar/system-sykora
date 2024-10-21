@@ -2,12 +2,13 @@ import { Dialog } from "../../common/Dialog/Dialog";
 import { allElementsByGroupGrid } from "../../../lib/grids";
 import { Grid } from "../../Grid/Grid";
 import { Button } from "@mui/material";
+import { Cell } from "../../../types/General";
 
 type ElementsSelectProps = {
   open: boolean;
   onClose: () => void;
   onCellChange: (element: string) => void;
-  activeCell: { x: number; y: number; name: string };
+  activeCell: Cell;
 };
 
 const size = 40;
@@ -42,8 +43,8 @@ export const ElementSelect = ({
             src={
               activeCell.name === "0" ? "/icons/xDisabled.svg" : "/icons/x.svg"
             }
-            width={20}
-            height={20}
+            width={size / 2.5}
+            height={size / 2.5}
             alt={"x icon"}
           />
         }
@@ -57,14 +58,14 @@ export const ElementSelect = ({
         grid={allElementsByGroupGrid}
         size={size}
         onCellClick={onClick}
-        activeNames={[activeCell.name]}
+        activeNames={[activeCell.name!]}
       />
 
       <Grid
         grid={[["+", "-", "", ""]]}
         size={size}
         onCellClick={onClick}
-        activeNames={[activeCell.name]}
+        activeNames={[activeCell.name!]}
       />
     </Dialog>
   );

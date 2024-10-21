@@ -37,9 +37,7 @@ export const Dialog = ({
         },
       }}
     >
-      <DialogTitle sx={{ marginRight: "20px" }}>
-        {title.toUpperCase()}
-      </DialogTitle>
+      <DialogTitle>{title.toUpperCase()}</DialogTitle>
 
       <IconButton
         color="inherit"
@@ -47,8 +45,8 @@ export const Dialog = ({
         sx={{
           marginTop: "-5px",
           position: "absolute",
-          right: 8,
-          top: 8,
+          right: 12,
+          top: 14,
         }}
       >
         <img

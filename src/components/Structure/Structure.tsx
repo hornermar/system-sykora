@@ -23,10 +23,10 @@ export type StructureProps = {
   activeCell?: Cell;
   activeNeighbours?: Cell[];
   displayDefaultGrid?: boolean;
-
   viewMode?: ViewMode;
   tooltip?: string;
   isViewModeChangeable?: boolean;
+  highlightDefaultGrid?: boolean;
 };
 
 export const Structure = memo(function Structure({
@@ -40,6 +40,7 @@ export const Structure = memo(function Structure({
   viewMode,
   tooltip,
   isViewModeChangeable,
+  highlightDefaultGrid,
 }: StructureProps) {
   const [mode, setMode] = useState<ViewMode>(viewMode ?? "image");
   const [cellSize, setCellSize] = useState(0);
@@ -89,7 +90,7 @@ export const Structure = memo(function Structure({
     >
       {cellSize > 0 && (
         <>
-          {onCellClick && <StructureTooltip tooltip={tooltip} />}
+          {!!onCellClick && <StructureTooltip tooltip={tooltip} />}
           {isViewModeChangeable && <Swipe setViewMode={setMode} />}
           <div id="swipe-container">
             <StructureGrid
@@ -101,6 +102,7 @@ export const Structure = memo(function Structure({
               activeCell={activeCell}
               handleCellClick={onCellClick && handleCellClick}
               viewMode={mode}
+              highlightDefaultGrid={highlightDefaultGrid}
             />
           </div>
           <StructureToolbox

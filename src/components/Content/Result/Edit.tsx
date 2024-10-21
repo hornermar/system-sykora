@@ -22,6 +22,8 @@ type ResultEditProps = {
   open: boolean;
   isRandom: boolean;
   setIsRandom: React.Dispatch<React.SetStateAction<boolean>>;
+  displayDefaultGrid: boolean;
+  setDisplayDefaultGrid: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const ResultEdit = ({
@@ -30,6 +32,8 @@ export const ResultEdit = ({
   open,
   isRandom,
   setIsRandom,
+  displayDefaultGrid,
+  setDisplayDefaultGrid,
 }: ResultEditProps) => {
   const theme = useTheme();
 
@@ -41,11 +45,12 @@ export const ResultEdit = ({
     onFormChange({ coefficient: newValue as number });
   };
 
-  const toggleIsRandom = (
+  const toggle = (
     _: React.ChangeEvent<HTMLInputElement>,
-    selected: boolean
+    selected: boolean,
+    callback: React.Dispatch<React.SetStateAction<boolean>>
   ) => {
-    setIsRandom(!selected);
+    callback(selected);
   };
 
   return (
@@ -143,7 +148,32 @@ export const ResultEdit = ({
               </Typography>
             </Stack>
 
-            <Switch checked={!isRandom} onChange={toggleIsRandom} />
+            <Switch
+              checked={!isRandom}
+              onChange={(e, selected) => toggle(e, !selected, setIsRandom)}
+            />
+          </Stack>
+
+          <Stack
+            flexDirection="row"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <Stack>
+              <Typography variant="body1" sx={{ margin: 0 }}>
+                Zadání:
+              </Typography>
+              <Typography variant="caption">
+                Zapnutím se zobrazí původní prvky
+              </Typography>
+            </Stack>
+
+            <Switch
+              checked={displayDefaultGrid}
+              onChange={(e, selected) =>
+                toggle(e, selected, setDisplayDefaultGrid)
+              }
+            />
           </Stack>
         </Stack>
       </Collapse>

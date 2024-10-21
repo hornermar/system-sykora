@@ -28,51 +28,68 @@ const OrderedList = ({ steps, start }: OrderedListProps) => (
 
 type ExplanationProps = {
   children: React.ReactNode;
-  itemsCount: number;
-  description?: string;
+  description: string;
+  title?: string;
   start?: number;
   color?: string;
+  size?: number;
+  displaySeparator?: boolean;
 };
 
 const Explanation = ({
-  itemsCount,
   description,
+  title,
   color,
   children,
+  size,
+  displaySeparator,
 }: ExplanationProps) => {
   const theme = useTheme();
   return (
-    <Stack
-      flexDirection="row"
-      alignItems="center"
-      width="100%"
-      gap={0.5}
-      sx={{
-        color:
-          color === "grey"
-            ? theme.palette.grey[500]
-            : theme.palette.text.primary,
-        marginTop: itemsCount === 1 ? "-20px" : "0",
-      }}
-    >
-      {children}
-      {description && (
-        <>
-          <Typography
-            sx={{
-              fontSize: "60px",
-              fontWeight: 300,
-              // marginBottom: itemsCount === 1 ? "0" : "10px",
-            }}
-            component="span"
-          >
-            {/* {itemsCount === 1 ? "–⁠⁠⁠⁠⁠⁠" : "}"} */}
-            {"}"}
-          </Typography>
-          <Typography variant="caption">{description}</Typography>
-        </>
+    <>
+      {title && (
+        <Typography variant="body1" sx={{ margin: "10px 0 10px" }}>
+          {title}
+        </Typography>
       )}
-    </Stack>
+
+      <Stack
+        flexDirection="row"
+        alignItems="center"
+        width="100%"
+        gap={1}
+        sx={{
+          color:
+            color === "grey"
+              ? theme.palette.grey[500]
+              : theme.palette.text.primary,
+          marginTop: size === 1 ? "-10px" : "0",
+        }}
+      >
+        {children}
+        {description && (
+          <>
+            {displaySeparator && (
+              <Typography
+                sx={{
+                  fontSize: "54px",
+                  fontWeight: 300,
+                }}
+                component="span"
+              >
+                {"}"}
+              </Typography>
+            )}
+            <Typography
+              sx={{ padding: displaySeparator ? "0" : "10px 0 10px 20px" }}
+              variant="body2"
+            >
+              {description}
+            </Typography>
+          </>
+        )}
+      </Stack>
+    </>
   );
 };
 
@@ -80,30 +97,31 @@ export const Instruction = () => {
   const { steps } = useStep();
   return (
     <>
-      <Typography variant="body1">Projdeš 5 až 8 kroky:</Typography>
       <Explanation
-        itemsCount={4}
-        description="Vstupní hodnoty, které je potřeba do algoritmu zadat"
+        title="Projdeš 5 až 8 kroky:"
+        description="Vstupní hodnoty, které je potřeba algoritmu zadat"
+        displaySeparator
         children={<OrderedList steps={steps.slice(0, 4)} />}
       />
 
       <Explanation
-        itemsCount={3}
-        description="Vysvětlení výpočtu jednotlivých prvků. Tyto kroky je možné přeskočit."
+        description="Ukázka výpočtu prvků (lze přeskočit)"
         color="grey"
+        displaySeparator
         children={<OrderedList steps={steps.slice(4, 7)} start={5} />}
       />
 
       <Explanation
-        itemsCount={1}
-        description="Vygenerovaná struktura, kterou je možné upravovat a sledovat změny."
+        description="Algoritmem vygenerovaná struktura"
+        size={1}
+        displaySeparator
         children={<OrderedList steps={steps.slice(7, 8)} start={8} />}
       />
 
-      <Typography variant="body1">Interactivní mřížka</Typography>
       <Explanation
-        itemsCount={1}
-        description="U mřížek, které pod sebou mají tečky, je možné měnit zobrazení prvků. Na výběr je z názvů nebo obrazů a změníte jej přejetím po displeji."
+        title="Symboly:"
+        description="U mřížek s tímto symbolem můžeš měnit zobrazení prvků (název/obraz). 
+        "
         children={
           <MobileStepper
             variant="dots"
@@ -116,9 +134,7 @@ export const Instruction = () => {
         }
       />
 
-      <Typography variant="body1">Přepínání zobrazení</Typography>
       <Explanation
-        itemsCount={1}
         description="Do mřížek s tímto symbolem je možné klikat."
         children={
           <img

@@ -46,7 +46,7 @@ export const customTheme = createTheme({
       fontSize: "12px",
     },
     caption: {
-      fontSize: "11px",
+      fontSize: "10px",
     },
   },
   components: {
@@ -110,6 +110,7 @@ export const customTheme = createTheme({
           fontFamily: "Pathway Gothic One, sans-serif",
           fontSize: "28px",
           fontWeight: 500,
+          padding: "10px 80px 10px 20px",
         },
       },
     },

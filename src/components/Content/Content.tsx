@@ -156,6 +156,8 @@ export const Content = ({
               form={form}
               onFormChange={onFormChange}
               defaultGrid={defaultGrid}
+              setDefaultGrid={setDefaultGrid}
+              onEditClose={onEditClose}
             />
           }
           backButton="Zpět"

@@ -133,6 +133,7 @@ export const Calculation = ({ grid, defaultGrid, form, part }: GroupProps) => {
         sx={{ margin: "15px 0" }}
         tooltip={tooltip}
         isViewModeChangeable
+        highlightDefaultGrid
       />
 
       {part === "group" && (
