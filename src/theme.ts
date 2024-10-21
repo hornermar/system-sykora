@@ -46,7 +46,7 @@ export const customTheme = createTheme({
       fontSize: "12px",
     },
     caption: {
-      fontSize: "10px",
+      fontSize: "11px",
     },
   },
   components: {

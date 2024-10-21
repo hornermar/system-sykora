@@ -21,10 +21,10 @@ export const Swipe = ({ setViewMode }: SwipeProps) => {
       const deltaX = touchStartX.current - touchEndX.current;
       if (deltaX > 50) {
         // Swipe left
-        setViewMode("text");
+        setViewMode("image");
       } else if (deltaX < -50) {
         // Swipe right
-        setViewMode("image");
+        setViewMode("text");
       }
     }
     touchStartX.current = null;

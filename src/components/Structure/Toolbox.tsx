@@ -1,6 +1,6 @@
 import { Box, MobileStepper } from "@mui/material";
 import { ViewMode } from "../../types/General";
-import { StructureTooltip } from "./Tooltip";
+// import { StructureTooltip } from "./Tooltip";
 
 type StructureToolboxProps = {
   width: number;
@@ -12,11 +12,11 @@ type StructureToolboxProps = {
 
 export const StructureToolbox = ({
   width,
-  clickable,
+  // clickable,
   viewMode,
   isViewModeChangeable,
-  tooltip,
-}: StructureToolboxProps) => {
+}: // tooltip,
+StructureToolboxProps) => {
   return (
     <Box sx={{ width: `${width}px`, position: "relative" }}>
       {isViewModeChangeable && (
@@ -32,7 +32,7 @@ export const StructureToolbox = ({
           backButton={<></>}
         />
       )}
-      {clickable && <StructureTooltip tooltip={tooltip} />}
+      {/* {clickable && <StructureTooltip tooltip={tooltip} />} */}
     </Box>
   );
 };

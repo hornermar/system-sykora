@@ -46,7 +46,7 @@ const Explanation = ({
       flexDirection="row"
       alignItems="center"
       width="100%"
-      gap={1}
+      gap={0.5}
       sx={{
         color:
           color === "grey"
@@ -103,7 +103,7 @@ export const Instruction = () => {
       <Typography variant="body1">Interactivní mřížka</Typography>
       <Explanation
         itemsCount={1}
-        description="U mřížek, které pod sebou mají tečky, je možné měnit zobrazení prvků přejetím po displeji. Na výběr je z názvů nebo obrazů."
+        description="U mřížek, které pod sebou mají tečky, je možné měnit zobrazení prvků. Na výběr je z názvů nebo obrazů a změníte jej přejetím po displeji."
         children={
           <MobileStepper
             variant="dots"

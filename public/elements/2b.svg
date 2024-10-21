@@ -1,6 +1,7 @@
 <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
  <g id="Layer_1">
   <title>Layer 1</title>
+   <rect id="svg_6" height="30" width="30" y="0" x="0" stroke-width="0" stroke="#000" fill="#ffffff"/>
   <ellipse stroke-width="0" ry="15" rx="15" id="svg_2" cy="30" cx="15" stroke="#000" fill="#000000"/>
  </g>
 

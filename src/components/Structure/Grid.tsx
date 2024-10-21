@@ -98,7 +98,7 @@ export const StructureGrid = memo(function StructureGrid({
                 )}
 
                 {viewMode === "image" &&
-                  (cell !== "+" && cell !== "-" ? (
+                  (cell !== "+" && cell !== "-" && cell !== "0" ? (
                     <img
                       src={getImgPath(cell)}
                       width={cellSize}
@@ -115,9 +115,11 @@ export const StructureGrid = memo(function StructureGrid({
                       }}
                     />
                   ) : (
-                    <Typography component="span" sx={{ margin: 0 }}>
-                      {cell}
-                    </Typography>
+                    cell !== "0" && (
+                      <Typography component="span" sx={{ margin: 0 }}>
+                        {cell}
+                      </Typography>
+                    )
                   ))}
               </Box>
             );
