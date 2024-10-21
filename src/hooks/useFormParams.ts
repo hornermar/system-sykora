@@ -31,7 +31,7 @@ const getValidParams = (values: FormValues, activeStep: number) => {
 
   let step = activeStep;
 
-  if (rows === 0 || (columns === 0 && activeStep > 1)) {
+  if ((rows === 0 || columns === 0) && activeStep > 1) {
     step = 1;
   } else if (!coefficient && activeStep > 3) {
     step = 3;
