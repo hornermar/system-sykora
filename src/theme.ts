@@ -6,9 +6,9 @@ const black = "#000000";
 export const customTheme = createTheme({
   palette: {
     primary: {
-      light: "#c0e9f0",
+      light: "#fcf7a9",
       main: black,
-      dark: "#04c2df",
+      dark: "#f6e93f",
       contrastText: white,
     },
     secondary: {
@@ -83,6 +83,9 @@ export const customTheme = createTheme({
         },
         containedPrimary: {
           border: `2px solid ${black}`,
+          "&:active, &:hover": {
+            color: "black",
+          },
         },
         outlinedPrimary: {
           border: "2px solid",
@@ -151,6 +154,15 @@ export const customTheme = createTheme({
           backgroundColor: "unset",
           color: black,
           fontSize: "13px",
+        },
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          "&:active": {
+            boxShadow: "none",
+          },
         },
       },
     },

@@ -29,7 +29,7 @@ const BlackWhiteStructureWrapper = () => {
           to="https://maps.app.goo.gl/YAtsMNmorrUaSU3h7"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ color: "white" }}
+          style={{ color: "black" }}
         >
           Jindřišská 832/3
         </Link>

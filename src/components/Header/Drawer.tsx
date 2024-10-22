@@ -66,7 +66,11 @@ export const HeaderDrawer = ({
             padding: "10px 12px 10px 20px",
           }}
         >
-          <Typography variant="h6" onClick={() => handleItemClick("/")}>
+          <Typography
+            variant="h6"
+            sx={{ cursor: "pointer" }}
+            onClick={() => handleItemClick("/")}
+          >
             Systém Sýkora
           </Typography>
 

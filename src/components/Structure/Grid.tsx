@@ -82,7 +82,13 @@ export const StructureGrid = memo(function StructureGrid({
                     : theme.palette.secondary.light,
                   cursor:
                     handleCellClick && !isCellOriginal ? "pointer" : "unset",
-                  zIndex: isCellActive ? 100 : isCellActiveNeighbour ? 50 : 0,
+                  zIndex: isCellActive ? 70 : isCellActiveNeighbour ? 50 : 0,
+                  ":active": {
+                    zIndex: handleCellClick ? 100 : 0,
+                    outline: handleCellClick
+                      ? `3px solid ${theme.palette.primary.light}`
+                      : "none",
+                  },
                 }}
               >
                 {viewMode === "text" && !isCellSign && (
@@ -91,7 +97,7 @@ export const StructureGrid = memo(function StructureGrid({
                       margin: 0,
                       fontWeight: 500,
                       color:
-                        defaultGrid && highlightDefaultGrid
+                        defaultGrid && isCellOriginal && highlightDefaultGrid
                           ? theme.palette.text.disabled
                           : theme.palette.text.primary,
                     }}

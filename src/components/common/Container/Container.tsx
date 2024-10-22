@@ -48,8 +48,8 @@ export const Container = ({
       <Stack
         component="main"
         sx={{
-          backgroundColor: color?.main ?? "unset",
-          color: color?.contrastText ?? "unset",
+          backgroundColor: color?.dark ?? "unset",
+          color: color?.main ?? "unset",
           minHeight: fulllHeight ? "100vh" : "100%",
           paddingBottom: "50px",
         }}

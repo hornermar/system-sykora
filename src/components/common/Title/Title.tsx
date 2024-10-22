@@ -64,12 +64,17 @@ export const Title = ({ title, variant }: TitleProps) => {
   if (activeStep === undefined) return null;
 
   const progress = (100 / steps.length) * activeStep;
-  const disableProgress = activeStep === 0;
+  const disableProgress = activeStep === 0 || activeStep > steps.length;
 
   const currentTitle = title ?? find(steps, { order: activeStep })?.label;
 
   return (
-    <Stack flexDirection="row" width="100%" gap={3} paddingTop="10px">
+    <Stack
+      flexDirection="row"
+      width="100%"
+      gap={3}
+      padding={variant === "h1" ? "150px 0 20px" : "10px 0 0"}
+    >
       {!disableProgress && (
         <CircularProgressWithLabel
           value={progress}

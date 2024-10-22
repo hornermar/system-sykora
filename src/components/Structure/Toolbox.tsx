@@ -1,22 +1,19 @@
-import { Box, MobileStepper } from "@mui/material";
+import { Box, MobileStepper, IconButton } from "@mui/material";
 import { ViewMode } from "../../types/General";
-// import { StructureTooltip } from "./Tooltip";
 
 type StructureToolboxProps = {
   width: number;
-  clickable: boolean;
   viewMode: ViewMode;
   isViewModeChangeable?: boolean;
-  tooltip?: string;
+  setViewMode: (mode: ViewMode) => void;
 };
 
 export const StructureToolbox = ({
   width,
-  // clickable,
   viewMode,
   isViewModeChangeable,
-}: // tooltip,
-StructureToolboxProps) => {
+  setViewMode,
+}: StructureToolboxProps) => {
   return (
     <Box sx={{ width: `${width}px`, position: "relative" }}>
       {isViewModeChangeable && (
@@ -26,13 +23,51 @@ StructureToolboxProps) => {
           position="static"
           activeStep={viewMode === "text" ? 0 : 1}
           sx={{
-            justifyContent: "center",
+            justifyContent: "space-evenly",
+            width: "100%",
           }}
-          nextButton={<></>}
-          backButton={<></>}
+          nextButton={
+            <IconButton
+              size="small"
+              onClick={() => setViewMode("image")}
+              disabled={viewMode === "image"}
+              sx={{ display: { xs: "none", sm: "block" } }}
+            >
+              <img
+                src={
+                  viewMode === "image"
+                    ? "/icons/chevron-right-disabled.svg"
+                    : "/icons/chevron-right.svg"
+                }
+                width={30}
+                height={25}
+                alt={"right icon"}
+                style={{ marginBottom: "-2px" }}
+              />
+            </IconButton>
+          }
+          backButton={
+            <IconButton
+              size="small"
+              onClick={() => setViewMode("text")}
+              disabled={viewMode === "text"}
+              sx={{ display: { xs: "none", sm: "block" } }}
+            >
+              <img
+                src={
+                  viewMode === "text"
+                    ? "/icons/chevron-left-disabled.svg"
+                    : "/icons/chevron-left.svg"
+                }
+                width={30}
+                height={25}
+                alt={"left icon"}
+                style={{ marginBottom: "-2px" }}
+              />
+            </IconButton>
+          }
         />
       )}
-      {/* {clickable && <StructureTooltip tooltip={tooltip} />} */}
     </Box>
   );
 };

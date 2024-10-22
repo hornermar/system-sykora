@@ -1,4 +1,4 @@
-import { Stack, SxProps, Typography } from "@mui/material";
+import { Stack, SxProps, Typography, Box } from "@mui/material";
 import { map } from "lodash";
 import { getImgPath } from "../../utils/getImgPath";
 import { useCallback } from "react";
@@ -56,29 +56,31 @@ export const Grid = ({
             const isCellActive = activeNames?.includes(cell);
 
             return (
-              <div
+              <Box
                 key={`${x}${y}`}
-                style={{
+                sx={{
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
                 }}
               >
-                <div
-                  style={{
+                <Box
+                  sx={{
                     height: `${size}px`,
                     width: `${size}px`,
                     marginBottom: !displayName ? "20px" : 0,
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    backgroundColor:
-                      cell === "+" || cell === "-" || cell === "x"
-                        ? theme.palette.secondary.dark
-                        : "transparent",
-                    outline: isCellActive
-                      ? `3px solid ${theme.palette.primary.dark}`
-                      : "unset",
+                    backgroundColor: isCellActive
+                      ? theme.palette.primary.light
+                      : cell === "+" || cell === "-" || cell === "x"
+                      ? theme.palette.secondary.dark
+                      : "transparent",
+                    ":active": {
+                      outline: `3px solid ${theme.palette.primary.light}`,
+                    },
+                    opacity: isCellActive ? 0.4 : 1,
                   }}
                   onClick={() => handleCellClick?.(x, y, cell)}
                 >
@@ -94,9 +96,9 @@ export const Grid = ({
                       style={{ cursor: "pointer" }}
                     />
                   ) : cell === "" ? (
-                    <span>
+                    <Typography component="span">
                       <b>{cell}</b>
-                    </span>
+                    </Typography>
                   ) : (
                     <img
                       src={pathMap(cell)}
@@ -105,14 +107,14 @@ export const Grid = ({
                       alt={`${cell} icon`}
                     />
                   )}
-                </div>
+                </Box>
 
                 {displayName && (
                   <Typography component="span" style={{ marginBottom: "8px" }}>
                     {cell !== "0" ? cell : " "}
                   </Typography>
                 )}
-              </div>
+              </Box>
             );
           })}
         </Stack>

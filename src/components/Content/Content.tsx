@@ -12,6 +12,7 @@ import { Calculation } from "./Calculation/Calculation";
 import { Instruction } from "./Instruction/Instruction";
 import { useStep } from "../../hooks/useStep";
 import { size } from "lodash";
+import { End } from "./End/End";
 
 type ContentProps = {
   form: FormValues;
@@ -166,9 +167,23 @@ export const Content = ({
             />
           }
           backButton="Zpět"
-          nextButton={editOpen ? "Hotovo" : "Upravit"}
-          onNextButtonClick={editOpen ? onEditClose : onEditOpen}
+          middleButton={editOpen ? "Hotovo" : "Upravit"}
+          onMiddleButtonClick={editOpen ? onEditClose : onEditOpen}
+          nextButton="Závěr"
           fulllHeight
+        />
+      )}
+
+      {/* End */}
+      {activeStep === 9 && (
+        <Container
+          children={<End />}
+          title="Závěr"
+          fulllHeight
+          onNextButtonClick={() => {
+            resetForm();
+            onStepChange(1);
+          }}
         />
       )}
     </>

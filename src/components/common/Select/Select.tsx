@@ -28,6 +28,7 @@ export const Select = ({ label, name, value, onChange, max }: InputProps) => {
         type="number"
         onChange={(e) => onChange(e)}
         size="small"
+        sx={{ minWidth: "70px" }}
       >
         {map(options, (option) => (
           <MenuItem value={option} key={option}>

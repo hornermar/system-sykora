@@ -68,7 +68,7 @@ export const ResultEdit = ({
       <Collapse in={open} orientation="vertical">
         <Stack
           sx={{
-            backgroundColor: theme.palette.secondary.main,
+            backgroundColor: theme.palette.primary.dark,
             padding: "20px 35px 15px",
           }}
         >

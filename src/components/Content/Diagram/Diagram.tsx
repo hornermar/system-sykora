@@ -53,9 +53,6 @@ export const Diagram = ({ form, onFormChange }: DiagramProps) => {
       <Box
         sx={{
           marginBottom: "10px",
-          // display: "flex",
-          // flexDirection: "row",
-          // justifyContent: "right",
         }}
       >
         {map(chips, (chip, index) => (

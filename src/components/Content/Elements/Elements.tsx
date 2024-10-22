@@ -85,7 +85,6 @@ export const Elements = ({
       <Structure
         grid={defaultGrid}
         onCellClick={onCellClick}
-        tooltip="Kliknutím do vybraného pole se otevře nabídka."
         isViewModeChangeable
       />
 

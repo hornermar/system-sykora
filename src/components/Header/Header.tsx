@@ -1,7 +1,9 @@
 import * as React from "react";
-import { Button, Toolbar, Box, AppBar, IconButton } from "@mui/material/";
+import { Toolbar, Stack, AppBar, IconButton, Typography } from "@mui/material/";
 import { HeaderDrawer } from "./Drawer";
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useTheme } from "@mui/material/styles";
 
 interface Props {
   window?: () => Window;
@@ -16,12 +18,12 @@ const navItems = [
   {
     label: "Struktura v Jindřišské",
     to: "/jindrisska",
-    colors: { backgroundColor: "black", color: "white" },
+    colors: { backgroundColor: "#f6e93f", color: "black" },
   },
   {
     label: "Zdroje",
     to: "/zdroje",
-    colors: { backgroundColor: "black", color: "white" },
+    colors: { backgroundColor: "#f6e93f", color: "black" },
   },
   // {
   //   label: "O projektu",
@@ -34,6 +36,7 @@ export const Header = (props: Props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const location = useLocation();
+  const theme = useTheme();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -43,6 +46,8 @@ export const Header = (props: Props) => {
     window !== undefined ? () => window().document.body : undefined;
 
   const colors = navItems.find((item) => item.to === location.pathname)?.colors;
+
+  const currentPage = location.pathname + location.search;
 
   return (
     <>
@@ -72,7 +77,10 @@ export const Header = (props: Props) => {
 
       <AppBar
         component="nav"
-        sx={{ ...colors, display: { xs: "none", sm: "block" } }}
+        sx={{
+          ...colors,
+          display: { xs: "none", sm: "block" },
+        }}
       >
         <Toolbar
           sx={{
@@ -81,11 +89,27 @@ export const Header = (props: Props) => {
             padding: "0 8px",
           }}
         >
-          <Box>
-            {navItems.map((item) => (
-              <Button key={item.label}>{item.label}</Button>
-            ))}
-          </Box>
+          <Stack direction="row" gap={2}>
+            {navItems.map((item) => {
+              const isDisabled = currentPage === item.to;
+
+              return (
+                <Link key={item.label} to={item.to}>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{
+                      textDecoration: "none",
+                      color: isDisabled
+                        ? theme.palette.text.disabled
+                        : colors?.color,
+                    }}
+                  >
+                    {item.label}
+                  </Typography>
+                </Link>
+              );
+            })}
+          </Stack>
         </Toolbar>
       </AppBar>
       <HeaderDrawer

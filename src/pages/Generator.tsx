@@ -11,17 +11,17 @@ export const GeneratorWrapper = () => {
   const [grid, setGrid] = useState<string[][]>([]);
 
   const setEmptyGrid = useCallback(() => {
+    clearGrid(form.rows, form.columns);
+  }, [form.columns, form.rows, clearGrid]);
+
+  useEffect(() => {
     if (
       form.rows !== size(defaultGrid) ||
       form.columns !== size(defaultGrid[0])
     ) {
-      clearGrid(form.rows, form.columns);
+      setEmptyGrid();
     }
-  }, [form.columns, form.rows, clearGrid, defaultGrid]);
-
-  useEffect(() => {
-    setEmptyGrid();
-  }, [setEmptyGrid]);
+  }, [setEmptyGrid, form.rows, form.columns, defaultGrid]);
 
   useEffect(() => {
     if (form.rule !== null && form.coefficient !== 0) {

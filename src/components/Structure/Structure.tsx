@@ -11,9 +11,9 @@ import {
 } from "react";
 import { Cell, ViewMode } from "../../types/General";
 import { StructureGrid } from "./Grid";
-import { StructureTooltip } from "./Tooltip";
 import { StructureToolbox } from "./Toolbox";
 import { Swipe } from "./Swipe";
+import { StructureDot } from "./Dot";
 
 export type StructureProps = {
   grid: string[][];
@@ -24,7 +24,6 @@ export type StructureProps = {
   activeNeighbours?: Cell[];
   displayDefaultGrid?: boolean;
   viewMode?: ViewMode;
-  tooltip?: string;
   isViewModeChangeable?: boolean;
   highlightDefaultGrid?: boolean;
 };
@@ -38,7 +37,6 @@ export const Structure = memo(function Structure({
   activeNeighbours,
   displayDefaultGrid,
   viewMode,
-  tooltip,
   isViewModeChangeable,
   highlightDefaultGrid,
 }: StructureProps) {
@@ -90,7 +88,7 @@ export const Structure = memo(function Structure({
     >
       {cellSize > 0 && (
         <>
-          {!!onCellClick && <StructureTooltip tooltip={tooltip} />}
+          {!!onCellClick && <StructureDot />}
           {isViewModeChangeable && <Swipe setViewMode={setMode} />}
           <div id="swipe-container">
             <StructureGrid
@@ -109,8 +107,7 @@ export const Structure = memo(function Structure({
             width={cellSize * columnsCount}
             isViewModeChangeable={isViewModeChangeable}
             viewMode={mode}
-            tooltip={tooltip}
-            clickable={!!onCellClick}
+            setViewMode={setMode}
           />
         </>
       )}
