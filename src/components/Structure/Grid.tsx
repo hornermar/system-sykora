@@ -15,6 +15,7 @@ type StructureGridProps = {
   handleCellClick?: (x: number, y: number, name: string) => void;
   displayDefaultGrid?: boolean;
   highlightDefaultGrid?: boolean;
+  isClickable: boolean;
 };
 
 export const StructureGrid = memo(function StructureGrid({
@@ -27,6 +28,7 @@ export const StructureGrid = memo(function StructureGrid({
   handleCellClick,
   displayDefaultGrid,
   highlightDefaultGrid,
+  isClickable,
 }: StructureGridProps) {
   const theme = useTheme();
 
@@ -80,14 +82,12 @@ export const StructureGrid = memo(function StructureGrid({
                     : isCellActiveNeighbour
                     ? theme.palette.primary.light
                     : theme.palette.secondary.light,
-                  cursor:
-                    handleCellClick && !isCellOriginal ? "pointer" : "unset",
+                  cursor: isClickable && !isCellOriginal ? "pointer" : "unset",
                   zIndex: isCellActive ? 70 : isCellActiveNeighbour ? 50 : 0,
                   ":active": {
-                    zIndex: handleCellClick ? 100 : 0,
-                    outline: handleCellClick
-                      ? `3px solid ${theme.palette.primary.light}`
-                      : "none",
+                    zIndex: isClickable && !isCellOriginal ? 100 : 0,
+                    transform:
+                      isClickable && !isCellOriginal ? "scale(1.1)" : "none",
                   },
                 }}
               >

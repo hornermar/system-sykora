@@ -6,9 +6,9 @@ const black = "#000000";
 export const customTheme = createTheme({
   palette: {
     primary: {
-      light: "#fcf7a9",
+      light: "#edcedd",
       main: black,
-      dark: "#f6e93f",
+      dark: "#de5696",
       contrastText: white,
     },
     secondary: {

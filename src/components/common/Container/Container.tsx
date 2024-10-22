@@ -48,7 +48,7 @@ export const Container = ({
       <Stack
         component="main"
         sx={{
-          backgroundColor: color?.dark ?? "unset",
+          backgroundColor: color?.light ?? "unset",
           color: color?.main ?? "unset",
           minHeight: fulllHeight ? "100vh" : "100%",
           paddingBottom: "50px",
@@ -79,6 +79,7 @@ export const Container = ({
               width: "100%",
               maxWidth: maxWidth,
               justifyContent: "space-between",
+              zIndex: 1000,
             }}
           >
             {backButton && (

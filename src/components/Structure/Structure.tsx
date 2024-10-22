@@ -101,6 +101,7 @@ export const Structure = memo(function Structure({
               handleCellClick={onCellClick && handleCellClick}
               viewMode={mode}
               highlightDefaultGrid={highlightDefaultGrid}
+              isClickable={!!onCellClick}
             />
           </div>
           <StructureToolbox

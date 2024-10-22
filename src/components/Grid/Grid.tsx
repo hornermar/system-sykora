@@ -73,14 +73,14 @@ export const Grid = ({
                     justifyContent: "center",
                     alignItems: "center",
                     backgroundColor: isCellActive
-                      ? theme.palette.primary.light
+                      ? theme.palette.primary.dark
                       : cell === "+" || cell === "-" || cell === "x"
                       ? theme.palette.secondary.dark
                       : "transparent",
                     ":active": {
-                      outline: `3px solid ${theme.palette.primary.light}`,
+                      transform: onCellClick ? "scale(1.1)" : "none",
                     },
-                    opacity: isCellActive ? 0.4 : 1,
+                    opacity: isCellActive ? 0.5 : 1,
                   }}
                   onClick={() => handleCellClick?.(x, y, cell)}
                 >
@@ -93,7 +93,10 @@ export const Grid = ({
                       width={size}
                       height={size}
                       alt={`element ${cell}`}
-                      style={{ cursor: "pointer" }}
+                      style={{
+                        cursor: "pointer",
+                        opacity: isCellActive ? 0.4 : 1,
+                      }}
                     />
                   ) : cell === "" ? (
                     <Typography component="span">
