@@ -35,6 +35,21 @@ export const ElementSelect = ({
       title="Vyber obsah buňky"
       sx={{ paddingBottom: "4px" }}
     >
+      <Grid
+        grid={allElementsByGroupGrid}
+        size={size}
+        onCellClick={onClick}
+        activeNames={[activeCell.name!]}
+        displayName
+      />
+
+      <Grid
+        grid={[["+", "-", "", ""]]}
+        size={size}
+        onCellClick={onClick}
+        activeNames={[activeCell.name!]}
+      />
+
       <Button
         variant="contained"
         onClick={() => onClick(undefined, undefined, "0")}
@@ -48,25 +63,19 @@ export const ElementSelect = ({
             alt={"x icon"}
           />
         }
-        sx={{ marginBottom: "20px" }}
+        sx={{
+          marginBottom: "20px",
+          height: `${size}px`,
+          width: `${size * 2 + 22}px`,
+          position: "absolute",
+          marginTop: `-${size + 20}px`,
+          marginLeft: `${size * 2 + 44}px`,
+        }}
         color="secondary"
         disabled={activeCell.name === "0"}
       >
         Smazat
       </Button>
-      <Grid
-        grid={allElementsByGroupGrid}
-        size={size}
-        onCellClick={onClick}
-        activeNames={[activeCell.name!]}
-      />
-
-      <Grid
-        grid={[["+", "-", "", ""]]}
-        size={size}
-        onCellClick={onClick}
-        activeNames={[activeCell.name!]}
-      />
     </Dialog>
   );
 };

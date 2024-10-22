@@ -10,6 +10,7 @@ import {
 } from "@mui/material/";
 import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import { map } from "lodash";
 
 type HeaderDrawerProps = {
   container: (() => HTMLElement) | undefined;
@@ -63,15 +64,15 @@ export const HeaderDrawer = ({
             justifyContent: "space-between",
             alignItems: "center",
             marginBottom: "60px",
-            padding: "10px 12px 10px 20px",
+            padding: "0px 10px 10px 20px",
           }}
         >
           <Typography
             variant="h6"
             sx={{ cursor: "pointer" }}
-            onClick={() => handleItemClick("/")}
+            onClick={() => handleItemClick(navItems[0].to)}
           >
-            Systém Sýkora
+            {navItems[0].label}
           </Typography>
 
           <IconButton onClick={handleDrawerToggle}>
@@ -85,7 +86,7 @@ export const HeaderDrawer = ({
         </Box>
         <Box sx={{ padding: "0 20px 0 4px" }}>
           <List>
-            {navItems.map((item) => {
+            {map(navItems.slice(1), (item) => {
               const isDisabled = currentPage === item.to;
 
               return (

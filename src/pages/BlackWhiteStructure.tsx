@@ -1,6 +1,5 @@
 import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
 import { Container } from "../components/common/Container/Container";
 import { Structure } from "../components/Structure/Structure";
 import { originalGrid } from "../lib/originalGrid";
@@ -29,9 +28,9 @@ const BlackWhiteStructureWrapper = () => {
           to="https://maps.app.goo.gl/YAtsMNmorrUaSU3h7"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ color: "black" }}
+          className="underline"
         >
-          Jindřišská 832/3
+          <b>Jindřišská 832/3</b>
         </Link>
         .
       </Typography>
@@ -41,13 +40,10 @@ const BlackWhiteStructureWrapper = () => {
 };
 
 export const BlackWhiteStructure = () => {
-  const theme = useTheme();
-
   return (
     <Container
       title="Stěna, 1969"
       children={<BlackWhiteStructureWrapper />}
-      color={theme.palette.primary}
       fulllHeight
     />
   );

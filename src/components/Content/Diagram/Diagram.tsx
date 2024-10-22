@@ -28,11 +28,16 @@ export const Diagram = ({ form, onFormChange }: DiagramProps) => {
 
   return (
     <>
-      <Typography variant="body1" sx={{ marginBottom: "20px" }}>
-        Urči počet sloupců a řádků mřížky:
+      <Typography variant="body1" sx={{ marginBottom: "10px" }}>
+        Urči počet sloupců a řádků a vytvoří se základní mřížka:
       </Typography>
 
-      <Stack width={"100%"} flexDirection="row" gap={3}>
+      <Stack
+        width={"100%"}
+        flexDirection="row"
+        gap={3}
+        sx={{ marginBottom: "6px" }}
+      >
         <Select
           label="Sloupce"
           name="columns"

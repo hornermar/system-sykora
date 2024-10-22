@@ -6,9 +6,9 @@ const black = "#000000";
 export const customTheme = createTheme({
   palette: {
     primary: {
-      light: "#edcedd",
+      light: "#fcf9ca",
       main: black,
-      dark: "#de5696",
+      dark: "#f6e93f",
       contrastText: white,
     },
     secondary: {
@@ -28,7 +28,7 @@ export const customTheme = createTheme({
     },
     h2: {
       fontFamily: "Pathway Gothic One, sans-serif",
-      fontSize: "40px",
+      fontSize: "34px",
       fontWeight: 500,
     },
     h6: {
@@ -48,8 +48,23 @@ export const customTheme = createTheme({
     caption: {
       fontSize: "10px",
     },
+    subtitle2: {
+      fontWeight: 400,
+      color: "rgb(158, 158, 158)",
+    },
   },
   components: {
+    // MuiTypography: {
+    //   styleOverrides: {
+    //     root: {
+    //       "&span": {
+    //         textDecoration: "underline",
+    //         textDecorationColor: "#f6e93f",
+    //         textDecorationThickness: "3px",
+    //       },
+    //     },
+    //   },
+    // },
     MuiAppBar: {
       styleOverrides: {
         root: {

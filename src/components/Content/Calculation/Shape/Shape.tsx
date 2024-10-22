@@ -43,8 +43,8 @@ export const CalculationShape = ({
 
       <Typography variant="body1">
         Snaží se najít prvek ze{" "}
-        <b onClick={() => onOpenDialog()}>
-          <u>skupiny {group.result.toLocaleString("cs-CZ")}</u>
+        <b onClick={() => onOpenDialog()} className="underline">
+          skupiny {group.result.toLocaleString("cs-CZ")}
         </b>
         , který podmínky splňuje nejlépe.
       </Typography>

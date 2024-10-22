@@ -66,26 +66,38 @@ export const Title = ({ title, variant }: TitleProps) => {
   const progress = (100 / steps.length) * activeStep;
   const disableProgress = activeStep === 0 || activeStep > steps.length;
 
-  const currentTitle = title ?? find(steps, { order: activeStep })?.label;
+  const currentStep = find(steps, { order: activeStep });
+
+  const currentTitle = title ?? find(steps, { order: activeStep })?.title;
 
   return (
     <Stack
       flexDirection="row"
       width="100%"
       gap={3}
-      padding={variant === "h1" ? "150px 0 20px" : "10px 0 0"}
+      sx={{
+        padding: {
+          xs: variant === "h1" ? "70px 0 0" : "8px 0 0",
+          sm: variant === "h1" ? "150px 0 20px" : "10px 0 0",
+        },
+      }}
     >
       {!disableProgress && (
         <CircularProgressWithLabel
           value={progress}
           activeStep={activeStep}
           steps={steps}
-          size={50}
+          size={60}
         />
       )}
-      <Typography variant={variant ?? "h2"}>
-        {currentTitle?.toUpperCase()}
-      </Typography>
+      <Box>
+        <Typography variant={variant ?? "h2"}>
+          {currentTitle?.toUpperCase()}
+        </Typography>
+        {currentStep?.subtitle && (
+          <Typography variant="subtitle2">{currentStep.subtitle}</Typography>
+        )}
+      </Box>
     </Stack>
   );
 };

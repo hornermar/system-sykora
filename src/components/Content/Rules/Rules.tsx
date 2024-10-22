@@ -3,6 +3,7 @@ import { map } from "lodash";
 import { Rule } from "../../../types/Rule";
 import { rulesItems } from "../../../lib/formItems";
 import { Structure } from "../../Structure/Structure";
+import { useStep } from "../../../hooks/useStep";
 import {
   FormControl,
   RadioGroup,
@@ -17,6 +18,7 @@ type RulesProps = {
 };
 
 export const Rules = ({ rule, onFormChange }: RulesProps) => {
+  const { onStepChange } = useStep();
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onFormChange({ rule: Number(event.target.value) });
   };
@@ -47,6 +49,22 @@ export const Rules = ({ rule, onFormChange }: RulesProps) => {
       {rule !== null && (
         <Structure grid={rulesItems[rule].example} key={rule} />
       )}
+
+      <Typography
+        variant="body1"
+        onClick={() => onStepChange(8)}
+        className="underline"
+        sx={{ marginTop: "40px" }}
+      >
+        Přeskočit na výstup (krok 8)
+        <img
+          src="/icons/chevron-right.svg"
+          width={10}
+          height={10}
+          alt={"left icon"}
+          style={{ marginLeft: "6px" }}
+        />
+      </Typography>
     </>
   );
 };

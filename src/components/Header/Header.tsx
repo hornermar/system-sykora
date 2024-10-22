@@ -11,19 +11,20 @@ interface Props {
 
 const navItems = [
   {
-    label: "Prozkoumat algoritmus",
+    label: "Systém Sýkora",
+    to: "/",
+  },
+  {
+    label: "Prozkoumat systém",
     to: "/struktura",
-    colors: { backgroundColor: "white", color: "black" },
   },
   {
     label: "Struktura v Jindřišské",
     to: "/jindrisska",
-    colors: { backgroundColor: "#f6e93f", color: "black" },
   },
   {
     label: "Zdroje",
     to: "/zdroje",
-    colors: { backgroundColor: "#f6e93f", color: "black" },
   },
   // {
   //   label: "O projektu",
@@ -45,8 +46,6 @@ export const Header = (props: Props) => {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  const colors = navItems.find((item) => item.to === location.pathname)?.colors;
-
   const currentPage = location.pathname + location.search;
 
   return (
@@ -59,16 +58,13 @@ export const Header = (props: Props) => {
         sx={{
           display: { xs: "block", sm: "none" },
           position: "absolute",
-          right: 12,
-          top: 14,
+          right: 10,
+          top: 4,
+          zIndex: 1000,
         }}
       >
         <img
-          src={
-            colors?.color === "white"
-              ? "/icons/bars-white.svg"
-              : "/icons/bars.svg"
-          }
+          src={"/icons/bars.svg"}
           width={30}
           height={30}
           alt={"chevron down icon"}
@@ -78,7 +74,6 @@ export const Header = (props: Props) => {
       <AppBar
         component="nav"
         sx={{
-          ...colors,
           display: { xs: "none", sm: "block" },
         }}
       >
@@ -101,7 +96,7 @@ export const Header = (props: Props) => {
                       textDecoration: "none",
                       color: isDisabled
                         ? theme.palette.text.disabled
-                        : colors?.color,
+                        : theme.palette.text.primary,
                     }}
                   >
                     {item.label}

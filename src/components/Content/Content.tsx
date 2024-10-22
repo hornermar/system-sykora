@@ -34,7 +34,7 @@ export const Content = ({
   resetForm,
 }: ContentProps) => {
   const [editOpen, onEditOpen, onEditClose] = useSwitch(false);
-  const { activeStep, steps, onStepChange } = useStep();
+  const { activeStep, onStepChange } = useStep();
 
   useEffect(() => {
     if (activeStep !== 8 && editOpen) {
@@ -44,6 +44,7 @@ export const Content = ({
 
   const isFormFilled =
     form.columns && form.rows && form.coefficient !== 0 && form.rule !== null;
+  const isGridFilled = size(grid) !== 0;
 
   return (
     <>
@@ -117,8 +118,8 @@ export const Content = ({
           children={<Rules rule={form.rule} onFormChange={onFormChange} />}
           backButton="Zpět"
           nextButton="Další"
-          middleButton="Přeskočit popis"
-          onMiddleButtonClick={() => onStepChange(size(steps))}
+          // middleButton="Přeskočit popis"
+          // onMiddleButtonClick={() => onStepChange(size(steps))}
           fulllHeight
           disableNext={form.rule === null}
           disableMiddle={form.rule === null}
@@ -136,21 +137,23 @@ export const Content = ({
       )}
 
       {/* Group + Shape */}
-      {(activeStep === 6 || activeStep === 7) && isFormFilled && (
-        <Container
-          children={
-            <Calculation
-              grid={grid}
-              defaultGrid={defaultGrid}
-              form={form}
-              part={activeStep === 6 ? "group" : "shape"}
-            />
-          }
-          backButton="Zpět"
-          nextButton={activeStep === 6 ? "Další" : "Vygenerovat"}
-          fulllHeight
-        />
-      )}
+      {(activeStep === 6 || activeStep === 7) &&
+        isFormFilled &&
+        isGridFilled && (
+          <Container
+            children={
+              <Calculation
+                grid={grid}
+                defaultGrid={defaultGrid}
+                form={form}
+                part={activeStep === 6 ? "group" : "shape"}
+              />
+            }
+            backButton="Zpět"
+            nextButton={activeStep === 6 ? "Další" : "Vygenerovat"}
+            fulllHeight
+          />
+        )}
 
       {/* Result */}
       {activeStep === 8 && isFormFilled && (

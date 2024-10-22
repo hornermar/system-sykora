@@ -1,6 +1,5 @@
 import { useCell } from "../../../hooks/useCell";
 import { Structure } from "../../Structure/Structure";
-import { ElementsDialog } from "./Dialog";
 import { Box, Typography, Chip } from "@mui/material";
 import { useSwitch } from "../../../hooks/useSwitch";
 import { ElementSelect } from "./Select";
@@ -28,7 +27,6 @@ export const Elements = ({
   setEmptyGrid,
   form,
 }: ElementsProps) => {
-  const [openDialog, onOpenDialog, onCloseDialog] = useSwitch(false);
   const [openSelect, onOpenSelect, onCloseSelect] = useSwitch(false);
 
   const { activeCell, onCellClick, onCellChange } = useCell({
@@ -44,17 +42,16 @@ export const Elements = ({
   return (
     <>
       <Typography variant="body1">
-        Aby bylo možné strukturu dopočítat algoritmem, je potřeba v mřížce
-        vyplnit některá pole. Na výběr máš z 20 prvků, které určí základ
-        struktury.
+        Aby bylo možné strukturu dopočítat, je potřeba do mřížky umístit několik
+        výchozích elementů (množství je na tobě).
       </Typography>
 
       <Typography variant="body1">
-        Podrobný popis prvků najdeš{" "}
-        <b onClick={onOpenDialog}>
-          <u>tady</u>
-        </b>
-        .
+        {" "}
+        Na výběr máš z 20 elementů. Jsou rozděleny do skupin <b>1</b>, <b>2</b>,{" "}
+        <b>3</b> a <b>4</b> podle poměru bílá-černá (1 je nejsvětlejší, 4
+        nejtmavší). Písmena <b>z</b>, <b>b</b>, <b>y</b>, <b>i</b>, <b>r</b>,{" "}
+        <b>d</b> označují natočení.
       </Typography>
 
       <Typography variant="body1">
@@ -96,8 +93,6 @@ export const Elements = ({
           onCellChange={onCellChange}
         />
       )}
-
-      <ElementsDialog open={openDialog} onClose={onCloseDialog} />
     </>
   );
 };

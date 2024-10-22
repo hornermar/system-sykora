@@ -21,7 +21,7 @@ export const End = () => {
       <Typography variant="body1">
         A jak to aktuálně vypadá s jednou ze Sýkorových struktur v centru Prahy
         zjistíš{" "}
-        <Link to="/jindrisska">
+        <Link to="/jindrisska" className="underline">
           <b>tady</b>
         </Link>
         .

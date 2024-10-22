@@ -83,7 +83,7 @@ export const Structure = memo(function Structure({
       flexDirection="column"
       width="100%"
       alignItems="center"
-      sx={{ margin: "0 auto", ...sx, position: "relative" }}
+      sx={{ margin: "0 auto", position: "relative", ...sx }}
       ref={ref}
     >
       {cellSize > 0 && (

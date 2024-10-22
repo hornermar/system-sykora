@@ -20,7 +20,7 @@ const OrderedList = ({ steps, start }: OrderedListProps) => (
   >
     {map(steps, (step: Step) => (
       <Box component="li" key={step.order}>
-        <Typography variant="subtitle2">{step.label}</Typography>
+        <Typography variant="subtitle2">{step.title}</Typography>
       </Box>
     ))}
   </Box>
@@ -98,14 +98,14 @@ export const Instruction = () => {
   return (
     <>
       <Explanation
-        title="Projdeš 5 až 8 kroky:"
+        title="Projdi 5 až 8 kroky a prozkoumej fungování algoritmu:"
         description="Vstupní hodnoty, které je potřeba algoritmu zadat"
         displaySeparator
         children={<OrderedList steps={steps.slice(0, 4)} />}
       />
 
       <Explanation
-        description="Ukázka výpočtu prvků (lze přeskočit)"
+        description="Výpočet elementů (lze přeskočit)"
         color="grey"
         displaySeparator
         children={<OrderedList steps={steps.slice(4, 7)} start={5} />}

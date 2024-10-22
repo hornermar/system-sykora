@@ -113,7 +113,15 @@ export const Grid = ({
                 </Box>
 
                 {displayName && (
-                  <Typography component="span" style={{ marginBottom: "8px" }}>
+                  <Typography
+                    component="span"
+                    sx={{
+                      fontSize: "12px",
+                      marginBottom: "6px",
+                      color: theme.palette.text.primary,
+                      fontWeight: isCellActive ? 600 : 400,
+                    }}
+                  >
                     {cell !== "0" ? cell : " "}
                   </Typography>
                 )}

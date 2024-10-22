@@ -30,8 +30,8 @@ export const CalculationGroup = ({
 
       <Typography variant="body1">
         Vybere nejbližší skupinu prvků. Tou je v tomto případě{" "}
-        <b onClick={() => onOpenDialog()}>
-          <u>skupina {group.result.toLocaleString("cs-CZ")}</u>
+        <b onClick={() => onOpenDialog()} className="underline">
+          skupina {group.result.toLocaleString("cs-CZ")}
         </b>
         .
       </Typography>

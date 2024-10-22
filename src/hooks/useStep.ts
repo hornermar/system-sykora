@@ -1,42 +1,51 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
 export type Step = {
-  label: string;
+  title: string;
   order: number;
+  subtitle?: string;
 };
 
 const steps: Step[] = [
   {
-    label: "Mřížka",
+    title: "Mřížka",
     order: 1,
+    subtitle: "Vstupní hodnoty",
   },
   {
-    label: "Prvky",
+    title: "Elementy",
     order: 2,
+    subtitle: "Vstupní hodnoty",
   },
   {
-    label: "Koeficient",
+    title: "Koeficient",
     order: 3,
+    subtitle: "Vstupní hodnoty",
   },
   {
-    label: "Pravidlo",
+    title: "Pravidlo",
     order: 4,
+    subtitle: "Vstupní hodnoty",
   },
   {
-    label: "Průchod mřížkou",
+    title: "Průchod mřížkou",
     order: 5,
+    subtitle: "Výpočet elementu",
   },
   {
-    label: "Výběr skupiny",
+    title: "Výběr skupiny",
     order: 6,
+    subtitle: "Výpočet elementu",
   },
   {
-    label: "Výběr prvku",
+    title: "Výběr prvku",
     order: 7,
+    subtitle: "Výpočet elementu",
   },
   {
-    label: "Struktura",
+    title: "Struktura",
     order: 8,
+    subtitle: "Výstup",
   },
 ];
 
