@@ -35,7 +35,7 @@ export const HeaderDrawer = ({
     handleDrawerToggle();
   };
 
-  const currentPath = location.pathname;
+  const currentPage = location.pathname + location.search;
 
   return (
     <nav>
@@ -82,7 +82,7 @@ export const HeaderDrawer = ({
         <Box sx={{ padding: "0 20px 0 4px" }}>
           <List>
             {navItems.map((item) => {
-              const isDisabled = currentPath === item.to;
+              const isDisabled = currentPage === item.to;
 
               return (
                 <ListItem

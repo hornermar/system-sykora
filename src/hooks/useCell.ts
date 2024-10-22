@@ -4,10 +4,15 @@ import { Cell } from "../types/General";
 
 type UseCellProps = {
   onOpenSelect: () => void;
-  setDefaultGrid: React.Dispatch<React.SetStateAction<string[][]>>;
+  onDefaultGridChange: (newDefaultGrid: string[][]) => void;
+  defaultGrid: string[][];
 };
 
-export const useCell = ({ onOpenSelect, setDefaultGrid }: UseCellProps) => {
+export const useCell = ({
+  onOpenSelect,
+  onDefaultGridChange,
+  defaultGrid,
+}: UseCellProps) => {
   const [activeCell, setActiveCell] = useState<Cell | null>(null);
 
   const onCellClick = (x: number, y: number, name: string) => {
@@ -16,13 +21,12 @@ export const useCell = ({ onOpenSelect, setDefaultGrid }: UseCellProps) => {
   };
 
   const onCellChange = (element: string) => {
-    setDefaultGrid((prevGrid) => {
-      const newGrid = [...prevGrid];
-      if (activeCell) {
-        set(newGrid, [activeCell.y, activeCell.x], element);
-      }
-      return newGrid;
-    });
+    const newGrid = [...defaultGrid];
+    if (activeCell) {
+      set(newGrid, [activeCell.y, activeCell.x], element);
+    }
+
+    onDefaultGridChange(newGrid);
   };
 
   return {

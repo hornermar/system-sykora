@@ -1,6 +1,5 @@
 import { FormValues } from "../../../types/FormValues";
-import { Slider } from "@mui/material";
-import { Typography } from "@mui/material";
+import { Slider, Box, Typography } from "@mui/material";
 
 type CoefficientProps = {
   coefficient: FormValues["coefficient"];
@@ -18,17 +17,19 @@ export const Coefficient = ({
         <b>4</b>.
       </Typography>
 
-      <Slider
-        value={coefficient}
-        step={0.01}
-        min={coefficient === 0 ? 0 : 0.01}
-        max={3.99}
-        onChange={(_, newValue: number | number[]) =>
-          onFormChange({ coefficient: newValue as number })
-        }
-        valueLabelDisplay="on"
-        sx={{ margin: "40px 0 35px" }}
-      />
+      <Box sx={{ padding: "0 20px" }}>
+        <Slider
+          value={coefficient}
+          step={0.01}
+          min={coefficient === 0 ? 0 : 0.01}
+          max={3.99}
+          onChange={(_, newValue: number | number[]) =>
+            onFormChange({ coefficient: newValue as number })
+          }
+          valueLabelDisplay="on"
+          sx={{ margin: "40px 0 35px" }}
+        />
+      </Box>
 
       <Typography variant="body1">
         Jeho funkcí je zpomalit nebo urychlit přechody od světlých prvků k

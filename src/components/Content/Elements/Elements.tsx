@@ -17,14 +17,14 @@ function getSubGrid(
 
 type ElementsProps = {
   defaultGrid: string[][];
-  setDefaultGrid: React.Dispatch<React.SetStateAction<string[][]>>;
+  onDefaultGridChange: (newDefaultGrid: string[][]) => void;
   setEmptyGrid: () => void;
   form: FormValues;
 };
 
 export const Elements = ({
   defaultGrid,
-  setDefaultGrid,
+  onDefaultGridChange,
   setEmptyGrid,
   form,
 }: ElementsProps) => {
@@ -33,11 +33,12 @@ export const Elements = ({
 
   const { activeCell, onCellClick, onCellChange } = useCell({
     onOpenSelect,
-    setDefaultGrid,
+    onDefaultGridChange,
+    defaultGrid,
   });
 
   const setTemplate = () => {
-    setDefaultGrid(getSubGrid(exampleGrid, form.rows, form.columns));
+    onDefaultGridChange(getSubGrid(exampleGrid, form.rows, form.columns));
   };
 
   return (

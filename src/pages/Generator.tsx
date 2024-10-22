@@ -1,43 +1,44 @@
 import { useState, useEffect, useCallback } from "react";
 import { Content } from "../components/Content/Content";
 import { getElements } from "../utils/getElements";
-import { createEmptyGrid } from "../utils/createEmptyGrid";
-import { useFormParams } from "../hooks/useFormParams";
+import { useForm } from "../hooks/useForm";
+import { useDefaultGrid } from "../hooks/useDefaultGrid";
+import { size } from "lodash";
 
 export const GeneratorWrapper = () => {
-  const { form, onFormChange, defaultFormValues } = useFormParams();
-  const [defaultGrid, setDefaultGrid] = useState<string[][]>(
-    createEmptyGrid(form.rows, form.columns)
-  );
+  const { form, onFormChange, defaultFormValues } = useForm();
+  const { defaultGrid, onDefaultGridChange, clearGrid } = useDefaultGrid();
   const [grid, setGrid] = useState<string[][]>([]);
 
-  useEffect(() => {
-    if (form.rows && form.columns) {
-      setDefaultGrid(createEmptyGrid(form.rows, form.columns));
+  const setEmptyGrid = useCallback(() => {
+    if (
+      form.rows !== size(defaultGrid) ||
+      form.columns !== size(defaultGrid[0])
+    ) {
+      clearGrid(form.rows, form.columns);
     }
-  }, [form.rows, form.columns]);
+  }, [form.columns, form.rows, clearGrid, defaultGrid]);
 
   useEffect(() => {
-    if (form.rule !== null && form.coefficient) {
+    setEmptyGrid();
+  }, [setEmptyGrid]);
+
+  useEffect(() => {
+    if (form.rule !== null && form.coefficient !== 0) {
       setGrid(getElements(form.rule, form.coefficient, defaultGrid, undefined));
     }
   }, [form.coefficient, form.rule, defaultGrid]);
 
   const resetForm = useCallback(() => {
     onFormChange(defaultFormValues);
-    setDefaultGrid([]);
-  }, [onFormChange, setDefaultGrid, defaultFormValues]);
-
-  const setEmptyGrid = useCallback(() => {
-    setDefaultGrid(createEmptyGrid(form.rows, form.columns));
-  }, [form.rows, form.columns, setDefaultGrid]);
+  }, [onFormChange, defaultFormValues]);
 
   return (
     <Content
       form={form}
       onFormChange={onFormChange}
       defaultGrid={defaultGrid}
-      setDefaultGrid={setDefaultGrid}
+      onDefaultGridChange={onDefaultGridChange}
       grid={grid}
       resetForm={resetForm}
       setEmptyGrid={setEmptyGrid}

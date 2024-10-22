@@ -17,7 +17,7 @@ type ContentProps = {
   form: FormValues;
   onFormChange: (newFormValues: Partial<FormValues>) => void;
   defaultGrid: string[][];
-  setDefaultGrid: React.Dispatch<React.SetStateAction<string[][]>>;
+  onDefaultGridChange: (newDefaultGrid: string[][]) => void;
   grid: string[][];
   setEmptyGrid: () => void;
   resetForm: () => void;
@@ -27,9 +27,10 @@ export const Content = ({
   form,
   onFormChange,
   defaultGrid,
-  setDefaultGrid,
+  onDefaultGridChange,
   grid,
   setEmptyGrid,
+  resetForm,
 }: ContentProps) => {
   const [editOpen, onEditOpen, onEditClose] = useSwitch(false);
   const { activeStep, steps, onStepChange } = useStep();
@@ -52,6 +53,10 @@ export const Content = ({
           title="Instrukce"
           nextButton="Začít"
           fulllHeight
+          onNextButtonClick={() => {
+            resetForm();
+            onStepChange(1);
+          }}
         />
       )}
 
@@ -78,7 +83,7 @@ export const Content = ({
           children={
             <Elements
               defaultGrid={defaultGrid}
-              setDefaultGrid={setDefaultGrid}
+              onDefaultGridChange={onDefaultGridChange}
               setEmptyGrid={setEmptyGrid}
               form={form}
             />
@@ -156,7 +161,7 @@ export const Content = ({
               form={form}
               onFormChange={onFormChange}
               defaultGrid={defaultGrid}
-              setDefaultGrid={setDefaultGrid}
+              onDefaultGridChange={onDefaultGridChange}
               onEditClose={onEditClose}
             />
           }

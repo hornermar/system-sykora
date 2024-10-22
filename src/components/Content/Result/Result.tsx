@@ -2,7 +2,7 @@ import { Stack } from "@mui/material";
 import { Structure } from "../../Structure/Structure";
 import { FormValues } from "../../../types/FormValues";
 import { ResultEdit } from "./Edit";
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { getElements } from "../../../utils/getElements";
 import { useCell } from "../../../hooks/useCell";
 import { ElementSelect } from "../Elements/Select";
@@ -15,7 +15,7 @@ type ResultProps = {
   editOpen: boolean;
   onEditClose: () => void;
   defaultGrid: string[][];
-  setDefaultGrid: React.Dispatch<React.SetStateAction<string[][]>>;
+  onDefaultGridChange: (newDefaultGrid: string[][]) => void;
 };
 
 export const Result = ({
@@ -25,14 +25,15 @@ export const Result = ({
   editOpen,
   onEditClose,
   defaultGrid,
-  setDefaultGrid,
+  onDefaultGridChange,
 }: ResultProps) => {
   const [openSelect, onOpenSelect, onCloseSelect] = useSwitch(false);
   const [isRandom, setIsRandom] = useState<boolean>(false);
   const [displayDefaultGrid, setDisplayDefaultGrid] = useState<boolean>(false);
   const { activeCell, onCellClick, onCellChange } = useCell({
     onOpenSelect,
-    setDefaultGrid,
+    onDefaultGridChange,
+    defaultGrid,
   });
 
   const randomGrid = useMemo(() => {

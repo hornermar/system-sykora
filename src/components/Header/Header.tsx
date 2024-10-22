@@ -9,7 +9,7 @@ interface Props {
 
 const navItems = [
   {
-    label: "Prozkoumej algoritmus",
+    label: "Prozkoumat algoritmus",
     to: "/struktura",
     colors: { backgroundColor: "white", color: "black" },
   },
@@ -23,11 +23,11 @@ const navItems = [
     to: "/zdroje",
     colors: { backgroundColor: "black", color: "white" },
   },
-  {
-    label: "O projektu",
-    to: "/o-projektu",
-    colors: { backgroundColor: "black", color: "white" },
-  },
+  // {
+  //   label: "O projektu",
+  //   to: "/o-projektu",
+  //   colors: { backgroundColor: "black", color: "white" },
+  // },
 ];
 
 export const Header = (props: Props) => {
