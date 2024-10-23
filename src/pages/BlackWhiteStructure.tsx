@@ -41,10 +41,6 @@ const BlackWhiteStructureWrapper = () => {
 
 export const BlackWhiteStructure = () => {
   return (
-    <Container
-      title="Stěna, 1969"
-      children={<BlackWhiteStructureWrapper />}
-      fulllHeight
-    />
+    <Container title="Stěna, 1969" children={<BlackWhiteStructureWrapper />} />
   );
 };

@@ -49,7 +49,6 @@ export const AboutWrapper = () => {
       title="O projektu"
       children={<About />}
       color={theme.palette.primary}
-      fulllHeight
     />
   );
 };
