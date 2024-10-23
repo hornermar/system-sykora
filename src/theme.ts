@@ -6,9 +6,9 @@ const black = "#000000";
 export const customTheme = createTheme({
   palette: {
     primary: {
-      light: "#fcf9ca",
+      light: "#dcf6fa",
       main: black,
-      dark: "#f6e93f",
+      dark: "#04C2DF",
       contrastText: white,
     },
     secondary: {
@@ -47,10 +47,6 @@ export const customTheme = createTheme({
     },
     caption: {
       fontSize: "10px",
-    },
-    subtitle2: {
-      fontWeight: 400,
-      color: "rgb(158, 158, 158)",
     },
   },
   components: {

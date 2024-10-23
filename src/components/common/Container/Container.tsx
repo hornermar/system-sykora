@@ -1,4 +1,4 @@
-import { Stack, Box, Button, PaletteColor } from "@mui/material";
+import { Stack, Box, PaletteColor, Typography } from "@mui/material";
 import { useStep } from "../../../hooks/useStep";
 import { Title } from "../Title/Title";
 
@@ -13,7 +13,6 @@ type ContainerProps = {
   nextButton?: string;
   middleButton?: string;
   onMiddleButtonClick?: () => void;
-  fulllHeight?: boolean;
   disableNext?: boolean;
   disableMiddle?: boolean;
   onNextButtonClick?: () => void;
@@ -28,7 +27,6 @@ export const Container = ({
   nextButton,
   middleButton,
   onMiddleButtonClick,
-  fulllHeight,
   disableNext,
   disableMiddle,
   onNextButtonClick,
@@ -45,16 +43,23 @@ export const Container = ({
 
   return (
     <>
-      <Stack
+      <Box
         component="main"
         sx={{
           backgroundColor: color?.light ?? "unset",
           color: color?.main ?? "unset",
-          minHeight: fulllHeight ? "100vh" : "100%",
-          paddingBottom: "50px",
+          minHeight: "100vh",
         }}
       >
-        <Box sx={{ maxWidth: maxWidth, width: "100%", margin: "0 auto" }}>
+        <Stack
+          sx={{
+            maxWidth: maxWidth,
+            width: "100%",
+            minHeight: "100vh",
+            margin: "0 auto",
+            justifyContent: "space-between",
+          }}
+        >
           <Box
             sx={{
               fontSize: "16px",
@@ -74,58 +79,100 @@ export const Container = ({
             sx={{
               display: "flex",
               flexDirection: "row",
-              position: "fixed",
-              bottom: 0,
+              // position: "fixed",
+              // bottom: 0,
               width: "100%",
               maxWidth: maxWidth,
               justifyContent: "space-between",
               zIndex: 1000,
+              padding: "10px 20px 20px",
             }}
           >
             {backButton && (
-              <Button
-                variant="outlined"
+              <Typography
+                variant="subtitle1"
+                className="underline"
                 onClick={handleBack}
-                fullWidth
-                disableTouchRipple
-                disableFocusRipple
               >
+                <img
+                  src="/icons/chevron-left.svg"
+                  width={10}
+                  height={10}
+                  alt={"left icon"}
+                  style={{ marginRight: "6px" }}
+                />
                 {backButton}
-              </Button>
+              </Typography>
+              // <Button
+              //   variant="outlined"
+              //   onClick={handleBack}
+              //   fullWidth
+              //   disableTouchRipple
+              //   disableFocusRipple
+              // >
+              //   {backButton}
+              // </Button>
             )}
 
             {middleButton && (
-              <Button
-                sx={{
-                  borderLeft: "none",
-                  borderRight: disableNext ? "revert" : "none",
-                }}
-                variant="outlined"
+              <Typography
+                className={
+                  disableMiddle ? "underline underline-disabled" : "underline"
+                }
+                variant="subtitle1"
                 onClick={onMiddleButtonClick}
-                fullWidth
-                disableTouchRipple
-                disableFocusRipple
-                disabled={disableMiddle}
               >
                 {middleButton}
-              </Button>
+              </Typography>
+              // <Button
+              //   sx={{
+              //     borderLeft: "none",
+              //     borderRight: disableNext ? "revert" : "none",
+              //   }}
+              //   variant="outlined"
+              //   onClick={onMiddleButtonClick}
+              //   fullWidth
+              //   disableTouchRipple
+              //   disableFocusRipple
+              //   disabled={disableMiddle}
+              // >
+              //   {middleButton}
+              // </Button>
             )}
 
             {nextButton && (
-              <Button
-                variant="contained"
-                onClick={onNextButtonClick ?? handleNext}
-                fullWidth
-                disabled={disableNext}
-                disableTouchRipple
-                disableFocusRipple
+              <Typography
+                variant="subtitle1"
+                className={
+                  disableNext ? "underline underline-disabled" : "underline"
+                }
+                onClick={
+                  !disableNext ? onNextButtonClick ?? handleNext : undefined
+                }
               >
                 {nextButton}
-              </Button>
+                <img
+                  src="/icons/chevron-right.svg"
+                  width={10}
+                  height={10}
+                  alt={"right icon"}
+                  style={{ marginLeft: "6px" }}
+                />
+              </Typography>
+              // <Button
+              //   variant="contained"
+              //   onClick={onNextButtonClick ?? handleNext}
+              //   fullWidth
+              //   disabled={disableNext}
+              //   disableTouchRipple
+              //   disableFocusRipple
+              // >
+              //   {nextButton}
+              // </Button>
             )}
           </Box>
-        </Box>
-      </Stack>
+        </Stack>
+      </Box>
     </>
   );
 };

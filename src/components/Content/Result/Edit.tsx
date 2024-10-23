@@ -144,7 +144,7 @@ export const ResultEdit = ({
                 Algoritmus:
               </Typography>
               <Typography variant="caption">
-                Vypnutím se prvky vyberou náhodně
+                Vypnutím se elementy vyberou náhodně
               </Typography>
             </Stack>
 
@@ -164,7 +164,7 @@ export const ResultEdit = ({
                 Zadání:
               </Typography>
               <Typography variant="caption">
-                Zapnutím se zobrazí původní prvky
+                Zapnutím se zobrazí původní elementy
               </Typography>
             </Stack>
 

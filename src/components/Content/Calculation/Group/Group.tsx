@@ -19,7 +19,7 @@ export const CalculationGroup = ({
   return (
     <>
       <Typography variant="body1">
-        Vypočítá průměr ze skupin, do kterých tyto prvky patří:
+        Vypočítá průměr ze skupin, do kterých tyto elementy patří:
       </Typography>
 
       <CalculationGroupDescription
@@ -29,7 +29,7 @@ export const CalculationGroup = ({
       />
 
       <Typography variant="body1">
-        Vybere nejbližší skupinu prvků. Tou je v tomto případě{" "}
+        Vybere nejbližší skupinu elementů. Tou je v tomto případě{" "}
         <b onClick={() => onOpenDialog()} className="underline">
           skupina {group.result.toLocaleString("cs-CZ")}
         </b>

@@ -87,7 +87,7 @@ export const Title = ({ title, variant }: TitleProps) => {
           value={progress}
           activeStep={activeStep}
           steps={steps}
-          size={60}
+          size={65}
         />
       )}
       <Box>
@@ -95,7 +95,9 @@ export const Title = ({ title, variant }: TitleProps) => {
           {currentTitle?.toUpperCase()}
         </Typography>
         {currentStep?.subtitle && (
-          <Typography variant="subtitle2">{currentStep.subtitle}</Typography>
+          <Typography variant="body1" sx={{ color: "rgb(158, 158, 158)" }}>
+            {currentStep.subtitle}
+          </Typography>
         )}
       </Box>
     </Stack>

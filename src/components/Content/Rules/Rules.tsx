@@ -50,21 +50,23 @@ export const Rules = ({ rule, onFormChange }: RulesProps) => {
         <Structure grid={rulesItems[rule].example} key={rule} />
       )}
 
-      <Typography
-        variant="body1"
-        onClick={() => onStepChange(8)}
-        className="underline"
-        sx={{ marginTop: "40px" }}
-      >
-        Přeskočit na výstup (krok 8)
-        <img
-          src="/icons/chevron-right.svg"
-          width={10}
-          height={10}
-          alt={"left icon"}
-          style={{ marginLeft: "6px" }}
-        />
-      </Typography>
+      {rule !== null && (
+        <Typography
+          variant="body1"
+          onClick={() => onStepChange(8)}
+          className="underline"
+          sx={{ marginTop: "40px" }}
+        >
+          Přeskočit na výstup (krok 8)
+          <img
+            src="/icons/chevron-right.svg"
+            width={10}
+            height={10}
+            alt={"left icon"}
+            style={{ marginLeft: "6px" }}
+          />
+        </Typography>
+      )}
     </>
   );
 };

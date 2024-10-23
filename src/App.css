@@ -16,8 +16,14 @@ body {
 
 .underline {
   text-decoration: underline;
-  text-decoration-color: #f6e93f;
+  text-decoration-color: #04c2df;
   text-decoration-thickness: 3px;
   color: black;
   cursor: pointer;
+}
+
+.underline-disabled {
+  text-decoration-color: rgb(158, 158, 158);
+  color: rgb(158, 158, 158);
+  cursor: initial;
 }

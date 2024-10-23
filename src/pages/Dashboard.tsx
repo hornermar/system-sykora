@@ -42,13 +42,6 @@ const Dashboard = () => {
         zprovoznil.
       </Typography>
 
-      <Typography variant="body1" sx={{ marginTop: "20px" }}>
-        <i>
-          A jak algoritmus funguje? Jaká pravidla dodržuje? Jaké vstupy zadal
-          umělec a co už je práce počítače?
-        </i>
-      </Typography>
-
       <Typography
         variant="subtitle1"
         className="underline"
@@ -65,9 +58,16 @@ const Dashboard = () => {
         />
       </Typography>
 
+      <Typography variant="body1" sx={{ marginTop: "20px" }}>
+        <i>
+          Zjistíš, jak algoritmus funguje, jaká pravidla dodržuje a jaké vstupy
+          zadával umělec a co už byla práce počítače.
+        </i>
+      </Typography>
+
       <Structure
         grid={currentGrid}
-        sx={{ position: "fixed", top: 0, right: 0 }}
+        sx={{ position: "absolute", top: 0, right: 0 }}
       />
     </>
   );
@@ -87,7 +87,6 @@ export const DashboardWrapper = () => {
       titleVariant="h1"
       // nextButton="Prozkoumat systém"
       onNextButtonClick={handleNextButtonClick}
-      fulllHeight
     />
   );
 };

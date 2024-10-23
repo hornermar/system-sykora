@@ -30,17 +30,17 @@ const steps: Step[] = [
   {
     title: "Průchod mřížkou",
     order: 5,
-    subtitle: "Výpočet elementu",
+    subtitle: "Výpočet",
   },
   {
     title: "Výběr skupiny",
     order: 6,
-    subtitle: "Výpočet elementu",
+    subtitle: "Výpočet",
   },
   {
-    title: "Výběr prvku",
+    title: "Výběr elementu",
     order: 7,
-    subtitle: "Výpočet elementu",
+    subtitle: "Výpočet",
   },
   {
     title: "Struktura",

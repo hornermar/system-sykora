@@ -32,7 +32,7 @@ export const Coefficient = ({
       </Box>
 
       <Typography variant="body1">
-        Jeho funkcí je zpomalit nebo urychlit přechody od světlých prvků k
+        Jeho funkcí je zpomalit nebo urychlit přechody od světlých elementů k
         tmavým a naopak. Nižší koeficient znamená pozvolnějí přechody, vyšší
         kontrastnější.
       </Typography>

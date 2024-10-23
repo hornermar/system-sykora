@@ -23,7 +23,7 @@ const BlackWhiteStructureWrapper = () => {
       </Typography>
 
       <Typography variant="body1">
-        Mozaiku najdete na adrese{" "}
+        Mozaiku najdeš na adrese{" "}
         <Link
           to="https://maps.app.goo.gl/YAtsMNmorrUaSU3h7"
           target="_blank"

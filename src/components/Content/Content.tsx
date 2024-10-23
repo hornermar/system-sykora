@@ -54,7 +54,6 @@ export const Content = ({
           children={<Instruction />}
           title="Instrukce"
           nextButton="Začít"
-          fulllHeight
           onNextButtonClick={() => {
             resetForm();
             onStepChange(1);
@@ -75,7 +74,6 @@ export const Content = ({
           backButton="Zpět na instrukce"
           nextButton="Další"
           disableNext={!form.columns || !form.rows}
-          fulllHeight
         />
       )}
 
@@ -92,7 +90,6 @@ export const Content = ({
           }
           backButton="Zpět"
           nextButton="Další"
-          fulllHeight
         />
       )}
 
@@ -107,7 +104,6 @@ export const Content = ({
           }
           backButton="Zpět"
           nextButton="Další"
-          fulllHeight
           disableNext={!form.coefficient}
         />
       )}
@@ -120,7 +116,7 @@ export const Content = ({
           nextButton="Další"
           // middleButton="Přeskočit popis"
           // onMiddleButtonClick={() => onStepChange(size(steps))}
-          fulllHeight
+
           disableNext={form.rule === null}
           disableMiddle={form.rule === null}
         />
@@ -132,7 +128,6 @@ export const Content = ({
           children={<GoingThrough grid={grid} defaultGrid={defaultGrid} />}
           backButton="Zpět"
           nextButton="Další"
-          fulllHeight
         />
       )}
 
@@ -151,7 +146,6 @@ export const Content = ({
             }
             backButton="Zpět"
             nextButton={activeStep === 6 ? "Další" : "Vygenerovat"}
-            fulllHeight
           />
         )}
 
@@ -173,7 +167,6 @@ export const Content = ({
           middleButton={editOpen ? "Hotovo" : "Upravit"}
           onMiddleButtonClick={editOpen ? onEditClose : onEditOpen}
           nextButton="Závěr"
-          fulllHeight
         />
       )}
 
@@ -182,7 +175,6 @@ export const Content = ({
         <Container
           children={<End />}
           title="Závěr"
-          fulllHeight
           onNextButtonClick={() => {
             resetForm();
             onStepChange(1);

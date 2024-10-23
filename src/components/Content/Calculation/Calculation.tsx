@@ -102,11 +102,11 @@ export const Calculation = ({ grid, defaultGrid, form, part }: GroupProps) => {
       {part === "group" && (
         <>
           <Typography variant="body1">
-            Před výběrem prvku pro pole nejprve algoritmus zmenší rozshah výběru
-            z 20 prvků na konktétní skupinu (1, 2, 3 nebo 4).
+            Před výběrem elementu pro pole nejprve algoritmus zmenší rozshah
+            výběru z 20 elementů na konktétní skupinu (1, 2, 3 nebo 4).
           </Typography>
           <Typography variant="body1">
-            Při jejím zjišťování prochází sousedící prvky, které se s prvkem
+            Při jejím zjišťování prochází sousedící elementy, které se s polem
             dotýkají stranou i rohy.
           </Typography>
         </>
@@ -114,8 +114,8 @@ export const Calculation = ({ grid, defaultGrid, form, part }: GroupProps) => {
 
       {part === "shape" && (
         <Typography variant="body1">
-          Při konečném výběru ze skupiny zkoumá algoritmus prvky, které s
-          analyzovaným prvkem sousedí pouze stranami.
+          Při konečném výběru ze skupiny zkoumá algoritmus elementy, které s
+          analyzovaným polem sousedí pouze stranami.
         </Typography>
       )}
 

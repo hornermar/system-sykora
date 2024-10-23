@@ -14,9 +14,14 @@ const smallSize = 35;
 
 export const ElementsDialog = ({ open, onClose }: ElementsDialogProps) => {
   return (
-    <Dialog title="Jak prvky vznikly?" open={open} onClose={onClose} fullScreen>
+    <Dialog
+      title="Jak elementy vznikly?"
+      open={open}
+      onClose={onClose}
+      fullScreen
+    >
       <Typography variant="body1">
-        Všechny prvky vycházejí ze 3 základních obrazců — jeden nebo dva
+        Všechny elementy vycházejí ze 3 základních obrazců — jeden nebo dva
         půlkruhy umístěné do čtverce. Ty jsou buď za sebou nebo proti sobě.
       </Typography>
 
@@ -38,7 +43,7 @@ export const ElementsDialog = ({ open, onClose }: ElementsDialogProps) => {
       </Stack>
 
       <Typography variant="body1" sx={{ marginBottom: "15px" }}>
-        Jejich otočením a prohozením barev vznikne 20 různých prvků. Jsou
+        Jejich otočením a prohozením barev vznikne 20 různých elementů. Jsou
         rozděleny do skupin 1, 2, 3 a 4 podle poměru barev černá-bílá (1 je
         nejsvětlejší, 4 nejtmavší). Písmena v názvech určují natočení.
       </Typography>

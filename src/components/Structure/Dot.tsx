@@ -19,7 +19,7 @@ export const StructureDot = () => {
         style={{
           position: "absolute",
           top: -33,
-          right: 9,
+          right: 3,
           transform: "rotate(180deg)",
         }}
         src={"/icons/circle.svg"}

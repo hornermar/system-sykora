@@ -120,20 +120,20 @@ export const Instruction = () => {
 
       <Explanation
         title="Symboly:"
-        description="Do mřížek se žlutou tečkou je možné klikat."
+        description="Do mřížek s modrou tečkou je možné klikat."
         children={
           <img
             src={"/icons/circle.svg"}
             width={20}
             height={20}
             alt={"circle icon"}
-            style={{ marginLeft: "8px" }}
+            style={{ marginLeft: "10px" }}
           />
         }
       />
 
       <Explanation
-        description="U mřížek s tímto symbolem můžeš měnit zobrazení prvků (název/obraz). 
+        description="U mřížek s tímto symbolem můžeš měnit zobrazení elementů (název/obraz). 
         "
         children={
           <MobileStepper
