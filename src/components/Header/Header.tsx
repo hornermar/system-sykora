@@ -22,10 +22,6 @@ const navItems = [
     label: "Struktura v Jindřišské",
     to: "/jindrisska",
   },
-  // {
-  //   label: "Zdroje",
-  //   to: "/zdroje",
-  // },
   {
     label: "O projektu",
     to: "/o-projektu",

@@ -67,7 +67,12 @@ const Dashboard = () => {
 
       <Structure
         grid={currentGrid}
-        sx={{ position: "absolute", top: 0, right: 0 }}
+        sx={{
+          display: { sm: "flex", md: "none" },
+          position: "absolute",
+          top: 0,
+          right: 0,
+        }}
       />
     </>
   );

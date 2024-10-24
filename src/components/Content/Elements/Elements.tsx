@@ -47,7 +47,6 @@ export const Elements = ({
       </Typography>
 
       <Typography variant="body1">
-        {" "}
         Na výběr máš z 20 elementů. Jsou rozděleny do skupin <b>1</b>, <b>2</b>,{" "}
         <b>3</b> a <b>4</b> podle poměru bílá-černá (1 je nejsvětlejší, 4
         nejtmavší). Písmena <b>z</b>, <b>b</b>, <b>y</b>, <b>i</b>, <b>r</b>,{" "}

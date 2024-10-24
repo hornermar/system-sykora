@@ -78,7 +78,7 @@ export const Title = ({ title, variant }: TitleProps) => {
       sx={{
         padding: {
           xs: variant === "h1" ? "70px 0 0" : "8px 0 0",
-          sm: variant === "h1" ? "150px 0 20px" : "10px 0 0",
+          sm: variant === "h1" ? "100px 0 20px" : "10px 0 0",
         },
       }}
     >

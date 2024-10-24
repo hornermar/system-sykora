@@ -56,7 +56,7 @@ export const Container = ({
           <Box
             sx={{
               fontSize: "16px",
-              padding: "10px 20px 70px",
+              padding: { xs: "10px 20px 70px", sm: "50px 20px 0" },
               textAlign: "left",
             }}
           >

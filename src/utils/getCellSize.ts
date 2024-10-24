@@ -1,12 +1,17 @@
 export const getCellSize = (
   ref: React.RefObject<HTMLDivElement>,
   columns: number,
-  rows: number
+  rows: number,
+  isSm: boolean
 ) => {
   if (!ref.current) return 0;
 
-  const sizeBasedOnWidth = ref.current.clientWidth / columns;
+  const sizeBasedOnWidth = isSm
+    ? ref.current.clientWidth / columns
+    : ref.current.clientWidth / 2 / columns;
   const sizeBasedOnHeight = (window.innerHeight - 80) / rows;
 
-  return Math.min(sizeBasedOnWidth, sizeBasedOnHeight);
+  return isSm
+    ? Math.min(sizeBasedOnWidth, sizeBasedOnHeight)
+    : sizeBasedOnWidth;
 };

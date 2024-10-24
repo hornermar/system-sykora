@@ -1,24 +1,18 @@
 import { getCellSize } from "../../utils/getCellSize";
 import { Box, Stack } from "@mui/material";
 import { map, size } from "lodash";
-import {
-  CSSProperties,
-  memo,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { Cell, ViewMode } from "../../types/General";
 import { StructureGrid } from "./Grid";
 import { StructureToolbox } from "./Toolbox";
 import { Swipe } from "./Swipe";
 import { StructureDot } from "./Dot";
+import { SxProps, Theme, useMediaQuery, useTheme } from "@mui/system";
 
 export type StructureProps = {
   grid: string[][];
   defaultGrid?: string[][];
-  sx?: CSSProperties;
+  sx?: SxProps<Theme> | undefined;
   onCellClick?: (x: number, y: number, name: string) => void;
   activeCell?: Cell;
   activeNeighbours?: Cell[];
@@ -44,13 +38,16 @@ export const Structure = memo(function Structure({
   const [cellSize, setCellSize] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
 
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+
   const rowsCount = size(grid);
   const columnsCount = Math.max(...map(grid, (row) => size(row)));
 
   const updateCellSize = useCallback(() => {
-    const newCellSize = getCellSize(ref, columnsCount, rowsCount);
+    const newCellSize = getCellSize(ref, columnsCount, rowsCount, isSm);
     setCellSize(Math.floor(newCellSize));
-  }, [columnsCount, rowsCount]);
+  }, [columnsCount, rowsCount, isSm]);
 
   useEffect(() => {
     setMode(viewMode ?? "image");

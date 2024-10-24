@@ -3,6 +3,7 @@ import { allElementsByGroupGrid } from "../../../lib/grids";
 import { Grid } from "../../Grid/Grid";
 import { Button } from "@mui/material";
 import { Cell } from "../../../types/General";
+import { useTheme, useMediaQuery } from "@mui/material";
 
 type ElementsSelectProps = {
   open: boolean;
@@ -11,14 +12,17 @@ type ElementsSelectProps = {
   activeCell: Cell;
 };
 
-const size = 40;
-
 export const ElementSelect = ({
   open,
   onClose,
   onCellChange,
   activeCell,
 }: ElementsSelectProps) => {
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const size = isSm ? 40 : 60;
+
   const onClick = (
     _x: number | undefined,
     _y: number | undefined,
