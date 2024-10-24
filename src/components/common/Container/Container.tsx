@@ -2,7 +2,7 @@ import { Stack, Box, PaletteColor, Button } from "@mui/material";
 import { useStep } from "../../../hooks/useStep";
 import { Title } from "../Title/Title";
 
-const maxWidth = "850px";
+const maxWidth = "1200px";
 
 type ContainerProps = {
   children: React.ReactNode;
@@ -13,6 +13,7 @@ type ContainerProps = {
   nextButton?: string;
   disableNext?: boolean;
   onNextButtonClick?: () => void;
+  isPage?: boolean;
 };
 
 export const Container = ({
@@ -24,6 +25,7 @@ export const Container = ({
   nextButton,
   disableNext,
   onNextButtonClick,
+  isPage,
 }: ContainerProps) => {
   const { activeStep, onStepChange } = useStep();
 
@@ -51,12 +53,16 @@ export const Container = ({
             width: "100%",
             margin: "0 auto",
             justifyContent: "space-between",
+            height: "100%",
           }}
         >
           <Box
             sx={{
               fontSize: "16px",
-              padding: { xs: "10px 20px 70px", sm: "50px 20px 0" },
+              padding: {
+                xs: isPage ? "50px 20px 20px" : "10px 20px 70px",
+                lg: "60px 20px 0",
+              },
               textAlign: "left",
             }}
           >
@@ -68,45 +74,38 @@ export const Container = ({
           </Box>
 
           {/* Buttons */}
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              position: "fixed",
-              bottom: 0,
-              width: "100%",
-              maxWidth: maxWidth,
-              height: "80px",
-              justifyContent: "space-between",
-              zIndex: 900,
-              padding: "10px 20px 20px",
-            }}
-          >
-            {backButton && (
-              <Button
-                variant="outlined"
-                onClick={handleBack}
-                disableTouchRipple
-                disableFocusRipple
-                sx={{ position: "absolute", top: 10, left: 20 }}
-              >
-                {backButton}
-              </Button>
-            )}
+          {!isPage && (
+            <>
+              {backButton && (
+                <Button
+                  variant="outlined"
+                  onClick={handleBack}
+                  disableTouchRipple
+                  disableFocusRipple
+                  sx={{
+                    position: { xs: "fixed", lg: "block" },
+                    bottom: 20,
+                    left: 20,
+                  }}
+                >
+                  {backButton}
+                </Button>
+              )}
 
-            {nextButton && (
-              <Button
-                variant="contained"
-                onClick={onNextButtonClick ?? handleNext}
-                disabled={disableNext}
-                disableTouchRipple
-                disableFocusRipple
-                sx={{ position: "absolute", top: 10, right: 20 }}
-              >
-                {nextButton}
-              </Button>
-            )}
-          </Box>
+              {nextButton && (
+                <Button
+                  variant="contained"
+                  onClick={onNextButtonClick ?? handleNext}
+                  disabled={disableNext}
+                  disableTouchRipple
+                  disableFocusRipple
+                  sx={{ position: "fixed", bottom: 20, right: 20 }}
+                >
+                  {nextButton}
+                </Button>
+              )}
+            </>
+          )}
         </Stack>
       </Box>
     </>

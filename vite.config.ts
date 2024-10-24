@@ -6,8 +6,6 @@ export default defineConfig({
   plugins: [react()],
   // base: "/system-sykora/",
   server: {
-    watch: {
-      usePolling: true,
-    },
+    hmr: true,
   },
 });

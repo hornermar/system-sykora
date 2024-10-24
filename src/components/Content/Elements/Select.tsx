@@ -19,9 +19,9 @@ export const ElementSelect = ({
   activeCell,
 }: ElementsSelectProps) => {
   const theme = useTheme();
-  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSmallMedia = useMediaQuery(theme.breakpoints.down("lg"));
 
-  const size = isSm ? 40 : 60;
+  const size = isSmallMedia ? 40 : 60;
 
   const onClick = (
     _x: number | undefined,

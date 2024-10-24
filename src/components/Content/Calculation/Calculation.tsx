@@ -14,6 +14,7 @@ import { Shape } from "../../../types/Shape";
 import { Density } from "../../../types/Density";
 import { useSwitch } from "../../../hooks/useSwitch";
 import { CalculationGroupDialog } from "./Group/Dialog";
+import { ContainerWithStructure } from "../../common/Container/WithStructure";
 
 type GroupProps = {
   grid: string[][];
@@ -97,65 +98,74 @@ export const Calculation = ({ grid, defaultGrid, form, part }: GroupProps) => {
     [shape]
   );
 
+  const renderStructure = () => (
+    <Structure
+      grid={slicedGrid}
+      defaultGrid={defaultGrid}
+      onCellClick={onCellClick}
+      activeCell={activeCell}
+      activeNeighbours={
+        part === "group" ? activeGroupNeighbours : activeShapeNeighbours
+      }
+      viewMode={part === "group" ? "text" : "image"}
+      isViewModeChangeable
+      highlightDefaultGrid
+    />
+  );
+
   return (
-    <>
-      {part === "group" && (
+    <ContainerWithStructure
+      structure={renderStructure()}
+      firstPart={
         <>
-          <Typography variant="body1">
-            Před výběrem elementu pro pole nejprve algoritmus zmenší rozshah
-            výběru z 20 elementů na konktétní skupinu (1, 2, 3 nebo 4).
-          </Typography>
-          <Typography variant="body1">
-            Při jejím zjišťování prochází sousedící elementy, které se s polem
-            dotýkají stranou i rohy.
-          </Typography>
+          {part === "group" && (
+            <>
+              <Typography variant="body1">
+                Před výběrem elementu pro pole nejprve algoritmus zmenší rozshah
+                výběru z 20 elementů na konktétní skupinu (1, 2, 3 nebo 4).
+              </Typography>
+              <Typography variant="body1" sx={{ marginBottom: "20px" }}>
+                Při jejím zjišťování prochází sousedící elementy, které se s
+                polem dotýkají stranou i rohy.
+              </Typography>
+            </>
+          )}
+
+          {part === "shape" && (
+            <Typography variant="body1" sx={{ marginBottom: "20px" }}>
+              Při konečném výběru ze skupiny zkoumá algoritmus elementy, které s
+              polem sousedí stranami.
+            </Typography>
+          )}
         </>
-      )}
+      }
+      secondPart={
+        <>
+          {part === "group" && (
+            <CalculationGroup
+              form={form}
+              group={group}
+              cellContent={cellContent}
+              onOpenDialog={onOpenDialog}
+            />
+          )}
 
-      {part === "shape" && (
-        <Typography variant="body1">
-          Při konečném výběru ze skupiny zkoumá algoritmus elementy, které s
-          polem sousedí stranami.
-        </Typography>
-      )}
+          {part === "shape" && (
+            <CalculationShape
+              form={form}
+              shape={shape}
+              onOpenDialog={onOpenDialog}
+              group={group}
+            />
+          )}
 
-      <Structure
-        grid={slicedGrid}
-        defaultGrid={defaultGrid}
-        onCellClick={onCellClick}
-        activeCell={activeCell}
-        activeNeighbours={
-          part === "group" ? activeGroupNeighbours : activeShapeNeighbours
-        }
-        viewMode={part === "group" ? "text" : "image"}
-        sx={{ margin: "15px 0" }}
-        isViewModeChangeable
-        highlightDefaultGrid
-      />
-
-      {part === "group" && (
-        <CalculationGroup
-          form={form}
-          group={group}
-          cellContent={cellContent}
-          onOpenDialog={onOpenDialog}
-        />
-      )}
-
-      {part === "shape" && (
-        <CalculationShape
-          form={form}
-          shape={shape}
-          onOpenDialog={onOpenDialog}
-          group={group}
-        />
-      )}
-
-      <CalculationGroupDialog
-        open={openDialog}
-        onClose={onCloseDialog}
-        group={group}
-      />
-    </>
+          <CalculationGroupDialog
+            open={openDialog}
+            onClose={onCloseDialog}
+            group={group}
+          />
+        </>
+      }
+    ></ContainerWithStructure>
   );
 };

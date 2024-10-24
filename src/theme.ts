@@ -90,9 +90,9 @@ export const customTheme = createTheme({
         },
         containedPrimary: {
           border: `2px solid ${black}`,
-          // "&:active, &:hover": {
-          //   color: "black",
-          // },
+          "&:active": {
+            backgroundColor: black,
+          },
         },
         outlinedPrimary: {
           border: "2px solid",

@@ -15,7 +15,13 @@ export const StructureToolbox = ({
   setViewMode,
 }: StructureToolboxProps) => {
   return (
-    <Box sx={{ width: `${width}px`, position: "relative" }}>
+    <Box
+      sx={{
+        width: `${width}px`,
+        position: "relative",
+        minHeight: { xs: "24px" },
+      }}
+    >
       {isViewModeChangeable && (
         <MobileStepper
           variant="dots"
@@ -31,7 +37,7 @@ export const StructureToolbox = ({
               size="small"
               onClick={() => setViewMode("image")}
               disabled={viewMode === "image"}
-              sx={{ display: { xs: "none", sm: "block" } }}
+              sx={{ display: { xs: "none", lg: "block" } }}
             >
               <img
                 src={
@@ -51,7 +57,7 @@ export const StructureToolbox = ({
               size="small"
               onClick={() => setViewMode("text")}
               disabled={viewMode === "text"}
-              sx={{ display: { xs: "none", sm: "block" } }}
+              sx={{ display: { xs: "none", lg: "block" } }}
             >
               <img
                 src={

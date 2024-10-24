@@ -36,10 +36,10 @@ const Dashboard = () => {
       </Typography>
 
       <Typography variant="body1">
-        Výpočet elementů se svou složitostí satl ideálním pro <b>počítač</b>. V
+        Výpočet elementů se svou složitostí stal ideálním pro <b>počítač</b>. V
         roce <b>1964</b> začal proto Sýkora společně s matematikem{" "}
         <b>Jaroslavem Blažkem</b> vytvářet program, který tento systém
-        zprovoznil.
+        zprovoznil. Vznikl tak unikátní algoritmus.
       </Typography>
 
       <Typography
@@ -68,9 +68,10 @@ const Dashboard = () => {
       <Structure
         grid={currentGrid}
         sx={{
-          display: { sm: "flex", md: "none" },
+          display: { xs: "flex", sm: "none" },
           position: "absolute",
           top: 0,
+
           right: 0,
         }}
       />

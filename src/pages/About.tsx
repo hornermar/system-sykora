@@ -8,14 +8,14 @@ import { Contact } from "../components/Content/Contanct/Contank";
 const About = () => {
   return (
     <>
-      <Typography variant="body1" sx={{ marginBottom: "20px" }}>
+      <Typography variant="body1">
         Systém Sýkora je rekonstruovaný algoritmmus, který byl navržen Zdeňkěm
         Sýkorou pro vytváření Struktur. Tato aplikace jej intreaktivní formou
         představuje a přibližuje jeho principy.
       </Typography>
 
-      <Sources />
       <Contact />
+      <Sources />
     </>
   );
 };
@@ -28,6 +28,7 @@ export const AboutWrapper = () => {
       title="O projektu"
       children={<About />}
       color={theme.palette.primary}
+      isPage
     />
   );
 };

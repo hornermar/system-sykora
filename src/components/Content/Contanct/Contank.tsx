@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const Contact = () => {
   return (
     <>
-      <Typography variant="h3" sx={{ margin: "20px 0" }}>
+      <Typography variant="h3" sx={{ margin: "30px 0 10px" }}>
         Kontakt
       </Typography>
 

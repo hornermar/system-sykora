@@ -39,15 +39,22 @@ export const Structure = memo(function Structure({
   const ref = useRef<HTMLDivElement | null>(null);
 
   const theme = useTheme();
-  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+  const isXs = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSm = useMediaQuery(theme.breakpoints.down("md"));
+  const isMd = useMediaQuery(theme.breakpoints.down("lg"));
 
   const rowsCount = size(grid);
   const columnsCount = Math.max(...map(grid, (row) => size(row)));
 
   const updateCellSize = useCallback(() => {
-    const newCellSize = getCellSize(ref, columnsCount, rowsCount, isSm);
+    const newCellSize = getCellSize(
+      ref,
+      columnsCount,
+      rowsCount,
+      isXs ? "xs" : isSm ? "sm" : isMd ? "md" : "lg"
+    );
     setCellSize(Math.floor(newCellSize));
-  }, [columnsCount, rowsCount, isSm]);
+  }, [columnsCount, rowsCount, isXs, isSm, isMd]);
 
   useEffect(() => {
     setMode(viewMode ?? "image");
@@ -55,15 +62,6 @@ export const Structure = memo(function Structure({
 
   useEffect(() => {
     updateCellSize();
-  }, [columnsCount, rowsCount, updateCellSize]);
-
-  useEffect(() => {
-    window.addEventListener("resize", updateCellSize);
-
-    // Cleanup the event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", updateCellSize);
-    };
   }, [columnsCount, rowsCount, updateCellSize]);
 
   const handleCellClick = useCallback(
@@ -80,7 +78,11 @@ export const Structure = memo(function Structure({
       flexDirection="column"
       width="100%"
       alignItems="center"
-      sx={{ margin: "0 auto", position: "relative", ...sx }}
+      sx={{
+        margin: "0 auto",
+        position: "relative",
+        ...sx,
+      }}
       ref={ref}
     >
       {cellSize > 0 && (

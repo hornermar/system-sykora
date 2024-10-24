@@ -6,7 +6,7 @@ export const StructureDot = () => {
 
   return (
     <Tooltip
-      title={"Do jednotlivých buňěk je možné klikat."}
+      title={"Do jednotlivých buněk je možné klikat."}
       open={openTooltip}
       onOpen={onOpenTooltip}
       onClose={onCloseTooltip}
@@ -18,13 +18,12 @@ export const StructureDot = () => {
       <img
         style={{
           position: "absolute",
-          top: -33,
-          right: 3,
-          transform: "rotate(180deg)",
+          top: -30,
+          right: 0,
         }}
         src={"/icons/circle.svg"}
-        width={20}
-        height={20}
+        width={15}
+        height={15}
         alt={"circle icon"}
       />
     </Tooltip>

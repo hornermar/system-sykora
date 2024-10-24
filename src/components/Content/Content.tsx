@@ -91,6 +91,7 @@ export const Content = ({
             <Coefficient
               coefficient={form.coefficient}
               onFormChange={onFormChange}
+              defaultGrid={defaultGrid}
             />
           }
           backButton="Zpět"
@@ -102,7 +103,13 @@ export const Content = ({
       {/* Rule */}
       {activeStep === 4 && (
         <Container
-          children={<Rules rule={form.rule} onFormChange={onFormChange} />}
+          children={
+            <Rules
+              rule={form.rule}
+              onFormChange={onFormChange}
+              defaultGrid={defaultGrid}
+            />
+          }
           backButton="Zpět"
           nextButton="Další"
           disableNext={form.rule === null}

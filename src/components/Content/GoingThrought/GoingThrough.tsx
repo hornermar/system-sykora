@@ -3,6 +3,7 @@ import { Structure } from "../../Structure/Structure";
 import { Cell } from "../../../types/General";
 import { useState, useEffect } from "react";
 import { mapGrid } from "../../../utils/mapGrid";
+import { ContainerWithStructure } from "../../common/Container/WithStructure";
 
 type GoingThroughProps = {
   defaultGrid: string[][];
@@ -34,22 +35,27 @@ export const GoingThrough = ({ defaultGrid }: GoingThroughProps) => {
   }, []);
 
   return (
-    <>
-      <Typography variant="body1">
-        A teď už strukturu přebírá algoritmus. Postupně dopočítává pole, která
-        zůstala prázdná.
-      </Typography>
+    <ContainerWithStructure
+      structure={
+        <Structure
+          grid={defaultGrid}
+          activeCell={activeCell}
+          isViewModeChangeable
+        />
+      }
+      firstPart={
+        <>
+          <Typography variant="body1">
+            A teď už strukturu přebírá algoritmus. Postupně dopočítává pole,
+            která zůstala prázdná.
+          </Typography>
 
-      <Typography variant="body1">
-        Počítat začíná v levém horním rohu a postupuje po buňce zleva doprava v
-        lichých řadách a zprava doleva v sudých.
-      </Typography>
-
-      <Structure
-        grid={defaultGrid}
-        activeCell={activeCell}
-        isViewModeChangeable
-      />
-    </>
+          <Typography variant="body1">
+            Počítat začíná v levém horním rohu a postupuje po buňce zleva
+            doprava v lichých řadách a zprava doleva v sudých.
+          </Typography>
+        </>
+      }
+    ></ContainerWithStructure>
   );
 };

@@ -2,16 +2,22 @@ export const getCellSize = (
   ref: React.RefObject<HTMLDivElement>,
   columns: number,
   rows: number,
-  isSm: boolean
+  mediaSize: "xs" | "sm" | "md" | "lg"
 ) => {
   if (!ref.current) return 0;
 
-  const sizeBasedOnWidth = isSm
-    ? ref.current.clientWidth / columns
-    : ref.current.clientWidth / 2 / columns;
-  const sizeBasedOnHeight = (window.innerHeight - 80) / rows;
+  const offset =
+    mediaSize === "xs"
+      ? 80
+      : mediaSize === "sm"
+      ? 450
+      : mediaSize === "md"
+      ? 400
+      : 300;
 
-  return isSm
-    ? Math.min(sizeBasedOnWidth, sizeBasedOnHeight)
-    : sizeBasedOnWidth;
+  const sizeBasedOnWidth = ref.current.clientWidth / columns;
+
+  const sizeBasedOnHeight = (window.innerHeight - offset) / rows;
+
+  return Math.min(sizeBasedOnWidth, sizeBasedOnHeight);
 };

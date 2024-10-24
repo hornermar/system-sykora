@@ -1,7 +1,14 @@
 import * as React from "react";
-import { Toolbar, Stack, AppBar, IconButton, Typography } from "@mui/material/";
+import {
+  Toolbar,
+  Stack,
+  AppBar,
+  IconButton,
+  Typography,
+  Box,
+} from "@mui/material/";
 import { HeaderDrawer } from "./Drawer";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 
@@ -33,11 +40,20 @@ export const Header = (props: Props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const theme = useTheme();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
+  const handleItemClick = (to: string) => {
+    navigate(to.toLowerCase());
+  };
+
+  const isLocationWithTitle = ["/o-projektu", "/jindrisska"].includes(
+    location.pathname
+  );
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -46,31 +62,48 @@ export const Header = (props: Props) => {
 
   return (
     <>
-      <IconButton
-        color="inherit"
-        aria-label="open drawer"
-        edge="start"
-        onClick={handleDrawerToggle}
+      <Box
         sx={{
-          display: { xs: "block", sm: "none" },
-          position: "absolute",
-          right: 10,
-          top: 4,
+          display: { xs: "flex", lg: "none" },
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "10px 10px 0 20px",
           zIndex: 1000,
+          position: "absolute",
+          width: "100%",
+          height: "42.6719px",
         }}
       >
-        <img
-          src={"/icons/bars.svg"}
-          width={30}
-          height={30}
-          alt={"chevron down icon"}
-        />
-      </IconButton>
+        {isLocationWithTitle && (
+          <Typography
+            variant="h3"
+            sx={{ cursor: "pointer", color: theme.palette.secondary.dark }}
+            onClick={() => handleItemClick(navItems[0].to)}
+          >
+            {navItems[0].label}
+          </Typography>
+        )}
+
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          onClick={handleDrawerToggle}
+          sx={{ position: "absolute", right: "8px" }}
+        >
+          <img
+            src={"/icons/bars.svg"}
+            width={30}
+            height={30}
+            alt={"chevron down icon"}
+          />
+        </IconButton>
+      </Box>
 
       <AppBar
         component="nav"
         sx={{
-          display: { xs: "none", sm: "block" },
+          display: { xs: "none", lg: "block" },
         }}
       >
         <Toolbar
@@ -108,6 +141,7 @@ export const Header = (props: Props) => {
         mobileOpen={mobileOpen}
         handleDrawerToggle={handleDrawerToggle}
         navItems={navItems}
+        handleItemClick={handleItemClick}
       />
     </>
   );

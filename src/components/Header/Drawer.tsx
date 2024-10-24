@@ -9,7 +9,6 @@ import {
   IconButton,
 } from "@mui/material/";
 import { useTheme } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
 import { map } from "lodash";
 
 type HeaderDrawerProps = {
@@ -17,6 +16,7 @@ type HeaderDrawerProps = {
   mobileOpen: boolean;
   handleDrawerToggle: () => void;
   navItems: { label: string; to: string }[];
+  handleItemClick: (to: string) => void;
 };
 
 const drawerWidth = 240;
@@ -26,17 +26,15 @@ export const HeaderDrawer = ({
   mobileOpen,
   handleDrawerToggle,
   navItems,
+  handleItemClick,
 }: HeaderDrawerProps) => {
   const theme = useTheme();
-  const navigate = useNavigate();
+  const currentPage = location.pathname + location.search;
 
-  const handleItemClick = (to: string) => {
-    navigate(to.toLowerCase());
-
+  const onItemClick = (to: string) => {
+    handleItemClick(to);
     handleDrawerToggle();
   };
-
-  const currentPage = location.pathname + location.search;
 
   return (
     <nav>
@@ -50,10 +48,10 @@ export const HeaderDrawer = ({
           keepMounted: true, // Better open performance on mobile.
         }}
         sx={{
-          display: { xs: "block", sm: "none" },
+          display: { xs: "block", lg: "none" },
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
-            width: { xs: "100vw", sm: drawerWidth },
+            width: { xs: "100vw", lg: drawerWidth },
             backgroundColor: theme.palette.secondary.main,
           },
         }}
@@ -64,13 +62,13 @@ export const HeaderDrawer = ({
             justifyContent: "space-between",
             alignItems: "center",
             marginBottom: "60px",
-            padding: "0px 10px 10px 20px",
+            padding: "4px 10px 10px 20px",
           }}
         >
           <Typography
-            variant="h6"
+            variant="h3"
             sx={{ cursor: "pointer" }}
-            onClick={() => handleItemClick(navItems[0].to)}
+            onClick={() => onItemClick(navItems[0].to)}
           >
             {navItems[0].label}
           </Typography>
@@ -94,9 +92,7 @@ export const HeaderDrawer = ({
                   key={item.label}
                   disablePadding
                   onClick={() =>
-                    !isDisabled
-                      ? handleItemClick(item.to)
-                      : handleDrawerToggle()
+                    !isDisabled ? onItemClick(item.to) : handleDrawerToggle()
                   }
                   secondaryAction={
                     <IconButton

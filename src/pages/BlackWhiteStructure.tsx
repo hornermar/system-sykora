@@ -47,6 +47,7 @@ export const BlackWhiteStructure = () => {
       title="Stěna, 1969"
       children={<BlackWhiteStructureWrapper />}
       color={theme.palette.primary}
+      isPage
     />
   );
 };
