@@ -115,7 +115,7 @@ export const Calculation = ({ grid, defaultGrid, form, part }: GroupProps) => {
       {part === "shape" && (
         <Typography variant="body1">
           Při konečném výběru ze skupiny zkoumá algoritmus elementy, které s
-          analyzovaným polem sousedí pouze stranami.
+          polem sousedí stranami.
         </Typography>
       )}
 

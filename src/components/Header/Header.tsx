@@ -22,15 +22,15 @@ const navItems = [
     label: "Struktura v Jindřišské",
     to: "/jindrisska",
   },
-  {
-    label: "Zdroje",
-    to: "/zdroje",
-  },
   // {
-  //   label: "O projektu",
-  //   to: "/o-projektu",
-  //   colors: { backgroundColor: "black", color: "white" },
+  //   label: "Zdroje",
+  //   to: "/zdroje",
   // },
+  {
+    label: "O projektu",
+    to: "/o-projektu",
+    colors: { backgroundColor: "black", color: "white" },
+  },
 ];
 
 export const Header = (props: Props) => {

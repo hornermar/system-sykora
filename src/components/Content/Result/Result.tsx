@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { Structure } from "../../Structure/Structure";
 import { FormValues } from "../../../types/FormValues";
 import { ResultEdit } from "./Edit";
@@ -12,8 +12,6 @@ type ResultProps = {
   grid: string[][];
   form: FormValues;
   onFormChange: (newFormValues: Partial<FormValues>) => void;
-  editOpen: boolean;
-  onEditClose: () => void;
   defaultGrid: string[][];
   onDefaultGridChange: (newDefaultGrid: string[][]) => void;
 };
@@ -22,11 +20,10 @@ export const Result = ({
   grid,
   form,
   onFormChange,
-  editOpen,
-  onEditClose,
   defaultGrid,
   onDefaultGridChange,
 }: ResultProps) => {
+  const [editOpen, onEditOpen, onEditClose] = useSwitch(false);
   const [openSelect, onOpenSelect, onCloseSelect] = useSwitch(false);
   const [isRandom, setIsRandom] = useState<boolean>(false);
   const [displayDefaultGrid, setDisplayDefaultGrid] = useState<boolean>(false);
@@ -47,6 +44,13 @@ export const Result = ({
 
   return (
     <Stack>
+      <Typography
+        variant="body1"
+        onClick={editOpen ? onEditClose : onEditOpen}
+        className="underline"
+      >
+        <b>{editOpen ? "Skrýt panel vstupů" : "Panel vstupů (úprava)"}</b>
+      </Typography>
       <Structure
         grid={isRandom ? randomGrid : grid}
         isViewModeChangeable

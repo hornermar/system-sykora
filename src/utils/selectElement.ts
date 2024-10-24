@@ -53,7 +53,7 @@ export const selectElement = (
     return {
       result: getRandomItem(options),
       reason:
-        "V tomto případě neodpovídá žádný element. Je proto vybrán element z dané skupiny náhodně",
+        "V tomto případě neodpovídá žádný element. Je proto vybrán element ze  skupiny náhodně",
       finalOptions: options,
     };
   }

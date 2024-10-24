@@ -30,6 +30,13 @@ export const customTheme = createTheme({
       fontFamily: "Pathway Gothic One, sans-serif",
       fontSize: "34px",
       fontWeight: 500,
+      textTransform: "uppercase",
+    },
+    h3: {
+      fontFamily: "Pathway Gothic One, sans-serif",
+      fontSize: "28px",
+      fontWeight: 500,
+      textTransform: "uppercase",
     },
     h6: {
       fontFamily: "Pathway Gothic One, sans-serif",
@@ -50,17 +57,6 @@ export const customTheme = createTheme({
     },
   },
   components: {
-    // MuiTypography: {
-    //   styleOverrides: {
-    //     root: {
-    //       "&span": {
-    //         textDecoration: "underline",
-    //         textDecorationColor: "#f6e93f",
-    //         textDecorationThickness: "3px",
-    //       },
-    //     },
-    //   },
-    // },
     MuiAppBar: {
       styleOverrides: {
         root: {
@@ -74,8 +70,8 @@ export const customTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: "0px",
-          padding: "12px 15px",
+          borderRadius: "30px",
+          padding: "10px 25px",
           boxShadow: "none",
           borderWidth: "2px",
 
@@ -94,9 +90,9 @@ export const customTheme = createTheme({
         },
         containedPrimary: {
           border: `2px solid ${black}`,
-          "&:active, &:hover": {
-            color: "black",
-          },
+          // "&:active, &:hover": {
+          //   color: "black",
+          // },
         },
         outlinedPrimary: {
           border: "2px solid",

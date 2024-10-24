@@ -118,7 +118,7 @@ export const StructureGrid = memo(function StructureGrid({
                       opacity:
                         isCellOriginal && highlightDefaultGrid
                           ? 0.5
-                          : isCellActiveNeighbour
+                          : isCellActiveNeighbour || isCellActive
                           ? 0.4
                           : 1,
                     }}

@@ -4,11 +4,15 @@ import { Link } from "react-router-dom";
 export const Sources = () => {
   return (
     <>
+      <Typography variant="h3" sx={{ margin: "20px 0" }}>
+        Zdroje
+      </Typography>
       <Typography variant="body1" sx={{ marginBottom: "20px" }}>
-        Zdeněk Sýkora popsal algoritmus v textu Můj systém z roku 1967.
+        Zdeněk Sýkora popsal algoritmus v textu <b>Můj systém</b> z roku 1967.
         <sup>1</sup> O pár let později, v roce 1970, jej pak spolu s Jaroslavem
-        Blažkem popisují v textu Computer-aided multielement geometrical
-        abstract paintings.<sup>2</sup>
+        Blažkem popisují v textu{" "}
+        <b>Computer-aided multielement geometrical abstract paintings</b>.
+        <sup>2</sup>
       </Typography>
 
       <Box

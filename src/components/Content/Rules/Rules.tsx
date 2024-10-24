@@ -55,7 +55,7 @@ export const Rules = ({ rule, onFormChange }: RulesProps) => {
           variant="body1"
           onClick={() => onStepChange(8)}
           className="underline"
-          sx={{ marginTop: "40px" }}
+          sx={{ marginTop: "30px" }}
         >
           Přeskočit na výstup (krok 8)
           <img

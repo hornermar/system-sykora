@@ -5,8 +5,6 @@ import { Elements } from "./Elements/Elements";
 import { Rules } from "./Rules/Rules";
 import { Result } from "./Result/Result";
 import { Container } from "../common/Container/Container";
-import { useSwitch } from "../../hooks/useSwitch";
-import { useEffect } from "react";
 import { GoingThrough } from "./GoingThrought/GoingThrough";
 import { Calculation } from "./Calculation/Calculation";
 import { Instruction } from "./Instruction/Instruction";
@@ -33,14 +31,7 @@ export const Content = ({
   setEmptyGrid,
   resetForm,
 }: ContentProps) => {
-  const [editOpen, onEditOpen, onEditClose] = useSwitch(false);
   const { activeStep, onStepChange } = useStep();
-
-  useEffect(() => {
-    if (activeStep !== 8 && editOpen) {
-      onEditClose();
-    }
-  }, [activeStep, onEditClose, editOpen]);
 
   const isFormFilled =
     form.columns && form.rows && form.coefficient !== 0 && form.rule !== null;
@@ -71,7 +62,7 @@ export const Content = ({
               defaultGrid={defaultGrid}
             />
           }
-          backButton="Zpět na instrukce"
+          backButton="Zpět"
           nextButton="Další"
           disableNext={!form.columns || !form.rows}
         />
@@ -114,11 +105,7 @@ export const Content = ({
           children={<Rules rule={form.rule} onFormChange={onFormChange} />}
           backButton="Zpět"
           nextButton="Další"
-          // middleButton="Přeskočit popis"
-          // onMiddleButtonClick={() => onStepChange(size(steps))}
-
           disableNext={form.rule === null}
-          disableMiddle={form.rule === null}
         />
       )}
 
@@ -155,17 +142,18 @@ export const Content = ({
           children={
             <Result
               grid={grid}
-              editOpen={editOpen}
+              // editOpen={editOpen}
               form={form}
               onFormChange={onFormChange}
               defaultGrid={defaultGrid}
               onDefaultGridChange={onDefaultGridChange}
-              onEditClose={onEditClose}
+              // onEditClose={onEditClose}
+              // onEditOpen={onEditOpen}
             />
           }
           backButton="Zpět"
-          middleButton={editOpen ? "Hotovo" : "Upravit"}
-          onMiddleButtonClick={editOpen ? onEditClose : onEditOpen}
+          // middleButton={editOpen ? "Hotovo" : "Upravit"}
+          // onMiddleButtonClick={editOpen ? onEditClose : onEditOpen}
           nextButton="Závěr"
         />
       )}

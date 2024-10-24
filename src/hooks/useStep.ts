@@ -63,7 +63,6 @@ export const useStep = () => {
     const params = new URLSearchParams(location.search);
     params.set("step", step.toString());
     navigate({ search: params.toString() });
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const activeStep = getActiveStep();

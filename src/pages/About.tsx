@@ -1,42 +1,21 @@
-import { Typography, Box } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Typography } from "@mui/material";
+
 import { useTheme } from "@mui/material/styles";
 import { Container } from "../components/common/Container/Container";
+import { Sources } from "../components/Content/Sources/Sources";
+import { Contact } from "../components/Content/Contanct/Contank";
 
 const About = () => {
   return (
     <>
       <Typography variant="body1" sx={{ marginBottom: "20px" }}>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi
-        totam ipsa numquam necessitatibus animi voluptates, neque modi est, ad
-        reiciendis corporis aperiam! Explicabo minus laboriosam placeat,
-        quibusdam perferendis possimus facilis.
+        Systém Sýkora je rekonstruovaný algoritmmus, který byl navržen Zdeňkěm
+        Sýkorou pro vytváření Struktur. Tato aplikace jej intreaktivní formou
+        představuje a přibližuje jeho principy.
       </Typography>
 
-      <Box
-        component="ol"
-        sx={{
-          fontFamily: "Roboto mono, monospace",
-          fontSize: "12px",
-        }}
-      >
-        <Box component="li" sx={{ paddingBottom: "10px" }}>
-          <Typography variant="body2">Odkaz</Typography>
-        </Box>
-        <Box component="li">
-          <Typography variant="body2">
-            Kontakt
-            <Link to="https://www.jstor.org/stable/1572257">
-              <img
-                src={"/icons/arrow-up-right-from-square.svg"}
-                width={11}
-                height={11}
-                alt={"open icon"}
-              />
-            </Link>
-          </Typography>
-        </Box>
-      </Box>
+      <Sources />
+      <Contact />
     </>
   );
 };

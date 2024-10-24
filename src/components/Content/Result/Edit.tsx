@@ -57,12 +57,14 @@ export const ResultEdit = ({
     <Box
       sx={{
         position: "fixed",
-        bottom: "52.5px",
         width: "100vw",
         left: 0,
+        bottom: 0,
         borderTop: open ? `2px solid ${theme.palette.primary.main}` : "none",
         borderLeft: `2px solid ${theme.palette.primary.main}`,
         borderRight: `2px solid ${theme.palette.primary.main}`,
+        borderBottom: open ? `2px solid ${theme.palette.primary.main}` : "none",
+        zIndex: 1000,
       }}
     >
       <Collapse in={open} orientation="vertical">

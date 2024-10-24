@@ -33,7 +33,7 @@ export const ElementSelect = ({
       open={open}
       onClose={onClose}
       title="Vyber obsah buňky"
-      sx={{ paddingBottom: "4px" }}
+      sx={{ paddingBottom: "0px" }}
     >
       <Grid
         grid={allElementsByGroupGrid}
@@ -67,8 +67,8 @@ export const ElementSelect = ({
           marginBottom: "20px",
           height: `${size}px`,
           width: `${size * 2 + 22}px`,
-          position: "absolute",
-          marginTop: `-${size + 20}px`,
+          borderRadius: "0px ",
+          marginTop: `-${size + 40}px`,
           marginLeft: `${size * 2 + 44}px`,
         }}
         color="secondary"

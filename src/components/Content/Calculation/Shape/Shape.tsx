@@ -32,7 +32,12 @@ export const CalculationShape = ({
     <>
       <Typography variant="body1">
         Zkoumá, jaké vlastnosti mají strany dotyku - jakou mají barvu a zda je
-        zde otevřený tvar či nikoliv. Zde se řídí pravidlem:
+        zde otevřený tvar či nikoliv. Ze{" "}
+        <b onClick={() => onOpenDialog()} className="underline">
+          skupiny {group.result.toLocaleString("cs-CZ")}
+        </b>{" "}
+        se snaží vybrat takový element, který podmínky splňuje co nejlépe. Zde
+        se řídí pravidlem:
       </Typography>
 
       <Typography variant="body1">
@@ -41,23 +46,13 @@ export const CalculationShape = ({
         </b>
       </Typography>
 
-      <Typography variant="body1">
-        Snaží se najít element ze{" "}
-        <b onClick={() => onOpenDialog()} className="underline">
-          skupiny {group.result.toLocaleString("cs-CZ")}
-        </b>
-        , který podmínky splňuje nejlépe.
-      </Typography>
-
-      <Typography variant="body1">
-        {shape.description.reason}: <b>{shape.result}</b>
-      </Typography>
+      <Typography variant="body1">{shape.description.reason}:</Typography>
 
       <Grid
         grid={[map(shape.description.finalOptions, (option) => option.name)]}
         activeNames={shape.result ? [shape.result] : []}
         displayName
-        size={30}
+        size={40}
         sx={{
           justifyContent: "flex-start",
           gap: "10px",
