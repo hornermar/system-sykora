@@ -49,7 +49,7 @@ const Dashboard = () => {
         onClick={handleNextButtonClick}
         sx={{ marginTop: "20px" }}
       >
-        Prozkoumat
+        <b>Prozkoumat</b>
         <img
           src="/icons/chevron-right.svg"
           width={10}

@@ -35,12 +35,9 @@ export const GroupAverage = ({
       {(cellContent === "+" || cellContent === "-") && (
         <>
           <Typography variant="body1">
-            {`V buňce je ${cellContent}, ${
-              cellContent === "+" ? "k" : "od"
-            } průměru proto  ${
-              cellContent === "+" ? "přičte" : "odečte"
-            } zvolený koeficient `}
-            <b>{coefficient.toLocaleString("cs-CZ")}</b>:
+            V buňce je <b>{cellContent}</b>, {cellContent === "+" ? "k" : "od"}{" "}
+            průměru proto {cellContent === "+" ? "přičte" : "odečte"} zvolený
+            koeficient <b>{coefficient.toLocaleString("cs-CZ")}</b>:
           </Typography>
 
           <Label

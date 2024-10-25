@@ -65,7 +65,7 @@ export const ContentStructure = ({
   const handleCellClick =
     activeStep === 1
       ? undefined
-      : activeStep === 2 || activeStep === 8
+      : activeStep === 2 || (activeStep === 8 && displayDefaultGrid)
       ? handleCellSelectOpen
       : activeStep === 6 || activeStep === 7
       ? onCellClick
@@ -154,6 +154,7 @@ export const ContentStructure = ({
       : activeStep === 8
       ? grid
       : defaultGrid;
+
   const currentDefaultrid =
     activeStep === 6 || activeStep === 7 || activeStep === 8
       ? defaultGrid

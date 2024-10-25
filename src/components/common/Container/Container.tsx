@@ -44,7 +44,6 @@ export const Container = ({
         width: "100%",
         margin: "0 auto",
         justifyContent: "space-between",
-        // height: "100%",
         minHeight: { xs: "100vh", lg: "calc(100vh - 48px )" },
         backgroundColor: isPage ? theme.palette.primary.light : "white",
         padding: { xs: 0, lg: "0 20px" },
@@ -56,7 +55,7 @@ export const Container = ({
         sx={{
           fontSize: "16px",
           padding: {
-            xs: isPage ? "0 20px 20px" : "0px 20px 70px",
+            xs: isPage ? "40px 20px 20px" : "0px 20px 70px",
             lg: "40px 20px 0",
           },
 

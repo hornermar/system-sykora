@@ -70,6 +70,7 @@ export const customTheme = createTheme({
           },
           "&:active": {
             boxShadow: "none",
+            backgroundColor: black,
           },
           "&.Mui-disabled.MuiButton-contained": {
             border: "2px solid rgba(0, 0, 0, 0)",
