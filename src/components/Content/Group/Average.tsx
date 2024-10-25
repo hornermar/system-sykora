@@ -1,7 +1,7 @@
-import { DensityDescription } from "../../../../types/Density";
 import { first, map, size } from "lodash";
-import { Label } from "../../../common/Label/Label";
 import { Typography } from "@mui/material";
+import { DensityDescription } from "../../../types/Density";
+import { Label } from "../../common/Label/Label";
 
 type GroupAverageProps = {
   cellContent: string;

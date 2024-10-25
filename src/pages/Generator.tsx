@@ -4,6 +4,85 @@ import { getElements } from "../utils/getElements";
 import { useForm } from "../hooks/useForm";
 import { useDefaultGrid } from "../hooks/useDefaultGrid";
 import { size } from "lodash";
+import { FormValues } from "../types/FormValues";
+import { Container } from "../components/common/Container/Container";
+import { useStep } from "../hooks/useStep";
+
+type GeneratorProps = {
+  form: FormValues;
+  onFormChange: (newFormValues: Partial<FormValues>) => void;
+  defaultGrid: string[][];
+  onDefaultGridChange: (newDefaultGrid: string[][]) => void;
+  grid: string[][];
+  setEmptyGrid: () => void;
+  resetForm: () => void;
+};
+
+const Generator = ({
+  form,
+  onFormChange,
+  defaultGrid,
+  onDefaultGridChange,
+  grid,
+  setEmptyGrid,
+  resetForm,
+}: GeneratorProps) => {
+  const { activeStep, onStepChange } = useStep();
+
+  const stepZero = activeStep === 0 || !activeStep;
+
+  const onStartClick = () => {
+    resetForm();
+    onStepChange(1);
+  };
+
+  const title = stepZero ? "Instrukce" : activeStep === 9 ? "Závěr" : "";
+  const nextButton = stepZero
+    ? "Začít"
+    : activeStep === 7
+    ? "Vygenerovat"
+    : activeStep === 8
+    ? "Závěr"
+    : activeStep === 9
+    ? ""
+    : "Další";
+  const nextButtonClick = stepZero ? onStartClick : undefined;
+
+  const disableNext = () => {
+    switch (activeStep) {
+      case 1:
+        return !form.columns || !form.rows;
+      case 3:
+        return !form.coefficient;
+      case 4:
+        return form.rule === null;
+
+      default:
+        return false;
+    }
+  };
+
+  const backButton = stepZero ? undefined : "Zpět";
+
+  return (
+    <Container
+      title={title}
+      nextButton={nextButton}
+      onNextButtonClick={nextButtonClick}
+      backButton={backButton}
+      disableNext={disableNext()}
+    >
+      <Content
+        form={form}
+        onFormChange={onFormChange}
+        defaultGrid={defaultGrid}
+        onDefaultGridChange={onDefaultGridChange}
+        grid={grid}
+        setEmptyGrid={setEmptyGrid}
+      />
+    </Container>
+  );
+};
 
 export const GeneratorWrapper = () => {
   const { form, onFormChange, defaultFormValues } = useForm();
@@ -34,7 +113,7 @@ export const GeneratorWrapper = () => {
   }, [onFormChange, defaultFormValues]);
 
   return (
-    <Content
+    <Generator
       form={form}
       onFormChange={onFormChange}
       defaultGrid={defaultGrid}

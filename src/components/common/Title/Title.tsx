@@ -68,7 +68,8 @@ export const Title = ({ title, variant }: TitleProps) => {
 
   const currentStep = find(steps, { order: activeStep });
 
-  const currentTitle = title ?? find(steps, { order: activeStep })?.title;
+  const currentTitle =
+    title !== "" ? title : find(steps, { order: activeStep })?.title;
 
   return (
     <Stack

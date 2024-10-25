@@ -1,4 +1,4 @@
-import { Stack, Box, PaletteColor, Button } from "@mui/material";
+import { Stack, Box, PaletteColor, Button, useTheme } from "@mui/material";
 import { useStep } from "../../../hooks/useStep";
 import { Title } from "../Title/Title";
 
@@ -28,6 +28,7 @@ export const Container = ({
   isPage,
 }: ContainerProps) => {
   const { activeStep, onStepChange } = useStep();
+  const theme = useTheme();
 
   const handleBack = () => {
     onStepChange(activeStep - 1);
@@ -42,7 +43,7 @@ export const Container = ({
       <Box
         component="main"
         sx={{
-          backgroundColor: color?.light ?? "unset",
+          backgroundColor: color?.light ?? theme.palette.secondary.light,
           color: color?.main ?? "unset",
           minHeight: "100vh",
         }}
@@ -54,6 +55,9 @@ export const Container = ({
             margin: "0 auto",
             justifyContent: "space-between",
             height: "100%",
+            minHeight: "100vh",
+            backgroundColor: color?.light ?? "white",
+            padding: { xs: 0, lg: "0 20px" },
           }}
         >
           <Box
@@ -86,6 +90,7 @@ export const Container = ({
                     position: { xs: "fixed", lg: "block" },
                     bottom: 20,
                     left: 20,
+                    zIndex: 1000,
                   }}
                 >
                   {backButton}
@@ -99,7 +104,12 @@ export const Container = ({
                   disabled={disableNext}
                   disableTouchRipple
                   disableFocusRipple
-                  sx={{ position: "fixed", bottom: 20, right: 20 }}
+                  sx={{
+                    position: "fixed",
+                    bottom: 20,
+                    right: 20,
+                    zIndex: 1000,
+                  }}
                 >
                   {nextButton}
                 </Button>

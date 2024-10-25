@@ -1,10 +1,10 @@
-import { Density } from "../../../../types/Density";
-import { Grid } from "../../../Grid/Grid";
-import { Dialog } from "../../../common/Dialog/Dialog";
 import { map, filter } from "lodash";
-import { elementList } from "../../../../lib/elementList";
+import { Density } from "../../../types/Density";
+import { Grid } from "../../Grid/Grid";
+import { elementList } from "../../../lib/elementList";
+import { Dialog } from "../../common/Dialog/Dialog";
 
-type CalculationGroupDialogProps = {
+type GroupDialogProps = {
   open: boolean;
   onClose: () => void;
   group: Density;
@@ -12,11 +12,7 @@ type CalculationGroupDialogProps = {
 
 const smallSize = 35;
 
-export const CalculationGroupDialog = ({
-  open,
-  onClose,
-  group,
-}: CalculationGroupDialogProps) => {
+export const GroupDialog = ({ open, onClose, group }: GroupDialogProps) => {
   const options = filter(
     elementList,
     ({ colorDensity }) => colorDensity === group.result

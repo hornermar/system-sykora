@@ -44,6 +44,7 @@ const Dashboard = () => {
 
       <Typography
         variant="subtitle1"
+        component="a"
         className="underline"
         onClick={handleNextButtonClick}
         sx={{ marginTop: "20px" }}

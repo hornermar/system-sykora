@@ -1,4 +1,5 @@
 import { Cell } from "../types/General";
+import { map } from "lodash";
 
 // slice grid in position of cell, rest replace with "0"
 export const getSlicedGrid = (
@@ -6,10 +7,10 @@ export const getSlicedGrid = (
   defaultGrid: string[][],
   cell: Cell
 ) => {
-  return grid.map((row, y) => {
+  return map(grid, (row, y) => {
     if (y < cell.y) return row;
 
-    return row.map((value, x) => {
+    return map(row, (value, x) => {
       if (y % 2 === 0) {
         return (y === cell.y && x >= cell.x) || y > cell.y
           ? defaultGrid[y][x]

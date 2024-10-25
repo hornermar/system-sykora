@@ -1,21 +1,21 @@
 import { Typography } from "@mui/material";
-import { FormValues } from "../../../../types/FormValues";
+import { FormValues } from "../../../types/FormValues";
 import { CalculationGroupDescription } from "./Description";
-import { Density } from "../../../../types/Density";
+import { Density } from "../../../types/Density";
 
-type CalculationGroupProps = {
+type GroupCalculationProps = {
   cellContent: string;
   form: FormValues;
   group: Density;
   onOpenDialog: () => void;
 };
 
-export const CalculationGroup = ({
+export const GroupCalculation = ({
   cellContent,
   form,
   group,
   onOpenDialog,
-}: CalculationGroupProps) => {
+}: GroupCalculationProps) => {
   return (
     <>
       <Typography variant="body1">
@@ -28,7 +28,7 @@ export const CalculationGroup = ({
         form={form}
       />
 
-      <Typography variant="body1">
+      <Typography variant="body1" sx={{ marginBottom: "30px" }}>
         Vybere nejbližší skupinu elementů. Tou je v tomto případě{" "}
         <b onClick={() => onOpenDialog()} className="underline">
           skupina {group.result.toLocaleString("cs-CZ")}

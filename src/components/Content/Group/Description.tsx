@@ -1,10 +1,10 @@
 import { useMemo } from "react";
-import { Density } from "../../../../types/Density";
+import { Density } from "../../../types/Density";
 import { size, map } from "lodash";
-import { FormValues } from "../../../../types/FormValues";
+import { FormValues } from "../../../types/FormValues";
 import { GroupAverage } from "./Average";
 import { Box, Typography } from "@mui/material";
-import { Accordion } from "../../../common/Accordion/Accordion";
+import { Accordion } from "../../common/Accordion/Accordion";
 
 type CalculationGroupDescriptionProps = {
   cellContent: string;

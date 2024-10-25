@@ -1,26 +1,26 @@
 import { useMemo } from "react";
 import { Typography } from "@mui/material";
-import { FormValues } from "../../../../types/FormValues";
-import { rulesItems } from "../../../../lib/formItems";
-import { Rule } from "../../../../types/Rule";
+import { FormValues } from "../../../types/FormValues";
+import { rulesItems } from "../../../lib/formItems";
+import { Rule } from "../../../types/Rule";
 import { find, map } from "lodash";
-import { Grid } from "../../../Grid/Grid";
-import { Shape } from "../../../../types/Shape";
-import { Density } from "../../../../types/Density";
+import { Grid } from "../../Grid/Grid";
+import { Shape } from "../../../types/Shape";
+import { Density } from "../../../types/Density";
 
-type ShapeProps = {
+type ShapeCalculationProps = {
   form: FormValues;
   shape: Shape;
   onOpenDialog: () => void;
   group: Density;
 };
 
-export const CalculationShape = ({
+export const ShapeCalculation = ({
   form,
   shape,
   onOpenDialog,
   group,
-}: ShapeProps) => {
+}: ShapeCalculationProps) => {
   const ruleItem: Rule = useMemo(
     () =>
       find(rulesItems, (ruleItem: Rule) => form.rule === ruleItem.code) ??
@@ -57,6 +57,7 @@ export const CalculationShape = ({
           justifyContent: "flex-start",
           gap: "10px",
           marginTop: "5px",
+          marginBottom: "20px",
         }}
       />
     </>

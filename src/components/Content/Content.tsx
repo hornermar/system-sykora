@@ -4,13 +4,26 @@ import { Diagram } from "./Diagram/Diagram";
 import { Elements } from "./Elements/Elements";
 import { Rules } from "./Rules/Rules";
 import { Result } from "./Result/Result";
-import { Container } from "../common/Container/Container";
 import { GoingThrough } from "./GoingThrought/GoingThrough";
-import { Calculation } from "./Calculation/Calculation";
 import { Instruction } from "./Instruction/Instruction";
 import { useStep } from "../../hooks/useStep";
 import { size } from "lodash";
 import { End } from "./End/End";
+import { useState, useMemo } from "react";
+import { ContainerWithStructure } from "../common/Container/WithStructure";
+import { ContentStructure } from "./Structure/Structure";
+import { createEmptyGrid } from "../../utils/createEmptyGrid";
+import { getElements } from "../../utils/getElements";
+import { getShape } from "../../utils/getShape";
+import { getColorDensity } from "../../utils/getColorDensity";
+import { Cell } from "../../types/General";
+import { Density } from "../../types/Density";
+import { Shape as ShapeType } from "../../types/Shape";
+import { getSlicedGrid } from "../../utils/getSlicedGrid";
+import { Group } from "./Group/Group";
+import { Shape } from "./Shape/Shape";
+
+const initialActiveCell = { x: 0, y: 0, name: "" };
 
 type ContentProps = {
   form: FormValues;
@@ -19,7 +32,6 @@ type ContentProps = {
   onDefaultGridChange: (newDefaultGrid: string[][]) => void;
   grid: string[][];
   setEmptyGrid: () => void;
-  resetForm: () => void;
 };
 
 export const Content = ({
@@ -29,153 +41,138 @@ export const Content = ({
   onDefaultGridChange,
   grid,
   setEmptyGrid,
-  resetForm,
 }: ContentProps) => {
-  const { activeStep, onStepChange } = useStep();
+  const { activeStep } = useStep();
+  const [isRandom, setIsRandom] = useState<boolean>(false);
+  const [displayDefaultGrid, setDisplayDefaultGrid] = useState<boolean>(false);
+  const [activeCell, setActiveCell] = useState<Cell>(initialActiveCell);
+
+  const emptyGrid = createEmptyGrid(form.rows, form.columns);
+
+  const randomGrid = useMemo(() => {
+    return getElements(0, 0, defaultGrid, undefined, true);
+  }, [defaultGrid]);
+
+  const slicedGrid = useMemo(() => {
+    if (size(defaultGrid) === 0 || size(grid) === 0) {
+      return [];
+    } else {
+      getSlicedGrid(grid, defaultGrid, activeCell);
+    }
+  }, [grid, defaultGrid, activeCell]);
 
   const isFormFilled =
     form.columns && form.rows && form.coefficient !== 0 && form.rule !== null;
   const isGridFilled = size(grid) !== 0;
 
+  const group: Density | null = useMemo(() => {
+    if (size(slicedGrid) === 0) {
+      return null;
+    }
+    return getColorDensity(
+      slicedGrid as string[][],
+      activeCell.x,
+      activeCell.y,
+      form.coefficient
+    );
+  }, [slicedGrid, activeCell, form.coefficient]);
+
+  const shape: ShapeType | null = useMemo(() => {
+    if (size(slicedGrid) === 0 || !group) {
+      return null;
+    }
+    return getShape(grid, activeCell.x, activeCell.y, group.result, form.rule!);
+  }, [grid, activeCell, group, form.rule, slicedGrid]);
+
   return (
     <>
-      {/* Instruction */}
-      {(activeStep === 0 || !activeStep) && (
-        <Container
-          children={<Instruction />}
-          title="Instrukce"
-          nextButton="Začít"
-          onNextButtonClick={() => {
-            resetForm();
-            onStepChange(1);
-          }}
-        />
-      )}
+      <ContainerWithStructure
+        structure={
+          <ContentStructure
+            defaultGrid={defaultGrid}
+            onDefaultGridChange={onDefaultGridChange}
+            emptyGrid={emptyGrid}
+            grid={isRandom && activeStep === 8 ? randomGrid : grid}
+            displayDefaultGrid={displayDefaultGrid}
+            activeCell={activeCell}
+            setActiveCell={setActiveCell}
+            group={group}
+            shape={shape}
+          />
+        }
+      >
+        <>
+          {/* Instruction */}
+          {(activeStep === 0 || !activeStep) && <Instruction />}
 
-      {/* Diagram */}
-      {activeStep === 1 && (
-        <Container
-          children={
+          {/* Diagram */}
+          {activeStep === 1 && (
             <Diagram
               form={form}
               onFormChange={onFormChange}
               defaultGrid={defaultGrid}
             />
-          }
-          backButton="Zpět"
-          nextButton="Další"
-          disableNext={!form.columns || !form.rows}
-        />
-      )}
+          )}
 
-      {/* Elements */}
-      {activeStep === 2 && (
-        <Container
-          children={
+          {/* Elements */}
+          {activeStep === 2 && (
             <Elements
-              defaultGrid={defaultGrid}
               onDefaultGridChange={onDefaultGridChange}
               setEmptyGrid={setEmptyGrid}
               form={form}
             />
-          }
-          backButton="Zpět"
-          nextButton="Další"
-        />
-      )}
+          )}
 
-      {/* Coefficient */}
-      {activeStep === 3 && (
-        <Container
-          children={
+          {/* Coefficient */}
+          {activeStep === 3 && (
             <Coefficient
               coefficient={form.coefficient}
               onFormChange={onFormChange}
-              defaultGrid={defaultGrid}
             />
-          }
-          backButton="Zpět"
-          nextButton="Další"
-          disableNext={!form.coefficient}
-        />
-      )}
+          )}
 
-      {/* Rule */}
-      {activeStep === 4 && (
-        <Container
-          children={
-            <Rules
-              rule={form.rule}
-              onFormChange={onFormChange}
-              defaultGrid={defaultGrid}
-            />
-          }
-          backButton="Zpět"
-          nextButton="Další"
-          disableNext={form.rule === null}
-        />
-      )}
+          {/* Rule */}
+          {activeStep === 4 && (
+            <Rules rule={form.rule} onFormChange={onFormChange} />
+          )}
 
-      {/* Going Through Diagram */}
-      {activeStep === 5 && isFormFilled && (
-        <Container
-          children={<GoingThrough grid={grid} defaultGrid={defaultGrid} />}
-          backButton="Zpět"
-          nextButton="Další"
-        />
-      )}
+          {/* Going Through Diagram */}
+          {activeStep === 5 && isFormFilled && <GoingThrough />}
 
-      {/* Group + Shape */}
-      {(activeStep === 6 || activeStep === 7) &&
-        isFormFilled &&
-        isGridFilled && (
-          <Container
-            children={
-              <Calculation
-                grid={grid}
-                defaultGrid={defaultGrid}
+          {/* Group  */}
+          {activeStep === 6 && isFormFilled && isGridFilled && group && (
+            <Group activeCell={activeCell} form={form} group={group} />
+          )}
+
+          {activeStep === 7 &&
+            isFormFilled &&
+            isGridFilled &&
+            group &&
+            shape && (
+              <Shape
+                activeCell={activeCell}
                 form={form}
-                part={activeStep === 6 ? "group" : "shape"}
+                group={group}
+                shape={shape}
               />
-            }
-            backButton="Zpět"
-            nextButton={activeStep === 6 ? "Další" : "Vygenerovat"}
-          />
-        )}
+            )}
 
-      {/* Result */}
-      {activeStep === 8 && isFormFilled && (
-        <Container
-          children={
+          {/* Result */}
+          {activeStep === 8 && isFormFilled && (
             <Result
-              grid={grid}
-              // editOpen={editOpen}
               form={form}
               onFormChange={onFormChange}
-              defaultGrid={defaultGrid}
-              onDefaultGridChange={onDefaultGridChange}
-              // onEditClose={onEditClose}
-              // onEditOpen={onEditOpen}
+              setIsRandom={setIsRandom}
+              isRandom={isRandom}
+              setDisplayDefaultGrid={setDisplayDefaultGrid}
+              displayDefaultGrid={displayDefaultGrid}
             />
-          }
-          backButton="Zpět"
-          // middleButton={editOpen ? "Hotovo" : "Upravit"}
-          // onMiddleButtonClick={editOpen ? onEditClose : onEditOpen}
-          nextButton="Závěr"
-        />
-      )}
+          )}
 
-      {/* End */}
-      {activeStep === 9 && (
-        <Container
-          children={<End />}
-          title="Závěr"
-          onNextButtonClick={() => {
-            resetForm();
-            onStepChange(1);
-          }}
-        />
-      )}
+          {/* End */}
+          {activeStep === 9 && <End />}
+        </>
+      </ContainerWithStructure>
     </>
   );
 };
