@@ -57,16 +57,6 @@ export const customTheme = createTheme({
     },
   },
   components: {
-    MuiAppBar: {
-      styleOverrides: {
-        root: {
-          boxShadow: "none",
-          backgroundColor: "inherit",
-          maxWidth: "850px",
-          color: white,
-        },
-      },
-    },
     MuiButton: {
       styleOverrides: {
         root: {

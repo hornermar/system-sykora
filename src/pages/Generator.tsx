@@ -6,7 +6,7 @@ import { useDefaultGrid } from "../hooks/useDefaultGrid";
 import { size } from "lodash";
 import { FormValues } from "../types/FormValues";
 import { Container } from "../components/common/Container/Container";
-import { useStep } from "../hooks/useStep";
+import { useStepLogic } from "../hooks/useStepLogic";
 
 type GeneratorProps = {
   form: FormValues;
@@ -27,42 +27,8 @@ const Generator = ({
   setEmptyGrid,
   resetForm,
 }: GeneratorProps) => {
-  const { activeStep, onStepChange } = useStep();
-
-  const stepZero = activeStep === 0 || !activeStep;
-
-  const onStartClick = () => {
-    resetForm();
-    onStepChange(1);
-  };
-
-  const title = stepZero ? "Instrukce" : activeStep === 9 ? "Závěr" : "";
-  const nextButton = stepZero
-    ? "Začít"
-    : activeStep === 7
-    ? "Vygenerovat"
-    : activeStep === 8
-    ? "Závěr"
-    : activeStep === 9
-    ? ""
-    : "Další";
-  const nextButtonClick = stepZero ? onStartClick : undefined;
-
-  const disableNext = () => {
-    switch (activeStep) {
-      case 1:
-        return !form.columns || !form.rows;
-      case 3:
-        return !form.coefficient;
-      case 4:
-        return form.rule === null;
-
-      default:
-        return false;
-    }
-  };
-
-  const backButton = stepZero ? undefined : "Zpět";
+  const { title, nextButton, nextButtonClick, disableNext, backButton } =
+    useStepLogic({ form, resetForm });
 
   return (
     <Container

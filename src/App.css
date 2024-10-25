@@ -12,6 +12,7 @@ html {
 body {
   /* padding-top: 50px; */
   margin: 0;
+  background-color: #f3f3f3;
 }
 
 .underline {
@@ -25,5 +26,5 @@ body {
 .underline-disabled {
   text-decoration-color: rgb(158, 158, 158);
   color: rgb(158, 158, 158);
-  cursor: initial;
+  text-decoration-thickness: 3px;
 }

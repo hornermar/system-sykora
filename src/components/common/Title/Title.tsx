@@ -78,7 +78,7 @@ export const Title = ({ title, variant }: TitleProps) => {
       gap={3}
       sx={{
         padding: {
-          xs: variant === "h1" ? "70px 0 0" : "8px 0 0",
+          xs: variant === "h1" ? "66px 0 0" : "20px 0 0",
           lg: variant === "h1" ? "100px 0 20px" : "10px 0 20px",
         },
       }}

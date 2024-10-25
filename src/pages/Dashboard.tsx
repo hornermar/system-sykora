@@ -72,8 +72,8 @@ const Dashboard = () => {
           display: { xs: "flex", sm: "none" },
           position: "absolute",
           top: 0,
-
           right: 0,
+          zIndex: 1,
         }}
       />
     </>

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Container } from "../components/common/Container/Container";
 import { Structure } from "../components/Structure/Structure";
 import { originalGrid } from "../lib/originalGrid";
-import { useTheme } from "@mui/material/styles";
 
 const BlackWhiteStructureWrapper = () => {
   return (
@@ -41,12 +40,10 @@ const BlackWhiteStructureWrapper = () => {
 };
 
 export const BlackWhiteStructure = () => {
-  const theme = useTheme();
   return (
     <Container
       title="Stěna, 1969"
       children={<BlackWhiteStructureWrapper />}
-      color={theme.palette.primary}
       isPage
     />
   );

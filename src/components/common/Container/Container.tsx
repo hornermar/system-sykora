@@ -20,7 +20,6 @@ export const Container = ({
   children,
   title,
   titleVariant,
-  color,
   backButton,
   nextButton,
   disableNext,
@@ -39,85 +38,77 @@ export const Container = ({
   };
 
   return (
-    <>
+    <Stack
+      sx={{
+        maxWidth: maxWidth,
+        width: "100%",
+        margin: "0 auto",
+        justifyContent: "space-between",
+        // height: "100%",
+        minHeight: { xs: "100vh", lg: "calc(100vh - 48px )" },
+        backgroundColor: isPage ? theme.palette.primary.light : "white",
+        padding: { xs: 0, lg: "0 20px" },
+        marginTop: { xs: "-48px", lg: "0" },
+        position: "relative",
+      }}
+    >
       <Box
-        component="main"
         sx={{
-          backgroundColor: color?.light ?? theme.palette.secondary.light,
-          color: color?.main ?? "unset",
-          minHeight: "100vh",
+          fontSize: "16px",
+          padding: {
+            xs: isPage ? "0 20px 20px" : "0px 20px 70px",
+            lg: "40px 20px 0",
+          },
+
+          textAlign: "left",
         }}
       >
-        <Stack
-          sx={{
-            maxWidth: maxWidth,
-            width: "100%",
-            margin: "0 auto",
-            justifyContent: "space-between",
-            height: "100%",
-            minHeight: "100vh",
-            backgroundColor: color?.light ?? "white",
-            padding: { xs: 0, lg: "0 20px" },
-          }}
-        >
-          <Box
-            sx={{
-              fontSize: "16px",
-              padding: {
-                xs: isPage ? "50px 20px 20px" : "10px 20px 70px",
-                lg: "60px 20px 0",
-              },
-              textAlign: "left",
-            }}
-          >
-            {/* Title with Progress */}
-            <Title title={title} variant={titleVariant} />
+        {/* Title with Progress */}
+        <Title title={title} variant={titleVariant} />
 
-            {/* Children */}
-            <Box sx={{ marginTop: "20px" }}>{children}</Box>
-          </Box>
-
-          {/* Buttons */}
-          {!isPage && (
-            <>
-              {backButton && (
-                <Button
-                  variant="outlined"
-                  onClick={handleBack}
-                  disableTouchRipple
-                  disableFocusRipple
-                  sx={{
-                    position: { xs: "fixed", lg: "block" },
-                    bottom: 20,
-                    left: 20,
-                    zIndex: 1000,
-                  }}
-                >
-                  {backButton}
-                </Button>
-              )}
-
-              {nextButton && (
-                <Button
-                  variant="contained"
-                  onClick={onNextButtonClick ?? handleNext}
-                  disabled={disableNext}
-                  disableTouchRipple
-                  disableFocusRipple
-                  sx={{
-                    position: "fixed",
-                    bottom: 20,
-                    right: 20,
-                    zIndex: 1000,
-                  }}
-                >
-                  {nextButton}
-                </Button>
-              )}
-            </>
-          )}
-        </Stack>
+        {/* Children */}
+        <Box sx={{ marginTop: "20px" }}>{children}</Box>
       </Box>
-    </>
+
+      {/* Buttons */}
+      {!isPage && (
+        <>
+          {backButton && (
+            <Button
+              variant="outlined"
+              onClick={handleBack}
+              disableTouchRipple
+              disableFocusRipple
+              sx={{
+                position: { xs: "fixed", lg: "block" },
+                bottom: 20,
+                left: { xs: 20, lg: "calc(50% - 150px)" },
+                zIndex: 1000,
+              }}
+            >
+              {backButton}
+            </Button>
+          )}
+
+          {nextButton && (
+            <Button
+              variant="contained"
+              onClick={onNextButtonClick ?? handleNext}
+              disabled={disableNext}
+              disableTouchRipple
+              disableFocusRipple
+              sx={{
+                position: "fixed",
+                bottom: 20,
+                right: { xs: 20, lg: "calc(50% - 150px)" },
+                zIndex: 1000,
+              }}
+            >
+              {nextButton}
+            </Button>
+          )}
+        </>
+      )}
+    </Stack>
   );
 };
