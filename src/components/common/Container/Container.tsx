@@ -83,7 +83,7 @@ export const Container = ({
                 position: { xs: "fixed", lg: "block" },
                 bottom: 20,
                 left: { xs: 20, lg: "calc(50% - 150px)" },
-                zIndex: 1000,
+                zIndex: 900,
               }}
             >
               {backButton}
@@ -101,7 +101,7 @@ export const Container = ({
                 position: "fixed",
                 bottom: 20,
                 right: { xs: 20, lg: "calc(50% - 150px)" },
-                zIndex: 1000,
+                zIndex: 900,
               }}
             >
               {nextButton}

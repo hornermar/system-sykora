@@ -8,11 +8,11 @@ import { FormValues } from "../types/FormValues";
 export const useGroupAndShape = (
   slicedGrid: string[][] | null,
   grid: string[][],
-  activeCell: Cell,
+  activeCell: Cell | undefined,
   form: FormValues
 ) => {
   const group = useMemo(() => {
-    if (size(slicedGrid) === 0) {
+    if (size(slicedGrid) === 0 || !activeCell) {
       return null;
     }
     return getColorDensity(
@@ -24,7 +24,7 @@ export const useGroupAndShape = (
   }, [slicedGrid, activeCell, form.coefficient]);
 
   const shape = useMemo(() => {
-    if (size(slicedGrid) === 0 || !group) {
+    if (size(slicedGrid) === 0 || !group || !activeCell) {
       return null;
     }
     return getShape(grid, activeCell.x, activeCell.y, group.result, form.rule!);

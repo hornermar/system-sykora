@@ -114,9 +114,8 @@ export const Header = (props: Props) => {
         >
           {map(navItems.slice(1), (item) => {
             return (
-              <Typography variant="subtitle1">
+              <Typography variant="subtitle1" key={item.label}>
                 <Link
-                  key={item.label}
                   to={item.to}
                   className={
                     currentPage === item.to

@@ -19,7 +19,7 @@ import { Group } from "./Group/Group";
 import { Shape } from "./Shape/Shape";
 import { useGroupAndShape } from "../../hooks/useGroupAndShape";
 
-const initialActiveCell = { x: 0, y: 0, name: "" };
+export const initialActiveCell = { x: 0, y: 0, name: "" };
 
 type ContentProps = {
   form: FormValues;
@@ -41,7 +41,7 @@ export const Content = ({
   const { activeStep } = useStep();
   const [isRandom, setIsRandom] = useState<boolean>(false);
   const [displayDefaultGrid, setDisplayDefaultGrid] = useState<boolean>(false);
-  const [activeCell, setActiveCell] = useState<Cell>(initialActiveCell);
+  const [activeCell, setActiveCell] = useState<Cell | undefined>(undefined);
 
   const emptyGrid = createEmptyGrid(form.rows, form.columns);
 
@@ -85,11 +85,11 @@ export const Content = ({
       case 5:
         return isFormFilled ? <GoingThrough /> : null;
       case 6:
-        return isFormFilled && isGridFilled && group ? (
+        return isFormFilled && isGridFilled && group && activeCell ? (
           <Group activeCell={activeCell} form={form} group={group} />
         ) : null;
       case 7:
-        return isFormFilled && isGridFilled && group && shape ? (
+        return isFormFilled && isGridFilled && group && shape && activeCell ? (
           <Shape
             activeCell={activeCell}
             form={form}
@@ -129,6 +129,7 @@ export const Content = ({
             setActiveCell={setActiveCell}
             group={group}
             shape={shape}
+            slicedGrid={slicedGrid}
           />
         }
       >

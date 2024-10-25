@@ -80,7 +80,7 @@ export const customTheme = createTheme({
         },
         containedPrimary: {
           border: `2px solid ${black}`,
-          "&:active": {
+          "&:activ, &:focuse": {
             backgroundColor: black,
           },
         },

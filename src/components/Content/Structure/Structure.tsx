@@ -1,15 +1,15 @@
+import { useEffect, useCallback, useMemo, useRef } from "react";
 import { Structure } from "../../Structure/Structure";
 import { useSwitch } from "../../../hooks/useSwitch";
 import { ElementSelect } from "../Elements/Select";
 import { useStep } from "../../../hooks/useStep";
-import { useEffect, useCallback, useMemo } from "react";
 import { mapGrid } from "../../../utils/mapGrid";
 import { set, map, size } from "lodash";
 import { Cell } from "../../../types/General";
-import { getSlicedGrid } from "../../../utils/getSlicedGrid";
 import { useTheme, useMediaQuery } from "@mui/material";
 import { Shape } from "../../../types/Shape";
 import { Density } from "../../../types/Density";
+import { initialActiveCell } from "../Content";
 
 type ContentStructureProps = {
   defaultGrid: string[][];
@@ -19,8 +19,9 @@ type ContentStructureProps = {
   displayDefaultGrid: boolean;
   group: Density | null;
   shape: Shape | null;
-  activeCell: Cell;
-  setActiveCell: (newActiveCell: Cell) => void;
+  activeCell: Cell | undefined;
+  setActiveCell: (newActiveCell: Cell | undefined) => void;
+  slicedGrid: string[][];
 };
 
 export const ContentStructure = ({
@@ -33,10 +34,11 @@ export const ContentStructure = ({
   shape,
   activeCell,
   setActiveCell,
+  slicedGrid,
 }: ContentStructureProps) => {
   const { activeStep } = useStep();
   const [openSelect, onOpenSelect, onCloseSelect] = useSwitch(false);
-  // const [isRunning, setIsRunning] = useState(false);
+  const isRunningRef = useRef(false);
 
   const theme = useTheme();
   const isSmallMedia = useMediaQuery(theme.breakpoints.down("lg"));
@@ -69,22 +71,25 @@ export const ContentStructure = ({
       ? onCellClick
       : undefined;
 
-  // const goThroughGrid = useCallback(() => {
-  //   mapGrid(
-  //     defaultGrid,
-  //     (x, y) => {
-  //       const content = defaultGrid[y][x];
-  //       if (content === "0" || content === "-" || content === "+") {
-  //         setActiveCell({ x, y });
-  //       } else {
-  //         return;
-  //       }
-  //     },
-  //     200,
-  //     undefined,
-  //     () => goThroughGrid()
-  //   );
-  // }, [defaultGrid, setActiveCell]);
+  const goThroughGrid = useCallback(() => {
+    if (!isRunningRef.current) return;
+
+    mapGrid(
+      defaultGrid,
+      (x, y) => {
+        if (!isRunningRef.current) return;
+        const content = defaultGrid[y][x];
+        if (content === "0" || content === "-" || content === "+") {
+          setActiveCell({ x, y, name: content });
+        } else {
+          return;
+        }
+      },
+      200,
+      () => !isRunningRef.current,
+      () => goThroughGrid()
+    );
+  }, [defaultGrid, setActiveCell]);
 
   const initializeActiveCell = useCallback(() => {
     mapGrid(
@@ -97,17 +102,20 @@ export const ContentStructure = ({
       undefined,
       (x, y) => defaultGrid[y][x] === "0"
     );
-  }, [defaultGrid]);
+  }, [defaultGrid, setActiveCell]);
 
   useEffect(() => {
-    // if (activeStep === 5) {
-    //   setIsRunning(true);
-    //   goThroughGrid();
-    // }
+    if (activeStep === 5) {
+      setActiveCell(initialActiveCell);
+      isRunningRef.current = true;
+      goThroughGrid();
+    } else {
+      isRunningRef.current = false;
+    }
     if ((activeStep === 6 || activeStep === 7) && !activeCell) {
       initializeActiveCell();
     }
-  }, [activeStep]);
+  }, [activeStep, goThroughGrid, initializeActiveCell]);
 
   const activeShapeNeighbours: Cell[] = useMemo(
     () =>
@@ -142,7 +150,7 @@ export const ContentStructure = ({
     activeStep === 1
       ? emptyGrid
       : activeStep === 6 || activeStep === 7
-      ? getSlicedGrid(grid, defaultGrid, activeCell)
+      ? slicedGrid
       : activeStep === 8
       ? grid
       : defaultGrid;
@@ -152,7 +160,9 @@ export const ContentStructure = ({
       : undefined;
 
   const isNotVisile =
-    (isSmallMedia && (activeStep === 3 || activeStep === 4)) || !activeStep;
+    (isSmallMedia && (activeStep === 3 || activeStep === 4)) ||
+    !activeStep ||
+    activeStep === 9;
 
   if (isNotVisile) return null;
 
