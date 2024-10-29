@@ -65,10 +65,6 @@ export const customTheme = createTheme({
           boxShadow: "none",
           borderWidth: "2px",
 
-          "&:active, &:hover": {
-            transform: "scale(1.1)",
-          },
-
           "&:active, &:focus, &:hover": {
             boxShadow: "none",
           },
@@ -84,8 +80,11 @@ export const customTheme = createTheme({
           },
         },
         containedPrimary: {
-          backgroundColor: black,
           border: `2px solid ${black}`,
+          "&:active, &:hover": {
+            color: black,
+            border: `2px solid #04C2DF`,
+          },
         },
         outlinedPrimary: {
           border: "2px solid",
