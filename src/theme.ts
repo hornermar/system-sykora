@@ -64,14 +64,12 @@ export const customTheme = createTheme({
           padding: "10px 25px",
           boxShadow: "none",
           borderWidth: "2px",
-
           "&:active, &:focus, &:hover": {
             boxShadow: "none",
           },
           "&:focus-visible": {
             boxShadow: "none",
           },
-
           "&.Mui-disabled.MuiButton-contained": {
             border: "2px solid rgba(0, 0, 0, 0)",
           },
@@ -81,9 +79,9 @@ export const customTheme = createTheme({
         },
         containedPrimary: {
           border: `2px solid ${black}`,
-          "&:active, &:hover": {
-            color: black,
-            border: `2px solid #04C2DF`,
+          "&:hover": {
+            color: white,
+            backgroundColor: black,
           },
         },
         outlinedPrimary: {

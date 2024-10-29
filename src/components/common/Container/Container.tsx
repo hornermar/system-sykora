@@ -37,10 +37,6 @@ export const Container = ({
     onStepChange(activeStep + 1);
   };
 
-  const handleMouseDown = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.currentTarget.blur();
-  };
-
   return (
     <Stack
       sx={{
@@ -80,9 +76,6 @@ export const Container = ({
             <Button
               variant="outlined"
               onClick={handleBack}
-              onMouseDown={handleMouseDown}
-              disableTouchRipple
-              disableFocusRipple
               sx={{
                 position: { xs: "fixed", lg: "block" },
                 bottom: 20,
@@ -98,10 +91,7 @@ export const Container = ({
             <Button
               variant="contained"
               onClick={onNextButtonClick ?? handleNext}
-              onMouseDown={handleMouseDown}
               disabled={disableNext}
-              disableTouchRipple
-              disableFocusRipple
               sx={{
                 position: "fixed",
                 bottom: 20,
