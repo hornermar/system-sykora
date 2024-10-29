@@ -87,7 +87,12 @@ export const StructureGrid = memo(function StructureGrid({
                   ":active": {
                     zIndex: isClickable && !isCellOriginal ? 100 : 0,
                     transform:
-                      isClickable && !isCellOriginal ? "scale(1.1)" : "none",
+                      isClickable && !isCellOriginal ? "scale(1.05)" : "none",
+                  },
+                  ":hover": {
+                    zIndex: isClickable && !isCellOriginal ? 100 : 0,
+                    transform:
+                      isClickable && !isCellOriginal ? "scale(1.05)" : "none",
                   },
                 }}
               >
@@ -96,6 +101,7 @@ export const StructureGrid = memo(function StructureGrid({
                     sx={{
                       margin: 0,
                       fontWeight: 500,
+                      fontSize: Math.round(cellSize / 2.5),
                       color:
                         defaultGrid && isCellOriginal && highlightDefaultGrid
                           ? theme.palette.text.disabled
@@ -118,7 +124,8 @@ export const StructureGrid = memo(function StructureGrid({
                       opacity:
                         isCellOriginal && highlightDefaultGrid
                           ? 0.5
-                          : isCellActiveNeighbour || isCellActive
+                          : (isCellActiveNeighbour || isCellActive) &&
+                            !isCellSign
                           ? 0.4
                           : 1,
                     }}

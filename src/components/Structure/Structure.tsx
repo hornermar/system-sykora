@@ -12,7 +12,6 @@ import { SxProps, Theme, useMediaQuery, useTheme } from "@mui/system";
 export type StructureProps = {
   grid: string[][];
   defaultGrid?: string[][];
-  sx?: SxProps<Theme> | undefined;
   onCellClick?: (x: number, y: number, name: string) => void;
   activeCell?: Cell;
   activeNeighbours?: Cell[];
@@ -20,12 +19,12 @@ export type StructureProps = {
   viewMode?: ViewMode;
   isViewModeChangeable?: boolean;
   highlightDefaultGrid?: boolean;
+  sx?: SxProps<Theme> | undefined;
 };
 
 export const Structure = memo(function Structure({
   grid,
   defaultGrid,
-  sx,
   onCellClick,
   activeCell,
   activeNeighbours,
@@ -33,6 +32,7 @@ export const Structure = memo(function Structure({
   viewMode,
   isViewModeChangeable,
   highlightDefaultGrid,
+  sx,
 }: StructureProps) {
   const [mode, setMode] = useState<ViewMode>(viewMode ?? "image");
   const [cellSize, setCellSize] = useState(0);

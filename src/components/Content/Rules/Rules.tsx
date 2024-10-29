@@ -9,10 +9,8 @@ import {
   FormControlLabel,
   Radio,
   Typography,
-  useTheme,
-  useMediaQuery,
 } from "@mui/material";
-import { Grid } from "../../Grid/Grid";
+import { Structure } from "../../Structure/Structure";
 
 type RulesProps = {
   rule: FormValues["rule"];
@@ -21,10 +19,6 @@ type RulesProps = {
 
 export const Rules = ({ rule, onFormChange }: RulesProps) => {
   const { onStepChange } = useStep();
-  const theme = useTheme();
-  const isSmallMedia = useMediaQuery(theme.breakpoints.down("lg"));
-
-  const size = isSmallMedia ? 30 : 60;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onFormChange({ rule: Number(event.target.value) });
@@ -53,14 +47,7 @@ export const Rules = ({ rule, onFormChange }: RulesProps) => {
           ))}
         </RadioGroup>
       </FormControl>
-      {rule !== null && (
-        <Grid
-          grid={rulesItems[rule].example}
-          key={rule}
-          size={size}
-          sx={{ justifyContent: "flex-start" }}
-        />
-      )}
+      {rule !== null && <Structure grid={rulesItems[rule].example} />}
 
       {rule !== null && (
         <Typography

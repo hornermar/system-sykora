@@ -78,7 +78,11 @@ export const Grid = ({
                       ? theme.palette.secondary.dark
                       : "transparent",
                     ":active": {
-                      transform: onCellClick ? "scale(1.1)" : "none",
+                      transform: onCellClick ? "scale(1.05)" : "none",
+                    },
+                    ":hover": {
+                      zIndex: onCellClick ? 100 : 0,
+                      transform: onCellClick ? "scale(1.05)" : "none",
                     },
                     opacity: isCellActive ? 0.5 : 1,
                   }}
@@ -94,7 +98,7 @@ export const Grid = ({
                       height={size}
                       alt={`element ${cell}`}
                       style={{
-                        cursor: "pointer",
+                        cursor: onCellClick ? "pointer" : "unset",
                         opacity: isCellActive ? 0.4 : 1,
                       }}
                     />

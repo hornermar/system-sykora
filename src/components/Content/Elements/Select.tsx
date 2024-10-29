@@ -28,7 +28,7 @@ export const ElementSelect = ({
     _y: number | undefined,
     element: string
   ) => {
-    onCellChange(element === "x" ? "0" : element);
+    onCellChange(element);
     onClose();
   };
 
@@ -77,6 +77,7 @@ export const ElementSelect = ({
         }}
         color="secondary"
         disabled={activeCell.name === "0"}
+        disableRipple
       >
         Smazat
       </Button>
