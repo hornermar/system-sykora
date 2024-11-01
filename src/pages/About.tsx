@@ -8,7 +8,7 @@ const About = () => {
     <>
       <Typography variant="body1">
         Systém Sýkora je rekonstruovaný algoritmmus, který byl navržen Zdeňkěm
-        Sýkorou pro vytváření Struktur. Tato aplikace jej intreaktivní formou
+        Sýkorou pro vytváření struktur. Tato aplikace jej intreaktivní formou
         představuje a přibližuje jeho principy.
       </Typography>
 

@@ -1,5 +1,5 @@
 import { getCellSize } from "../../utils/getCellSize";
-import { Box, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { map, size } from "lodash";
 import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { Cell, ViewMode } from "../../types/General";
@@ -110,16 +110,6 @@ export const Structure = memo(function Structure({
             setViewMode={setMode}
           />
         </>
-      )}
-
-      {cellSize === 0 && rowsCount !== 0 && columnsCount !== 0 && (
-        <Box
-          sx={{
-            width: "100%",
-            paddingBottom: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.03)",
-          }}
-        ></Box>
       )}
     </Stack>
   );

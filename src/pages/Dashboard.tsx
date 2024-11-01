@@ -92,7 +92,6 @@ export const DashboardWrapper = () => {
       children={<Dashboard />}
       title="Systém Sýkora"
       titleVariant="h1"
-      // nextButton="Prozkoumat systém"
       onNextButtonClick={handleNextButtonClick}
     />
   );

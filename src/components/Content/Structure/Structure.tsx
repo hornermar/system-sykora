@@ -115,6 +115,10 @@ export const ContentStructure = ({
     if ((activeStep === 6 || activeStep === 7) && !activeCell) {
       initializeActiveCell();
     }
+
+    return () => {
+      isRunningRef.current = false;
+    };
   }, [activeStep, goThroughGrid, initializeActiveCell]);
 
   const activeShapeNeighbours: Cell[] = useMemo(
