@@ -51,7 +51,7 @@ const Dashboard = () => {
       >
         <b>Prozkoumat</b>
         <img
-          src="/icons/chevron-right.svg"
+          src="/system-sykora/icons/chevron-right.svg"
           width={10}
           height={10}
           alt={"left icon"}

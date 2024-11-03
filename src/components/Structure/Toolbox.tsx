@@ -42,8 +42,8 @@ export const StructureToolbox = ({
               <img
                 src={
                   viewMode === "image"
-                    ? "/icons/chevron-right-disabled.svg"
-                    : "/icons/chevron-right.svg"
+                    ? "/system-sykora/icons/chevron-right-disabled.svg"
+                    : "/system-sykora/icons/chevron-right.svg"
                 }
                 width={30}
                 height={25}
@@ -62,8 +62,8 @@ export const StructureToolbox = ({
               <img
                 src={
                   viewMode === "text"
-                    ? "/icons/chevron-left-disabled.svg"
-                    : "/icons/chevron-left.svg"
+                    ? "/system-sykora/icons/chevron-left-disabled.svg"
+                    : "/system-sykora/icons/chevron-left.svg"
                 }
                 width={30}
                 height={25}

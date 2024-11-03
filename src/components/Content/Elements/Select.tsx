@@ -60,7 +60,9 @@ export const ElementSelect = ({
         endIcon={
           <img
             src={
-              activeCell.name === "0" ? "/icons/xDisabled.svg" : "/icons/x.svg"
+              activeCell.name === "0"
+                ? "/system-sykora/icons/xDisabled.svg"
+                : "/system-sykora/icons/x.svg"
             }
             width={size / 2.5}
             height={size / 2.5}

@@ -35,7 +35,7 @@ export const Accordion = ({
       <AccordionSummary
         expandIcon={
           <img
-            src={"/icons/chevron-down.svg"}
+            src={"/system-sykora/icons/chevron-down.svg"}
             width={10}
             height={10}
             alt={"chevron down icon"}

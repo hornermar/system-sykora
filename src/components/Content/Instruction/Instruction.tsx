@@ -123,7 +123,7 @@ export const Instruction = () => {
         description="Do mřížek s modrou tečkou je možné klikat."
         children={
           <img
-            src={"/icons/circle.svg"}
+            src={"/system-sykora/icons/circle.svg"}
             width={20}
             height={20}
             alt={"circle icon"}

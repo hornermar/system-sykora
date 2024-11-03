@@ -7,11 +7,11 @@ import { useTheme } from "@mui/material/styles";
 const pathMap = (cell: string) => {
   switch (cell) {
     case "+":
-      return "icons/plus.svg";
+      return "/system-sykora/icons/plus.svg";
     case "-":
-      return "icons/minus.svg";
+      return "/system-sykora/icons/minus.svg";
     default:
-      return `/elements/${cell}.svg`;
+      return `/system-sykora/elements/${cell}.svg`;
   }
 };
 

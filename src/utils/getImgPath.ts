@@ -1,9 +1,9 @@
 export const getImgPath = (element: string) => {
   if (element === "+") {
-    return "icons/plus.svg";
+    return "/system-sykora/icons/plus.svg";
   } else if (element === "-") {
-    return "icons/minus.svg";
+    return "/system-sykora/icons/minus.svg";
   } else {
-    return `/elements/${element}.svg`;
+    return `/system-sykora/elements/${element}.svg`;
   }
 };
