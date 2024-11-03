@@ -50,7 +50,7 @@ export const Dialog = ({
         }}
       >
         <img
-          src={"/system-sykora/icons/xmark.svg"}
+          src={"/icons/xmark.svg"}
           width={30}
           height={30}
           alt={"close icon"}

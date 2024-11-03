@@ -2,7 +2,7 @@
   "name": "system-sykora",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://marketahajek.cz/system-sykora/",
+  "homepage": "https://system-sykora.marketahajek.cz/",
   "type": "module",
   "scripts": {
     "dev": "vite",

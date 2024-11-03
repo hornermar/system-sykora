@@ -34,7 +34,7 @@ export const Sources = () => {
             Geometrical Abstract Paintings. Leonardo. 1970, roč. 3, s. 409-413{" "}
             <Link to="https://www.jstor.org/stable/1572257">
               <img
-                src={"/system-sykora/icons/arrow-up-right-from-square.svg"}
+                src={"/icons/arrow-up-right-from-square.svg"}
                 width={11}
                 height={11}
                 alt={"open icon"}

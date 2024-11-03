@@ -102,7 +102,7 @@ export const Header = (props: Props) => {
           }}
         >
           <img
-            src={"/system-sykora/icons/bars.svg"}
+            src={"/icons/bars.svg"}
             width={30}
             height={30}
             alt={"chevron down icon"}

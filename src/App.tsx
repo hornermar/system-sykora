@@ -12,7 +12,7 @@ import "./App.css";
 function App() {
   return (
     <ThemeProvider theme={customTheme}>
-      <BrowserRouter basename="/system-sykora">
+      <BrowserRouter>
         <ScrollToTop />
         <Header />
         <Routes>

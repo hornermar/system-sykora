@@ -75,7 +75,7 @@ export const HeaderDrawer = ({
 
           <IconButton onClick={handleDrawerToggle}>
             <img
-              src={"/system-sykora/icons/xmark.svg"}
+              src={"/icons/xmark.svg"}
               width={30}
               height={30}
               alt={"close icon"}
@@ -102,7 +102,7 @@ export const HeaderDrawer = ({
                       sx={{ opacity: isDisabled ? 0.5 : 1 }}
                     >
                       <img
-                        src={"/system-sykora/icons/arrow-right.svg"}
+                        src={"/icons/arrow-right.svg"}
                         width={15}
                         height={15}
                         alt="arrow right icon"

@@ -58,7 +58,7 @@ export const Rules = ({ rule, onFormChange }: RulesProps) => {
         >
           Přeskočit na výstup (krok 8)
           <img
-            src="/system-sykora/icons/chevron-right.svg"
+            src="/icons/chevron-right.svg"
             width={10}
             height={10}
             alt={"left icon"}

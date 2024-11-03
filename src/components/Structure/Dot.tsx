@@ -21,7 +21,7 @@ export const StructureDot = () => {
           top: -30,
           right: 0,
         }}
-        src={"/system-sykora/icons/circle.svg"}
+        src={"/icons/circle.svg"}
         width={15}
         height={15}
         alt={"circle icon"}
