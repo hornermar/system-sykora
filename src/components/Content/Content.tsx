@@ -88,7 +88,7 @@ export const Content = ({
       ),
     },
     3: {
-      isValid: !!form.columns && !!form.rows && form.coefficient !== 0,
+      isValid: !!form.columns && !!form.rows,
       render: () => (
         <Coefficient
           coefficient={form.coefficient}
@@ -122,7 +122,7 @@ export const Content = ({
       ),
     },
     8: {
-      isValid: !!(isFormFilled && isGridFilled && group && !shape),
+      isValid: !!(isFormFilled && isGridFilled && group && shape),
       render: () => (
         <Result
           form={form}
