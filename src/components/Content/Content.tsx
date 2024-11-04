@@ -21,6 +21,11 @@ import { useGroupAndShape } from "../../hooks/useGroupAndShape";
 
 export const initialActiveCell = { x: 0, y: 0, name: "" };
 
+type StepConfig = {
+  isValid: boolean;
+  render: () => JSX.Element;
+};
+
 type ContentProps = {
   form: FormValues;
   onFormChange: (newFormValues: Partial<FormValues>) => void;
@@ -38,7 +43,7 @@ export const Content = ({
   grid,
   setEmptyGrid,
 }: ContentProps) => {
-  const { activeStep } = useStep();
+  const { activeStep, onStepChange } = useStep();
   const [isRandom, setIsRandom] = useState<boolean>(false);
   const [displayDefaultGrid, setDisplayDefaultGrid] = useState<boolean>(false);
   const [activeCell, setActiveCell] = useState<Cell | undefined>(undefined);
@@ -48,72 +53,94 @@ export const Content = ({
   const { randomGrid, slicedGrid } = useGrid(defaultGrid, grid, activeCell);
   const { group, shape } = useGroupAndShape(slicedGrid, grid, activeCell, form);
 
+  const handleInvalidState = () => {
+    onStepChange(0);
+    return null;
+  };
+
   const isFormFilled =
     form.columns && form.rows && form.coefficient !== 0 && form.rule !== null;
   const isGridFilled = size(grid) !== 0;
 
-  const renderContent = () => {
-    switch (activeStep) {
-      case 0:
-      case undefined:
-        return <Instruction />;
-      case 1:
-        return (
-          <Diagram
-            form={form}
-            onFormChange={onFormChange}
-            defaultGrid={defaultGrid}
-          />
-        );
-      case 2:
-        return (
-          <Elements
-            onDefaultGridChange={onDefaultGridChange}
-            setEmptyGrid={setEmptyGrid}
-            form={form}
-          />
-        );
-      case 3:
-        return (
-          <Coefficient
-            coefficient={form.coefficient}
-            onFormChange={onFormChange}
-          />
-        );
-      case 4:
-        return <Rules rule={form.rule} onFormChange={onFormChange} />;
-      case 5:
-        return isFormFilled ? <GoingThrough /> : null;
-      case 6:
-        return isFormFilled && isGridFilled && group && activeCell ? (
-          <Group activeCell={activeCell} form={form} group={group} />
-        ) : null;
-      case 7:
-        return isFormFilled && isGridFilled && group && shape && activeCell ? (
-          <Shape
-            activeCell={activeCell}
-            form={form}
-            group={group}
-            shape={shape}
-          />
-        ) : null;
-      case 8:
-        return isFormFilled ? (
-          <Result
-            form={form}
-            onFormChange={onFormChange}
-            setIsRandom={setIsRandom}
-            isRandom={isRandom}
-            setDisplayDefaultGrid={setDisplayDefaultGrid}
-            displayDefaultGrid={displayDefaultGrid}
-          />
-        ) : null;
-      case 9:
-        return <End />;
-      default:
-        return null;
-    }
+  const stepConfig: { [key: number]: StepConfig } = {
+    0: {
+      isValid: true,
+      render: () => <Instruction />,
+    },
+    1: {
+      isValid: true,
+      render: () => (
+        <Diagram
+          form={form}
+          onFormChange={onFormChange}
+          defaultGrid={defaultGrid}
+        />
+      ),
+    },
+    2: {
+      isValid: !!(form.columns && form.rows),
+      render: () => (
+        <Elements
+          onDefaultGridChange={onDefaultGridChange}
+          setEmptyGrid={setEmptyGrid}
+          form={form}
+        />
+      ),
+    },
+    3: {
+      isValid: !!form.columns && !!form.rows && form.coefficient !== 0,
+      render: () => (
+        <Coefficient
+          coefficient={form.coefficient}
+          onFormChange={onFormChange}
+        />
+      ),
+    },
+    4: {
+      isValid: !!form.columns && !!form.rows && form.coefficient !== 0,
+      render: () => <Rules rule={form.rule} onFormChange={onFormChange} />,
+    },
+    5: {
+      isValid: !!(isFormFilled && isGridFilled),
+      render: () => <GoingThrough />,
+    },
+    6: {
+      isValid: !!(isFormFilled && isGridFilled && group && activeCell),
+      render: () => (
+        <Group activeCell={activeCell!} form={form} group={group!} />
+      ),
+    },
+    7: {
+      isValid: !!(isFormFilled && isGridFilled && group && shape && activeCell),
+      render: () => (
+        <Shape
+          activeCell={activeCell!}
+          form={form}
+          group={group!}
+          shape={shape!}
+        />
+      ),
+    },
+    8: {
+      isValid: !!(isFormFilled && isGridFilled && group && !shape),
+      render: () => (
+        <Result
+          form={form}
+          onFormChange={onFormChange}
+          setIsRandom={setIsRandom}
+          isRandom={isRandom}
+          setDisplayDefaultGrid={setDisplayDefaultGrid}
+          displayDefaultGrid={displayDefaultGrid}
+        />
+      ),
+    },
+    9: {
+      isValid: !!(isFormFilled && isGridFilled && group && shape),
+      render: () => <End />,
+    },
   };
+
+  const currentStep = stepConfig[activeStep];
 
   return (
     <>
@@ -133,7 +160,9 @@ export const Content = ({
           />
         }
       >
-        {renderContent()}
+        {currentStep && currentStep.isValid
+          ? currentStep.render()
+          : handleInvalidState()}
       </ContainerWithStructure>
     </>
   );

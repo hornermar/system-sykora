@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { Container } from "../components/common/Container/Container";
 import { Sources } from "../components/Content/Sources/Sources";
-import { Contact } from "../components/Content/Contanct/Contank";
+import { Contact } from "../components/Content/Contact/Contact";
 
 const About = () => {
   return (

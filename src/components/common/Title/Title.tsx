@@ -64,7 +64,8 @@ export const Title = ({ title, variant }: TitleProps) => {
   if (activeStep === undefined) return null;
 
   const progress = (100 / steps.length) * activeStep;
-  const disableProgress = activeStep === 0 || activeStep > steps.length;
+  const disableProgress =
+    activeStep === 0 || activeStep > steps.length || !activeStep;
 
   const currentStep = find(steps, { order: activeStep });
 

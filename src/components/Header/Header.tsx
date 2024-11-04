@@ -25,7 +25,7 @@ const navItems = [
   },
   {
     label: "Prozkoumat systém",
-    to: "/struktura",
+    to: "/structure",
   },
   {
     label: "Struktura v Jindřišské",
@@ -33,7 +33,7 @@ const navItems = [
   },
   {
     label: "O projektu",
-    to: "/o-projektu",
+    to: "/about",
     colors: { backgroundColor: "black", color: "white" },
   },
 ];
@@ -55,13 +55,13 @@ export const Header = (props: Props) => {
   };
 
   const isLocationWithTitle =
-    ["/o-projektu", "/jindrisska"].includes(location.pathname) ||
+    ["/about", "/jindrisska"].includes(location.pathname) ||
     (!isSmallMedia && location.pathname !== "/");
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  const isPage = ["/o-projektu", "/jindrisska"].includes(location.pathname);
+  const isPage = ["/about", "/jindrisska"].includes(location.pathname);
   const currentPage = location.pathname + location.search;
 
   return (

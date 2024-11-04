@@ -10,7 +10,7 @@ type UseStepLogicProps = {
 export const useStepLogic = ({ form, resetForm }: UseStepLogicProps) => {
   const { activeStep, onStepChange } = useStep();
 
-  const stepZero = activeStep === 0 || !activeStep;
+  const stepZero = activeStep === 0;
 
   const onStartClick = useCallback(() => {
     resetForm();
@@ -20,6 +20,7 @@ export const useStepLogic = ({ form, resetForm }: UseStepLogicProps) => {
   const title = useMemo(() => {
     return stepZero ? "Instrukce" : activeStep === 9 ? "Závěr" : "";
   }, [stepZero, activeStep]);
+
   const nextButton = useMemo(() => {
     if (stepZero) return "Začít";
     if (activeStep === 7) return "Vygenerovat";

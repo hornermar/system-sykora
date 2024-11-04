@@ -7,6 +7,7 @@ import { customTheme } from "./theme";
 import { GeneratorWrapper } from "./pages/Generator";
 import { BlackWhiteStructure } from "./pages/BlackWhiteStructure";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
+import { PageNotFound } from "./pages/PageNotFound";
 import "./App.css";
 
 function App() {
@@ -17,10 +18,11 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<DashboardWrapper />} />
-          <Route path="/struktura" element={<GeneratorWrapper />} />
+          <Route path="/structure" element={<GeneratorWrapper />} />
 
           <Route path="/jindrisska" element={<BlackWhiteStructure />} />
-          <Route path="/o-projektu" element={<AboutWrapper />} />
+          <Route path="/about" element={<AboutWrapper />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

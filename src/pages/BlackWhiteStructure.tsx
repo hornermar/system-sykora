@@ -42,7 +42,7 @@ const BlackWhiteStructureWrapper = () => {
 export const BlackWhiteStructure = () => {
   return (
     <Container
-      title="Stěna, 1969"
+      title="Stěna, 1968"
       children={<BlackWhiteStructureWrapper />}
       isPage
     />

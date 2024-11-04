@@ -21,7 +21,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const handleNextButtonClick = () => {
-    navigate("/struktura");
+    navigate("/structure");
   };
 
   return (
@@ -84,7 +84,7 @@ export const DashboardWrapper = () => {
   const navigate = useNavigate();
 
   const handleNextButtonClick = () => {
-    navigate("/struktura");
+    navigate("/structure");
   };
 
   return (
