@@ -84,7 +84,7 @@ export const Header = (props: Props) => {
           variant="h3"
           sx={{
             cursor: "pointer",
-            color: theme.palette.secondary.dark,
+            color: theme.palette.primary.dark,
             zIndex: 1000,
           }}
           onClick={() => isLocationWithTitle && handleItemClick(navItems[0].to)}

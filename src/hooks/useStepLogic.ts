@@ -29,11 +29,15 @@ export const useStepLogic = ({ form, resetForm }: UseStepLogicProps) => {
     return "Další";
   }, [stepZero, activeStep]);
 
-  const nextButtonClick = useMemo(() => {
-    return stepZero ? onStartClick : undefined;
-  }, [stepZero, onStartClick]);
+  const handleNext = useMemo(() => {
+    return stepZero ? onStartClick : () => onStepChange(activeStep + 1);
+  }, [stepZero, onStartClick, activeStep, onStepChange]);
 
-  const disableNext = useCallback(() => {
+  const handleBack = () => {
+    onStepChange(activeStep - 1);
+  };
+
+  const disableNext = useMemo(() => {
     switch (activeStep) {
       case 1:
         return !form.columns || !form.rows;
@@ -53,8 +57,9 @@ export const useStepLogic = ({ form, resetForm }: UseStepLogicProps) => {
   return {
     title,
     nextButton,
-    nextButtonClick,
+    handleNext,
     disableNext,
     backButton,
+    handleBack,
   };
 };

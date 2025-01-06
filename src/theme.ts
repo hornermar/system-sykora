@@ -83,6 +83,10 @@ export const customTheme = createTheme({
             color: white,
             backgroundColor: black,
           },
+          "&.Mui-disabled:hover": {
+            color: "rgba(0, 0, 0, 0.26)",
+            backgroundColor: "rgba(0, 0, 0, 0.12)",
+          },
         },
         outlinedPrimary: {
           border: "2px solid",

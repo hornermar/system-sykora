@@ -1,5 +1,4 @@
 import { Stack, Box, PaletteColor, Button, useTheme } from "@mui/material";
-import { useStep } from "../../../hooks/useStep";
 import { Title } from "../Title/Title";
 
 const maxWidth = "1200px";
@@ -12,7 +11,8 @@ type ContainerProps = {
   backButton?: string;
   nextButton?: string;
   disableNext?: boolean;
-  onNextButtonClick?: () => void;
+  handleNext?: () => void;
+  handleBack?: () => void;
   isPage?: boolean;
 };
 
@@ -23,19 +23,11 @@ export const Container = ({
   backButton,
   nextButton,
   disableNext,
-  onNextButtonClick,
+  handleNext,
+  handleBack,
   isPage,
 }: ContainerProps) => {
-  const { activeStep, onStepChange } = useStep();
   const theme = useTheme();
-
-  const handleBack = () => {
-    onStepChange(activeStep - 1);
-  };
-
-  const handleNext = () => {
-    onStepChange(activeStep + 1);
-  };
 
   return (
     <Stack
@@ -55,7 +47,7 @@ export const Container = ({
         sx={{
           fontSize: "16px",
           padding: {
-            xs: isPage ? "40px 20px 20px" : "0px 20px 70px",
+            xs: isPage ? "60px 20px 20px" : "0px 20px 70px",
             lg: "40px 20px 0",
           },
 
@@ -90,7 +82,7 @@ export const Container = ({
           {nextButton && (
             <Button
               variant="contained"
-              onClick={onNextButtonClick ?? handleNext}
+              onClick={handleNext}
               disabled={disableNext}
               sx={{
                 position: "fixed",

@@ -1,22 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import { Container } from "../components/common/Container/Container";
 import { Typography } from "@mui/material";
-import { Structure } from "../components/Structure/Structure";
-import { useEffect, useState } from "react";
+// import { Structure } from "../components/Structure/Structure";
+// import { useEffect, useState } from "react";
 
-const grid1 = [["4y", "4r", "4z", "3z", "4y", "4r", "3y"]];
-const grid2 = [["4r", "4z", "3z", "4y", "4r", "4y", "4z"]];
+// const grid1 = [["4y", "4r", "4z", "3z", "4y", "4r", "3y"]];
+// const grid2 = [["4r", "4z", "3z", "4y", "4r", "4y", "4z"]];
 
 const Dashboard = () => {
-  const [currentGrid, setCurrentGrid] = useState(grid1);
+  // const [currentGrid, setCurrentGrid] = useState(grid1);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentGrid((prevGrid) => (prevGrid === grid1 ? grid2 : grid1));
-    }, 1000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCurrentGrid((prevGrid) => (prevGrid === grid1 ? grid2 : grid1));
+  //   }, 1000);
 
-    return () => clearInterval(interval); // Cleanup interval on component unmount
-  }, []);
+  //   return () => clearInterval(interval); // Cleanup interval on component unmount
+  // }, []);
 
   const navigate = useNavigate();
 
@@ -66,7 +66,7 @@ const Dashboard = () => {
         </i>
       </Typography>
 
-      <Structure
+      {/* <Structure
         grid={currentGrid}
         sx={{
           display: { xs: "flex", sm: "none" },
@@ -75,7 +75,7 @@ const Dashboard = () => {
           right: 0,
           zIndex: 1,
         }}
-      />
+      /> */}
     </>
   );
 };
@@ -83,7 +83,7 @@ const Dashboard = () => {
 export const DashboardWrapper = () => {
   const navigate = useNavigate();
 
-  const handleNextButtonClick = () => {
+  const handleNextButton = () => {
     navigate("/structure");
   };
 
@@ -92,7 +92,7 @@ export const DashboardWrapper = () => {
       children={<Dashboard />}
       title="Systém Sýkora"
       titleVariant="h1"
-      onNextButtonClick={handleNextButtonClick}
+      handleNext={handleNextButton}
     />
   );
 };

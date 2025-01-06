@@ -105,7 +105,7 @@ export const Content = ({
       render: () => <GoingThrough />,
     },
     6: {
-      isValid: !!(isFormFilled && isGridFilled && group && activeCell),
+      isValid: !!(isFormFilled && isGridFilled && activeCell),
       render: () => (
         <Group activeCell={activeCell!} form={form} group={group!} />
       ),
@@ -122,7 +122,7 @@ export const Content = ({
       ),
     },
     8: {
-      isValid: !!(isFormFilled && isGridFilled && group && shape),
+      isValid: !!(isFormFilled && isGridFilled),
       render: () => (
         <Result
           form={form}
@@ -135,7 +135,7 @@ export const Content = ({
       ),
     },
     9: {
-      isValid: !!(isFormFilled && isGridFilled && group && shape),
+      isValid: !!(isFormFilled && isGridFilled),
       render: () => <End />,
     },
   };

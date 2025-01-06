@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Container } from "../components/common/Container/Container";
 import { Structure } from "../components/Structure/Structure";
 import { originalGrid } from "../lib/originalGrid";
+import { ContainerWithStructure } from "../components/common/Container/WithStructure";
 
 const BlackWhiteStructureWrapper = () => {
   return (
@@ -34,7 +35,6 @@ const BlackWhiteStructureWrapper = () => {
         </Link>
         .
       </Typography>
-      <Structure grid={originalGrid} sx={{ paddingTop: "20px" }} />
     </>
   );
 };
@@ -43,7 +43,15 @@ export const BlackWhiteStructure = () => {
   return (
     <Container
       title="Stěna, 1968"
-      children={<BlackWhiteStructureWrapper />}
+      children={
+        <ContainerWithStructure
+          structure={
+            <Structure grid={originalGrid} sx={{ paddingTop: "20px" }} />
+          }
+        >
+          <BlackWhiteStructureWrapper />
+        </ContainerWithStructure>
+      }
       isPage
     />
   );

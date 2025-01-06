@@ -1,5 +1,4 @@
 import { Typography } from "@mui/material";
-import { Link } from "react-router-dom";
 
 export const Contact = () => {
   return (
@@ -9,9 +8,13 @@ export const Contact = () => {
       </Typography>
 
       <Typography variant="body1">
-        <Link to="https://marketahajek.cz" className="underline">
+        <a
+          href="https://marketahajek.cz"
+          className="underline"
+          rel="noopener noreferrer"
+        >
           www.marketahajek.cz
-        </Link>
+        </a>
       </Typography>
     </>
   );

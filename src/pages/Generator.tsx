@@ -27,16 +27,17 @@ const Generator = ({
   setEmptyGrid,
   resetForm,
 }: GeneratorProps) => {
-  const { title, nextButton, nextButtonClick, disableNext, backButton } =
+  const { title, nextButton, handleNext, disableNext, backButton, handleBack } =
     useStepLogic({ form, resetForm });
 
   return (
     <Container
       title={title}
       nextButton={nextButton}
-      onNextButtonClick={nextButtonClick}
+      handleNext={handleNext}
       backButton={backButton}
-      disableNext={disableNext()}
+      handleBack={handleBack}
+      disableNext={disableNext}
     >
       <Content
         form={form}
