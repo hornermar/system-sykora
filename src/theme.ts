@@ -3,13 +3,15 @@ import { createTheme } from "@mui/material/styles";
 const white = "#ffffff";
 const black = "#000000";
 
+const primary = "#04C2DF";
+
 export const customTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
       light: "#dcf6fa",
-      main: "#04C2DF",
-      dark: "#04C2DF",
+      main: primary,
+      dark: "#04a4bd",
       contrastText: black,
     },
     secondary: {
@@ -73,32 +75,29 @@ export const customTheme = createTheme({
           },
           "&.Mui-disabled.MuiButton-contained": {
             border: "2px solid rgba(0, 0, 0, 0)",
+            backgroundColor: "rgb(117, 117, 117)",
+            color: "#242424",
           },
-          "&.Mui-disabled": {
-            borderWidth: "2px",
+          // "&.Mui-disabled": {
+          //   borderWidth: "2px",
+          // },
+        },
+        containedSecondary: {
+          border: `2px solid ${black}`,
+          "&:hover": {
+            color: black,
+            backgroundColor: white,
           },
         },
         containedPrimary: {
           color: white,
-          // border: `2px solid ${white}`,
+          border: `2px solid ${primary}`,
           "&:hover": {
-            // color: black,
-            // backgroundColor: white,
-          },
-          "&.Mui-disabled:hover": {
-            color: "rgba(0, 0, 0, 0.26)",
-            backgroundColor: "rgba(0, 0, 0, 0.12)",
+            backgroundColor: primary,
           },
         },
-        // outlinedPrimary: {
-        //   border: "2px solid",
-        //   backgroundColor: black,
-        // },
         // endIcon: {
         //   marginLeft: "16px",
-        // },
-        // containedSecondary: {
-        //   backgroundColor: "#c2c2c2",
         // },
       },
     },

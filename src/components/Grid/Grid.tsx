@@ -73,9 +73,9 @@ export const Grid = ({
                     justifyContent: "center",
                     alignItems: "center",
                     backgroundColor: isCellActive
-                      ? theme.palette.primary.dark
+                      ? theme.palette.primary.main
                       : cell === "+" || cell === "-" || cell === "x"
-                      ? theme.palette.secondary.dark
+                      ? theme.palette.secondary.main
                       : "transparent",
                     ":active": {
                       transform: onCellClick ? "scale(1.05)" : "none",

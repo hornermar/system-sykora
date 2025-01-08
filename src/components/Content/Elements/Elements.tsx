@@ -1,4 +1,4 @@
-import { Box, Typography, Chip } from "@mui/material";
+import { Box, Typography, Chip, Rating } from "@mui/material";
 import { exampleGrid } from "../../../lib/grids";
 import { FormValues } from "../../../types/FormValues";
 
@@ -47,12 +47,37 @@ export const Elements = ({
       </Typography>
 
       <Typography variant="body1">
-        Pro postup vyplň alespoň <b>5</b> buněk: <b>{filledCells}</b>
+        Pro postup vyplň alespoň <b>5</b> buněk:
       </Typography>
+
+      <Rating
+        name="simple-controlled"
+        value={filledCells}
+        readOnly
+        max={5}
+        icon={
+          <img
+            src={"/icons/circle-check.svg"}
+            width={25}
+            height={25}
+            alt={"circle check icon"}
+            style={{ marginRight: "5px" }}
+          />
+        }
+        emptyIcon={
+          <img
+            src={"/icons/circle-empty.svg"}
+            width={25}
+            height={25}
+            alt={"circle icon"}
+            style={{ marginRight: "5px" }}
+          />
+        }
+      />
 
       <Box
         sx={{
-          marginBottom: "10px",
+          margin: "10px 0",
         }}
       >
         <Chip

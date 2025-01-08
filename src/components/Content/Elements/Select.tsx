@@ -56,6 +56,7 @@ export const ElementSelect = ({
 
       <Button
         variant="contained"
+        color="secondary"
         onClick={() => onClick(undefined, undefined, "0")}
         endIcon={
           <img
@@ -75,7 +76,6 @@ export const ElementSelect = ({
           marginTop: `-${size + 40}px`,
           marginLeft: `${size * 2 + 44}px`,
         }}
-        color="secondary"
         disabled={activeCell.name === "0"}
         disableRipple
       >

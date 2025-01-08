@@ -78,7 +78,7 @@ export const StructureGrid = memo(function StructureGrid({
                       ? `1px solid ${theme.palette.secondary.dark}`
                       : "initial",
                   backgroundColor: isCellActive
-                    ? theme.palette.primary.dark
+                    ? theme.palette.primary.main
                     : isCellActiveNeighbour
                     ? theme.palette.primary.light
                     : theme.palette.secondary.light,

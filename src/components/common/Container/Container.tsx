@@ -40,7 +40,7 @@ export const Container = ({
         justifyContent: "space-between",
         minHeight: { xs: "100vh", lg: "calc(100vh - 48px )" },
         backgroundColor: isPage
-          ? theme.palette.primary.dark
+          ? theme.palette.primary.main
           : theme.palette.primary.contrastText,
         padding: { xs: 0, lg: "0 20px" },
         marginTop: { xs: "-48px", lg: "0" },
@@ -84,7 +84,7 @@ export const Container = ({
                 position: { xs: "fixed", lg: "block" },
                 bottom: 20,
                 left: { xs: 20, lg: "calc(50% - 150px)" },
-                zIndex: 200,
+                zIndex: 800,
               }}
             >
               {backButton}
@@ -101,7 +101,7 @@ export const Container = ({
                 position: "fixed",
                 bottom: 20,
                 right: { xs: 20, lg: "calc(50% - 150px)" },
-                zIndex: 200,
+                zIndex: 800,
               }}
             >
               {nextButton}

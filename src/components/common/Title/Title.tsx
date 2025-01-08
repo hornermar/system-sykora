@@ -1,4 +1,4 @@
-import { find } from "lodash";
+import { find, size } from "lodash";
 import { Box, Stack, Typography, IconButton } from "@mui/material";
 import CircularProgress, {
   CircularProgressProps,
@@ -36,7 +36,7 @@ const CircularProgressWithLabel = (
           position: "absolute",
           left: 8,
           top: 8,
-          color: theme.palette.primary.dark,
+          color: theme.palette.primary.main,
         })}
       />
     </Box>
@@ -83,7 +83,7 @@ export const Title = ({ title, variant, onOpenInstruction }: TitleProps) => {
       )}
       <Box sx={{ position: "relative", width: "100%" }}>
         <Typography variant={variant ?? "h2"}>
-          {activeStep ? (
+          {activeStep && activeStep !== size(steps) + 1 ? (
             <span style={{ marginRight: "10px" }}>{activeStep}</span>
           ) : null}
 
