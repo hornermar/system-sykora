@@ -14,6 +14,7 @@ type ContainerProps = {
   handleNext?: () => void;
   handleBack?: () => void;
   isPage?: boolean;
+  onOpenInstruction?: () => void;
 };
 
 export const Container = ({
@@ -26,6 +27,7 @@ export const Container = ({
   handleNext,
   handleBack,
   isPage,
+  onOpenInstruction,
 }: ContainerProps) => {
   const theme = useTheme();
 
@@ -37,10 +39,15 @@ export const Container = ({
         margin: "0 auto",
         justifyContent: "space-between",
         minHeight: { xs: "100vh", lg: "calc(100vh - 48px )" },
-        backgroundColor: isPage ? theme.palette.primary.light : "white",
+        backgroundColor: isPage
+          ? theme.palette.primary.dark
+          : theme.palette.primary.contrastText,
         padding: { xs: 0, lg: "0 20px" },
         marginTop: { xs: "-48px", lg: "0" },
         position: "relative",
+        color: isPage
+          ? theme.palette.primary.contrastText
+          : theme.palette.text.primary,
       }}
     >
       <Box
@@ -55,7 +62,11 @@ export const Container = ({
         }}
       >
         {/* Title with Progress */}
-        <Title title={title} variant={titleVariant} />
+        <Title
+          title={title}
+          variant={titleVariant}
+          onOpenInstruction={onOpenInstruction}
+        />
 
         {/* Children */}
         <Box sx={{ marginTop: "20px" }}>{children}</Box>
@@ -66,13 +77,14 @@ export const Container = ({
         <>
           {backButton && (
             <Button
-              variant="outlined"
+              variant="contained"
+              color="secondary"
               onClick={handleBack}
               sx={{
                 position: { xs: "fixed", lg: "block" },
                 bottom: 20,
                 left: { xs: 20, lg: "calc(50% - 150px)" },
-                zIndex: 900,
+                zIndex: 200,
               }}
             >
               {backButton}
@@ -82,13 +94,14 @@ export const Container = ({
           {nextButton && (
             <Button
               variant="contained"
+              color="primary"
               onClick={handleNext}
               disabled={disableNext}
               sx={{
                 position: "fixed",
                 bottom: 20,
                 right: { xs: 20, lg: "calc(50% - 150px)" },
-                zIndex: 900,
+                zIndex: 200,
               }}
             >
               {nextButton}

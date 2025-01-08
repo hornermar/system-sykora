@@ -1,9 +1,10 @@
-import { Step, useStep } from "../../../hooks/useStep";
+import { find } from "lodash";
+import { Box, Stack, Typography, IconButton } from "@mui/material";
 import CircularProgress, {
   CircularProgressProps,
 } from "@mui/material/CircularProgress";
-import { Box, Stack, Typography } from "@mui/material";
-import { find, size } from "lodash";
+
+import { Step, useStep } from "../../../hooks/useStep";
 
 const CircularProgressWithLabel = (
   props: CircularProgressProps & {
@@ -12,60 +13,49 @@ const CircularProgressWithLabel = (
     steps: Step[];
   }
 ) => {
-  const { activeStep, steps, ...circularProgressProps } = props;
+  const { value } = props;
+  const circleSize = 64;
 
   return (
     <Box sx={{ position: "relative" }}>
       <CircularProgress
-        thickness={4}
+        thickness={1}
         variant="determinate"
         value={100}
         sx={(theme) => ({
           color: theme.palette.grey[200],
         })}
-        size={circularProgressProps.size}
+        size={circleSize}
       />
       <CircularProgress
-        thickness={4}
+        thickness={22}
         variant="determinate"
-        {...circularProgressProps}
-        sx={{ position: "absolute", left: 0 }}
-      />
-      <Box
-        sx={{
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
+        size={circleSize - 16}
+        value={value}
+        sx={(theme) => ({
           position: "absolute",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Typography
-          variant="subtitle2"
-          component="div"
-          sx={{ color: "text.secondary", marginTop: "-6px" }}
-        >{`${activeStep}/${size(steps)}`}</Typography>
-      </Box>
+          left: 8,
+          top: 8,
+          color: theme.palette.primary.dark,
+        })}
+      />
     </Box>
   );
 };
 
 type TitleProps = {
   title: string | undefined;
+  onOpenInstruction?: () => void;
   variant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 };
 
-export const Title = ({ title, variant }: TitleProps) => {
+export const Title = ({ title, variant, onOpenInstruction }: TitleProps) => {
   const { steps, activeStep } = useStep();
 
   if (activeStep === undefined) return null;
 
   const progress = (100 / steps.length) * activeStep;
-  const disableProgress =
-    activeStep === 0 || activeStep > steps.length || !activeStep;
+  const disableProgress = activeStep > steps.length || !activeStep;
 
   const currentStep = find(steps, { order: activeStep });
 
@@ -76,10 +66,10 @@ export const Title = ({ title, variant }: TitleProps) => {
     <Stack
       flexDirection="row"
       width="100%"
-      gap={3}
+      gap={2}
       sx={{
         padding: {
-          xs: variant === "h1" ? "66px 0 0" : "20px 0 0",
+          xs: variant === "h1" ? "40px 0 0" : "20px 0 0",
           lg: variant === "h1" ? "100px 0 20px" : "10px 0 20px",
         },
       }}
@@ -89,17 +79,34 @@ export const Title = ({ title, variant }: TitleProps) => {
           value={progress}
           activeStep={activeStep}
           steps={steps}
-          size={65}
         />
       )}
-      <Box>
+      <Box sx={{ position: "relative", width: "100%" }}>
         <Typography variant={variant ?? "h2"}>
+          {activeStep ? (
+            <span style={{ marginRight: "10px" }}>{activeStep}</span>
+          ) : null}
+
           {currentTitle?.toUpperCase()}
         </Typography>
         {currentStep?.subtitle && (
           <Typography variant="body1" sx={{ color: "rgb(158, 158, 158)" }}>
             {currentStep.subtitle}
           </Typography>
+        )}
+
+        {!disableProgress && (
+          <IconButton
+            onClick={onOpenInstruction}
+            sx={{ position: "absolute", right: -5, bottom: 6 }}
+          >
+            <img
+              src={"/system-sykora/icons/question.svg"}
+              width={20}
+              height={20}
+              alt={"question icon"}
+            />
+          </IconButton>
         )}
       </Box>
     </Stack>

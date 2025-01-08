@@ -1,4 +1,10 @@
-import { FormValues } from "../../types/FormValues";
+import { useCallback, useState, useMemo } from "react";
+import { size } from "lodash";
+
+import { useStep } from "../../hooks/useStep";
+import { useGrid } from "../../hooks/useGrid";
+import { createEmptyGrid } from "../../utils/createEmptyGrid";
+import { getFilledCells } from "../../utils/getFilledCells";
 import { Coefficient } from "./Coefficient/Coefficient";
 import { Diagram } from "./Diagram/Diagram";
 import { Elements } from "./Elements/Elements";
@@ -6,18 +12,14 @@ import { Rules } from "./Rules/Rules";
 import { Result } from "./Result/Result";
 import { GoingThrough } from "./GoingThrought/GoingThrough";
 import { Instruction } from "./Instruction/Instruction";
-import { useStep } from "../../hooks/useStep";
-import { size } from "lodash";
 import { End } from "./End/End";
-import { useState } from "react";
 import { ContainerWithStructure } from "../common/Container/WithStructure";
 import { ContentStructure } from "./Structure/Structure";
-import { createEmptyGrid } from "../../utils/createEmptyGrid";
 import { Cell } from "../../types/General";
-import { useGrid } from "../../hooks/useGrid";
 import { Group } from "./Group/Group";
 import { Shape } from "./Shape/Shape";
 import { useGroupAndShape } from "../../hooks/useGroupAndShape";
+import { FormValues } from "../../types/FormValues";
 
 export const initialActiveCell = { x: 0, y: 0, name: "" };
 
@@ -33,6 +35,8 @@ type ContentProps = {
   onDefaultGridChange: (newDefaultGrid: string[][]) => void;
   grid: string[][];
   setEmptyGrid: () => void;
+  openInstruction: boolean;
+  onCloseInstruction: () => void;
 };
 
 export const Content = ({
@@ -42,6 +46,8 @@ export const Content = ({
   onDefaultGridChange,
   grid,
   setEmptyGrid,
+  openInstruction,
+  onCloseInstruction,
 }: ContentProps) => {
   const { activeStep, onStepChange } = useStep();
   const [isRandom, setIsRandom] = useState<boolean>(false);
@@ -53,20 +59,18 @@ export const Content = ({
   const { randomGrid, slicedGrid } = useGrid(defaultGrid, grid, activeCell);
   const { group, shape } = useGroupAndShape(slicedGrid, grid, activeCell, form);
 
-  const handleInvalidState = () => {
-    onStepChange(0);
+  const handleInvalidState = useCallback(() => {
+    onStepChange(1);
     return null;
-  };
+  }, [onStepChange]);
 
   const isFormFilled =
     form.columns && form.rows && form.coefficient !== 0 && form.rule !== null;
   const isGridFilled = size(grid) !== 0;
 
+  const filledCells = useMemo(() => getFilledCells(defaultGrid), [defaultGrid]);
+
   const stepConfig: { [key: number]: StepConfig } = {
-    0: {
-      isValid: true,
-      render: () => <Instruction />,
-    },
     1: {
       isValid: true,
       render: () => (
@@ -81,6 +85,7 @@ export const Content = ({
       isValid: !!(form.columns && form.rows),
       render: () => (
         <Elements
+          filledCells={filledCells}
           onDefaultGridChange={onDefaultGridChange}
           setEmptyGrid={setEmptyGrid}
           form={form}
@@ -163,6 +168,7 @@ export const Content = ({
         {currentStep && currentStep.isValid
           ? currentStep.render()
           : handleInvalidState()}
+        <Instruction open={openInstruction} onClose={onCloseInstruction} />
       </ContainerWithStructure>
     </>
   );

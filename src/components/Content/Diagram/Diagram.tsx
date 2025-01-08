@@ -56,6 +56,7 @@ export const Diagram = ({ form, onFormChange }: DiagramProps) => {
       >
         {map(chips, (chip, index) => (
           <Chip
+            variant="outlined"
             key={index}
             label={`${chip.columns}x${chip.rows}`}
             onClick={() =>

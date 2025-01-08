@@ -1,29 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { Container } from "../components/common/Container/Container";
 import { Typography } from "@mui/material";
-// import { Structure } from "../components/Structure/Structure";
-// import { useEffect, useState } from "react";
-
-// const grid1 = [["4y", "4r", "4z", "3z", "4y", "4r", "3y"]];
-// const grid2 = [["4r", "4z", "3z", "4y", "4r", "4y", "4z"]];
+import { useForm } from "../hooks/useForm";
+import { useCallback } from "react";
 
 const Dashboard = () => {
-  // const [currentGrid, setCurrentGrid] = useState(grid1);
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setCurrentGrid((prevGrid) => (prevGrid === grid1 ? grid2 : grid1));
-  //   }, 1000);
-
-  //   return () => clearInterval(interval); // Cleanup interval on component unmount
-  // }, []);
-
-  const navigate = useNavigate();
-
-  const handleNextButtonClick = () => {
-    navigate("/structure");
-  };
-
   return (
     <>
       <Typography variant="body1">
@@ -31,38 +12,23 @@ const Dashboard = () => {
         abstraktní malby, které nazýval <b>Struktury</b>.
       </Typography>
       <Typography variant="body1">
-        Jejich kompozice byla tvořena opakujícími se čtverci či obdélníky s
-        geometrickými vzory. Umístění těchto elementů ovlivňovala řada pravidel.
+        Jejich kompozice byla tvořena prvky, opakujícími se čtverci či
+        obdélníky, které měli uvnitř různé obrazce. Rozmístění těchto prvků
+        ovlivňovala řada pravidel.
       </Typography>
 
       <Typography variant="body1">
-        Výpočet elementů se svou složitostí stal ideálním pro <b>počítač</b>. V
-        roce <b>1964</b> začal proto Sýkora společně s matematikem{" "}
-        <b>Jaroslavem Blažkem</b> vytvářet program, který tento systém
-        zprovoznil. Vznikl tak unikátní algoritmus.
-      </Typography>
-
-      <Typography
-        variant="subtitle1"
-        component="a"
-        className="underline"
-        onClick={handleNextButtonClick}
-        sx={{ marginTop: "20px" }}
-      >
-        <b>Prozkoumat</b>
-        <img
-          src="/icons/chevron-right.svg"
-          width={10}
-          height={10}
-          alt={"left icon"}
-          style={{ marginLeft: "6px" }}
-        />
+        Výpočet rozmístění prvků se svou složitostí stal ideálním pro{" "}
+        <b>počítač</b>. V roce <b>1964</b> začal proto Sýkora společně s
+        matematikem <b>Jaroslavem Blažkem</b> vytvářet program, který tento
+        systém zprovoznil. Vznikl tak unikátní algoritmus.
       </Typography>
 
       <Typography variant="body1" sx={{ marginTop: "20px" }}>
         <i>
-          Zjistíš, jak algoritmus funguje, jaká pravidla dodržuje a jaké vstupy
-          zadával umělec a co už byla práce počítače.
+          Sestav si svého Sýkoru a zjisti, jak algoritmus funguje.
+          {/* jaká pravidla
+          dodržuje a jaké vstupy zadával umělec a co už byla práce počítače. */}
         </i>
       </Typography>
 
@@ -82,9 +48,15 @@ const Dashboard = () => {
 
 export const DashboardWrapper = () => {
   const navigate = useNavigate();
+  const { onFormChange, defaultFormValues } = useForm();
+
+  const resetForm = useCallback(() => {
+    onFormChange(defaultFormValues);
+  }, [onFormChange, defaultFormValues]);
 
   const handleNextButton = () => {
-    navigate("/structure");
+    resetForm();
+    navigate("/structure?step=1");
   };
 
   return (
@@ -93,6 +65,7 @@ export const DashboardWrapper = () => {
       title="Systém Sýkora"
       titleVariant="h1"
       handleNext={handleNextButton}
+      nextButton="Začít"
     />
   );
 };

@@ -31,6 +31,7 @@ export const StructureToolbox = ({
           sx={{
             justifyContent: "space-evenly",
             width: "100%",
+            backgroundColor: "transparent",
           }}
           nextButton={
             <IconButton
@@ -62,8 +63,8 @@ export const StructureToolbox = ({
               <img
                 src={
                   viewMode === "text"
-                    ? "/icons/chevron-left-disabled.svg"
-                    : "/icons/chevron-left.svg"
+                    ? "/system-sykora/icons/chevron-left-disabled.svg"
+                    : "/system-sykora/icons/chevron-left.svg"
                 }
                 width={30}
                 height={25}

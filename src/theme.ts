@@ -5,16 +5,17 @@ const black = "#000000";
 
 export const customTheme = createTheme({
   palette: {
+    mode: "dark",
     primary: {
       light: "#dcf6fa",
-      main: black,
+      main: "#04C2DF",
       dark: "#04C2DF",
-      contrastText: white,
+      contrastText: black,
     },
     secondary: {
-      light: "#f3f3f3",
-      main: "#e0e0e0",
-      dark: "#c2c2c2",
+      light: "#c2c2c2",
+      main: white,
+      dark: "#242424",
       contrastText: black,
     },
   },
@@ -78,26 +79,27 @@ export const customTheme = createTheme({
           },
         },
         containedPrimary: {
-          border: `2px solid ${black}`,
+          color: white,
+          // border: `2px solid ${white}`,
           "&:hover": {
-            color: white,
-            backgroundColor: black,
+            // color: black,
+            // backgroundColor: white,
           },
           "&.Mui-disabled:hover": {
             color: "rgba(0, 0, 0, 0.26)",
             backgroundColor: "rgba(0, 0, 0, 0.12)",
           },
         },
-        outlinedPrimary: {
-          border: "2px solid",
-          backgroundColor: white,
-        },
-        endIcon: {
-          marginLeft: "16px",
-        },
-        containedSecondary: {
-          backgroundColor: "#c2c2c2",
-        },
+        // outlinedPrimary: {
+        //   border: "2px solid",
+        //   backgroundColor: black,
+        // },
+        // endIcon: {
+        //   marginLeft: "16px",
+        // },
+        // containedSecondary: {
+        //   backgroundColor: "#c2c2c2",
+        // },
       },
     },
     MuiFormControlLabel: {
@@ -153,7 +155,7 @@ export const customTheme = createTheme({
         valueLabel: {
           top: -6,
           backgroundColor: "unset",
-          color: black,
+          color: white,
           fontSize: "13px",
         },
       },
@@ -170,15 +172,16 @@ export const customTheme = createTheme({
     MuiTooltip: {
       styleOverrides: {
         tooltip: {
-          backgroundColor: "#c2c2c2",
-          color: black,
+          backgroundColor: black,
+          color: white,
+          border: `1px solid ${white}`,
           fontSize: "12px",
           maxWidth: "250px",
           fontWeight: 400,
           padding: "15px ",
         },
         arrow: {
-          color: "#c2c2c2",
+          color: white,
         },
       },
     },

@@ -17,17 +17,24 @@ export const ResultCollapse = ({ open, children }: ResultCollapseProps) => {
         width: "100vw",
         left: 0,
         bottom: 0,
-        borderTop: open ? `2px solid ${theme.palette.primary.main}` : "none",
-        borderLeft: `2px solid ${theme.palette.primary.main}`,
-        borderRight: `2px solid ${theme.palette.primary.main}`,
-        borderBottom: open ? `2px solid ${theme.palette.primary.main}` : "none",
+        borderTop: open
+          ? `2px solid ${theme.palette.secondary.contrastText}`
+          : "none",
+        borderLeft: `2px solid ${theme.palette.secondary.contrastText}`,
+        borderRight: `2px solid ${theme.palette.secondary.contrastText}`,
+        borderBottom: open
+          ? `2px solid ${theme.palette.secondary.contrastText}`
+          : "none",
         zIndex: 1000,
       }}
     >
-      <Collapse in={open} orientation="vertical">
+      <Collapse
+        in={open}
+        orientation="vertical"
+        sx={{ backgroundColor: theme.palette.secondary.dark }}
+      >
         <Stack
           sx={{
-            backgroundColor: theme.palette.secondary.main,
             padding: "20px 35px 15px",
           }}
         >

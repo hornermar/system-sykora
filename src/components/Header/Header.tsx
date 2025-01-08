@@ -76,7 +76,9 @@ export const Header = (props: Props) => {
           zIndex: 1000,
           maxWidth: maxWidth,
           width: "100%",
-          backgroundColor: isPage ? theme.palette.primary.light : "white",
+          backgroundColor: isPage
+            ? theme.palette.primary.main
+            : theme.palette.primary.contrastText,
           height: "48px",
         }}
       >
@@ -84,7 +86,7 @@ export const Header = (props: Props) => {
           variant="h3"
           sx={{
             cursor: "pointer",
-            color: theme.palette.primary.dark,
+            color: theme.palette.secondary.main,
             zIndex: 1000,
           }}
           onClick={() => isLocationWithTitle && handleItemClick(navItems[0].to)}

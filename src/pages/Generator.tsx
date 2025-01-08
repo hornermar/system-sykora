@@ -1,12 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
+import { size } from "lodash";
+
+import { useSwitch } from "../hooks/useSwitch";
+import { useStepLogic } from "../hooks/useStepLogic";
+import { useForm } from "../hooks/useForm";
 import { Content } from "../components/Content/Content";
 import { getElements } from "../utils/getElements";
-import { useForm } from "../hooks/useForm";
 import { useDefaultGrid } from "../hooks/useDefaultGrid";
-import { size } from "lodash";
 import { FormValues } from "../types/FormValues";
 import { Container } from "../components/common/Container/Container";
-import { useStepLogic } from "../hooks/useStepLogic";
 
 type GeneratorProps = {
   form: FormValues;
@@ -15,7 +17,6 @@ type GeneratorProps = {
   onDefaultGridChange: (newDefaultGrid: string[][]) => void;
   grid: string[][];
   setEmptyGrid: () => void;
-  resetForm: () => void;
 };
 
 const Generator = ({
@@ -25,10 +26,12 @@ const Generator = ({
   onDefaultGridChange,
   grid,
   setEmptyGrid,
-  resetForm,
 }: GeneratorProps) => {
   const { title, nextButton, handleNext, disableNext, backButton, handleBack } =
-    useStepLogic({ form, resetForm });
+    useStepLogic({ form, defaultGrid });
+
+  const [openInstruction, onOpenInstruction, onCloseInstruction] =
+    useSwitch(false);
 
   return (
     <Container
@@ -38,6 +41,7 @@ const Generator = ({
       backButton={backButton}
       handleBack={handleBack}
       disableNext={disableNext}
+      onOpenInstruction={onOpenInstruction}
     >
       <Content
         form={form}
@@ -46,13 +50,15 @@ const Generator = ({
         onDefaultGridChange={onDefaultGridChange}
         grid={grid}
         setEmptyGrid={setEmptyGrid}
+        openInstruction={openInstruction}
+        onCloseInstruction={onCloseInstruction}
       />
     </Container>
   );
 };
 
 export const GeneratorWrapper = () => {
-  const { form, onFormChange, defaultFormValues } = useForm();
+  const { form, onFormChange } = useForm();
   const { defaultGrid, onDefaultGridChange, clearGrid } = useDefaultGrid();
   const [grid, setGrid] = useState<string[][]>([]);
 
@@ -75,10 +81,6 @@ export const GeneratorWrapper = () => {
     }
   }, [form.coefficient, form.rule, defaultGrid]);
 
-  const resetForm = useCallback(() => {
-    onFormChange(defaultFormValues);
-  }, [onFormChange, defaultFormValues]);
-
   return (
     <Generator
       form={form}
@@ -86,7 +88,6 @@ export const GeneratorWrapper = () => {
       defaultGrid={defaultGrid}
       onDefaultGridChange={onDefaultGridChange}
       grid={grid}
-      resetForm={resetForm}
       setEmptyGrid={setEmptyGrid}
     />
   );

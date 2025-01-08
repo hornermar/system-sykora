@@ -30,9 +30,9 @@ export const Dialog = ({
       open={open}
       sx={{
         ".MuiPaper-root": {
-          backgroundColor: theme.palette.secondary.main,
+          backgroundColor: theme.palette.secondary.dark,
           maxWidth: "600px",
-          border: `2px solid ${theme.palette.primary.main}`,
+          border: `2px solid ${theme.palette.secondary.contrastText}`,
           borderRadius: "0",
         },
       }}

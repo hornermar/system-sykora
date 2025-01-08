@@ -10,21 +10,20 @@ html {
 }
 
 body {
-  /* padding-top: 50px; */
   margin: 0;
-  background-color: #f3f3f3;
+  background-color: black;
 }
 
 .underline {
   text-decoration: underline;
   text-decoration-color: #04c2df;
   text-decoration-thickness: 3px;
-  color: black;
   cursor: pointer;
+  color: white;
 }
 
 .underline-disabled {
   text-decoration-color: rgb(158, 158, 158);
-  color: rgb(158, 158, 158);
+  color: #c2c2c2;
   text-decoration-thickness: 3px;
 }

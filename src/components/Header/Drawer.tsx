@@ -52,7 +52,7 @@ export const HeaderDrawer = ({
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
             width: { xs: "100vw", lg: drawerWidth },
-            backgroundColor: theme.palette.secondary.main,
+            backgroundColor: theme.palette.secondary.dark,
           },
         }}
       >

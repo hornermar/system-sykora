@@ -75,7 +75,7 @@ export const StructureGrid = memo(function StructureGrid({
                   height: `${cellSize}px`,
                   border:
                     viewMode === "text" || isCellEmpty
-                      ? `1px solid ${theme.palette.secondary.main}`
+                      ? `1px solid ${theme.palette.secondary.dark}`
                       : "initial",
                   backgroundColor: isCellActive
                     ? theme.palette.primary.dark
@@ -104,8 +104,8 @@ export const StructureGrid = memo(function StructureGrid({
                       fontSize: Math.round(cellSize / 2.5),
                       color:
                         defaultGrid && isCellOriginal && highlightDefaultGrid
-                          ? theme.palette.text.disabled
-                          : theme.palette.text.primary,
+                          ? theme.palette.grey[600]
+                          : theme.palette.secondary.contrastText,
                     }}
                   >
                     {cell !== "0" && cell}

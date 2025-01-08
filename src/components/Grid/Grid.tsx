@@ -84,7 +84,7 @@ export const Grid = ({
                       zIndex: onCellClick ? 100 : 0,
                       transform: onCellClick ? "scale(1.05)" : "none",
                     },
-                    opacity: isCellActive ? 0.5 : 1,
+                    // opacity: isCellActive ? 0.5 : 1,
                   }}
                   onClick={() => handleCellClick?.(x, y, cell)}
                 >

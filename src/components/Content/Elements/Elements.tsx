@@ -11,12 +11,14 @@ function getSubGrid(
 }
 
 type ElementsProps = {
+  filledCells: number;
   onDefaultGridChange: (newDefaultGrid: string[][]) => void;
   setEmptyGrid: () => void;
   form: FormValues;
 };
 
 export const Elements = ({
+  filledCells,
   onDefaultGridChange,
   setEmptyGrid,
   form,
@@ -43,12 +45,18 @@ export const Elements = ({
         Do míst, kde si přeješ urychlit nebo zpomalit přechody barev, přidej
         znaménka <b>+</b> nebo <b>-</b>.
       </Typography>
+
+      <Typography variant="body1">
+        Pro postup vyplň alespoň <b>5</b> buněk: <b>{filledCells}</b>
+      </Typography>
+
       <Box
         sx={{
           marginBottom: "10px",
         }}
       >
         <Chip
+          variant="outlined"
           label={"Použít šablonu"}
           onClick={setTemplate}
           size="small"
@@ -56,6 +64,7 @@ export const Elements = ({
         />
 
         <Chip
+          variant="outlined"
           label={"Smazat vše"}
           onClick={setEmptyGrid}
           size="small"

@@ -11,7 +11,8 @@ export const Label = ({ value }: LabelProps) => {
   return (
     <Typography
       sx={{
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: theme.palette.secondary.light,
+        color: theme.palette.secondary.contrastText,
         padding: "5px 10px",
         marginBottom: "10px",
         display: "inline-block",

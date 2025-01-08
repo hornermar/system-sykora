@@ -1,46 +1,47 @@
 import { useCallback, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { useStep } from "./useStep";
+import { getFilledCells } from "../utils/getFilledCells";
 import { FormValues } from "../types/FormValues";
 
 type UseStepLogicProps = {
   form: FormValues;
-  resetForm: () => void;
+  defaultGrid: string[][];
 };
 
-export const useStepLogic = ({ form, resetForm }: UseStepLogicProps) => {
+export const useStepLogic = ({ form, defaultGrid }: UseStepLogicProps) => {
   const { activeStep, onStepChange } = useStep();
-
-  const stepZero = activeStep === 0;
-
-  const onStartClick = useCallback(() => {
-    resetForm();
-    onStepChange(1);
-  }, [resetForm, onStepChange]);
+  const navigate = useNavigate();
 
   const title = useMemo(() => {
-    return stepZero ? "Instrukce" : activeStep === 9 ? "Závěr" : "";
-  }, [stepZero, activeStep]);
+    return activeStep === 9 ? "Závěr" : "";
+  }, [activeStep]);
 
   const nextButton = useMemo(() => {
-    if (stepZero) return "Začít";
     if (activeStep === 7) return "Vygenerovat";
     if (activeStep === 8) return "Závěr";
     if (activeStep === 9) return "";
     return "Další";
-  }, [stepZero, activeStep]);
+  }, [activeStep]);
 
-  const handleNext = useMemo(() => {
-    return stepZero ? onStartClick : () => onStepChange(activeStep + 1);
-  }, [stepZero, onStartClick, activeStep, onStepChange]);
+  const handleNext = useCallback(() => {
+    return onStepChange(activeStep + 1);
+  }, [activeStep, onStepChange]);
 
   const handleBack = () => {
-    onStepChange(activeStep - 1);
+    if (activeStep === 1) return navigate("/");
+    return onStepChange(activeStep - 1);
   };
+
+  const filledCells = useMemo(() => getFilledCells(defaultGrid), [defaultGrid]);
 
   const disableNext = useMemo(() => {
     switch (activeStep) {
       case 1:
         return !form.columns || !form.rows;
+      case 2:
+        return filledCells < 5;
       case 3:
         return !form.coefficient;
       case 4:
@@ -48,11 +49,9 @@ export const useStepLogic = ({ form, resetForm }: UseStepLogicProps) => {
       default:
         return false;
     }
-  }, [activeStep, form]);
+  }, [activeStep, form, filledCells]);
 
-  const backButton = useMemo(() => {
-    return stepZero ? undefined : "Zpět";
-  }, [stepZero]);
+  const backButton = "Zpět";
 
   return {
     title,
