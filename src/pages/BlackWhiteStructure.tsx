@@ -11,8 +11,8 @@ const BlackWhiteStructureWrapper = () => {
       <Typography variant="body1">
         Na konci 60. let 20 století Zdeněk Sýkora pomocí tohoto algoritmu
         vytvořil Stěnu pro pasáž v Jindřišské ulici v Praze. Z jedné strany
-        původně sousedila s polským kulturním střediskem, z druhé později s
-        výlezem ze stanice metra Můstek.
+        sousedila s polským kulturním střediskem, z druhé později s výlezem ze
+        stanice metra Můstek.
       </Typography>
 
       <Typography variant="body1">

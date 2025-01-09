@@ -31,7 +31,7 @@ export const Elements = ({
     <>
       <Typography variant="body1">
         Aby bylo možné strukturu dopočítat, je potřeba do mřížky umístit několik
-        výchozích elementů (množství je na tobě).
+        výchozích elementů.
       </Typography>
 
       <Typography variant="body1">

@@ -27,10 +27,10 @@ const navItems = [
     label: "Prozkoumat systém",
     to: "/structure",
   },
-  {
-    label: "Struktura v Jindřišské",
-    to: "/jindrisska",
-  },
+  // {
+  //   label: "Struktura v Jindřišské",
+  //   to: "/jindrisska",
+  // },
   {
     label: "O projektu",
     to: "/about",
