@@ -1,5 +1,5 @@
 import { find, size } from "lodash";
-import { Box, Stack, Typography, IconButton } from "@mui/material";
+import { Box, Stack, Typography, IconButton, useTheme } from "@mui/material";
 import CircularProgress, {
   CircularProgressProps,
 } from "@mui/material/CircularProgress";
@@ -46,10 +46,11 @@ const CircularProgressWithLabel = (
 type TitleProps = {
   title: string | undefined;
   onOpenInstruction?: () => void;
-  variant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  overline?: string;
 };
 
-export const Title = ({ title, variant, onOpenInstruction }: TitleProps) => {
+export const Title = ({ title, onOpenInstruction, overline }: TitleProps) => {
+  const theme = useTheme();
   const { steps, activeStep } = useStep();
 
   if (activeStep === undefined) return null;
@@ -69,8 +70,8 @@ export const Title = ({ title, variant, onOpenInstruction }: TitleProps) => {
       gap={2}
       sx={{
         padding: {
-          xs: variant === "h1" ? "40px 0 0" : "20px 0 0",
-          lg: variant === "h1" ? "100px 0 20px" : "10px 0 20px",
+          xs: "20px 0 0",
+          lg: "10px 0 20px",
         },
       }}
     >
@@ -82,7 +83,19 @@ export const Title = ({ title, variant, onOpenInstruction }: TitleProps) => {
         />
       )}
       <Box sx={{ position: "relative", width: "100%" }}>
-        <Typography variant={variant ?? "h2"}>
+        {overline && (
+          <Typography
+            variant="overline"
+            sx={{
+              color: theme.palette.primary.main,
+              marginBottom: "-8px",
+              display: "block",
+            }}
+          >
+            8 KROKŮ
+          </Typography>
+        )}
+        <Typography variant={"h2"} sx={{ maxWidth: "280px" }}>
           {activeStep && activeStep !== size(steps) + 1 ? (
             <span style={{ marginRight: "10px" }}>{activeStep}</span>
           ) : null}
@@ -101,7 +114,7 @@ export const Title = ({ title, variant, onOpenInstruction }: TitleProps) => {
             sx={{ position: "absolute", right: -5, bottom: 6 }}
           >
             <img
-              src={"/system-sykora/icons/question.svg"}
+              src={"/icons/question.svg"}
               width={20}
               height={20}
               alt={"question icon"}

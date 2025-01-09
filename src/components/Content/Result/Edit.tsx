@@ -63,6 +63,7 @@ export const ResultEdit = ({
           variant="body1"
           sx={{
             paddingRight: "10px",
+            paddingBottom: isSmallMedia ? "0" : "30px",
             margin: 0,
             color: isRandom
               ? theme.palette.text.disabled
@@ -78,7 +79,10 @@ export const ResultEdit = ({
           max={3.99}
           onChange={handleCoeffChange}
           valueLabelDisplay={isRandom ? "off" : "on"}
-          sx={{ margin: "0 10px 0 0", paddingBottom: "10px !important" }}
+          sx={{
+            margin: "0 10px 0 0",
+            paddingBottom: "10px !important",
+          }}
           disabled={isRandom}
           size={isSmallMedia ? "small" : "medium"}
         />
@@ -130,7 +134,7 @@ export const ResultEdit = ({
           flexDirection: { xs: "row", lg: "column" },
           alignItems: { xs: "center", lg: "start" },
           justifyContent: { xs: "space-between", lg: "left" },
-          paddingBottom: { xs: "0", lg: "20px" },
+          paddingBottom: { xs: "4px", lg: "20px" },
         }}
       >
         <Stack>

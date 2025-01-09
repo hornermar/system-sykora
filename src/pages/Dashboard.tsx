@@ -26,7 +26,6 @@ const Dashboard = () => {
 
       <Typography variant="body1" sx={{ marginTop: "20px" }}>
         <i>
-          Sestav si svého Sýkoru a zjisti, jak algoritmus funguje.
           {/* jaká pravidla
           dodržuje a jaké vstupy zadával umělec a co už byla práce počítače. */}
         </i>
@@ -62,10 +61,11 @@ export const DashboardWrapper = () => {
   return (
     <Container
       children={<Dashboard />}
-      title="Systém Sýkora"
-      titleVariant="h1"
+      title="Sestav&nbsp;si svojí&nbsp;strukturu"
+      overline="8 kroků"
       handleNext={handleNextButton}
       nextButton="Začít"
+      isPage
     />
   );
 };

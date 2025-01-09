@@ -77,11 +77,10 @@ export const Elements = ({
 
       <Box
         sx={{
-          margin: "10px 0",
+          margin: "20px 0 10px",
         }}
       >
         <Chip
-          variant="outlined"
           label={"Použít šablonu"}
           onClick={setTemplate}
           size="small"
@@ -89,7 +88,6 @@ export const Elements = ({
         />
 
         <Chip
-          variant="outlined"
           label={"Smazat vše"}
           onClick={setEmptyGrid}
           size="small"

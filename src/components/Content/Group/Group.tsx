@@ -20,8 +20,8 @@ export const Group = ({ form, group, activeCell }: GroupProps) => {
   return (
     <>
       <Typography variant="body1">
-        Před výběrem elementu pro pole nejprve algoritmus zmenší rozshah výběru
-        z 20 elementů na konktétní skupinu (1, 2, 3 nebo 4).
+        Před výběrem elementu pro jednotlivá pole nejprve algoritmus zmenší
+        rozshah výběru z 20 elementů na konktétní skupinu (1, 2, 3 nebo 4).
       </Typography>
       <Typography variant="body1" sx={{ marginBottom: "20px" }}>
         Při jejím zjišťování prochází sousedící elementy, které se s polem

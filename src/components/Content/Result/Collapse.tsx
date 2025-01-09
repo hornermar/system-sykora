@@ -25,7 +25,7 @@ export const ResultCollapse = ({ open, children }: ResultCollapseProps) => {
         borderBottom: open
           ? `2px solid ${theme.palette.secondary.contrastText}`
           : "none",
-        zIndex: 1000,
+        zIndex: 700,
       }}
     >
       <Collapse
@@ -35,7 +35,7 @@ export const ResultCollapse = ({ open, children }: ResultCollapseProps) => {
       >
         <Stack
           sx={{
-            padding: "20px 35px 15px",
+            padding: "20px 35px 75px",
           }}
         >
           {children}

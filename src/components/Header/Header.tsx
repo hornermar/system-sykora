@@ -55,13 +55,13 @@ export const Header = (props: Props) => {
   };
 
   const isLocationWithTitle =
-    ["/about", "/jindrisska"].includes(location.pathname) ||
+    ["/", "/about", "/jindrisska"].includes(location.pathname) ||
     (!isSmallMedia && location.pathname !== "/");
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  const isPage = ["/about", "/jindrisska"].includes(location.pathname);
+  // const isPage = ["/about", "/jindrisska"].includes(location.pathname);
   const currentPage = location.pathname + location.search;
 
   return (
@@ -76,14 +76,14 @@ export const Header = (props: Props) => {
           zIndex: 1000,
           maxWidth: maxWidth,
           width: "100%",
-          backgroundColor: isPage
-            ? theme.palette.primary.main
-            : theme.palette.primary.contrastText,
+          // backgroundColor: isPage
+          //   ? theme.palette.primary.main
+          //   : theme.palette.primary.contrastText,
           height: "48px",
         }}
       >
         <Typography
-          variant="h3"
+          variant="h1"
           sx={{
             cursor: "pointer",
             color: theme.palette.secondary.main,

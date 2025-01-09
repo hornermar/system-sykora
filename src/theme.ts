@@ -25,7 +25,7 @@ export const customTheme = createTheme({
     fontFamily: "Roboto mono, monospace",
     h1: {
       fontFamily: "Pathway Gothic One, sans-serif",
-      fontSize: "54px",
+      fontSize: "28px",
       fontWeight: 500,
       textTransform: "uppercase",
     },
@@ -78,9 +78,6 @@ export const customTheme = createTheme({
             backgroundColor: "rgb(117, 117, 117)",
             color: "#242424",
           },
-          // "&.Mui-disabled": {
-          //   borderWidth: "2px",
-          // },
         },
         containedSecondary: {
           border: `2px solid ${black}`,
@@ -96,9 +93,6 @@ export const customTheme = createTheme({
             backgroundColor: primary,
           },
         },
-        // endIcon: {
-        //   marginLeft: "16px",
-        // },
       },
     },
     MuiFormControlLabel: {
@@ -106,6 +100,13 @@ export const customTheme = createTheme({
         label: {
           fontSize: "13px",
           marginBottom: 0,
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "rgba(255, 255, 255, 0.16)",
         },
       },
     },

@@ -1,12 +1,11 @@
-import { Typography } from "@mui/material";
-import { FormValues } from "../../../types/FormValues";
-import { ResultEdit } from "./Edit";
 import { Dispatch, SetStateAction } from "react";
+import { Button, Box } from "@mui/material";
+import { useMediaQuery, useTheme } from "@mui/system";
 
 import { useSwitch } from "../../../hooks/useSwitch";
-
+import { ResultEdit } from "./Edit";
 import { ResultCollapse } from "./Collapse";
-import { useMediaQuery, useTheme } from "@mui/system";
+import { FormValues } from "../../../types/FormValues";
 
 type ResultProps = {
   form: FormValues;
@@ -44,15 +43,22 @@ export const Result = ({
   );
 
   return (
-    <>
+    <Box>
       {isSmallMedia && (
-        <Typography
-          variant="body1"
+        <Button
           onClick={editOpen ? onEditClose : onEditOpen}
-          className="underline"
-        >
-          <b>{editOpen ? "Skrýt panel vstupů" : "Panel vstupů (úprava)"}</b>
-        </Typography>
+          variant="contained"
+          color="primary"
+          sx={{ position: "fixed", right: -20, bottom: 230, zIndex: 1000 }}
+          startIcon={
+            <img
+              src={"/icons/pen.svg"}
+              width={20}
+              height={20}
+              alt={"question icon"}
+            />
+          }
+        ></Button>
       )}
 
       {isSmallMedia ? (
@@ -60,6 +66,6 @@ export const Result = ({
       ) : (
         renderResultEdit()
       )}
-    </>
+    </Box>
   );
 };
