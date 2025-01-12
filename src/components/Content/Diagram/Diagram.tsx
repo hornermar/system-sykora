@@ -3,11 +3,14 @@ import { FormValues } from "../../../types/FormValues";
 import { Select } from "../../common/Select/Select";
 import { map } from "lodash";
 import { SelectChangeEvent } from "@mui/material/Select";
+import { Cell } from "../../../types/General";
+import { useEffect } from "react";
 
 type DiagramProps = {
   form: FormValues;
   onFormChange: (newFormValues: Partial<FormValues>) => void;
   defaultGrid: string[][];
+  setActiveCell: React.Dispatch<React.SetStateAction<Cell | undefined>>;
 };
 
 const chips = [
@@ -16,11 +19,19 @@ const chips = [
   { columns: 11, rows: 21 },
 ];
 
-export const Diagram = ({ form, onFormChange }: DiagramProps) => {
+export const Diagram = ({
+  form,
+  onFormChange,
+  setActiveCell,
+}: DiagramProps) => {
   const handleChange = (e: SelectChangeEvent<number>) => {
     const { name, value } = e.target;
     onFormChange({ [name]: value });
   };
+
+  useEffect(() => {
+    setActiveCell(undefined);
+  }, []);
 
   return (
     <>

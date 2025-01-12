@@ -56,7 +56,10 @@ export const Header = (props: Props) => {
 
   const isLocationWithTitle =
     ["/", "/about", "/jindrisska"].includes(location.pathname) ||
-    (!isSmallMedia && location.pathname !== "/");
+    (!isSmallMedia && location.pathname !== "/") ||
+    location.search === "?step=9";
+
+  console.log(location);
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -76,9 +79,6 @@ export const Header = (props: Props) => {
           zIndex: 1000,
           maxWidth: maxWidth,
           width: "100%",
-          // backgroundColor: isPage
-          //   ? theme.palette.primary.main
-          //   : theme.palette.primary.contrastText,
           height: "48px",
         }}
       >

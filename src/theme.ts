@@ -9,7 +9,7 @@ export const customTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      light: "#dcf6fa",
+      light: "#b3f5ff",
       main: primary,
       dark: "#04a4bd",
       contrastText: black,

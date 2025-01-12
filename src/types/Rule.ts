@@ -1,7 +1,8 @@
 export type Rule = {
-    text: string;
-    code: number;
-    colorContinue: boolean;
-    shapeContinue: boolean;
-    example: string[][];
+  text: string;
+  shortText: string;
+  code: number;
+  colorContinue: boolean;
+  shapeContinue: boolean;
+  example: string[][];
 };

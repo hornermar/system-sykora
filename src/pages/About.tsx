@@ -12,8 +12,8 @@ const About = () => {
         představuje a přibližuje jeho principy.
       </Typography>
 
-      <Contact />
       <Sources />
+      <Contact />
     </>
   );
 };

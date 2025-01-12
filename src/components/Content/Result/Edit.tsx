@@ -1,3 +1,4 @@
+import { find, map } from "lodash";
 import {
   Stack,
   Typography,
@@ -8,12 +9,13 @@ import {
   Radio,
   Switch,
   useMediaQuery,
+  Box,
+  useTheme,
 } from "@mui/material";
+
 import { FormValues } from "../../../types/FormValues";
 import { rulesItems } from "../../../lib/formItems";
 import { Rule } from "../../../types/Rule";
-import { map } from "lodash";
-import { useTheme } from "@mui/material/styles";
 
 type ResultEditProps = {
   form: FormValues;
@@ -29,8 +31,6 @@ export const ResultEdit = ({
   onFormChange,
   isRandom,
   setIsRandom,
-  displayDefaultGrid,
-  setDisplayDefaultGrid,
 }: ResultEditProps) => {
   const theme = useTheme();
   const isSmallMedia = useMediaQuery(theme.breakpoints.down("lg"));
@@ -56,6 +56,51 @@ export const ResultEdit = ({
         sx={{
           flexDirection: { xs: "row", lg: "column" },
           alignItems: { xs: "center", lg: "start" },
+          justifyContent: { xs: "space-between", lg: "left" },
+          paddingBottom: { xs: "22px", lg: "20px" },
+        }}
+      >
+        <Stack>
+          <Typography variant="body1" sx={{ margin: 0 }}>
+            Algoritmus:
+          </Typography>
+          <Typography variant="caption">
+            Vypnutím se elementy vyberou náhodně
+          </Typography>
+        </Stack>
+
+        <Switch
+          checked={!isRandom}
+          onChange={(e, selected) => toggle(e, !selected, setIsRandom)}
+        />
+      </Stack>
+      {/* <Stack
+        sx={{
+          flexDirection: { xs: "row", lg: "column" },
+          alignItems: { xs: "center", lg: "start" },
+          justifyContent: { xs: "space-between", lg: "left" },
+          paddingBottom: { xs: "0", lg: "20px" },
+        }}
+      >
+        <Stack>
+          <Typography variant="body1" sx={{ margin: 0 }}>
+            Zadání:
+          </Typography>
+          <Typography variant="caption">
+            Zapnutím se zobrazí původní elementy
+          </Typography>
+        </Stack>
+
+        <Switch
+          checked={displayDefaultGrid}
+          onChange={(e, selected) => toggle(e, selected, setDisplayDefaultGrid)}
+        />
+      </Stack> */}
+
+      <Stack
+        sx={{
+          flexDirection: { xs: "row", lg: "column" },
+          alignItems: { xs: "center", lg: "start" },
           paddingBottom: { xs: "0", lg: "20px" },
         }}
       >
@@ -63,7 +108,7 @@ export const ResultEdit = ({
           variant="body1"
           sx={{
             paddingRight: "10px",
-            paddingBottom: isSmallMedia ? "0" : "30px",
+            paddingBottom: isSmallMedia ? "10px" : "30px",
             margin: 0,
             color: isRandom
               ? theme.palette.text.disabled
@@ -88,92 +133,61 @@ export const ResultEdit = ({
         />
       </Stack>
 
-      <Stack
-        sx={{
-          flexDirection: { xs: "row", lg: "column" },
-          alignItems: { xs: "center", lg: "start" },
-          paddingBottom: { xs: "0", lg: "20px" },
-        }}
-      >
-        <Typography
-          variant="body1"
+      <Box sx={{ paddingBottom: { xs: "5px", lg: "20px" } }}>
+        <Stack
           sx={{
-            paddingRight: "10px",
-            margin: 0,
+            flexDirection: { xs: "row", lg: "column" },
+            alignItems: { xs: "center", lg: "start" },
+          }}
+        >
+          <Typography
+            variant="body1"
+            sx={{
+              paddingRight: "10px",
+              margin: 0,
+              color: isRandom
+                ? theme.palette.text.disabled
+                : theme.palette.text.primary,
+            }}
+          >
+            Pravidlo:
+          </Typography>
+
+          <FormControl disabled={isRandom}>
+            <RadioGroup
+              row
+              value={form.rule}
+              onChange={handleGroupChange}
+              sx={{ flexWrap: "nowrap" }}
+            >
+              {map(rulesItems, (rule: Rule) => (
+                <FormControlLabel
+                  value={rule.code.toString()}
+                  control={<Radio size={isSmallMedia ? "small" : "medium"} />}
+                  label={rule.code}
+                  key={rule.code}
+                  sx={{
+                    fontStyle: form.rule === rule.code ? "italic" : "normal",
+                  }}
+                />
+              ))}
+            </RadioGroup>
+          </FormControl>
+        </Stack>
+
+        <Typography
+          variant="caption"
+          sx={{
+            display: "block",
+            marginTop: "-8px",
             color: isRandom
               ? theme.palette.text.disabled
               : theme.palette.text.primary,
           }}
         >
-          Pravidlo:
+          {find(rulesItems, (rule: Rule) => rule.code === form.rule)?.shortText}
         </Typography>
-
-        <FormControl disabled={isRandom}>
-          <RadioGroup
-            row
-            value={form.rule}
-            onChange={handleGroupChange}
-            sx={{ flexWrap: "nowrap" }}
-          >
-            {map(rulesItems, (rule: Rule) => (
-              <FormControlLabel
-                value={rule.code.toString()}
-                control={<Radio size={isSmallMedia ? "small" : "medium"} />}
-                label={rule.code}
-                key={rule.code}
-                sx={{
-                  fontStyle: form.rule === rule.code ? "italic" : "normal",
-                }}
-              />
-            ))}
-          </RadioGroup>
-        </FormControl>
-      </Stack>
-      <Stack
-        sx={{
-          flexDirection: { xs: "row", lg: "column" },
-          alignItems: { xs: "center", lg: "start" },
-          justifyContent: { xs: "space-between", lg: "left" },
-          paddingBottom: { xs: "4px", lg: "20px" },
-        }}
-      >
-        <Stack>
-          <Typography variant="body1" sx={{ margin: 0 }}>
-            Algoritmus:
-          </Typography>
-          <Typography variant="caption">
-            Vypnutím se elementy vyberou náhodně
-          </Typography>
-        </Stack>
-
-        <Switch
-          checked={!isRandom}
-          onChange={(e, selected) => toggle(e, !selected, setIsRandom)}
-        />
-      </Stack>
-
-      <Stack
-        sx={{
-          flexDirection: { xs: "row", lg: "column" },
-          alignItems: { xs: "center", lg: "start" },
-          justifyContent: { xs: "space-between", lg: "left" },
-          paddingBottom: { xs: "0", lg: "20px" },
-        }}
-      >
-        <Stack>
-          <Typography variant="body1" sx={{ margin: 0 }}>
-            Zadání:
-          </Typography>
-          <Typography variant="caption">
-            Zapnutím se zobrazí původní elementy
-          </Typography>
-        </Stack>
-
-        <Switch
-          checked={displayDefaultGrid}
-          onChange={(e, selected) => toggle(e, selected, setDisplayDefaultGrid)}
-        />
-      </Stack>
+      </Box>
     </>
   );
 };

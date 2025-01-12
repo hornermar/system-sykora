@@ -1,17 +1,61 @@
-import { useNavigate } from "react-router-dom";
-import { Container } from "../components/common/Container/Container";
-import { Typography } from "@mui/material";
-import { useForm } from "../hooks/useForm";
 import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { Typography, useTheme, Box } from "@mui/material";
+
+import { useForm } from "../hooks/useForm";
+import { Container } from "../components/common/Container/Container";
 
 const Dashboard = () => {
+  const theme = useTheme();
   return (
     <>
-      <Typography variant="body1">
-        <b>Zdeněk Sýkora</b> začal v roce <b>1961</b> vytvářet geometrické
-        abstraktní malby, které nazýval <b>Struktury</b>.
+      <Typography variant="body1" sx={{ paddingTop: "12px" }}>
+        Objev, jak fungoval algoritmus pro tvorbu <b>Struktur</b>{" "}
+        <b>Zdeňka Sýkory</b>.
       </Typography>
+
+      <Box sx={{ "& .MuiTypography-root": { margin: 0 } }}>
+        <Typography variant="body1">
+          <i>Jaká pravidla řídila kompozici?</i>
+        </Typography>
+        <Typography variant="body1">
+          <i>Jaké vstupy zadával Sýkora? </i>
+        </Typography>
+        <Typography variant="body1">
+          <i>A co už bylo výsledkem výpočtu?</i>
+        </Typography>
+      </Box>
+
+      {/* <Typography variant="body1">
+        Zjisti, jak algoritmus funguje, jaká pravidla dodržuje a jaké vstupy
+        zadával umělec a co už byla práce počítače.
+      </Typography> */}
+
+      <Box sx={{ margin: "30px 0" }}>
+        <Typography
+          variant="overline"
+          sx={{
+            color: theme.palette.primary.main,
+            marginBottom: "-8px",
+            display: "block",
+          }}
+        >
+          8 KROKŮ
+        </Typography>
+        <Typography variant={"h2"} sx={{ maxWidth: "280px" }}>
+          SESTAV&nbsp;SI SVOJÍ&nbsp;STRUKTURU
+        </Typography>
+      </Box>
+
       <Typography variant="body1">
+        <b>Zdeněk Sýkora</b> od roku <b>1961</b> tvořil geometrické abstraktní
+        malby zvané <b>Struktury</b>. Sýkorovy Struktury vznikaly z čtverců a
+        obdélníků s různými obrazci, jejichž rozmístění určovala pravidla. Pro
+        složitost výpočtů začal Sýkora v roce 1964 spolu s matematikem
+        Jaroslavem Blažkem vytvářet program, který tento systém zprovoznil.
+      </Typography>
+
+      {/* <Typography variant="body1">
         Jejich kompozice byla tvořena prvky, opakujícími se čtverci či
         obdélníky, které měli uvnitř různé obrazce. Rozmístění těchto prvků
         ovlivňovala řada pravidel.
@@ -22,25 +66,7 @@ const Dashboard = () => {
         <b>počítač</b>. V roce <b>1964</b> začal proto Sýkora společně s
         matematikem <b>Jaroslavem Blažkem</b> vytvářet program, který tento
         systém zprovoznil. Vznikl tak unikátní algoritmus.
-      </Typography>
-
-      <Typography variant="body1" sx={{ marginTop: "20px" }}>
-        <i>
-          {/* jaká pravidla
-          dodržuje a jaké vstupy zadával umělec a co už byla práce počítače. */}
-        </i>
-      </Typography>
-
-      {/* <Structure
-        grid={currentGrid}
-        sx={{
-          display: { xs: "flex", sm: "none" },
-          position: "absolute",
-          top: 0,
-          right: 0,
-          zIndex: 1,
-        }}
-      /> */}
+      </Typography> */}
     </>
   );
 };
@@ -61,8 +87,6 @@ export const DashboardWrapper = () => {
   return (
     <Container
       children={<Dashboard />}
-      title="Sestav&nbsp;si svojí&nbsp;strukturu"
-      overline="8 kroků"
       handleNext={handleNextButton}
       nextButton="Začít"
       isPage

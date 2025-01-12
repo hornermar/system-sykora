@@ -76,6 +76,7 @@ export const Content = ({
       render: () => (
         <Diagram
           form={form}
+          setActiveCell={setActiveCell}
           onFormChange={onFormChange}
           defaultGrid={defaultGrid}
         />

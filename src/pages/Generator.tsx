@@ -9,6 +9,7 @@ import { getElements } from "../utils/getElements";
 import { useDefaultGrid } from "../hooks/useDefaultGrid";
 import { FormValues } from "../types/FormValues";
 import { Container } from "../components/common/Container/Container";
+import { useStep } from "../hooks/useStep";
 
 type GeneratorProps = {
   form: FormValues;
@@ -29,6 +30,7 @@ const Generator = ({
 }: GeneratorProps) => {
   const { title, nextButton, handleNext, disableNext, backButton, handleBack } =
     useStepLogic({ form, defaultGrid });
+  const { activeStep } = useStep();
 
   const [openInstruction, onOpenInstruction, onCloseInstruction] =
     useSwitch(false);
@@ -42,6 +44,7 @@ const Generator = ({
       handleBack={handleBack}
       disableNext={disableNext}
       onOpenInstruction={onOpenInstruction}
+      isPage={activeStep === 9}
     >
       <Content
         form={form}

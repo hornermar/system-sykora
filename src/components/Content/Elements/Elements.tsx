@@ -30,12 +30,11 @@ export const Elements = ({
   return (
     <>
       <Typography variant="body1">
-        Aby bylo možné strukturu dopočítat, je potřeba do mřížky umístit několik
-        výchozích elementů.
+        Teď do mřížky umísti několik elementů.
       </Typography>
 
       <Typography variant="body1">
-        Na výběr máš z 20 elementů. Jsou rozděleny do skupin <b>1</b>, <b>2</b>,{" "}
+        Na výběr je jich <b>20</b>. Jsou rozděleny do skupin <b>1</b>, <b>2</b>,{" "}
         <b>3</b> a <b>4</b> podle poměru bílá-černá (1 je nejsvětlejší, 4
         nejtmavší). Písmena <b>z</b>, <b>b</b>, <b>y</b>, <b>i</b>, <b>r</b>,{" "}
         <b>d</b> označují natočení.

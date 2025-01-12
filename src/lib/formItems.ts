@@ -3,6 +3,7 @@ import { Rule } from "../types/Rule";
 export const rulesItems: Rule[] = [
   {
     text: "Elementy\u00A0navazují\u00A0barvami, elementy navazují tvary",
+    shortText: "El. navazují barvami, el. navazují tvary",
     code: 0,
     colorContinue: true,
     shapeContinue: true,
@@ -10,6 +11,7 @@ export const rulesItems: Rule[] = [
   },
   {
     text: "Elementy\u00A0navazují\u00A0barvami, elementy nenavazují tvary",
+    shortText: "El. navazují barvami, el. nenavazují tvary",
     code: 1,
     colorContinue: true,
     shapeContinue: false,
@@ -17,6 +19,7 @@ export const rulesItems: Rule[] = [
   },
   {
     text: "Elementy\u00A0nenavazují\u00A0barvami, elementy navazují tvary",
+    shortText: "El. nenavazují barvami, el. navazují tvary",
     code: 2,
     colorContinue: false,
     shapeContinue: true,
@@ -24,6 +27,7 @@ export const rulesItems: Rule[] = [
   },
   {
     text: "Elementy\u00A0nenavazují\u00A0barvami, elementy\u00A0nenavazují\u00A0tvary",
+    shortText: "El. nenavazují barvami, el. nenavazují tvary",
     code: 3,
     colorContinue: false,
     shapeContinue: false,

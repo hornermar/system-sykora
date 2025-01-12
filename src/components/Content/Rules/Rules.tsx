@@ -9,6 +9,7 @@ import {
   FormControlLabel,
   Radio,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { Structure } from "../../Structure/Structure";
 
@@ -19,6 +20,7 @@ type RulesProps = {
 
 export const Rules = ({ rule, onFormChange }: RulesProps) => {
   const { onStepChange } = useStep();
+  const theme = useTheme();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onFormChange({ rule: Number(event.target.value) });
@@ -47,7 +49,17 @@ export const Rules = ({ rule, onFormChange }: RulesProps) => {
           ))}
         </RadioGroup>
       </FormControl>
-      {rule !== null && <Structure grid={rulesItems[rule].example} />}
+      {rule !== null && (
+        <Structure
+          grid={rulesItems[rule].example}
+          sx={{
+            img: {
+              borderRight: `1px solid ${theme.palette.primary.main}`,
+              borderLeft: `1px solid ${theme.palette.primary.main}`,
+            },
+          }}
+        />
+      )}
 
       {rule !== null && (
         <Typography

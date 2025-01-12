@@ -123,10 +123,10 @@ export const StructureGrid = memo(function StructureGrid({
                       objectFit: "fill",
                       opacity:
                         isCellOriginal && highlightDefaultGrid
-                          ? 0.5
+                          ? 0.4
                           : (isCellActiveNeighbour || isCellActive) &&
                             !isCellSign
-                          ? 0.4
+                          ? 0.3
                           : 1,
                     }}
                   />

@@ -49,7 +49,7 @@ export const Result = ({
           onClick={editOpen ? onEditClose : onEditOpen}
           variant="contained"
           color="primary"
-          sx={{ position: "fixed", right: -20, bottom: 230, zIndex: 1000 }}
+          sx={{ position: "fixed", right: -20, bottom: 225, zIndex: 1000 }}
           startIcon={
             <img
               src={"/icons/pen.svg"}

@@ -8,7 +8,6 @@ type ContainerProps = {
   children: React.ReactNode;
   title?: string;
   titleVariant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-  overline?: string;
   color?: PaletteColor;
   backButton?: string;
   nextButton?: string;
@@ -22,7 +21,6 @@ type ContainerProps = {
 export const Container = ({
   children,
   title,
-  overline,
   backButton,
   nextButton,
   disableNext,
@@ -58,11 +56,7 @@ export const Container = ({
         }}
       >
         {/* Title with Progress */}
-        <Title
-          title={title}
-          onOpenInstruction={onOpenInstruction}
-          overline={overline}
-        />
+        <Title title={title} onOpenInstruction={onOpenInstruction} />
 
         {/* Children */}
         <Box sx={{ marginTop: "20px" }}>{children}</Box>
@@ -77,7 +71,7 @@ export const Container = ({
           onClick={handleBack}
           sx={{
             position: { xs: "fixed", lg: "block" },
-            bottom: 15,
+            bottom: 20,
             left: { xs: 20, lg: "calc(50% - 150px)" },
             zIndex: 800,
           }}
@@ -94,7 +88,7 @@ export const Container = ({
           disabled={disableNext}
           sx={{
             position: "fixed",
-            bottom: 15,
+            bottom: 20,
             right: { xs: 20, lg: "calc(50% - 150px)" },
             zIndex: 800,
           }}

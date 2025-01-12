@@ -25,7 +25,7 @@ export const Group = ({ form, group, activeCell }: GroupProps) => {
       </Typography>
       <Typography variant="body1" sx={{ marginBottom: "20px" }}>
         Při jejím zjišťování prochází sousedící elementy, které se s polem
-        dotýkají stranou i rohy.
+        dotýkají stranou i rohy (zvýrazněné světle modře).
       </Typography>
 
       <GroupCalculation

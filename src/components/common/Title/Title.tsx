@@ -1,5 +1,5 @@
 import { find, size } from "lodash";
-import { Box, Stack, Typography, IconButton, useTheme } from "@mui/material";
+import { Box, Stack, Typography, IconButton, Zoom } from "@mui/material";
 import CircularProgress, {
   CircularProgressProps,
 } from "@mui/material/CircularProgress";
@@ -15,6 +15,8 @@ const CircularProgressWithLabel = (
 ) => {
   const { value } = props;
   const circleSize = 64;
+
+  const finished = value === 100;
 
   return (
     <Box sx={{ position: "relative" }}>
@@ -39,6 +41,16 @@ const CircularProgressWithLabel = (
           color: theme.palette.primary.main,
         })}
       />
+
+      <Zoom in={finished} timeout={finished ? 1000 : 0}>
+        <img
+          src={"/icons/check.svg"}
+          width={30}
+          height={30}
+          alt={"check icon"}
+          style={{ zIndex: 1000, position: "absolute", left: 18, top: 16 }}
+        />
+      </Zoom>
     </Box>
   );
 };
@@ -46,11 +58,9 @@ const CircularProgressWithLabel = (
 type TitleProps = {
   title: string | undefined;
   onOpenInstruction?: () => void;
-  overline?: string;
 };
 
-export const Title = ({ title, onOpenInstruction, overline }: TitleProps) => {
-  const theme = useTheme();
+export const Title = ({ title, onOpenInstruction }: TitleProps) => {
   const { steps, activeStep } = useStep();
 
   if (activeStep === undefined) return null;
@@ -83,18 +93,6 @@ export const Title = ({ title, onOpenInstruction, overline }: TitleProps) => {
         />
       )}
       <Box sx={{ position: "relative", width: "100%" }}>
-        {overline && (
-          <Typography
-            variant="overline"
-            sx={{
-              color: theme.palette.primary.main,
-              marginBottom: "-8px",
-              display: "block",
-            }}
-          >
-            8 KROKŮ
-          </Typography>
-        )}
         <Typography variant={"h2"} sx={{ maxWidth: "280px" }}>
           {activeStep && activeStep !== size(steps) + 1 ? (
             <span style={{ marginRight: "10px" }}>{activeStep}</span>
