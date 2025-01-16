@@ -118,6 +118,7 @@ export const StructureGrid = memo(function StructureGrid({
                     src={getImgPath(cell)}
                     width={isCellSign ? cellSize / 2.5 : cellSize}
                     height={isCellSign ? cellSize / 2.5 : cellSize}
+                    id={`${y}${x}`}
                     alt={`element ${cell}`}
                     style={{
                       objectFit: "fill",

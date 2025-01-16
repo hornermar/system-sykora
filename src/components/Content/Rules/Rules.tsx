@@ -2,7 +2,6 @@ import { FormValues } from "../../../types/FormValues";
 import { map } from "lodash";
 import { Rule } from "../../../types/Rule";
 import { rulesItems } from "../../../lib/formItems";
-import { useStep } from "../../../hooks/useStep";
 import {
   FormControl,
   RadioGroup,
@@ -19,7 +18,6 @@ type RulesProps = {
 };
 
 export const Rules = ({ rule, onFormChange }: RulesProps) => {
-  const { onStepChange } = useStep();
   const theme = useTheme();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,29 +52,12 @@ export const Rules = ({ rule, onFormChange }: RulesProps) => {
           grid={rulesItems[rule].example}
           sx={{
             img: {
-              borderRight: `1px solid ${theme.palette.primary.main}`,
-              borderLeft: `1px solid ${theme.palette.primary.main}`,
+              "&:not([id='00'])": {
+                borderLeft: `1px solid ${theme.palette.primary.main}`,
+              },
             },
           }}
         />
-      )}
-
-      {rule !== null && (
-        <Typography
-          variant="body1"
-          onClick={() => onStepChange(8)}
-          className="underline"
-          sx={{ marginTop: "10px" }}
-        >
-          Přeskočit na výstup (krok 8)
-          <img
-            src="/icons/chevron-right.svg"
-            width={10}
-            height={10}
-            alt={"left icon"}
-            style={{ marginLeft: "6px" }}
-          />
-        </Typography>
       )}
     </>
   );

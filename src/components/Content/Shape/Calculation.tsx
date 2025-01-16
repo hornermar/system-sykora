@@ -33,9 +33,9 @@ export const ShapeCalculation = ({
       <Typography variant="body1">
         Zkoumá, jaké vlastnosti mají strany dotyku - jakou mají barvu a zda je
         zde otevřený tvar či nikoliv. Ze{" "}
-        <b onClick={() => onOpenDialog()} className="underline">
+        <span onClick={() => onOpenDialog()} className="underline">
           skupiny {group.result.toLocaleString("cs-CZ")}
-        </b>{" "}
+        </span>{" "}
         se snaží vybrat takový element, který podmínky splňuje co nejlépe. Zde
         se řídí pravidlem:
       </Typography>

@@ -1,8 +1,19 @@
-import DialogTitle from "@mui/material/DialogTitle";
-import { Dialog as MuiDialog } from "@mui/material";
-import { DialogContent } from "@mui/material";
-import { IconButton } from "@mui/material";
+import {
+  DialogActions,
+  Dialog as MuiDialog,
+  Button,
+  IconButton,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 import { SxProps, useTheme } from "@mui/material/styles";
+import { map } from "lodash";
+
+type Action = {
+  text: string;
+  color: "primary" | "secondary";
+  onClick: () => void;
+};
 
 type DialogProp = {
   open: boolean;
@@ -11,6 +22,7 @@ type DialogProp = {
   children: React.ReactNode;
   fullScreen?: boolean;
   sx?: SxProps;
+  actions?: Action[];
 };
 
 export const Dialog = ({
@@ -20,6 +32,7 @@ export const Dialog = ({
   children,
   fullScreen,
   sx,
+  actions,
 }: DialogProp) => {
   const theme = useTheme();
 
@@ -50,7 +63,7 @@ export const Dialog = ({
         }}
       >
         <img
-          src={"/icons/xmark.svg"}
+          src={"/system-sykora/icons/xmark.svg"}
           width={30}
           height={30}
           alt={"close icon"}
@@ -60,6 +73,21 @@ export const Dialog = ({
       <DialogContent sx={{ paddingTop: "0", fontSize: "14px", ...sx }}>
         {children}
       </DialogContent>
+
+      {actions && (
+        <DialogActions>
+          {map(actions, ({ text, color, onClick }: Action) => (
+            <Button
+              key={text}
+              variant="contained"
+              color={color}
+              onClick={onClick}
+            >
+              {text}
+            </Button>
+          ))}
+        </DialogActions>
+      )}
     </MuiDialog>
   );
 };

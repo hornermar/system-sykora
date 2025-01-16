@@ -1,35 +1,22 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Typography, useTheme, Box } from "@mui/material";
+import { isEqual } from "lodash";
 
 import { useForm } from "../hooks/useForm";
+import { useSwitch } from "../hooks/useSwitch";
 import { Container } from "../components/common/Container/Container";
+import { Dialog } from "../components/common/Dialog/Dialog";
 
 const Dashboard = () => {
   const theme = useTheme();
   return (
     <>
       <Typography variant="body1" sx={{ paddingTop: "12px" }}>
-        Objev, jak fungoval algoritmus pro tvorbu <b>Struktur</b>{" "}
-        <b>Zdeňka Sýkory</b>.
+        <b>Zdeněk Sýkora</b> vymyslel pro tvorbu <b>Struktur</b> algoritmus.
+        {/* Vznikaly z čtverců a obdélníků s různými obrazci. které rozmístěnými do mřížky
+        dle daných pravidel. */}
       </Typography>
-
-      <Box sx={{ "& .MuiTypography-root": { margin: 0 } }}>
-        <Typography variant="body1">
-          <i>Jaká pravidla řídila kompozici?</i>
-        </Typography>
-        <Typography variant="body1">
-          <i>Jaké vstupy zadával Sýkora? </i>
-        </Typography>
-        <Typography variant="body1">
-          <i>A co už bylo výsledkem výpočtu?</i>
-        </Typography>
-      </Box>
-
-      {/* <Typography variant="body1">
-        Zjisti, jak algoritmus funguje, jaká pravidla dodržuje a jaké vstupy
-        zadával umělec a co už byla práce počítače.
-      </Typography> */}
 
       <Box sx={{ margin: "30px 0" }}>
         <Typography
@@ -47,13 +34,19 @@ const Dashboard = () => {
         </Typography>
       </Box>
 
-      <Typography variant="body1">
-        <b>Zdeněk Sýkora</b> od roku <b>1961</b> tvořil geometrické abstraktní
-        malby zvané <b>Struktury</b>. Sýkorovy Struktury vznikaly z čtverců a
-        obdélníků s různými obrazci, jejichž rozmístění určovala pravidla. Pro
-        složitost výpočtů začal Sýkora v roce 1964 spolu s matematikem
-        Jaroslavem Blažkem vytvářet program, který tento systém zprovoznil.
-      </Typography>
+      <Typography variant="body1">Objev, jak algoritmus funguje!</Typography>
+
+      <Box sx={{ "& .MuiTypography-root": { margin: 0 }, marginTop: "30px" }}>
+        <Typography variant="body1">
+          <i>Jaká pravidla řídi kompozici?</i>
+        </Typography>
+        <Typography variant="body1">
+          <i>Jaké vstupy zadával Sýkora? </i>
+        </Typography>
+        <Typography variant="body1">
+          <i>A co už bylo výsledkem výpočtu?</i>
+        </Typography>
+      </Box>
 
       {/* <Typography variant="body1">
         Jejich kompozice byla tvořena prvky, opakujícími se čtverci či
@@ -71,25 +64,96 @@ const Dashboard = () => {
   );
 };
 
+type DashboardDialogProps = {
+  open: boolean;
+  onClose: () => void;
+  resetForm: () => void;
+  redirect: () => void;
+};
+
+const DashboardDialog = ({
+  open,
+  onClose,
+  resetForm,
+  redirect,
+}: DashboardDialogProps) => {
+  const handleNew = useCallback(() => {
+    resetForm();
+    onClose();
+    redirect();
+  }, [redirect, onClose, resetForm]);
+
+  const handleContinue = useCallback(() => {
+    onClose();
+    redirect();
+  }, [redirect, onClose]);
+
+  return (
+    <Dialog
+      open={open}
+      onClose={onClose}
+      title="Rozpracováno"
+      actions={[
+        {
+          text: "Nová",
+          color: "secondary",
+          onClick: () => {
+            handleNew();
+          },
+        },
+        {
+          text: "Pokračovat",
+          color: "primary",
+          onClick: () => {
+            handleContinue();
+          },
+        },
+      ]}
+    >
+      <Typography variant="body1">
+        Chcete začít od začátku nebo pokračovat v rozpracované struktuře?
+      </Typography>
+    </Dialog>
+  );
+};
+
 export const DashboardWrapper = () => {
+  const { onFormChange, defaultFormValues, form } = useForm();
+  const [openDialog, onOpenDialog, onCloseDialog] = useSwitch(false);
   const navigate = useNavigate();
-  const { onFormChange, defaultFormValues } = useForm();
+
+  const redirect = useCallback(() => {
+    navigate("/structure?step=1");
+  }, [navigate]);
 
   const resetForm = useCallback(() => {
     onFormChange(defaultFormValues);
   }, [onFormChange, defaultFormValues]);
 
   const handleNextButton = () => {
-    resetForm();
-    navigate("/structure?step=1");
+    if (!isEqual(form, defaultFormValues)) {
+      onOpenDialog();
+    } else {
+      redirect();
+    }
   };
 
   return (
-    <Container
-      children={<Dashboard />}
-      handleNext={handleNextButton}
-      nextButton="Začít"
-      isPage
-    />
+    <>
+      <Container
+        children={<Dashboard />}
+        nextButton={{
+          label: "Začít",
+          onClick: handleNextButton,
+        }}
+        isPage
+      />
+      <DashboardDialog
+        open={openDialog}
+        onClose={onCloseDialog}
+        resetForm={resetForm}
+        redirect={redirect}
+      />
+    </>
   );
 };

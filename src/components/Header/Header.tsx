@@ -59,8 +59,6 @@ export const Header = (props: Props) => {
     (!isSmallMedia && location.pathname !== "/") ||
     location.search === "?step=9";
 
-  console.log(location);
-
   const container =
     window !== undefined ? () => window().document.body : undefined;
 

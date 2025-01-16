@@ -93,6 +93,9 @@ export const customTheme = createTheme({
             backgroundColor: primary,
           },
         },
+        outlinedPrimary: {
+          backgroundColor: black,
+        },
       },
     },
     MuiFormControlLabel: {

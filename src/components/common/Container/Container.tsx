@@ -1,6 +1,7 @@
 import { Stack, Box, PaletteColor, Button, useTheme } from "@mui/material";
 import { Title } from "../Title/Title";
 import React from "react";
+import { StepButton } from "../../../hooks/useStepLogic";
 
 const maxWidth = "1200px";
 
@@ -9,11 +10,9 @@ type ContainerProps = {
   title?: string;
   titleVariant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   color?: PaletteColor;
-  backButton?: string;
-  nextButton?: string;
-  disableNext?: boolean;
-  handleNext?: () => void;
-  handleBack?: () => void;
+  backButton?: StepButton;
+  nextButton?: StepButton;
+  secondNextButton?: StepButton;
   isPage?: boolean;
   onOpenInstruction?: () => void;
 };
@@ -23,9 +22,7 @@ export const Container = ({
   title,
   backButton,
   nextButton,
-  disableNext,
-  handleNext,
-  handleBack,
+  secondNextButton,
   isPage,
   onOpenInstruction,
 }: ContainerProps) => {
@@ -64,11 +61,12 @@ export const Container = ({
 
       {/* Buttons */}
 
-      {backButton && (
+      {backButton?.label && (
         <Button
           variant="contained"
           color="secondary"
-          onClick={handleBack}
+          onClick={backButton.onClick}
+          disabled={backButton.isDisabled}
           sx={{
             position: { xs: "fixed", lg: "block" },
             bottom: 20,
@@ -76,16 +74,33 @@ export const Container = ({
             zIndex: 800,
           }}
         >
-          {backButton}
+          {backButton?.label}
         </Button>
       )}
 
-      {nextButton && (
+      {secondNextButton?.label && (
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={secondNextButton.onClick}
+          disabled={secondNextButton.isDisabled}
+          sx={{
+            position: "fixed",
+            bottom: 90,
+            right: { xs: 20, lg: "calc(50% - 150px)" },
+            zIndex: 800,
+          }}
+        >
+          {secondNextButton.label}
+        </Button>
+      )}
+
+      {nextButton?.label && (
         <Button
           variant="contained"
           color="primary"
-          onClick={handleNext}
-          disabled={disableNext}
+          onClick={nextButton.onClick}
+          disabled={nextButton.isDisabled}
           sx={{
             position: "fixed",
             bottom: 20,
@@ -93,7 +108,7 @@ export const Container = ({
             zIndex: 800,
           }}
         >
-          {nextButton}
+          {nextButton.label}
         </Button>
       )}
     </Stack>

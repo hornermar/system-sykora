@@ -28,8 +28,10 @@ const Generator = ({
   grid,
   setEmptyGrid,
 }: GeneratorProps) => {
-  const { title, nextButton, handleNext, disableNext, backButton, handleBack } =
-    useStepLogic({ form, defaultGrid });
+  const { title, nextButton, backButton, secondNextButton } = useStepLogic({
+    form,
+    defaultGrid,
+  });
   const { activeStep } = useStep();
 
   const [openInstruction, onOpenInstruction, onCloseInstruction] =
@@ -39,10 +41,8 @@ const Generator = ({
     <Container
       title={title}
       nextButton={nextButton}
-      handleNext={handleNext}
+      secondNextButton={secondNextButton}
       backButton={backButton}
-      handleBack={handleBack}
-      disableNext={disableNext}
       onOpenInstruction={onOpenInstruction}
       isPage={activeStep === 9}
     >

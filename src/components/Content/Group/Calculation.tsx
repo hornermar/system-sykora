@@ -30,9 +30,9 @@ export const GroupCalculation = ({
 
       <Typography variant="body1" sx={{ marginBottom: "30px" }}>
         Vybere nejbližší skupinu elementů. Tou je v tomto případě{" "}
-        <b onClick={() => onOpenDialog()} className="underline">
+        <span onClick={() => onOpenDialog()} className="underline">
           skupina {group.result.toLocaleString("cs-CZ")}
-        </b>
+        </span>
         .
       </Typography>
     </>

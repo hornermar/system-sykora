@@ -5,12 +5,26 @@ import { useStep } from "./useStep";
 import { getFilledCells } from "../utils/getFilledCells";
 import { FormValues } from "../types/FormValues";
 
+export type StepButton = {
+  label?: string;
+  onClick: () => void;
+  isDisabled?: boolean;
+};
+
 type UseStepLogicProps = {
   form: FormValues;
   defaultGrid: string[][];
 };
 
-export const useStepLogic = ({ form, defaultGrid }: UseStepLogicProps) => {
+export const useStepLogic = ({
+  form,
+  defaultGrid,
+}: UseStepLogicProps): {
+  title: string;
+  nextButton: StepButton;
+  backButton: StepButton;
+  secondNextButton: StepButton;
+} => {
   const { activeStep, onStepChange } = useStep();
   const navigate = useNavigate();
 
@@ -19,14 +33,24 @@ export const useStepLogic = ({ form, defaultGrid }: UseStepLogicProps) => {
   }, [activeStep]);
 
   const nextButton = useMemo(() => {
+    if (activeStep === 4) return "Výpočet";
     if (activeStep === 7) return "Vygenerovat";
     if (activeStep === 8) return "Závěr";
     if (activeStep === 9) return "";
     return "Další";
   }, [activeStep]);
 
+  const secondNextButton = useMemo(() => {
+    if (activeStep === 4) return "Rovnou na výstup";
+  }, [activeStep]);
+
   const handleNext = useCallback(() => {
     return onStepChange(activeStep + 1);
+  }, [activeStep, onStepChange]);
+
+  const handleSecondNext = useCallback(() => {
+    if (activeStep === 4) return onStepChange(8);
+    else return undefined;
   }, [activeStep, onStepChange]);
 
   const handleBack = () => {
@@ -51,14 +75,26 @@ export const useStepLogic = ({ form, defaultGrid }: UseStepLogicProps) => {
     }
   }, [activeStep, form, filledCells]);
 
-  const backButton = "Zpět";
+  const disableSecondNext = useMemo(() => {
+    return form.rule === null;
+  }, [form]);
 
   return {
     title,
-    nextButton,
-    handleNext,
-    disableNext,
-    backButton,
-    handleBack,
+    nextButton: {
+      label: nextButton,
+      onClick: handleNext,
+      isDisabled: disableNext,
+    },
+    backButton: {
+      label: "Zpět",
+      onClick: handleBack,
+      isDisabled: false,
+    },
+    secondNextButton: {
+      label: secondNextButton,
+      onClick: handleSecondNext,
+      isDisabled: disableSecondNext,
+    },
   };
 };

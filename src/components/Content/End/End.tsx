@@ -26,7 +26,7 @@ export const End = () => {
           rel="noopener noreferrer"
           className="underline"
         >
-          <b>Jindřišká</b>
+          Jindřišká
         </Link>
         .
       </Typography>

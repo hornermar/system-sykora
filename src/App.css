@@ -20,10 +20,12 @@ body {
   text-decoration-thickness: 3px;
   cursor: pointer;
   color: white;
+  font-style: italic;
 }
 
 .underline-disabled {
   text-decoration-color: rgb(158, 158, 158);
   color: #c2c2c2;
   text-decoration-thickness: 3px;
+  font-style: italic;
 }
