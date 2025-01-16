@@ -34,7 +34,8 @@ export const CalculationGroupDescription = ({
               <Accordion
                 summary={`${description.step}. okruh`}
                 key={description.step}
-                defaultExpanded={description.step === steps}
+                defaultExpanded={true}
+                // defaultExpanded={description.step === steps}
               >
                 <GroupAverage
                   cellContent={cellContent}

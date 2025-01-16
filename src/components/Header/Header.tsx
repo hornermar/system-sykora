@@ -63,7 +63,7 @@ export const Header = (props: Props) => {
     window !== undefined ? () => window().document.body : undefined;
 
   // const isPage = ["/about", "/jindrisska"].includes(location.pathname);
-  const currentPage = location.pathname + location.search;
+  const currentPage = location.pathname;
 
   return (
     <>

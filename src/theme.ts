@@ -3,15 +3,15 @@ import { createTheme } from "@mui/material/styles";
 const white = "#ffffff";
 const black = "#000000";
 
-const primary = "#04C2DF";
+const primary = "#cb3b77";
 
 export const customTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      light: "#b3f5ff",
+      light: "#dea2ba",
       main: primary,
-      dark: "#04a4bd",
+      dark: "#a6285c",
       contrastText: black,
     },
     secondary: {
@@ -130,6 +130,7 @@ export const customTheme = createTheme({
           fontWeight: 500,
           fontSize: "20px",
           boxShadow: "none",
+          backgroundColor: "transparent",
         },
       },
     },

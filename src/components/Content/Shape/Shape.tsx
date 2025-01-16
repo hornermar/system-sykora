@@ -18,6 +18,8 @@ type ShapeProps = {
 export const Shape = ({ form, group, shape }: ShapeProps) => {
   const [openDialog, onOpenDialog, onCloseDialog] = useSwitch(false);
 
+  if (!shape || !group) return null;
+
   return (
     <>
       <Typography variant="body1" sx={{ marginBottom: "20px" }}>

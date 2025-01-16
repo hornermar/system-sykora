@@ -53,7 +53,7 @@ export const Rules = ({ rule, onFormChange }: RulesProps) => {
           sx={{
             img: {
               "&:not([id='00'])": {
-                borderLeft: `1px solid ${theme.palette.primary.main}`,
+                borderLeft: `2px solid ${theme.palette.primary.main}`,
               },
             },
           }}

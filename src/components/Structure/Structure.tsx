@@ -80,6 +80,7 @@ export const Structure = memo(function Structure({
       alignItems="center"
       sx={{
         margin: "0 auto",
+        marginTop: isXs ? "6px" : 0,
         position: "relative",
         ...sx,
       }}

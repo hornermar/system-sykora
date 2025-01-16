@@ -41,7 +41,7 @@ export const useStepLogic = ({
   }, [activeStep]);
 
   const secondNextButton = useMemo(() => {
-    if (activeStep === 4) return "Rovnou na výstup";
+    if (activeStep === 4) return "Přeskočit na výstup";
   }, [activeStep]);
 
   const handleNext = useCallback(() => {

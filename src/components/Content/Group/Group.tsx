@@ -17,6 +17,8 @@ type GroupProps = {
 export const Group = ({ form, group, activeCell }: GroupProps) => {
   const [openDialog, onOpenDialog, onCloseDialog] = useSwitch(false);
 
+  if (!group) return null;
+
   return (
     <>
       <Typography variant="body1">
