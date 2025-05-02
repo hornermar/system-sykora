@@ -40,9 +40,13 @@ export const useStepLogic = ({
     return "Další";
   }, [activeStep]);
 
+  // const secondNextButton = useMemo(() => {
+  //   if (activeStep === 4) return "Přeskočit na výstup";
+  // }, [activeStep]);
+
   const secondNextButton = useMemo(() => {
-    if (activeStep === 4) return "Přeskočit na výstup";
-  }, [activeStep]);
+    return undefined;
+  }, []);
 
   const handleNext = useCallback(() => {
     return onStepChange(activeStep + 1);

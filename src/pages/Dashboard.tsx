@@ -13,7 +13,10 @@ const Dashboard = () => {
   const theme = useTheme();
   return (
     <>
-      <Typography variant="body1" sx={{ paddingTop: "12px" }}>
+      <Typography
+        variant="body1"
+        sx={{ paddingTop: "12px", maxWidth: "500px" }}
+      >
         <b>Zdeněk Sýkora</b> začal v roce 1961 vytvářet geometrické abstraktní
         obrazy –⁠⁠⁠⁠⁠⁠ <b>Struktury</b>. Pro jejich tvorbu vymyslel algoritmus.
         {/* Vznikaly z čtverců a obdélníků s různými obrazci. které rozmístěnými do mřížky
@@ -36,7 +39,7 @@ const Dashboard = () => {
         </Typography>
       </Box>
 
-      <Typography variant="body1">
+      <Typography variant="body1" sx={{ maxWidth: "500px" }}>
         Objev, jak algoritmus funguje.{" "}
         <i>
           Jaká pravidla řídi kompozici? Jaké vstupy zadával Sýkora? A co už bylo
