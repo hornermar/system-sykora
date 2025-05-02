@@ -46,7 +46,7 @@ export const Container = ({
         sx={{
           fontSize: "16px",
           padding: {
-            xs: isPage ? "60px 20px 20px" : "0px 20px 70px",
+            xs: isPage ? "60px 20px 70px" : "0px 20px 70px",
             lg: "40px 20px 0",
           },
           textAlign: "left",
@@ -70,7 +70,7 @@ export const Container = ({
           sx={{
             position: { xs: "fixed", lg: "block" },
             bottom: 20,
-            left: { xs: 20, lg: "calc(50% - 150px)" },
+            left: { xs: 20, lg: "calc(50% - 180px)" },
             zIndex: 800,
           }}
         >
@@ -86,8 +86,8 @@ export const Container = ({
           disabled={secondNextButton.isDisabled}
           sx={{
             position: "fixed",
-            bottom: 90,
-            right: { xs: 20, lg: "calc(50% - 150px)" },
+            bottom: 80,
+            right: { xs: 20, lg: "calc(50% - 180px)" },
             zIndex: 800,
           }}
         >
@@ -104,7 +104,7 @@ export const Container = ({
           sx={{
             position: "fixed",
             bottom: 20,
-            right: { xs: 20, lg: "calc(50% - 150px)" },
+            right: { xs: 20, lg: "calc(50% - 180px)" },
             zIndex: 800,
           }}
         >

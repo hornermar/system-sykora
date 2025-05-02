@@ -3,7 +3,7 @@ import { Property, Sides } from "../types/General";
 import { Neighbour } from "../types/Neighbour";
 import { propertyCheck } from "./propertyCheck";
 
-const opositeSides = {
+const oppositeSides = {
   top: "bottom",
   right: "left",
   bottom: "top",
@@ -16,7 +16,7 @@ export const getElementsBasedOnProperty = (
   isEqual: boolean,
   options: ElementType[]
 ) => {
-  const elements = Object.entries(opositeSides).map(([direction, opposite]) =>
+  const elements = Object.entries(oppositeSides).map(([direction, opposite]) =>
     propertyCheck(
       neighbours[direction as Sides],
       options,

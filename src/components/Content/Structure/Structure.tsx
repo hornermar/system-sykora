@@ -159,24 +159,24 @@ export const ContentStructure = ({
       ? grid
       : defaultGrid;
 
-  const currentDefaultrid =
+  const currentDefaultGrid =
     activeStep === 6 || activeStep === 7 || activeStep === 8
       ? defaultGrid
       : undefined;
 
-  const isNotVisile =
+  const isNotVisible =
     (isSmallMedia && (activeStep === 3 || activeStep === 4)) ||
     !activeStep ||
     activeStep === 9;
 
-  if (isNotVisile) return null;
+  if (isNotVisible) return null;
 
   return (
     <>
       <Structure
         grid={currentGrid}
-        defaultGrid={currentDefaultrid}
-        onCellClick={handleCellClick}
+        defaultGrid={currentDefaultGrid}
+        onCellClick={displayActiveCell ? handleCellClick : undefined}
         isViewModeChangeable={activeStep !== 1}
         activeCell={displayActiveCell ? activeCell : undefined}
         viewMode={viewMode}

@@ -11,6 +11,7 @@ type DiagramProps = {
   onFormChange: (newFormValues: Partial<FormValues>) => void;
   defaultGrid: string[][];
   setActiveCell: React.Dispatch<React.SetStateAction<Cell | undefined>>;
+  areInputsEditable: boolean;
 };
 
 const chips = [
@@ -23,6 +24,7 @@ export const Diagram = ({
   form,
   onFormChange,
   setActiveCell,
+  areInputsEditable,
 }: DiagramProps) => {
   const handleChange = (e: SelectChangeEvent<number>) => {
     const { name, value } = e.target;
@@ -36,47 +38,54 @@ export const Diagram = ({
   return (
     <>
       <Typography variant="body1" sx={{ marginBottom: "10px" }}>
-        Urči počet sloupců a řádků a vytvoří se základní mřížka:
+        {areInputsEditable
+          ? "Urči počet sloupců a řádků a vytvoří se základní mřížka:"
+          : "Nejprve Zdeněk Sýkora určil počet sloupců a řádků pro základní mřížku. V tomto příkladu 11x21."}
       </Typography>
-      <Stack
-        width={"100%"}
-        flexDirection="row"
-        gap={3}
-        sx={{ marginBottom: "6px" }}
-      >
-        <Select
-          label="Sloupce"
-          name="columns"
-          value={form.columns}
-          onChange={handleChange}
-          max={11}
-        />
 
-        <Select
-          label="Řady"
-          name="rows"
-          value={form.rows}
-          onChange={handleChange}
-          max={21}
-        />
-      </Stack>
-      <Box
-        sx={{
-          marginBottom: "10px",
-        }}
-      >
-        {map(chips, (chip, index) => (
-          <Chip
-            key={index}
-            label={`${chip.columns}x${chip.rows}`}
-            onClick={() =>
-              onFormChange({ columns: chip.columns, rows: chip.rows })
-            }
-            size="small"
-            sx={{ marginRight: "10px" }}
-          />
-        ))}
-      </Box>
+      {areInputsEditable && (
+        <>
+          <Stack
+            width={"100%"}
+            flexDirection="row"
+            gap={3}
+            sx={{ marginBottom: "6px" }}
+          >
+            <Select
+              label="Sloupce"
+              name="columns"
+              value={form.columns}
+              onChange={handleChange}
+              max={11}
+            />
+
+            <Select
+              label="Řady"
+              name="rows"
+              value={form.rows}
+              onChange={handleChange}
+              max={21}
+            />
+          </Stack>
+          <Box
+            sx={{
+              marginBottom: "10px",
+            }}
+          >
+            {map(chips, (chip, index) => (
+              <Chip
+                key={index}
+                label={`${chip.columns}x${chip.rows}`}
+                onClick={() =>
+                  onFormChange({ columns: chip.columns, rows: chip.rows })
+                }
+                size="small"
+                sx={{ marginRight: "10px" }}
+              />
+            ))}
+          </Box>
+        </>
+      )}
     </>
   );
 };

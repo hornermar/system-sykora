@@ -42,10 +42,10 @@ const getValidFormValues = (values: FormValues): FormValues => {
 };
 
 const defaultFormValues: FormValues = {
-  coefficient: 0,
-  rule: null,
-  rows: 0,
-  columns: 0,
+  coefficient: 0.75,
+  rule: 2,
+  rows: 21,
+  columns: 11,
 };
 
 const rules = map(rulesItems, (rule: Rule) => rule.code);

@@ -70,6 +70,8 @@ export const Content = ({
 
   const filledCells = useMemo(() => getFilledCells(defaultGrid), [defaultGrid]);
 
+  const areInputsEditable = false;
+
   const stepConfig: { [key: number]: StepConfig } = {
     1: {
       isValid: true,
@@ -79,6 +81,7 @@ export const Content = ({
           setActiveCell={setActiveCell}
           onFormChange={onFormChange}
           defaultGrid={defaultGrid}
+          areInputsEditable={areInputsEditable}
         />
       ),
     },
@@ -90,6 +93,7 @@ export const Content = ({
           onDefaultGridChange={onDefaultGridChange}
           setEmptyGrid={setEmptyGrid}
           form={form}
+          areInputsEditable={areInputsEditable}
         />
       ),
     },
@@ -99,12 +103,19 @@ export const Content = ({
         <Coefficient
           coefficient={form.coefficient}
           onFormChange={onFormChange}
+          areInputsEditable={areInputsEditable}
         />
       ),
     },
     4: {
       isValid: !!form.columns && !!form.rows && form.coefficient !== 0,
-      render: () => <Rules rule={form.rule} onFormChange={onFormChange} />,
+      render: () => (
+        <Rules
+          rule={form.rule}
+          onFormChange={onFormChange}
+          areInputsEditable={areInputsEditable}
+        />
+      ),
     },
     5: {
       isValid: !!(isFormFilled && isGridFilled),

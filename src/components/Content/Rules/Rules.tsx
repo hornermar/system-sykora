@@ -15,9 +15,14 @@ import { Structure } from "../../Structure/Structure";
 type RulesProps = {
   rule: FormValues["rule"];
   onFormChange: (newFormValues: Partial<FormValues>) => void;
+  areInputsEditable: boolean;
 };
 
-export const Rules = ({ rule, onFormChange }: RulesProps) => {
+export const Rules = ({
+  rule,
+  onFormChange,
+  areInputsEditable,
+}: RulesProps) => {
   const theme = useTheme();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,9 +32,9 @@ export const Rules = ({ rule, onFormChange }: RulesProps) => {
   return (
     <>
       <Typography variant="body1">
-        Nakonec vyber jedno ze čtyř pravidel. To rozhoduje, jaké vztahy elementy
-        navazují, zda se vzájemně napojují, nebo se od sebe izolují (barvou,
-        tvarem, nebo obojím).
+        {areInputsEditable
+          ? "Nakonec vyber jedno ze čtyř pravidel. To rozhoduje, jaké vztahy elementy navazují, zda se vzájemně napojují, nebo se od sebe izolují."
+          : "Nakonec vybral jedno ze čtyř pravidel. To rozhoduje, jaké vztahy elementy navazují, zda se vzájemně napojují, nebo se od sebe izolují."}
       </Typography>
       <FormControl sx={{ margin: "10px 0 20px" }}>
         <RadioGroup value={rule} onChange={handleChange}>
@@ -56,6 +61,7 @@ export const Rules = ({ rule, onFormChange }: RulesProps) => {
                 borderLeft: `2px solid ${theme.palette.primary.main}`,
               },
             },
+            marginBottom: "60px",
           }}
         />
       )}

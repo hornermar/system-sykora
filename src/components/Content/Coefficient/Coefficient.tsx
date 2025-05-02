@@ -7,15 +7,19 @@ const MIN = 0;
 type CoefficientProps = {
   coefficient: FormValues["coefficient"];
   onFormChange: (newFormValues: Partial<FormValues>) => void;
+  areInputsEditable: boolean;
 };
 
 export const Coefficient = ({
   coefficient,
   onFormChange,
+  areInputsEditable,
 }: CoefficientProps) => {
   return (
     <>
-      <Typography variant="body1">Dále zvol koeficient:</Typography>
+      <Typography variant="body1">
+        {areInputsEditable ? "Dále zvol koeficient:" : "Dále zvolil koeficient"}
+      </Typography>
 
       <Box sx={{ padding: "0 20px 30px" }}>
         <Slider

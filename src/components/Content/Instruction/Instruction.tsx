@@ -1,5 +1,5 @@
 import { map } from "lodash";
-import { Typography, Box, Stack, MobileStepper, Button } from "@mui/material";
+import { Typography, Box, Stack, MobileStepper } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 import { Step, useStep } from "../../../hooks/useStep";
@@ -128,7 +128,7 @@ export const Instruction = ({ open, onClose }: InstructionProps) => {
 
         <Explanation
           title="Nápověda:"
-          description="Do mřížek s modrou tečkou je možné klikat."
+          description="Do mřížek s růžovou tečkou je možné klikat."
           children={
             <img
               src={"/icons/circle.svg"}
@@ -159,14 +159,14 @@ export const Instruction = ({ open, onClose }: InstructionProps) => {
             />
           }
         />
-        <Explanation
+        {/* <Explanation
           description="Pokud je tlačítko šedé, před dalším krokem je potřeba vyplnit vstupní hodnotu"
           children={
             <Button variant="contained" size="small" disabled>
               Další
             </Button>
           }
-        />
+        /> */}
       </>
     </Dialog>
   );
