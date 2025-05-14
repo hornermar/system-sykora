@@ -34,7 +34,7 @@ export const Rules = ({
       <Typography variant="body1">
         {areInputsEditable
           ? "Nakonec vyber jedno ze čtyř pravidel. To rozhoduje, jaké vztahy elementy navazují, zda se vzájemně napojují, nebo se od sebe izolují."
-          : "Nakonec vybral jedno ze čtyř pravidel. To rozhoduje, jaké vztahy elementy navazují, zda se vzájemně napojují, nebo se od sebe izolují."}
+          : "Nakonec vybírá jedno ze čtyř pravidel. To rozhoduje, jaké vztahy elementy navazují, zda se vzájemně napojují, nebo se od sebe izolují."}
       </Typography>
       <FormControl sx={{ margin: "10px 0 20px" }}>
         <RadioGroup value={rule} onChange={handleChange}>

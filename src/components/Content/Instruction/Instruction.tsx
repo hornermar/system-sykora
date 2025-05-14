@@ -113,7 +113,7 @@ export const Instruction = ({ open, onClose }: InstructionProps) => {
         />
 
         <Explanation
-          description="Výpočet elementů (lze přeskočit)"
+          description="Výpočet elementů"
           color="grey"
           displaySeparator
           children={<OrderedList steps={steps.slice(4, 7)} start={5} />}
@@ -159,14 +159,6 @@ export const Instruction = ({ open, onClose }: InstructionProps) => {
             />
           }
         />
-        {/* <Explanation
-          description="Pokud je tlačítko šedé, před dalším krokem je potřeba vyplnit vstupní hodnotu"
-          children={
-            <Button variant="contained" size="small" disabled>
-              Další
-            </Button>
-          }
-        /> */}
       </>
     </Dialog>
   );

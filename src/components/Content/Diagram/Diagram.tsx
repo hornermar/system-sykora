@@ -38,9 +38,15 @@ export const Diagram = ({
   return (
     <>
       <Typography variant="body1" sx={{ marginBottom: "10px" }}>
-        {areInputsEditable
-          ? "Urči počet sloupců a řádků a vytvoří se základní mřížka:"
-          : "Nejprve Zdeněk Sýkora určil počet sloupců a řádků pro základní mřížku. V tomto příkladu 11x21."}
+        {areInputsEditable ? (
+          "Urči počet sloupců a řádků a vytvoří se základní mřížka:"
+        ) : (
+          <>
+            Při vytváření struktury začal Zdeněk Sýkora s rozvržením mřížky –
+            určuje, kolik bude mít sloupců a řádků. Pro tento příklad volí{" "}
+            <b>11</b> sloupců a <b>21</b> řádků.
+          </>
+        )}
       </Typography>
 
       {areInputsEditable && (

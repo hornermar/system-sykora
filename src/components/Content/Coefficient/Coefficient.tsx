@@ -18,7 +18,7 @@ export const Coefficient = ({
   return (
     <>
       <Typography variant="body1">
-        {areInputsEditable ? "Dále zvol koeficient:" : "Dále zvolil koeficient"}
+        {areInputsEditable ? "Dále zvol koeficient:" : "Dále volí koeficient"}
       </Typography>
 
       <Box sx={{ padding: "0 20px 30px" }}>

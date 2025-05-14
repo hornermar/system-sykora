@@ -78,7 +78,7 @@ export const Structure = memo(function Structure({
       flexDirection="column"
       width="100%"
       sx={{
-        alignItems: { sm: "center", lg: "flex-end" },
+        alignItems: { xs: "center", lg: "flex-end" },
         margin: "0 auto",
         marginTop: isXs ? "6px" : 0,
         position: "relative",
